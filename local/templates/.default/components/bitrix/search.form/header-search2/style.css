@@ -1,0 +1,51 @@
+input.search-suggest {
+	font-size: 14px;
+	padding: 2px 2px;
+	background: none;
+	line-height: 21px;
+	font-family: 'PTSansCaptionBold', sans-serif;
+	color: white;
+	border: none;
+	border-bottom: 2px dashed;
+	width: 145px;
+	text-transform: uppercase;
+}
+
+.b-header__user {
+	margin-top: 10px !important;
+}
+
+.search-form {
+	position: absolute;
+	right: 0;
+	top: 65px;
+}
+
+.search-form > form > div {
+	display: inline-block;
+}
+
+.search-form input[type="submit"] {
+	background: #aa6290;
+	border: none;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	background-image: url(http://www.clker.com/cliparts/F/2/r/b/e/n/white-magnifying-glass-md.png);
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	box-sizing: content-box;
+	margin-left: 7px;
+}
+.b-header__center {
+	position: relative;
+}
+
+.b-header__phone {
+	margin-bottom: 10px;
+}
+
+.b-header-phones-wrapper {
+	margin-top: 10px !important;
+}

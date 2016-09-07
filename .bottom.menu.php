@@ -1,0 +1,60 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"Капкейки", 
+		"catalog/cupcakes/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Торты", 
+		"/catalog/cakes/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Пряники", 
+		"/catalog/gingerbread/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Happy Box", 
+		"/catalog/happybox/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Эклеры", 
+		"/catalog/eclairs/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Пирожные", 
+		"/catalog/minicakes/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Агентствам", 
+		"/partners/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Свадьбы", 
+		"http://wedding.cupcakestory.ru/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

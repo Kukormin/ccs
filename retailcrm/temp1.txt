@@ -1,0 +1,69 @@
+array (
+  'number' => '552',
+  'externalId' => '552',
+  'createdAt' => 
+  DateTime::__set_state(array(
+     'date' => '2016-01-14 14:13:37',
+     'timezone_type' => 3,
+     'timezone' => 'Europe/Moscow',
+  )),
+  'customerId' => '832',
+  'discount' => 0,
+  'markDateTime' => NULL,
+  'paymentType' => 'cash',
+  'paymentStatus' => 'not-paid',
+  'orderType' => 'eshop-individual',
+  'contragentType' => 'individual',
+  'status' => 'new',
+  'statusComment' => NULL,
+  'customerComment' => 'Дата и время доставки: 15.01.2016 с 15:00 по 18:00. Комментарий: ',
+  'managerComment' => NULL,
+  'delivery' => 
+  array (
+    'cost' => 400,
+    'address' => 
+    array (
+      'text' => 'Госпитальный пер. 4/6, общежитие №10',
+    ),
+    'code' => '14',
+  ),
+  'firstName' => 'Никита',
+  'email' => 'Nikitasusoev@yandex.ru',
+  'phone' => '+7(925)827-34-44',
+  'items' => 
+  array (
+    0 => 
+    array (
+      'quantity' => '1.0000',
+      'productId' => '591',
+      'xmlId' => '594#591',
+      'productName' => 'Ягодная коллекция-6',
+      'comment' => 'Розничная цена',
+      'createdAt' => 
+      DateTime::__set_state(array(
+         'date' => '2016-01-14 14:12:06',
+         'timezone_type' => 3,
+         'timezone' => 'Europe/Moscow',
+      )),
+      'discount' => 0,
+      'initialPrice' => 1400,
+    ),
+    1 => 
+    array (
+      'quantity' => '1.0000',
+      'productId' => '432',
+      'xmlId' => '432',
+      'productName' => 'Подарочная коробка',
+      'comment' => 'Розничная цена',
+      'createdAt' => 
+      DateTime::__set_state(array(
+         'date' => '2016-01-14 14:12:09',
+         'timezone_type' => 3,
+         'timezone' => 'Europe/Moscow',
+      )),
+      'purchasePrice' => '0.00',
+      'discount' => 0,
+      'initialPrice' => 250,
+    ),
+  ),
+)

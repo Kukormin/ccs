@@ -1,0 +1,2310 @@
+Array
+(
+    [0] => 2016-01-22 14:46:13
+    [1] => Array
+        (
+            [externalId] => 690
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-23 19:47:04
+    [1] => Array
+        (
+            [externalId] => 702
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-25 11:04:16
+    [1] => Array
+        (
+            [externalId] => 710
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-26 12:25:31
+    [1] => Array
+        (
+            [externalId] => 731
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-26 16:47:03
+    [1] => Array
+        (
+            [externalId] => 736
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-27 11:17:03
+    [1] => Array
+        (
+            [externalId] => 753
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-27 19:27:49
+    [1] => Array
+        (
+            [externalId] => 764
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-27 19:55:43
+    [1] => Array
+        (
+            [externalId] => 765
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-27 23:19:07
+    [1] => Array
+        (
+            [externalId] => 767
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-28 17:59:00
+    [1] => Array
+        (
+            [externalId] => 788
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-28 20:19:16
+    [1] => Array
+        (
+            [externalId] => 792
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-01-29 10:33:51
+    [1] => Array
+        (
+            [externalId] => 799
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-02 12:58:56
+    [1] => Array
+        (
+            [externalId] => 891
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-02 16:32:40
+    [1] => Array
+        (
+            [externalId] => 905
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-02 19:48:24
+    [1] => Array
+        (
+            [externalId] => 923
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-02 20:26:33
+    [1] => Array
+        (
+            [externalId] => 925
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-03 12:11:26
+    [1] => Array
+        (
+            [externalId] => 937
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-03 16:39:30
+    [1] => Array
+        (
+            [externalId] => 967
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-03 22:18:09
+    [1] => Array
+        (
+            [externalId] => 983
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-04 10:37:00
+    [1] => Array
+        (
+            [externalId] => 991
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-04 11:04:24
+    [1] => Array
+        (
+            [externalId] => 993
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-06 21:19:50
+    [1] => Array
+        (
+            [externalId] => 1078
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-07 12:11:12
+    [1] => Array
+        (
+            [externalId] => 1083
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-07 22:58:01
+    [1] => Array
+        (
+            [externalId] => 1103
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-08 11:20:03
+    [1] => Array
+        (
+            [externalId] => 1110
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-08 12:17:14
+    [1] => Array
+        (
+            [externalId] => 1115
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-08 13:06:33
+    [1] => Array
+        (
+            [externalId] => 1119
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-08 15:11:10
+    [1] => Array
+        (
+            [externalId] => 1126
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-08 16:47:54
+    [1] => Array
+        (
+            [externalId] => 1135
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-09 11:10:00
+    [1] => Array
+        (
+            [externalId] => 1173
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-09 11:11:26
+    [1] => Array
+        (
+            [externalId] => 1172
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-09 15:52:13
+    [1] => Array
+        (
+            [externalId] => 1194
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-09 16:20:47
+    [1] => Array
+        (
+            [externalId] => 1196
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-09 18:17:00
+    [1] => Array
+        (
+            [externalId] => 1206
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-09 20:38:59
+    [1] => Array
+        (
+            [externalId] => 1208
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-09 20:50:52
+    [1] => Array
+        (
+            [externalId] => 1209
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-10 10:01:23
+    [1] => Array
+        (
+            [externalId] => 1220
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-10 10:47:40
+    [1] => Array
+        (
+            [externalId] => 1224
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-10 11:08:03
+    [1] => Array
+        (
+            [externalId] => 1226
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-10 17:35:48
+    [1] => Array
+        (
+            [externalId] => 1257
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-11 11:55:43
+    [1] => Array
+        (
+            [externalId] => 1292
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-11 12:34:59
+    [1] => Array
+        (
+            [externalId] => 1297
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-11 17:40:58
+    [1] => Array
+        (
+            [externalId] => 1323
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-12 12:11:55
+    [1] => Array
+        (
+            [externalId] => 1359
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-12 12:15:41
+    [1] => Array
+        (
+            [externalId] => 1360
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-12 19:15:50
+    [1] => Array
+        (
+            [externalId] => 1380
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-12 19:27:47
+    [1] => Array
+        (
+            [externalId] => 1382
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-13 16:46:38
+    [1] => Array
+        (
+            [externalId] => 1421
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-15 12:33:27
+    [1] => Array
+        (
+            [externalId] => 1492
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-15 12:55:19
+    [1] => Array
+        (
+            [externalId] => 1494
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-16 10:19:17
+    [1] => Array
+        (
+            [externalId] => 1517
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-16 14:28:47
+    [1] => Array
+        (
+            [externalId] => 1529
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-16 14:34:15
+    [1] => Array
+        (
+            [externalId] => 1530
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-16 16:21:28
+    [1] => Array
+        (
+            [externalId] => 1534
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-16 16:28:26
+    [1] => Array
+        (
+            [externalId] => 1535
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-16 16:34:10
+    [1] => Array
+        (
+            [externalId] => 1537
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-16 16:39:42
+    [1] => Array
+        (
+            [externalId] => 1538
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-17 11:54:02
+    [1] => Array
+        (
+            [externalId] => 1551
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-17 18:14:49
+    [1] => Array
+        (
+            [externalId] => 1565
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-18 09:43:07
+    [1] => Array
+        (
+            [externalId] => 1570
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-19 10:32:37
+    [1] => Array
+        (
+            [externalId] => 1619
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-19 10:43:29
+    [1] => Array
+        (
+            [externalId] => 1621
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-19 11:03:20
+    [1] => Array
+        (
+            [externalId] => 1623
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-19 13:23:17
+    [1] => Array
+        (
+            [externalId] => 1637
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-19 13:45:10
+    [1] => Array
+        (
+            [externalId] => 1641
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-19 18:25:09
+    [1] => Array
+        (
+            [externalId] => 1657
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-21 11:27:12
+    [1] => Array
+        (
+            [externalId] => 1725
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-21 23:38:56
+    [1] => Array
+        (
+            [externalId] => 1759
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-22 10:56:45
+    [1] => Array
+        (
+            [externalId] => 1763
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-22 11:58:41
+    [1] => Array
+        (
+            [externalId] => 1767
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-22 22:17:01
+    [1] => Array
+        (
+            [externalId] => 1796
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-24 14:40:19
+    [1] => Array
+        (
+            [externalId] => 1853
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-28 12:04:24
+    [1] => Array
+        (
+            [externalId] => 1923
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-28 19:10:03
+    [1] => Array
+        (
+            [externalId] => 1929
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-02-29 10:46:26
+    [1] => Array
+        (
+            [externalId] => 1940
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-01 07:26:23
+    [1] => Array
+        (
+            [externalId] => 1975
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-01 12:07:07
+    [1] => Array
+        (
+            [externalId] => 1989
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-01 12:59:10
+    [1] => Array
+        (
+            [externalId] => 1995
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-01 13:23:48
+    [1] => Array
+        (
+            [externalId] => 1996
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-01 18:48:27
+    [1] => Array
+        (
+            [externalId] => 2023
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-01 21:48:16
+    [1] => Array
+        (
+            [externalId] => 2035
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-01 23:58:16
+    [1] => Array
+        (
+            [externalId] => 2040
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-02 09:17:38
+    [1] => Array
+        (
+            [externalId] => 2041
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-02 12:19:36
+    [1] => Array
+        (
+            [externalId] => 2054
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-02 22:44:47
+    [1] => Array
+        (
+            [externalId] => 2083
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-03 00:40:40
+    [1] => Array
+        (
+            [externalId] => 2088
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-03 16:04:27
+    [1] => Array
+        (
+            [externalId] => 2120
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-03 18:28:08
+    [1] => Array
+        (
+            [externalId] => 2134
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-04 12:32:03
+    [1] => Array
+        (
+            [externalId] => 2158
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-04 18:19:37
+    [1] => Array
+        (
+            [externalId] => 2179
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-05 16:27:20
+    [1] => Array
+        (
+            [externalId] => 2229
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-05 18:28:20
+    [1] => Array
+        (
+            [externalId] => 2233
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-06 20:44:27
+    [1] => Array
+        (
+            [externalId] => 2260
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-09 08:42:09
+    [1] => Array
+        (
+            [externalId] => 2322
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-09 13:52:58
+    [1] => Array
+        (
+            [externalId] => 2336
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-11 00:26:58
+    [1] => Array
+        (
+            [externalId] => 2367
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-14 19:37:50
+    [1] => Array
+        (
+            [externalId] => 2425
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-24 14:52:54
+    [1] => Array
+        (
+            [externalId] => 2561
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-31 15:37:31
+    [1] => Array
+        (
+            [externalId] => 2674
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-03-31 18:21:17
+    [1] => Array
+        (
+            [externalId] => 2678
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-01 17:19:18
+    [1] => Array
+        (
+            [externalId] => 2694
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-04 11:12:19
+    [1] => Array
+        (
+            [externalId] => 2720
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-04 18:42:35
+    [1] => Array
+        (
+            [externalId] => 2731
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-12 09:12:06
+    [1] => Array
+        (
+            [externalId] => 2829
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-12 17:21:53
+    [1] => Array
+        (
+            [externalId] => 2844
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-13 11:49:10
+    [1] => Array
+        (
+            [externalId] => 2850
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-14 15:19:29
+    [1] => Array
+        (
+            [externalId] => 2884
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-18 10:10:31
+    [1] => Array
+        (
+            [externalId] => 2944
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-19 14:10:08
+    [1] => Array
+        (
+            [externalId] => 2977
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-19 16:01:02
+    [1] => Array
+        (
+            [externalId] => 2984
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-20 00:57:03
+    [1] => Array
+        (
+            [externalId] => 2997
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-20 07:13:28
+    [1] => Array
+        (
+            [externalId] => 2998
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-20 08:15:21
+    [1] => Array
+        (
+            [externalId] => 3000
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-20 22:58:53
+    [1] => Array
+        (
+            [externalId] => 3022
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-21 11:06:13
+    [1] => Array
+        (
+            [externalId] => 3029
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-21 16:00:22
+    [1] => Array
+        (
+            [externalId] => 3051
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-21 22:30:23
+    [1] => Array
+        (
+            [externalId] => 3068
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-22 10:20:29
+    [1] => Array
+        (
+            [externalId] => 3070
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-22 16:19:01
+    [1] => Array
+        (
+            [externalId] => 3082
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-23 14:34:52
+    [1] => Array
+        (
+            [externalId] => 3107
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-23 17:18:50
+    [1] => Array
+        (
+            [externalId] => 3114
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-23 23:46:43
+    [1] => Array
+        (
+            [externalId] => 3121
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-24 10:20:10
+    [1] => Array
+        (
+            [externalId] => 3124
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-24 13:06:45
+    [1] => Array
+        (
+            [externalId] => 3128
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-25 14:22:36
+    [1] => Array
+        (
+            [externalId] => 3171
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-25 16:52:07
+    [1] => Array
+        (
+            [externalId] => 3190
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-25 18:56:47
+    [1] => Array
+        (
+            [externalId] => 3200
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-26 12:01:27
+    [1] => Array
+        (
+            [externalId] => 3240
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-26 13:50:46
+    [1] => Array
+        (
+            [externalId] => 3254
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-26 14:25:34
+    [1] => Array
+        (
+            [externalId] => 3258
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-26 15:14:17
+    [1] => Array
+        (
+            [externalId] => 3262
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-27 08:03:53
+    [1] => Array
+        (
+            [externalId] => 3293
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-27 14:09:36
+    [1] => Array
+        (
+            [externalId] => 3319
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-27 17:40:37
+    [1] => Array
+        (
+            [externalId] => 3344
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-27 19:02:21
+    [1] => Array
+        (
+            [externalId] => 3350
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-04-29 12:37:53
+    [1] => Array
+        (
+            [externalId] => 3397
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-13 07:51:23
+    [1] => Array
+        (
+            [externalId] => 3559
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-15 07:18:18
+    [1] => Array
+        (
+            [externalId] => 3576
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-18 19:07:11
+    [1] => Array
+        (
+            [externalId] => 3628
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-20 13:25:35
+    [1] => Array
+        (
+            [externalId] => 3657
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-24 11:31:24
+    [1] => Array
+        (
+            [externalId] => 3717
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-24 12:20:23
+    [1] => Array
+        (
+            [externalId] => 3720
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-24 17:47:12
+    [1] => Array
+        (
+            [externalId] => 3730
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-28 12:56:59
+    [1] => Array
+        (
+            [externalId] => 3787
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-30 06:52:50
+    [1] => Array
+        (
+            [externalId] => 3801
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-05-31 09:48:46
+    [1] => Array
+        (
+            [externalId] => 3825
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-02 09:33:53
+    [1] => Array
+        (
+            [externalId] => 3863
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-04 13:18:19
+    [1] => Array
+        (
+            [externalId] => 3894
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-06 10:05:01
+    [1] => Array
+        (
+            [externalId] => 3905
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-08 22:24:03
+    [1] => Array
+        (
+            [externalId] => 3962
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-08 22:39:37
+    [1] => Array
+        (
+            [externalId] => 3964
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-10 18:27:44
+    [1] => Array
+        (
+            [externalId] => 3998
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-12 22:13:59
+    [1] => Array
+        (
+            [externalId] => 4041
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-16 15:42:37
+    [1] => Array
+        (
+            [externalId] => 4103
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-17 14:44:57
+    [1] => Array
+        (
+            [externalId] => 4124
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-19 21:47:15
+    [1] => Array
+        (
+            [externalId] => 4157
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-21 11:26:48
+    [1] => Array
+        (
+            [externalId] => 4179
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-24 10:45:34
+    [1] => Array
+        (
+            [externalId] => 4217
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-28 15:30:06
+    [1] => Array
+        (
+            [externalId] => 4265
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-28 17:05:16
+    [1] => Array
+        (
+            [externalId] => 4267
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-29 11:19:02
+    [1] => Array
+        (
+            [externalId] => 4282
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-30 11:26:32
+    [1] => Array
+        (
+            [externalId] => 4302
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-30 14:20:52
+    [1] => Array
+        (
+            [externalId] => 4309
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-06-30 19:49:54
+    [1] => Array
+        (
+            [externalId] => 4314
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-03 09:05:27
+    [1] => Array
+        (
+            [externalId] => 4335
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-05 10:13:22
+    [1] => Array
+        (
+            [externalId] => 4357
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-06 10:56:25
+    [1] => Array
+        (
+            [externalId] => 4377
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-06 12:19:25
+    [1] => Array
+        (
+            [externalId] => 4379
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-07 09:47:31
+    [1] => Array
+        (
+            [externalId] => 4390
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-07 15:59:41
+    [1] => Array
+        (
+            [externalId] => 4407
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-08 11:34:22
+    [1] => Array
+        (
+            [externalId] => 4414
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-08 18:00:28
+    [1] => Array
+        (
+            [externalId] => 4421
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-10 23:15:54
+    [1] => Array
+        (
+            [externalId] => 4437
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-10 23:27:29
+    [1] => Array
+        (
+            [externalId] => 4438
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-19 10:34:48
+    [1] => Array
+        (
+            [externalId] => 4579
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-20 13:37:04
+    [1] => Array
+        (
+            [externalId] => 4611
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-20 18:41:12
+    [1] => Array
+        (
+            [externalId] => 4620
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-21 15:14:24
+    [1] => Array
+        (
+            [externalId] => 4638
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-22 13:02:23
+    [1] => Array
+        (
+            [externalId] => 4650
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-22 15:50:47
+    [1] => Array
+        (
+            [externalId] => 4653
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-23 18:18:38
+    [1] => Array
+        (
+            [externalId] => 4671
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-23 20:20:29
+    [1] => Array
+        (
+            [externalId] => 4673
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-26 14:07:24
+    [1] => Array
+        (
+            [externalId] => 4723
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-26 16:03:25
+    [1] => Array
+        (
+            [externalId] => 4728
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-26 17:26:17
+    [1] => Array
+        (
+            [externalId] => 4731
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-27 09:29:04
+    [1] => Array
+        (
+            [externalId] => 4740
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-27 11:26:59
+    [1] => Array
+        (
+            [externalId] => 4747
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-27 14:22:59
+    [1] => Array
+        (
+            [externalId] => 4756
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-30 07:55:55
+    [1] => Array
+        (
+            [externalId] => 4819
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-07-31 16:21:13
+    [1] => Array
+        (
+            [externalId] => 4833
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-02 07:35:24
+    [1] => Array
+        (
+            [externalId] => 4850
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-02 12:32:03
+    [1] => Array
+        (
+            [externalId] => 4861
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-04 23:51:28
+    [1] => Array
+        (
+            [externalId] => 4911
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-11 17:32:46
+    [1] => Array
+        (
+            [externalId] => 4962
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-14 17:31:32
+    [1] => Array
+        (
+            [externalId] => 5003
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-15 10:28:03
+    [1] => Array
+        (
+            [externalId] => 5008
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-15 11:46:05
+    [1] => Array
+        (
+            [externalId] => 5015
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-15 16:02:25
+    [1] => Array
+        (
+            [externalId] => 5030
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-15 23:05:21
+    [1] => Array
+        (
+            [externalId] => 5044
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-16 16:03:14
+    [1] => Array
+        (
+            [externalId] => 5068
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-16 18:47:16
+    [1] => Array
+        (
+            [externalId] => 5075
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-16 23:57:38
+    [1] => Array
+        (
+            [externalId] => 5079
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-17 18:05:22
+    [1] => Array
+        (
+            [externalId] => 5102
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-23 10:36:20
+    [1] => Array
+        (
+            [externalId] => 5268
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-23 11:50:15
+    [1] => Array
+        (
+            [externalId] => 5273
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-23 12:03:25
+    [1] => Array
+        (
+            [externalId] => 5275
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-23 16:41:55
+    [1] => Array
+        (
+            [externalId] => 5295
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-23 16:45:16
+    [1] => Array
+        (
+            [externalId] => 5296
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-24 15:42:42
+    [1] => Array
+        (
+            [externalId] => 5344
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-25 11:20:23
+    [1] => Array
+        (
+            [externalId] => 5361
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-25 12:28:54
+    [1] => Array
+        (
+            [externalId] => 5374
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-25 12:40:52
+    [1] => Array
+        (
+            [externalId] => 5375
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-25 17:43:45
+    [1] => Array
+        (
+            [externalId] => 5401
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-25 23:36:05
+    [1] => Array
+        (
+            [externalId] => 5411
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-26 08:12:49
+    [1] => Array
+        (
+            [externalId] => 5415
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-26 08:45:58
+    [1] => Array
+        (
+            [externalId] => 5416
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-26 22:04:45
+    [1] => Array
+        (
+            [externalId] => 5460
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-26 22:31:02
+    [1] => Array
+        (
+            [externalId] => 5461
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-27 01:46:51
+    [1] => Array
+        (
+            [externalId] => 5464
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-28 21:38:18
+    [1] => Array
+        (
+            [externalId] => 5505
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-29 10:51:16
+    [1] => Array
+        (
+            [externalId] => 5515
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-29 12:56:57
+    [1] => Array
+        (
+            [externalId] => 5529
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-29 13:08:38
+    [1] => Array
+        (
+            [externalId] => 5530
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-29 13:38:18
+    [1] => Array
+        (
+            [externalId] => 5533
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-08-29 18:26:18
+    [1] => Array
+        (
+            [externalId] => 5568
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-09-01 22:04:46
+    [1] => Array
+        (
+            [externalId] => 5725
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-09-02 11:09:25
+    [1] => Array
+        (
+            [externalId] => 5732
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-09-05 11:56:27
+    [1] => Array
+        (
+            [externalId] => 5786
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-09-06 13:39:53
+    [1] => Array
+        (
+            [externalId] => 5812
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-09-06 16:56:14
+    [1] => Array
+        (
+            [externalId] => 5820
+            [paymentStatus] => paid
+        )
+
+)
+Array
+(
+    [0] => 2016-09-07 10:11:17
+    [1] => Array
+        (
+            [externalId] => 5826
+            [paymentStatus] => paid
+        )
+
+)

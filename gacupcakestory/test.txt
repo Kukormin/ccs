@@ -1,0 +1,688 @@
+array(49) {
+  [1061]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1061"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1076]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1076"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1133]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1133"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1159]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1159"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1162]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1162"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1163]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1163"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(8) "12550310"
+      ["umedium"]=>
+      string(3) "cpc"
+      ["usource"]=>
+      string(12) "yandexdirect"
+    }
+  }
+  [1164]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1164"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(8) "12550310"
+      ["umedium"]=>
+      string(3) "cpc"
+      ["usource"]=>
+      string(12) "yandexdirect"
+    }
+  }
+  [1166]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1166"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(14) "l.facebook.com"
+    }
+  }
+  [1170]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1170"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1172]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1172"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1173]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1173"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1174]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1174"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1175]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1175"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(12) "facebook.com"
+    }
+  }
+  [1179]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1179"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1182]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1182"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1183]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1183"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1184]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1184"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1186]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1186"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1187]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1187"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1188]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1188"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1190]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1190"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1192]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1192"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1194]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1194"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1196]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1196"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(14) "m.facebook.com"
+    }
+  }
+  [1203]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1203"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1206]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1206"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1208]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1208"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1209]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1209"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1211]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1211"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(14) "m.facebook.com"
+    }
+  }
+  [1212]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1212"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1213]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1213"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1214]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1214"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(12) "facebook.com"
+    }
+  }
+  [1215]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1215"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1216]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1216"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1218]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1218"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1220]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1220"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(8) "12543268"
+      ["umedium"]=>
+      string(3) "cpc"
+      ["usource"]=>
+      string(12) "yandexdirect"
+    }
+  }
+  [1221]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1221"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1222]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1222"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(14) "m.facebook.com"
+    }
+  }
+  [1224]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1224"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1225]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1225"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1226]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1226"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1227]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1227"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1228]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1228"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "google"
+    }
+  }
+  [1230]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1230"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(6) "(none)"
+      ["usource"]=>
+      string(8) "(direct)"
+    }
+  }
+  [1234]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1234"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1236]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1236"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(7) "organic"
+      ["usource"]=>
+      string(6) "yandex"
+    }
+  }
+  [1238]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1238"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(14) "m.facebook.com"
+    }
+  }
+  [1239]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1239"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(8) "12775388"
+      ["umedium"]=>
+      string(3) "cpc"
+      ["usource"]=>
+      string(12) "yandexdirect"
+    }
+  }
+  [1241]=>
+  array(2) {
+    ["externalId"]=>
+    string(4) "1241"
+    ["customFields"]=>
+    array(3) {
+      ["ucampaign"]=>
+      string(9) "(not set)"
+      ["umedium"]=>
+      string(8) "referral"
+      ["usource"]=>
+      string(14) "m.facebook.com"
+    }
+  }
+}

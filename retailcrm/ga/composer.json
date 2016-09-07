@@ -1,0 +1,8 @@
+{
+    "require": {
+        "theiconic/php-ga-measurement-protocol": "~1.1",
+        "retailcrm/api-client-php": "~3.0.0",
+        "guzzlehttp/guzzle": "5.2.0",
+        "google/apiclient": "^2.0.0@RC"
+    }
+}

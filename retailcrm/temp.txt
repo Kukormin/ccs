@@ -1,0 +1,79 @@
+array (
+  'number' => NULL,
+  'externalId' => 554,
+  'createdAt' => 
+  DateTime::__set_state(array(
+     'date' => '2016-01-14 15:30:43',
+     'timezone_type' => 3,
+     'timezone' => 'Europe/Moscow',
+  )),
+  'customerId' => '833',
+  'discount' => NULL,
+  'markDateTime' => NULL,
+  'paymentType' => '',
+  'paymentStatus' => '',
+  'orderType' => 'eshop-individual',
+  'contragentType' => 'individual',
+  'status' => 'new',
+  'statusComment' => NULL,
+  'customerComment' => '',
+  'managerComment' => NULL,
+  'delivery' => 
+  array (
+    'cost' => NULL,
+  ),
+  'firstName' => 'Надежда',
+  'phone' => '+7(965)166-39-36',
+  'items' => 
+  array (
+    0 => 
+    array (
+      'quantity' => '1.0000',
+      'productId' => '601',
+      'xmlId' => '576#601',
+      'productName' => 'Happy Box 6',
+      'comment' => 'Розничная цена',
+      'createdAt' => 
+      DateTime::__set_state(array(
+         'date' => '2016-01-14 15:30:14',
+         'timezone_type' => 3,
+         'timezone' => 'Europe/Moscow',
+      )),
+      'discount' => 0,
+      'initialPrice' => 1200,
+    ),
+    1 => 
+    array (
+      'quantity' => '2.0000',
+      'productId' => '431',
+      'xmlId' => '431',
+      'productName' => 'Базовая коробка',
+      'comment' => 'Розничная цена',
+      'createdAt' => 
+      DateTime::__set_state(array(
+         'date' => '2016-01-14 15:30:14',
+         'timezone_type' => 3,
+         'timezone' => 'Europe/Moscow',
+      )),
+      'purchasePrice' => '0.00',
+      'discount' => 0,
+      'initialPrice' => 0,
+    ),
+    2 => 
+    array (
+      'quantity' => '1.0000',
+      'productId' => '601',
+      'xmlId' => '576#601',
+      'productName' => 'Happy Box 6',
+      'comment' => 'Розничная цена',
+      'createdAt' => 
+      DateTime::__set_state(array(
+         'date' => '2016-01-14 15:30:16',
+         'timezone_type' => 3,
+         'timezone' => 'Europe/Moscow',
+      )),
+      'discount' => 0,
+      'initialPrice' => 1200,
+    ),
+  ),
+)
