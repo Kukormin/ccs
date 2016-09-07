@@ -46,17 +46,7 @@ if (!isset($_SESSION['retailcrm'])) {
     <script type="text/javascript" src="/bitrix/templates/.default/js/messages_ru.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js"></script>
-	
-<?
-global $USER;
-if ($USER->IsAdmin()):
-?>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar_admin.js"></script>
-<?else:?>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js"></script>
-<?endif;?>
-
-    
+	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js"></script>
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

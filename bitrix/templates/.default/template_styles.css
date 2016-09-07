@@ -5661,7 +5661,7 @@ a.basket {
 	max-width:420px;
 	display:block;
 }
-.b-method-shipping_item .b-bnt-form--green { `
+.b-method-shipping_item .b-bnt-form--green {
     padding: 7px 26px;
     display: block;
 } 
@@ -5681,8 +5681,14 @@ a.basket {
 }
 .b-method-shipping_item .b-application-event__form-item--date {
     margin-left: 0;
-    width: 120px;
+    width: 135px;
 	float:left;
+}
+.b-form-item__input.b-item--date-input {
+    padding: 10px 10px;
+}
+.b-form-item__input.b-item--date-input input {
+    font-size: 16px;
 }
 .b-method-shipping_item-date {
 	width: 320px;
@@ -5716,7 +5722,7 @@ a.basket {
 	margin-right:40px;
 }
 .b-application-event__form-item--time {
-	width:176px;
+	width:166px;
 	float:right;
 }
 .b-application-event__time {
@@ -6489,99 +6495,112 @@ sup.sum-add-postcard {
 
 /*calendar*/
 .calendar-wrapper table {
-background-color: #FFFFFF; 
-color: #272829; 
-border-collapse: collapse;
-font-family: 'PTSansCaption', sans-serif;
+    background-color: #FFFFFF;
+    color: #272829;
+    border-collapse: collapse;
+    font-family: 'PTSansCaption', sans-serif;
 }
-.calendar-wrapper table tr.day td {
-	font-size: 10px; 
-	font-weight: bold; 
-	color:#717171;
-	text-transform:uppercase;
-}
-.calendar-wrapper table tr#first-child td {    
-padding-top: 5px;
-width: 0; 
-font-size: 11px; 
-font-weight: bold;
- font-family: 'PTSansCaptionBold', sans-serif;
- white-space: nowrap;
-}
-.calendar-wrapper table .lalign {
-text-align: left;
-}
-.calendar-wrapper table .ralign {
-text-align: right;
-}
-.calendar-wrapper table td {
-width: 25px;
- height: 20px; 
- text-align: center; 
- font-size: 14px; 
- cursor: pointer;
- font-family: 'PTSansCaptionBold', sans-serif;
- }
 
-.calendar-wrapper table td:hover {
-    color:#aa6290;
+.calendar-wrapper table tr.day td {
+    font-size: 10px;
+    font-weight: bold;
+    color: #717171;
+    text-transform: uppercase;
 }
+
+.calendar-wrapper table tr#first-child td {
+    padding-top: 5px;
+    width: 0;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'PTSansCaptionBold', sans-serif;
+    white-space: nowrap;
+}
+
+.calendar-wrapper table .lalign {
+    text-align: left;
+}
+
+.calendar-wrapper table .ralign {
+    text-align: right;
+}
+
+.calendar-wrapper table td {
+    color: #bbb;
+    width: 28px;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'PTSansCaptionBold', sans-serif;
+}
+
+.calendar-wrapper table td.dd {
+    color: #272829;
+    cursor: pointer;
+}
+.calendar-wrapper table td.dd:hover {
+    color: #aa6290;
+}
+
 /* button control */
 .calendar-wrapper table button {
-border: 1px solid #E9E5E5;
- background: #FFFFFF; 
- color: #272829; 
- padding: 0px 1px; 
- height: 20px; 
- cursor: pointer;}
-.calendar-wrapper table tr.day td, .calendar-wrapper table tr.control td, .calendar-wrapper table button {
-border: none;
+    border: 1px solid #E9E5E5;
+    background: #FFFFFF;
+    color: #272829;
+    padding: 0px 1px;
+    height: 20px;
+    cursor: pointer;
 }
-.calendar-wrapper {
-position: absolute; 
-z-index: 1; 
-left: 8px; 
-top: 200px; 
-display: none;
-border: 1px solid #D8D8D8; 
--webkit-box-shadow: 0 0 10px #888; 
--moz-box-shadow: 0 0 10px  #888; 
-box-shadow: 0 0 10px  #888;}
 
-/* colors day */
-.calendar-wrapper .DefaultDay {
-background: #FFFFFF;
-color:#22303d;
-font-size: 14px;
+.calendar-wrapper table tr.day td, .calendar-wrapper table tr.control td, .calendar-wrapper table button {
+    border: none;
 }
-.calendar-wrapper .CurrDay {
-background: #aa6290;
-color:#fff;
+
+.calendar-wrapper {
+    position: absolute;
+    z-index: 1;
+    left: 8px;
+    top: 200px;
+    display: none;
+    border: 1px solid #D8D8D8;
+    -webkit-box-shadow: 0 0 10px #888;
+    -moz-box-shadow: 0 0 10px #888;
+    box-shadow: 0 0 10px #888;
 }
-.calendar-wrapper .Select {
- color: #aa6290;
+
+.calendar-wrapper table td.CurrDay {
+    background: #aa6290;
+    color: #fff;
+}
+.calendar-wrapper table td.Select {
+    color: #000;
+    background: #e0bbd3;
+}
+.calendar-wrapper table td.holiday {
+    color: #d3a5c3;
 }
 
 .lalign button.arr-cal {
-	font-size:0;
-	background: url(../.default/images/arr-calendar.png) no-repeat 10px top;  
-	width:18px;
-	height:15px;
+    font-size: 0;
+    background: url(../.default/images/arr-calendar.png) no-repeat 10px top;
+    width: 18px;
+    height: 15px;
 }
+
 .lalign button.arr-cal:first-child {
-	display:none;
+    display: none;
 }
 
 .ralign button.arr-cal {
-	font-size:0;
-	background: url(../.default/images/arr-calendar.png) no-repeat  -18px top;  
-	width:18px;
-	height:15px;
-}
-.ralign button.arr-cal:last-child {
-	display:none;
+    font-size: 0;
+    background: url(../.default/images/arr-calendar.png) no-repeat -18px top;
+    width: 18px;
+    height: 15px;
 }
 
+.ralign button.arr-cal:last-child {
+    display: none;
+}
 
 
 
