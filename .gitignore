@@ -21,6 +21,7 @@
 yandex_*.html
 google*.html
 result.txt
+OrderUpl.txt
 
 .idea
 .DS_Store
