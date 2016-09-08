@@ -370,10 +370,10 @@ if (isset($user_id) && $user_id != '')
 				<div class="b-form-item__input b-form-item__input--select">
 					<p class="select_title"><?= $intervals[0] ?></p>
 					<select id="time_interval" name="time_interval" class="b-form-item__input"><?
-						foreach ($intervals as $interval)
+						foreach ($intervals as $index => $interval)
 						{
 							?>
-							<option value="<?= $interval ?>"><?= $interval ?></option><?
+							<option value="<?= $index ?>"><?= $interval ?></option><?
 						}
 						?>
 					</select>

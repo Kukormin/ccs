@@ -148,9 +148,14 @@ $arFields = array(
 	'CODE' => 'ADDRESS'
 );
 CSaleOrderPropsValue::Add($arFields);
+$intervals = array(
+	'с 10:00 по 13:00',
+	'с 13:00 по 16:00',
+	'с 16:00 по 20:00',
+);
 $GLOBALS['INTARO_CRM_ORDER_ADD_NEW'] = true;
 CSaleOrder::Update($ORDER_ID, array("USER_DESCRIPTION" => "Дата и время доставки: ". $_POST['date']. " " .
-	$_POST['time_interval'] . ". Комментарий: ".$_POST['COMMENT']));
+	$intervals[$_POST['time_interval']] . ". Комментарий: ".$_POST['COMMENT']));
 $GLOBALS['INTARO_CRM_ORDER_ADD_NEW'] = false;
 /*$arEventFields = array(
     "ORDER_ID"                    => $ORDER_ID,
