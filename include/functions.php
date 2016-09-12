@@ -52,6 +52,7 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 		return false;
 	}
 
+	// Продукт
 	$rsProducts = CCatalogProduct::GetList(
 		array(),
 		array('ID' => $PRODUCT_ID),
@@ -75,6 +76,8 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 		$APPLICATION->ThrowException(Loc::getMessage('CATALOG_ERR_NO_PRODUCT'), "NO_PRODUCT");
 		return false;
 	}
+
+	// Единицы измерения
 	$arCatalogProduct['MEASURE'] = (int)$arCatalogProduct['MEASURE'];
 	$arCatalogProduct['MEASURE_NAME'] = '';
 	$arCatalogProduct['MEASURE_CODE'] = 0;
@@ -100,15 +103,17 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 		}
 	}
 
+	// Проверка доступного количества (нужна ли?)
 	$dblQuantity = (float)$arCatalogProduct["QUANTITY"];
-	$intQuantity = (int)$arCatalogProduct["QUANTITY"];
 	$boolQuantity = ($arCatalogProduct["CAN_BUY_ZERO"] != 'Y' && $arCatalogProduct["QUANTITY_TRACE"] == 'Y');
 	if ($boolQuantity && $dblQuantity <= 0)
 	{
 		$APPLICATION->ThrowException(Loc::getMessage('CATALOG_ERR_PRODUCT_RUN_OUT'), "PRODUCT_RUN_OUT");
 		return false;
 	}
+	$resQuantity = ($boolQuantity && $dblQuantity < $QUANTITY ? $dblQuantity : $QUANTITY);
 
+	// Товар в инфоблоке
 	$rsItems = CIBlockElement::GetList(
 		array(),
 		array(
@@ -134,6 +139,7 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 		return false;
 	}
 
+	// Цена
 	$strCallbackFunc = "";
 	$strProductProviderClass = "CCatalogProductProvider";
 
@@ -223,8 +229,9 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 		}
 	}
 
+	// Упаковка
     $hasPackage = false;
-    
+	// Подготовка свойств
 	if (!empty($arProductParams) && is_array($arProductParams))
 	{
 		foreach ($arProductParams as &$arOneProductParams)
@@ -238,6 +245,28 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
             if ($arOneProductParams["CODE"] == 'PACKAGE') $hasPackage = true;
 		}
 		unset($arOneProductParams);
+	}
+
+	if (!$hasPackage) {
+		$check = !empty($arParentSku)?$arParentSku['IBLOCK_ID']:$arProduct['IBLOCK_ID'];
+		$arFilter = array('CODE' => 'PACKAGE', 'IBLOCK_ID'=>$check);
+		$res = CIBlockProperty::GetList(array(), $arFilter);
+		if ($ob = $res->GetNext()) {
+
+			$elements = CIBlockElement::GetList(array('catalog_PRICE_1'=>'asc'), array(
+				'IBLOCK_ID'=>$ob['LINK_IBLOCK_ID'],
+				"ACTIVE"=>"Y"
+			));
+			if ($el = $elements->GetNextElement()) {
+				$pack = $el->GetFields();
+				$arProps[] = array(
+					"NAME" => 'Коробка',
+					"CODE" => 'PACKAGE',
+					"VALUE" => $pack['NAME'],
+					"SORT" => $pack['ID'],
+				);
+			}
+		}
 	}
 
 	$arProps[] = array(
@@ -259,7 +288,7 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 			"HEIGHT" => $arCatalogProduct["HEIGHT"],
 			"LENGTH" => $arCatalogProduct["LENGTH"]
 		)),
-		"QUANTITY" => ($boolQuantity && $dblQuantity < $QUANTITY ? $dblQuantity : $QUANTITY),
+		"QUANTITY" => $resQuantity,
 		"LID" => SITE_ID,
 		"DELAY" => "N",
 		"CAN_BUY" => "Y",
@@ -288,30 +317,31 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 	{
 		if (Loader::includeModule("statistic"))
 			CStatistic::Set_Event("sale2basket", "catalog", $arFields["DETAIL_PAGE_URL"]);
-         
-            if (!$hasPackage) {
-                $check = !empty($arParentSku)?$arParentSku['IBLOCK_ID']:$arProduct['IBLOCK_ID'];
-                $arFilter = array('CODE' => 'PACKAGE', 'IBLOCK_ID'=>$check);
-                $res = CIBlockProperty::GetList(array(), $arFilter);
-                if ($ob = $res->GetNext()) {
-                    
-                    $arFilter = array('IBLOCK_ID'=>$ob['LINK_IBLOCK_ID'], "ACTIVE"=>"Y");
-                    $elements = CIBlockElement::GetList(array('catalog_PRICE_1'=>'asc'), $arFilter);
-                    if ($el = $elements->GetNextElement()) {
-                        $elFields = $el->GetFields();
-                        $bid = MOD_Add2BasketByProductID($elFields['ID'], 1);
-                        $data = array();
-                        $arProps[] = array(
-                            "NAME" => 'Коробка',
-                            "CODE" => 'PACKAGE',
-                            "VALUE" => $elFields['NAME'],
-                            "SORT" => $bid
-                        );
-                        $data['PROPS'] = $arProps;
-                        CSaleBasket::Update($result, $data);
-                    }
+
+		// Перенес добавление коробки выше
+        /*if (!$hasPackage) {
+            $check = !empty($arParentSku)?$arParentSku['IBLOCK_ID']:$arProduct['IBLOCK_ID'];
+            $arFilter = array('CODE' => 'PACKAGE', 'IBLOCK_ID'=>$check);
+            $res = CIBlockProperty::GetList(array(), $arFilter);
+            if ($ob = $res->GetNext()) {
+
+                $arFilter = array('IBLOCK_ID'=>$ob['LINK_IBLOCK_ID'], "ACTIVE"=>"Y");
+                $elements = CIBlockElement::GetList(array('catalog_PRICE_1'=>'asc'), $arFilter);
+                if ($el = $elements->GetNextElement()) {
+                    $elFields = $el->GetFields();
+                    $bid = MOD_Add2BasketByProductID($elFields['ID'], 1);
+                    $data = array();
+                    $arProps[] = array(
+                        "NAME" => 'Коробка',
+                        "CODE" => 'PACKAGE',
+                        "VALUE" => $elFields['NAME'],
+                        "SORT" => $bid
+                    );
+                    $data['PROPS'] = $arProps;
+                    CSaleBasket::Update($result, $data);
                 }
             }
+        }*/
 	}
     
     
@@ -400,13 +430,16 @@ function MOD_BasketAdd($arFields)
     }
     else
     {
+	    $xml = $arFields['PRODUCT_XML_ID'];
+	    $tmp = explode('#', $xml);
+	    $parentId = $tmp[0];
+
         $boolProps = (!empty($arFields["PROPS"]) && is_array($arFields["PROPS"]));
 
         if (!isset($arFields['ALLOW_DUBLICATE']) || $arFields['ALLOW_DUBLICATE'] != 'Y') {
             // check if this item is already in the basket
             $arDuplicateFilter = array(
                 "FUSER_ID" => $arFields["FUSER_ID"],
-                "PRODUCT_ID" => $arFields["PRODUCT_ID"],
                 "LID" => $arFields["LID"],
                 "ORDER_ID" => "NULL"
             );
@@ -424,78 +457,17 @@ function MOD_BasketAdd($arFields)
                 $arDuplicateFilter,
                 false,
                 false,
-                array("ID", "QUANTITY")
+                array("ID", "QUANTITY", "PRODUCT_XML_ID", "PRODUCT_ID")
             );
             while($res = $db_res->Fetch())
             {
                 if(!$bEqAr)
                 {
-                    $arPropsCur = array();
-                    $arPropsOld = array();
+                    $xml = $res['PRODUCT_XML_ID'];
+	                $tmp = explode('#', $xml);
+	                $oldParentId = $tmp[0];
 
-                    if ($boolProps)
-                    {
-                        foreach($arFields["PROPS"] as &$arProp)
-                        {
-                            if (array_key_exists('VALUE', $arProp)&& '' != $arProp["VALUE"])
-                            {
-                                $propID = '';
-                                if (array_key_exists('CODE', $arProp) && '' != $arProp["CODE"])
-                                {
-                                    $propID = $arProp["CODE"];
-                                }
-                                elseif (array_key_exists('NAME', $arProp) && '' != $arProp["NAME"])
-                                {
-                                    $propID = $arProp["NAME"];
-                                }
-                                if ('' == $propID)
-                                    continue;
-                                $arPropsCur[$propID] = $arProp["VALUE"];
-                            }
-                        }
-                        if (isset($arProp))
-                            unset($arProp);
-                    }
-
-                    $dbProp = CSaleBasket::GetPropsList(
-                        array(),
-                        array("BASKET_ID" => $res["ID"]),
-                        false,
-                        false,
-                        array('NAME', 'VALUE', 'CODE')
-                    );
-                    while ($arProp = $dbProp->Fetch())
-                    {
-                        if ('' != $arProp["VALUE"])
-                        {
-                            $propID = '';
-                            if ('' != $arProp["CODE"])
-                            {
-                                $propID = $arProp["CODE"];
-                            }
-                            elseif ('' != $arProp["NAME"])
-                            {
-                                $propID = $arProp["NAME"];
-                            }
-                            if ('' == $propID)
-                                continue;
-                            $arPropsOld[$propID] = $arProp["VALUE"];
-                        }
-                    }
-
-                    $bEqAr = false;
-                    if (count($arPropsCur) == count($arPropsOld))
-                    {
-                        $bEqAr = true;
-                        foreach($arPropsCur as $key => $val)
-                        {
-                            if (!array_key_exists($key, $arPropsOld) || $arPropsOld[$key] != $val)
-                            {
-                                $bEqAr = false;
-                                break;
-                            }
-                        }
-                    }
+	                $bEqAr = $oldParentId == $parentId;
 
                     if ($bEqAr)
                     {

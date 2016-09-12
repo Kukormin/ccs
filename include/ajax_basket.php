@@ -11,8 +11,8 @@ if($_POST["ajaxaddid"] && $_POST["ajaxaction"] == 'add'){
 		foreach ($_POST['params'] as $code => $value) {
 			$params[] = array(
 				'CODE' => $code,
-				'NAME' => $value['name'],
-				'VALUE' => $value['val'],
+				'NAME' => $value['NAME'],
+				'VALUE' => $value['VALUE'],
 				'SORT' => 'ASC'
 			);
 		}
@@ -21,6 +21,7 @@ if($_POST["ajaxaddid"] && $_POST["ajaxaction"] == 'add'){
     header('Content-Type: application/json');
     echo json_encode($result?$result:0);
 }
+// Добавление товара в новую позицию корзины, даже если ТП уже есть в корзине
 if($_POST["ajaxaddid"] && $_POST["ajaxaction"] == 'dupadd'){
 	$params = array();
 	

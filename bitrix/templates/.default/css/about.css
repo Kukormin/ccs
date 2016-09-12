@@ -161,8 +161,6 @@
 	box-sizing:border-box;
 }
 .b-basket__li-item:before {
-    content: counter(li);
-    counter-increment: li;
     color: #7c7d70;
     font-family: 'PTSansCaption', sans-serif;
     height: 10px;
@@ -178,7 +176,6 @@
 
 
 .b-basket--select {
-	float:left;
 	width:33%;
 }
 
@@ -219,7 +216,7 @@
 .b-slider-wrap-basket__list {
     font-size: 0;
     width: 62%;
-	float:left;
+    display: inline-block;
 }
 .b-slider-wrap-basket__list .slick-list {
     position: relative;
@@ -288,10 +285,6 @@
 	z-index:2;
 }
 
-.b-total-basket__group {    
-	margin-top: 45px;
-	float:right;
-}
 .b-total-basket--delete {
     padding-left: 25px;
     position: relative;

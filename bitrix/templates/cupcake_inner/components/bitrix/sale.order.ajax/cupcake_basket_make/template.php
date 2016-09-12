@@ -7,7 +7,7 @@
 /** @global CUser $USER */
 /** @global CMain $APPLICATION */
 
-$price = preg_replace('|(\D)|', '', $arResult['ORDER_PRICE_FORMATED']);
+$price = $arResult['ORDER_PRICE'];
 ?>
 <script>
 	$(document).ready(function () {
@@ -423,7 +423,7 @@ if (isset($user_id) && $user_id != '')
 				<span class="b-price-foter__desc js_price_footer">Итого </span>
 
 				<div class="b-price-foter__price js_total_price">
-					<? $totalPrice = preg_replace('|(\D)|', '', $arResult['ORDER_PRICE_FORMATED']); ?>
+					<? $totalPrice = $arResult['ORDER_PRICE'] ?>
 					<?= $totalPrice > 10000 ? number_format($totalPrice, 0, '', ' ') : $totalPrice ?>
 					<span
 						class="rub">i</span>

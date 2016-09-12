@@ -14,6 +14,18 @@ function onEpilog(){
 	}
 }
 
+// Модуль ИБ в основном всегда нужен
+\Bitrix\Main\Loader::includeModule('iblock');
+
+CModule::AddAutoloadClasses(
+	'',
+	array(
+		'Local\\StaticCache' => '/bitrix/php_interface/lib/StaticCache.php',
+		'Local\\ExtCache' => '/bitrix/php_interface/lib/ExtCache.php',
+		'Local\\Package' => '/bitrix/php_interface/lib/Package.php',
+	)
+);
+
 function intarocrm_before_order_send($resOrder){
 	if(!CModule::IncludeModule("sale") || !CModule::IncludeModule("intaro.intarocrm") || empty($resOrder))
 	  return false;

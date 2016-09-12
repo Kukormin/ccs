@@ -63,15 +63,7 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 	?>
 		<form method="post" action="<?=POST_FORM_ACTION_URI?>" name="basket_form" id="basket_form">
 			<div id="basket_form_container">
-				<div class="bx_ordercart">
-					<!--<div class="bx_sort_container">
-						<span><?=GetMessage("SALE_ITEMS")?></span>
-						<a href="javascript:void(0)" id="basket_toolbar_button" class="current" onclick="showBasketItemsList()"><?=GetMessage("SALE_BASKET_ITEMS")?><div id="normal_count" class="flat" style="display:none">&nbsp;(<?=$normalCount?>)</div></a>
-						<a href="javascript:void(0)" id="basket_toolbar_button_delayed" onclick="showBasketItemsList(2)" <?=$delayHidden?>><?=GetMessage("SALE_BASKET_ITEMS_DELAYED")?><div id="delay_count" class="flat">&nbsp;(<?=$delayCount?>)</div></a>
-						<a href="javascript:void(0)" id="basket_toolbar_button_subscribed" onclick="showBasketItemsList(3)" <?=$subscribeHidden?>><?=GetMessage("SALE_BASKET_ITEMS_SUBSCRIBED")?><div id="subscribe_count" class="flat">&nbsp;(<?=$subscribeCount?>)</div></a>
-						<a href="javascript:void(0)" id="basket_toolbar_button_not_available" onclick="showBasketItemsList(4)" <?=$naHidden?>><?=GetMessage("SALE_BASKET_ITEMS_NOT_AVAILABLE")?><div id="not_available_count" class="flat">&nbsp;(<?=$naCount?>)</div></a>
-					</div>-->
-					<?
+				<div class="bx_ordercart"><?
 					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items.php");
 					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delayed.php");
 					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_subscribed.php");

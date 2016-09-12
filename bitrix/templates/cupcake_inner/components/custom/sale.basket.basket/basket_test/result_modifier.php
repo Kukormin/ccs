@@ -1,30 +1,37 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+
 /** @var array $arParams */
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
 /** @global CUser $USER */
-/** @global CDatabase $DB */
 /** @var CBitrixComponentTemplate $this */
 /** @var string $templateName */
 /** @var string $templateFile */
 /** @var string $templateFolder */
 /** @var string $componentPath */
-/** @var CBitrixBasketComponent $component */
 
+//инфоблоки, товары из которых не надо выводить стандартным методом
 $hideItemsFrom = array(
-    16, //����������
-    12, //�������
-    30 //������� ������
+	16, //аксессуары
+	12, //коробки
+	30, //коробки тортов
+	37, //коробки для эклеров
 );
 
-//�������
+//коробки
 $packages = array();
 
-//�������� �������, ���� �������
 $props_list = array();
 $arResult['GROUPED_GOODS'] = [];
 
 foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
+	//debugmessage($arItem['NAME']);
+	//debugmessage($arItem['PROPS']);
+	// 12.09.2016 - Проверку позиции на упаковку пока оставлю для корзин старого типа
+	$pack = \Local\Package::getById($arItem['PRODUCT_ID']);
+	if ($pack)
+		CSaleBasket::Delete($arItem['ID']);
+
     $res = CCatalogSku::GetProductInfo($arItem['PRODUCT_ID']);
     if ($res) {
         $name =  CIBlockElement::GetByID($res['ID']);
@@ -64,7 +71,7 @@ foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
     $arFilter = array('CODE' => 'PACKAGE', 'IBLOCK_ID'=>isset($arResult["GRID"]["ROWS"][$k]['PARENT_IBLOCK_ID'])?$arResult["GRID"]["ROWS"][$k]['PARENT_IBLOCK_ID']:$arResult["GRID"]["ROWS"][$k]['IBLOCK_ID']);
     $res = CIBlockProperty::GetList(array(), $arFilter);
     if ($ob = $res->GetNext()) {
-        $arResult["GRID"]["ROWS"][$k]['PACKAGES'] = $ob['LINK_IBLOCK_ID']; //id ��������� �������
+        $arResult["GRID"]["ROWS"][$k]['PACKAGES'] = $ob['LINK_IBLOCK_ID']; //id ��������� �������
     }
     
     foreach ($arItem['PROPS'] as $data) {

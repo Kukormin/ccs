@@ -1,6 +1,7 @@
 <?
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+require($_SERVER["DOCUMENT_ROOT"]."/include/functions.php");
 
 if (empty($_POST['NAME']) || empty($_POST['EMAIL']) || empty($_POST['PERSONAL_PHONE'])) die;
 
@@ -62,6 +63,58 @@ if($_POST['form_type'] == 'popup') {
 	MOD_Add2BasketByProductID($_POST['product_id'], $_POST['quantity'], array(), false);
 	$DELIVERY_PRICE = 0;
 	$DELIVERY_TYPE = 15;
+}
+
+$dbBasketItems = CSaleBasket::GetList(
+	array("NAME" => "ASC"),
+	array(
+		"FUSER_ID" => CSaleBasket::GetBasketUserID(),
+		"LID" => s1,
+		"ORDER_ID" => "NULL"
+	),
+	false,
+	false,
+	array("ID", "PRODUCT_ID", "QUANTITY", "DELAY", "CAN_BUY", "PRICE", "WEIGHT", "NAME")
+);
+
+// Добавляем подарочные упаковки в заказ
+while ($arBasketItems = $dbBasketItems->GetNext())
+{
+	if ($arBasketItems["DELAY"] == "N" && $arBasketItems["CAN_BUY"] == "Y")
+	{
+		// 12.09.2016 - Проверку позиции на упаковку пока оставлю для корзин старого типа
+		$pack = \Local\Package::getById($arBasketItems['PRODUCT_ID']);
+		if ($pack)
+			CSaleBasket::Delete($arBasketItems['ID']);
+
+		$rsProps = CSaleBasket::GetPropsList(array(), array("BASKET_ID" => $arBasketItems['ID'], 'CODE' => 'PACKAGE'));
+		$props = array();
+		if ($prop = $rsProps->Fetch())
+		{
+			$pack = \Local\Package::getById($prop['SORT']);
+			if (!$pack)
+			{
+				$iblockId = 0;
+				$res = CCatalogSku::GetProductInfo($arBasketItems['PRODUCT_ID']);
+				if ($res) {
+					$parent =  CIBlockElement::GetByID($res['ID']);
+					while($ar_res = $parent->GetNext())
+						$iblockId = $ar_res['IBLOCK_ID'];
+				}
+				if (!$iblockId)
+				{
+					$product = CIBlockElement::GetByID($arBasketItems['PRODUCT_ID']);
+					while($ar_res = $product->GetNext())
+						$iblockId = $ar_res['IBLOCK_ID'];
+				}
+				if ($iblockId)
+					$pack = \Local\Package::getByName($prop['VALUE'], $iblockId);
+			}
+
+			if ($pack && $pack['PRICE'] > 0)
+				MOD_Add2BasketByProductID($pack['ID'], $arBasketItems["QUANTITY"]);
+		}
+	}
 }
 
 $dbBasketItems = CSaleBasket::GetList(

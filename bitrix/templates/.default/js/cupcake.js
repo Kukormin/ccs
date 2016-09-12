@@ -798,7 +798,7 @@ $(document).ready(function () {
 			var addid = modal.data('id');
 
 		$.post('/include/ajax_basket.php', {
-			'ajaxaction': 'dupadd',
+			'ajaxaction': 'add',
 			'ajaxaddid': addid,
 			'quantity': parseInt($(".js-modal-counter", modal).text()),
 			'params': params
@@ -828,7 +828,7 @@ $(document).ready(function () {
 			var addid = modal.data('id');
 
 		$.post('/include/ajax_basket.php', {
-			'ajaxaction': 'dupadd',
+			'ajaxaction': 'add',
 			'ajaxaddid': addid,
 			'quantity': parseInt($(".js-modal-counter", modal).text()),
 			'params': params
@@ -884,26 +884,13 @@ $(document).ready(function () {
 		var productName = $(this).closest('.b-basket__item').find('.b-mod__item-title--basket').html();
 		var price = line.data('base-price');
 		productName = productName.trim();
-		var productId = $(this).closest('.b-basket__item').find('.js-duplicate-item').data('id');
 		$.post('/include/ajax_basket.php', {'ajaxaction': 'delete', 'ajaxdeleteid': id}, function () {
-			$.post('/include/ajax_basket.php', {'ajaxaction': 'delete', 'ajaxdeleteid': id}, function () {
-				updateBasketPrice();
-			});
+			updateBasketPrice();
 		});
-		var id = line.find('.js-package-cont').data('package-bid');
 
-		$(this).closest('.js-basket-item-cont').slideUp(function () {
-			//if ($(this).siblings('.b-basket__li-item ').length>1) {
-
-			//}
-			if ($(this).siblings('.b-basket__li-item ').length <= 1) {
-				$(this).closest('.b-basket__item').slideUp(function () {
-					$(this).remove();
-					if (!$('.b-basket__item').length) document.location.reload();
-				});
-			}
-
-			$(this).remove();
+		line.slideUp(function () {
+			line.parent().remove();
+			if (!$('.b-basket__item').length) document.location.reload();
 		});
 		dataLayer.push({
 			'event': 'removeFromCart',
@@ -911,7 +898,7 @@ $(document).ready(function () {
 				'remove': {
 					'products': [{
 						'name': productName,
-						'id': productId,
+						'id': id,
 						'price': price,
 						'quantity': 1
 					}]
@@ -1043,11 +1030,67 @@ $(document).ready(function () {
 				resp = JSON.parse(resp);
 				line.data('base-price', resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
 				var pack_price = parseInt(line.data('package-price'));
-				line.find('.js-item-total').text(parseInt(resp.BASKET_DATA.GRID.ROWS[bid].PRICE) + pack_price);
+				var price = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
+				var cnt = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].QUANTITY);
+				line.find('.js-item-total').text((price + pack_price)*cnt);
 				updateBasketPrice();
 			}
 		});
 	});
+
+	$('.basket_cnt_minus').on('click', function () {
+		var line = $(this).closest('.js-basket-item-cont');
+		var that = $(this);
+		var input = that.parent().find('input');
+		var val = input.val();
+		if (val <= 1)
+			return false;
+
+		val--;
+		input.val(val);
+		sendCntAjax(line, val);
+	});
+
+	$('.basket_cnt_plus').on('click', function () {
+		var line = $(this).closest('.js-basket-item-cont');
+		var that = $(this);
+		var input = that.parent().find('input');
+		var val = input.val();
+		if (val >= 99)
+			return false;
+
+		val++;
+		input.val(val);
+		sendCntAjax(line, val);
+	});
+
+	function sendCntAjax(line, val) {
+		var bid = line.data('oiid');
+		var opts = {
+			'action_var': basket_settings.action_var,
+			'basketItemId': bid,
+			'sessid': basket_settings.sid,
+			'select_props': 'QUANTITY'
+		};
+		opts['QUANTITY_' + bid] = val;
+		opts[basket_settings.action_var] = 'recalculate';
+		$.ajax({
+			type: 'POST',
+			url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
+			data: opts,
+			dataType: 'json',
+			complete: function (resp) {
+				resp = resp.responseText.replace(/'/g, '"');
+				resp = JSON.parse(resp);
+				line.data('base-price', resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
+				var pack_price = parseInt(line.data('package-price'));
+				var price = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
+				var cnt = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].QUANTITY);
+				line.find('.js-item-total').text((price + pack_price)*cnt);
+				updateBasketPrice();
+			}
+		});
+	}
 
 	if ($('.js-package-popup').length) {
 		$('.js-package-popup').featherlight();
@@ -1083,7 +1126,8 @@ $(document).ready(function () {
 		$.post('/include/update_package.php', {'bid': bid, 'newid': id, 'gbid': gbid, 'name': name}, function (resp) {
 			var price = parseInt(line.data('base-price'));
 			var pack_price = parseFloat(pack_item.data('package-price'));
-			line.find('.js-item-total').text(price + pack_price);
+			var cnt = parseInt(line.find('#QUANTITY_INPUT_' + gbid).val());
+			line.find('.js-item-total').text((price + pack_price)*cnt);
 			line.data('package-price', pack_price);
 			package_cont.data('package-bid', resp);
 			updateBasketPrice();
@@ -1107,7 +1151,7 @@ $(document).ready(function () {
 			};
 		});
 		$.post('/include/ajax_basket.php', {
-			'ajaxaction': 'dupadd',
+			'ajaxaction': 'add',
 			'ajaxaddid': id,
 			'params': params
 		}, function (resp) {

@@ -29,5 +29,36 @@ while ($ptype = $db_ptype->Fetch())
     $arResult['PAYSYSTEM_UNAUTHED'][] = $ptype;
 }
 
+$packTotal = 0;
+foreach ($arResult['BASKET_ITEMS'] as $item) {
+	foreach ($item['PROPS'] as $prop)
+	{
+		if ($prop['CODE'] == 'PACKAGE')
+		{
+			$pack = \Local\Package::getById($prop['SORT']);
+			if (!$pack)
+			{
+				$iblockId = 0;
+				$res = CCatalogSku::GetProductInfo($item['PRODUCT_ID']);
+				if ($res) {
+					$parent =  CIBlockElement::GetByID($res['ID']);
+					while($ar_res = $parent->GetNext())
+						$iblockId = $ar_res['IBLOCK_ID'];
+				}
+				if (!$iblockId)
+				{
+					$product = CIBlockElement::GetByID($item['PRODUCT_ID']);
+					while($ar_res = $product->GetNext())
+						$iblockId = $ar_res['IBLOCK_ID'];
+				}
+				if ($iblockId)
+					$pack = \Local\Package::getByName($prop['VALUE'], $iblockId);
+			}
+			if ($pack && $pack['PRICE'] > 0)
+				$packTotal += $pack['PRICE'] * $item['QUANTITY'];
+			break;
+		}
+	}
+}
 
-?>
+$arResult['ORDER_PRICE'] += $packTotal;
