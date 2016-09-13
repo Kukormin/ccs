@@ -12,7 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-//print_r($arResult);
 ?>
 <div class="b-slider-wrap-about-novelty" id="related-products">
         <?foreach ($arResult['ITEMS'] as $key => $arItem) {

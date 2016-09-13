@@ -12,12 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-if(isset($_COOKIE['test'])){
-    echo "<pre>";
-    print_r($arResult);
-    die;
-}
-//print_r($arResult);
 ?>
 <div class="b-slider-wrap-about-novelty" id="related-products">
         <?foreach ($arResult['ITEMS'] as $key => $arItem) {
