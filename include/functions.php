@@ -40,7 +40,7 @@ function MOD_Add2BasketByProductID($PRODUCT_ID, $QUANTITY = 1, $arRewriteFields 
 	if ($QUANTITY <= 0)
 		$QUANTITY = 1;
 
-	if (!Loader::includeModule("sale"))
+	if (!Loader::includeModule("sale") || !Loader::includeModule("catalog"))
 	{
 		$APPLICATION->ThrowException(Loc::getMessage('CATALOG_ERR_NO_SALE_MODULE'), "NO_SALE_MODULE");
 		return false;
