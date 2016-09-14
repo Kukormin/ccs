@@ -26,9 +26,9 @@ if (!isset($_SESSION['retailcrm'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="/bitrix/templates/.default/css/slick.css" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/css/about.css" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/template_styles.css" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/css/cupcake-media.css" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/css/about.css?v=1" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/template_styles.css?v=1" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/css/cupcake-media.css?v=1" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -40,7 +40,7 @@ if (!isset($_SESSION['retailcrm'])) {
     <script type="text/javascript" src="/bitrix/templates/.default/js/messages_ru.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=1"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
