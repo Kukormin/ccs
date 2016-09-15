@@ -22,7 +22,7 @@
         <div class="b-footer-info gl-block-footer-info">
             <div class="b-footer-copy">
                 <span>Проект развивает </span><a style="color:#a3a67b;" href="http://komanda-a.pro/">Команда-А</a><br>
-                <span>Проект продвигает </span><a style="color:#a3a67b;" href="http://neyiron.ru/">Neyiron</a>
+                <span>Продвижение сайта - </span><a style="color:#a3a67b;" href="http://neyiron.ru/">Neyiron</a>
             </div>
             <ul class="b-footer-nav__list">
                 <?$APPLICATION->IncludeComponent(
