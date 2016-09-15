@@ -167,8 +167,8 @@ while ($ob = $rsItems->GetNextElement())
 
 }
 
-debugmessage($cnt);
-debugmessage($cnt1);
+echo ($cnt);
+echo ($cnt1);
 
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");
