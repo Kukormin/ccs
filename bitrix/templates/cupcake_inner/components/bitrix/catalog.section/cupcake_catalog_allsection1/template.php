@@ -191,18 +191,18 @@ foreach ($arResult['ITEMS'] as $key => $arItem) {
 
 								</div>
                             <? } ?>
-							</div>
-				 </div>		<!--end b-catalog-wrap--cupcake-->
+							</div><?
+					if ($arParams["DISPLAY_BOTTOM_PAGER"])
+					{
+						?><? echo $arResult["NAV_STRING"]; ?><?
+					}
+					?>
+					<div class="new_descr"><?= $arParams['~CUSTOM_DESCRIPTION'] ?></div>
+	 </div>		<!--end b-catalog-wrap--cupcake-->
 
-
-	</div>
 
         <div class="b-content-center b-content-center--bottom i-padding-vert-30">
-            <?if ($arParams["DISPLAY_BOTTOM_PAGER"])
-            {
-                ?><? echo $arResult["NAV_STRING"]; ?><?
-            }?>
-	        <div class="new_descr"><?= $arParams['~CUSTOM_DESCRIPTION'] ?></div>
+
             <a href="#" class="b-scroll-to-top b-scroll-to-top--catalog">
                 наверх
             </a>

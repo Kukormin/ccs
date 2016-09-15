@@ -13,96 +13,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-// TODO: что за индийский нахрен?
-/*if (strpos('/catalog/cupcakes/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки от Cupcake Story');
-elseif (strpos('/catalog/cakes/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Торты от Cupcake Story');
-elseif (strpos('/catalog/happybox/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки Happy Box от Cupcake Story');
-elseif (strpos('/catalog/eclairs/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Эклеры от Cupcake Story');
-elseif (strpos('/catalog/cakes/klassicheskie/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Классические торты от Cupcake Story');
-elseif (strpos('/catalog/cakes/novogodnie/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Новогодние торты от Cupcake Story');
-elseif (strpos('/catalog/gingerbread/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Пряники от Cupcake Story');
-elseif (strpos('/catalog/gingerbread/bolshie/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Большие пряники от Cupcake Story');
-elseif (strpos('/catalog/gingerbread/malye/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Малые пряники от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/dlya-devochek/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки для девочек от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/dlya-malchikov/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки для мальчиков от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/rozhdenie-rebenka/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки к рождению ребенка от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/malchishnik/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки для мальчишника от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/devichnik/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки для девичника от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/anniversary/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Юбилейные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/birthday/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки ко Дню рождения от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/kreshchenie/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки к крещению от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/rozhdestvo/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Рождественские капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/9-maya/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки к 9 мая от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/den-zashhity-detej/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки ко Дню защиты детей от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/vypusknoj/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки к выпускному от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/den-semi-vernosti-i-lyubvi/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки ко Дню семьи верности и любви от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/halloween/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки на Хеллоуин от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/den-znaniy/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки ко Дню знаний от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/pasha/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Пасхальные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/den-materi/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки ко Дню матери от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/novogodnie/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Новогодние капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/14-fevralya/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки к 14 февраля от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/children/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Детские капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/classic/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Классические капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/holyday/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Праздничные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/exclusive/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Эксклюзивные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/vyhodi-za-menya/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки Выходи за меня от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/lyublyu/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки Люблю за меня от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/prosti/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки Прости от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/skuchayu/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки Скучаю от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/spasibo/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки Спасибо от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/ulybnis/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки Улыбнись от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/family/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Семейные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/raznoe/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Разные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/holyday/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Праздничные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/calendar/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Календарные капкейки от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/bestseller/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки BESTSELLER от Cupcake Story');
-elseif (strpos('/catalog/cupcakes/fitness/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки FITNESS от Cupcake Story');*/
-
 $strElementEdit = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT");
 $strElementDelete = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE");
 $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELETE_CONFIRM'));
@@ -111,23 +21,7 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 
 
 <div class="b-catalog-wrap--cupcake js-ajax-content-block">
-<h1><?= $APPLICATION->ShowTitle(false) ?>
-	<? /*if (CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "NAME") != '' && $_REQUEST['SECTION_CODE'] == ''): ?>
-		<? echo CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "NAME"); ?>
-	<? else: ?>
-		<?
-		$rsSections = CIBlockSection::GetList(array(), array(
-			'IBLOCK_ID' => $arResult['IBLOCK_ID'],
-			'CODE' => $_REQUEST['SECTION_CODE']
-		));
-		if ($arSection = $rsSections->Fetch())
-		{
-
-			echo CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "NAME") . " - " . $arSection['NAME'];
-		}
-		?>
-	<?endif */?>
-</h1>
+<h1><?= $APPLICATION->ShowTitle(false) ?></h1>
 <ul class="b-catalog-cupcake__list">
 	<li class="b-catalog-cupcake--all <?= !isset($_REQUEST['new']) && !isset($_REQUEST['action']) ? 'active' : ''; ?> js-catalog-filter"
 	    data-param="">Все
