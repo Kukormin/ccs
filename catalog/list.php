@@ -151,7 +151,7 @@ $APPLICATION->IncludeComponent(
 	array(
 		"ACTION_VARIABLE" => "action",
 		"ADD_PICT_PROP" => "-",
-		"BY_LINK" => "Y",
+		//"BY_LINK" => "Y",
 		"ADD_PROPERTIES_TO_BASKET" => "Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"ADD_TO_BASKET_ACTION" => "ADD",
@@ -255,7 +255,7 @@ $APPLICATION->IncludeComponent(
 			4 => "FILLING",
 			5 => "",
 		),
-		"SECTION_CODE" => "",
+		"SECTION_CODE" => $_REQUEST['SECTION_CODE'],
 		"SECTION_ID" => "",
 		"SECTION_ID_VARIABLE" => "",
 		"SECTION_URL" => "",

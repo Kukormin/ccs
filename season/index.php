@@ -3,34 +3,40 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "Новый Год");
 $APPLICATION->SetTitle("");
 
+$iblock = new \CIBlock();
+$iblockElement = new \CIBlockElement();
 
-if (isset($_REQUEST['FILTER'])) {
-    $filter = $_REQUEST['FILTER'];
-}else{
-    $filter = 'newyear';
+$seasonsId = 0;
+$dbIb = $iblock->GetList(
+	Array(),
+	Array(
+		'CODE' => 'seasons',
+	),
+	false
+);
+while ($arIb = $dbIb->Fetch()) {
+	$seasonsId = $arIb['ID'];
 }
 
-if (CModule::IncludeModule('highloadblock')){
-
- 
-$ID = 8; //highloadblock Sezonnost
- 
-$hldata = Bitrix\Highloadblock\HighloadBlockTable::getById($ID)->fetch();
-//затем инициализировать класс сущности
-$hlentity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hldata);
- 
-$hlDataClass = $hldata['NAME'].'Table';
- 
-$result = $hlDataClass::getList(array(
-     'select' => array('ID', 'UF_NAME'),
-     'order' => array('UF_NAME' =>'ASC'),
-     'filter' => array('UF_XML_ID'=>$filter),
-));
- 
-while($res = $result->fetch())
-   $APPLICATION->SetPageProperty("title", $res['UF_NAME']);
-   
+$newSeasonsByCode = array();
+$rsItems = $iblockElement->GetList(array(), array(
+	'IBLOCK_ID' => $seasonsId,
+), false, false, array('ID', 'NAME', 'CODE', 'DETAIL_TEXT'));
+while ($arItem = $rsItems->Fetch())
+{
+	$newSeasonsByCode[$arItem['CODE']] = $arItem;
 }
+
+if ($newSeasonsByCode[$_REQUEST['FILTER']])
+    $code = $_REQUEST['FILTER'];
+else
+    $code = 'newyear';
+
+$fSeason = $newSeasonsByCode[$code];
+$filterValue = $fSeason['ID'];
+
+$ipropValues = new \Bitrix\Iblock\InheritedProperty\ElementValues($seasonsId, $filterValue);
+$propValues = $ipropValues->getValues();
 
 //echo '----index';
 ?><section class="b-topblock b-topblock--pay-ship"> </section> <section class="b-bg-grey">
@@ -97,9 +103,63 @@ while($res = $result->fetch())
 	</div>
 </div>
 <div class="b-content-center b-content-center--cupcake">
+
+<div class="b-grey-wrap-top b-grey-wrap-top--asaide">
+	<div class="b-grey-wrap-top-right">
+		<div class="b-grey-wrap-bottom">
+			<div class="b-grey-wrap-bottom-right">
+				<ul id="nav_list_asaide" class="b-cupcake-fiirst-line__list"><?
+
+					foreach ($newSeasonsByCode as $season)
+					{
+						$active = $season['ID'] == $filterValue ? ' active' : '';
+						?>
+						<li class="b-cupcake-fiirst-line__item<?= $active?>">
+							<a class="b-cupcake-fiirst-line__link" href="/season/<?= $season['CODE'] ?>/"><?=
+								$season['NAME'] ?></a>
+						</li><?
+					}
+					?>
+				</ul>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="b-mobile-breadcrumbs b-block-mobile-only">
+	<div class="mobile_catalog_open">Развернуть каталог</div>
+	<div class="cupcake__navigation--mobile"> </div>
+	<div class="cupcake__navigation--mobile-wrap">
+		<div class="b-grey-wrap-top">
+			<div class="b-grey-wrap-top-right">
+				<div class="b-grey-wrap-bottom">
+					<div class="b-grey-wrap-bottom-right">
+						<ul class="b-cupcake__navigation--mobile-first-line__list"><?
+
+							foreach ($newSeasonsByCode as $season)
+							{
+								$active = $season['ID'] == $filterValue ? ' active' : '';
+								?>
+								<li class="b-cupcake__navigation--mobile-first-line__item<?= $active?>">
+									<a class="b-cupcake__navigation--mobile-first-line__link" href="/season/<?= $season['CODE'] ?>/"><?=
+										$season['NAME'] ?></a>
+								</li><?
+							}
+
+							?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 	 <?
      $arrFilter = array(
-    'PROPERTY_SEASON' => $filter
+    'PROPERTY_SEASON_IB' => $filterValue
+    //'PROPERTY_SEASON' => 'newyear'
 );
 if (isset($_REQUEST['new'])) {
     $arrFilter['!PROPERTY_NEW'] = false;
@@ -249,9 +309,30 @@ if (isset($_REQUEST['action'])) {
 		"TEMPLATE_THEME" => "blue",
 		"USE_MAIN_ELEMENT_SECTION" => "N",
 		"USE_PRICE_COUNT" => "N",
-		"USE_PRODUCT_QUANTITY" => "Y"
+		"USE_PRODUCT_QUANTITY" => "Y",
+	    "CUSTOM_DESCRIPTION" => $fSeason['DETAIL_TEXT'],
 	),
 	false
-);?>
+);
+
+	 if ($propValues)
+	 {
+		 $arTitleOptions = null;
+
+		 if ($propValues["ELEMENT_PAGE_TITLE"] != "")
+			 $APPLICATION->SetTitle($propValues["ELEMENT_PAGE_TITLE"], $arTitleOptions);
+
+		 if ($propValues["ELEMENT_META_TITLE"] != "")
+			 $APPLICATION->SetPageProperty("title", $propValues["ELEMENT_META_TITLE"], $arTitleOptions);
+
+		 if ($propValues["ELEMENT_META_KEYWORDS"] != "")
+			 $APPLICATION->SetPageProperty("keywords", $propValues["ELEMENT_META_KEYWORDS"], $arTitleOptions);
+
+		 if ($propValues["ELEMENT_META_DESCRIPTION"] != "")
+			 $APPLICATION->SetPageProperty("description", $propValues["ELEMENT_META_DESCRIPTION"], $arTitleOptions);
+
+	 }
+
+	 ?>
 </div>
  </section><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

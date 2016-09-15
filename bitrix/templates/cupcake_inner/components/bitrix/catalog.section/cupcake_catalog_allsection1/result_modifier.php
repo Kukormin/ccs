@@ -466,10 +466,9 @@ if (!empty($arResult['ITEMS']))
 	}
 }
 
-$main_section = [5, 6, 7, 33];
+$main_section = [5, 6, 7, 33, 38, 40];
 $product_ids = [];
 global $arrFilter;
-
 foreach($main_section as $ids) {
 
 

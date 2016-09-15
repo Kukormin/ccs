@@ -34,6 +34,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem) {
                             'TEMPLATE'  => 'page_inc.php',
                         )
                     ); ?>
+					<h1><?= $APPLICATION->ShowTitle(false) ?></h1>
                     <ul class="b-catalog-cupcake__list">
 						<li class="b-catalog-cupcake--all <?=!isset($_REQUEST['new'])&&!isset($_REQUEST['action'])?'active':'';?> js-catalog-filter" data-param="">Все</li>
 						<li class="b-catalog-cupcake--new-items <?=isset($_REQUEST['new'])?'active':'';?> js-catalog-filter" data-param="new">Новинки</li>
@@ -201,6 +202,7 @@ foreach ($arResult['ITEMS'] as $key => $arItem) {
             {
                 ?><? echo $arResult["NAV_STRING"]; ?><?
             }?>
+	        <div class="new_descr"><?= $arParams['~CUSTOM_DESCRIPTION'] ?></div>
             <a href="#" class="b-scroll-to-top b-scroll-to-top--catalog">
                 наверх
             </a>

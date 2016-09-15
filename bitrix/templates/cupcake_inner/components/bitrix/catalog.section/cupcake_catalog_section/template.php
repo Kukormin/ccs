@@ -14,7 +14,7 @@
 $this->setFrameMode(true);
 
 // TODO: что за индийский нахрен?
-if (strpos('/catalog/cupcakes/', $APPLICATION->GetCurPage()) === 0)
+/*if (strpos('/catalog/cupcakes/', $APPLICATION->GetCurPage()) === 0)
 	$APPLICATION->SetPageProperty("title", 'Капкейки от Cupcake Story');
 elseif (strpos('/catalog/cakes/', $APPLICATION->GetCurPage()) === 0)
 	$APPLICATION->SetPageProperty("title", 'Торты от Cupcake Story');
@@ -101,7 +101,7 @@ elseif (strpos('/catalog/cupcakes/calendar/', $APPLICATION->GetCurPage()) === 0)
 elseif (strpos('/catalog/cupcakes/bestseller/', $APPLICATION->GetCurPage()) === 0)
 	$APPLICATION->SetPageProperty("title", 'Капкейки BESTSELLER от Cupcake Story');
 elseif (strpos('/catalog/cupcakes/fitness/', $APPLICATION->GetCurPage()) === 0)
-	$APPLICATION->SetPageProperty("title", 'Капкейки FITNESS от Cupcake Story');
+	$APPLICATION->SetPageProperty("title", 'Капкейки FITNESS от Cupcake Story');*/
 
 $strElementEdit = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT");
 $strElementDelete = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE");
@@ -111,8 +111,8 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 
 
 <div class="b-catalog-wrap--cupcake js-ajax-content-block">
-<h1>
-	<? if (CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "NAME") != '' && $_REQUEST['SECTION_CODE'] == ''): ?>
+<h1><?= $APPLICATION->ShowTitle(false) ?>
+	<? /*if (CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "NAME") != '' && $_REQUEST['SECTION_CODE'] == ''): ?>
 		<? echo CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "NAME"); ?>
 	<? else: ?>
 		<?
@@ -126,7 +126,7 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 			echo CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "NAME") . " - " . $arSection['NAME'];
 		}
 		?>
-	<?endif ?>
+	<?endif */?>
 </h1>
 <ul class="b-catalog-cupcake__list">
 	<li class="b-catalog-cupcake--all <?= !isset($_REQUEST['new']) && !isset($_REQUEST['action']) ? 'active' : ''; ?> js-catalog-filter"
@@ -314,14 +314,15 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 	{
 		?><? echo $arResult["NAV_STRING"]; ?><?
 	}?>
-	<div class="new_descr">
-		<? if (is_object($arResult['NAV_RESULT']) && $arResult['NAV_RESULT']->PAGEN == 1): ?>
-			<? if (CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "DESCRIPTION") != '' && $_REQUEST['SECTION_CODE'] == ''): ?>
-				<? echo CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "DESCRIPTION"); ?>
-			<? else: ?>
-
-
-				<?
+	<div class="new_descr"><?
+		// Описание выводим только на первой странице. Почему?
+		if (is_object($arResult['NAV_RESULT']) && $arResult['NAV_RESULT']->PAGEN == 1)
+		{
+			$desc = CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "DESCRIPTION");
+			if ($desc != '' && $_REQUEST['SECTION_CODE'] == '')
+				echo $desc;
+			else
+			{
 				$rsSections = CIBlockSection::GetList(array(), array(
 					'IBLOCK_ID' => $arResult['IBLOCK_ID'],
 					'CODE' => $_REQUEST['SECTION_CODE']
@@ -330,12 +331,9 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 				{
 					echo $arSection['DESCRIPTION'];
 				}
-				?>
-
-
-			<?endif ?>
-		<? endif ?>
-
+			}
+		}
+		?>
 	</div>
 
 

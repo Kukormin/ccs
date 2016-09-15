@@ -23,4 +23,22 @@ if (isset($templateData['TEMPLATE_LIBRARY']) && !empty($templateData['TEMPLATE_L
 	}
 }
 
-?>
+if (!$arResult["ID"])
+{
+	$arTitleOptions = null;
+	$ipropValues = new \Bitrix\Iblock\InheritedProperty\IblockValues($arParams["IBLOCK_ID"]);
+	$val = $ipropValues->getValues();
+
+	if ($val["SECTION_PAGE_TITLE"] != "")
+		$APPLICATION->SetTitle($val["SECTION_PAGE_TITLE"], $arTitleOptions);
+
+	if ($val["SECTION_META_TITLE"] != "")
+		$APPLICATION->SetPageProperty("title", $val["SECTION_META_TITLE"], $arTitleOptions);
+
+	if ($val["SECTION_META_KEYWORDS"] != "")
+		$APPLICATION->SetPageProperty("keywords", $val["SECTION_META_KEYWORDS"], $arTitleOptions);
+
+	if ($val["SECTION_META_DESCRIPTION"] != "")
+		$APPLICATION->SetPageProperty("description", $val["SECTION_META_DESCRIPTION"], $arTitleOptions);
+
+}
