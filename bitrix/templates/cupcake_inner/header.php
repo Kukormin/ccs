@@ -39,14 +39,14 @@ if (!isset($_SESSION['retailcrm'])) {
     <script type="text/javascript" src="/bitrix/templates/.default/js/featherlight.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/slick.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/richmarker.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=1"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/share.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/additional.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/messages_ru.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=1"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=2"></script>
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

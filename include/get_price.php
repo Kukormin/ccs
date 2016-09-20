@@ -11,8 +11,7 @@ if (CModule::IncludeModule('sale')) {
             "ORDER_ID" => "NULL"
         ),
         false,
-        false,
-        array("ID", "QUANTITY", "PRICE")
+        false
     );
     
     while ($arItems = $dbBasketItems->Fetch())

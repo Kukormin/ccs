@@ -969,9 +969,6 @@ function recalcBasketAjax(params)
 {
 	BX.showWait();
 
-	console.log(params);
-	
-	
 	var property_values = {},
 		action_var = BX('action_var').value,
 		items = BX('basket_items'),
@@ -1026,13 +1023,11 @@ function recalcBasketAjax(params)
 		
 			if(result.VALID_COUPON != false){
 				coupon_id.removeClass('badCoupon');
-				BX.closeWait();
 				updateBasketTable(null, result);
 			}else{
 				coupon_id.addClass('badCoupon');
 			}
-			//console.log(result.VALID_COUPON);
-			
+			BX.closeWait();
 		}
 	});
 }

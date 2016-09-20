@@ -1029,11 +1029,14 @@ $(document).ready(function () {
 				resp = resp.responseText.replace(/'/g, '"');
 				resp = JSON.parse(resp);
 				line.data('base-price', resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
-				var pack_price = parseInt(line.data('package-price'));
-				var price = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
+				var pack_price = parseFloat(line.data('package-price'));
+				var price = parseFloat(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
 				var cnt = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].QUANTITY);
-				line.find('.js-item-total').text((price + pack_price)*cnt);
+				var sum = Math.round((price + pack_price)*cnt);
+				line.find('.js-item-total').text(sum);
 				updateBasketPrice();
+				if (resp.BASKET_DATA.COUPON_LIST)
+					updateCouponsBlock(resp.BASKET_DATA.COUPON_LIST, resp.BASKET_DATA.allSum, resp.BASKET_DATA.DISCOUNT_PRICE_ALL);
 			}
 		});
 	});
@@ -1083,11 +1086,14 @@ $(document).ready(function () {
 				resp = resp.responseText.replace(/'/g, '"');
 				resp = JSON.parse(resp);
 				line.data('base-price', resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
-				var pack_price = parseInt(line.data('package-price'));
-				var price = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
+				var pack_price = parseFloat(line.data('package-price'));
+				var price = parseFloat(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
 				var cnt = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].QUANTITY);
-				line.find('.js-item-total').text((price + pack_price)*cnt);
+				var sum = Math.round((price + pack_price)*cnt);
+				line.find('.js-item-total').text(sum);
 				updateBasketPrice();
+				if (resp.BASKET_DATA.COUPON_LIST)
+					updateCouponsBlock(resp.BASKET_DATA.COUPON_LIST, resp.BASKET_DATA.allSum, resp.BASKET_DATA.DISCOUNT_PRICE_ALL);
 			}
 		});
 	}
@@ -1124,10 +1130,11 @@ $(document).ready(function () {
 		var name = pack_item.data('package-name');
 
 		$.post('/include/update_package.php', {'bid': bid, 'newid': id, 'gbid': gbid, 'name': name}, function (resp) {
-			var price = parseInt(line.data('base-price'));
+			var price = parseFloat(line.data('base-price'));
 			var pack_price = parseFloat(pack_item.data('package-price'));
 			var cnt = parseInt(line.find('#QUANTITY_INPUT_' + gbid).val());
-			line.find('.js-item-total').text((price + pack_price)*cnt);
+			var sum = Math.round((price + pack_price)*cnt);
+			line.find('.js-item-total').text(sum);
 			line.data('package-price', pack_price);
 			package_cont.data('package-bid', resp);
 			updateBasketPrice();
@@ -1442,20 +1449,44 @@ $(document).ready(function () {
 });
 
 function updateBasketPrice() {
+	var sum = 0;
+	$('.js-item-total').each(function() {
+		sum += parseInt($(this).text());
+	});
+	$('.js-order-total').html(sum > 10000 ? format_number(sum) : sum);
+}
 
-	if (!$(".bx_ordercart_coupon").find("span").hasClass("good")) {
-
-		$.get('/include/get_price.php', function (resp) {
-			$('.js-order-total').html(parseInt(resp.SUM) > 10000 ? format_number(resp.SUM) : resp.SUM);
-			if (resp.COUNT > 0) {
-				$('.js-basket-total-count').text(resp.COUNT).show();
-			} else {
-				$('.js-basket-total-count').hide();
-			}
-		});
-
+function updateCouponsBlock(list, sum, discount) {
+	for (var i in list)
+	{
+		var item = list[i];
+		var div = $('.bx_ordercart_coupon#c_' + item.ID);
+		if (div.length) {
+			var cl = 'disabled';
+			if (item.JS_STATUS === 'BAD')
+				cl = 'bad';
+			else if (item.JS_STATUS === 'APPLYED')
+				cl = 'good';
+			div.children('input').attr('class', cl);
+			div.children('span').attr('class', cl);
+			div.children('.bx_ordercart_coupon_notes').text(item.JS_CHECK_CODE);
+		}
 	}
 
+	var total = $('.discount-total');
+	if (total.length) {
+		if (discount > 0) {
+			console.log(sum);
+			console.log(discount);
+			total.find('#dtotal1').text(Math.round(sum) + Math.round(discount));
+			total.find('#dtotal2').text(Math.round(discount));
+			total.find('#dtotal3').text(Math.round(sum));
+			total.removeClass('hidden');
+		}
+		else {
+			total.addClass('hidden');
+		}
+	}
 
 }
 

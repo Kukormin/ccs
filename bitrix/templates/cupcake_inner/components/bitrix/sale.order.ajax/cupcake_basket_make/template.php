@@ -7,7 +7,7 @@
 /** @global CUser $USER */
 /** @global CMain $APPLICATION */
 
-$price = $arResult['ORDER_PRICE'];
+$price = round($arResult['ORDER_PRICE']);
 ?>
 <script>
 	$(document).ready(function () {
@@ -77,14 +77,14 @@ $price = $arResult['ORDER_PRICE'];
 
 		$('#ORDER_FORM').validate({
 			rules: {
-				NAME: {
+				ORDER_PROP_1: {
 					required: true,
 					minlength: 3
 				},
-				EMAIL: {
+				ORDER_PROP_2: {
 					required: true
 				},
-				PERSONAL_PHONE: {
+				ORDER_PROP_3: {
 					required: true
 				},
 				date: {
@@ -98,21 +98,56 @@ $price = $arResult['ORDER_PRICE'];
 				}
 			},
 			messages: {
-				NAME: {
+				ORDER_PROP_1: {
 					required: 'Обязательное поле',
 					minlength: 'Не менее 3 символов'
 				},
-				EMAIL: {
+				ORDER_PROP_2: {
 					required: 'Обязательное поле',
 					email: 'Введите валидную почту'
 				},
-				PERSONAL_PHONE: 'Обязательное поле',
+				ORDER_PROP_3: 'Обязательное поле',
 				date: 'Обязательно',
 				timefrom: 'Обязательно',
 				timeto: 'Обязательно',
-				hidden_delivery_adress: 'Обязательное поле'
+				ORDER_PROP_7: 'Обязательное поле'
+			},
+			submitHandler: function(form) {
+				var date = $('input[name="date"]').val();
+				var ti = $('#time_interval').val();
+				var comment = $('textarea[name="COMMENT"]').val();
+				var coupon = $('input[name="COUPON_CODE"]').val();
+				if (coupon)
+					coupon = '. Промо-код: ' + coupon;
+				var OD = "Дата и время доставки: " + date + ' ' +
+					intervals[ti] + coupon + ". Комментарий: " + comment;
+				$('input[name=ORDER_DESCRIPTION]').val(OD);
+				var data = $('#ORDER_FORM').serialize();
+				$.ajax({
+					type: 'POST',
+					url: '/personal/order/make/',
+					data: data,
+					success: function (res) {
+						if (res.order.REDIRECT_URL) {
+							/*var ar = res.order.REDIRECT_URL.split('ORDER_ID=');
+							var id = ar[1];
+							location.href = '/personal/final.php?id=' + id;*/
+							location.href = res.order.REDIRECT_URL;
+						}
+					},
+					complete: function (res) {
+					}
+				});
+				return false;
 			}
 		});
+
+		var intervals = [
+			'с 10:00 по 13:00',
+			'с 13:00 по 16:00',
+			'с 16:00 по 20:00'
+		];
+
 		<?if(!$USER->IsAuthorized()) {?>
 		$('.hidden_addr').addClass('required');
 		<? } ?>
@@ -131,8 +166,29 @@ if (isset($user_id) && $user_id != '')
 }
 
 ?>
-<form action="/include/cart_sd_step.php" method="POST" name="ORDER_FORM" id="ORDER_FORM"
+<form action="<?=$APPLICATION->GetCurPage();?>" method="POST" name="ORDER_FORM" id="ORDER_FORM"
       enctype="multipart/form-data">
+<?=bitrix_sessid_post()?>
+<input type="hidden" name="action" value="saveOrderAjax">
+<input type="hidden" name="ORDER_DESCRIPTION" value="">
+<input type="hidden" name="PERSON_TYPE" value="1">
+<input type="hidden" name="PERSON_TYPE_OLD" value="1"><?
+
+$couponCode = '';
+if (!empty($arResult['JS_DATA']['COUPON_LIST']))
+{
+	foreach ($arResult['JS_DATA']['COUPON_LIST'] as $oneCoupon)
+	{
+		if ($oneCoupon['JS_STATUS'] == 'APPLIED')
+		{
+			$couponCode = $oneCoupon['COUPON'];
+			break;
+		}
+	}
+}
+
+?>
+<input type="hidden" name="COUPON_CODE" value="<?= $couponCode ?>">
 <section class="b-bg-grey b-bg-grey--order">
 
 <div class="b-content-center b-block-order">
@@ -161,7 +217,7 @@ if (isset($user_id) && $user_id != '')
 				<label for="">ваше имя</label>
 
 				<div class="b-account-form--input">
-					<input type="text" name="NAME" value="<?= $arUser["NAME"] ?>"
+					<input type="text" name="ORDER_PROP_1" value="<?= $arUser["NAME"] ?>"
 					       class="required"/>
 				</div>
 			</div>
@@ -169,7 +225,7 @@ if (isset($user_id) && $user_id != '')
 				<label for="">Адрес эл. почты</label>
 
 				<div class="b-account-form--input">
-					<input type="email" name="EMAIL" value="<?= $arUser["EMAIL"] ?>"
+					<input type="email" name="ORDER_PROP_2" value="<?= $arUser["EMAIL"] ?>"
 					       class="required email"/>
 				</div>
 			</div>
@@ -177,7 +233,7 @@ if (isset($user_id) && $user_id != '')
 				<label for="">телефон</label>
 
 				<div class="b-account-form--input">
-					<input type="text" name="PERSONAL_PHONE"
+					<input type="text" name="ORDER_PROP_3"
 					       value="<?= str_replace('+7', '', $arUser["PERSONAL_PHONE"]) ?>"
 					       class="js-phone-mask required" placeholder="+7(926)123-45-67"/>
 				</div>
@@ -322,7 +378,7 @@ if (isset($user_id) && $user_id != '')
 						<div class="b-form-item__input" style="margin-left:45px;">
 
 							<input class="hidden_addr" type="text"
-							       name="hidden_delivery_adress"
+							       name="ORDER_PROP_7"
 							       value="">
 						</div>
 					</div>
@@ -423,7 +479,7 @@ if (isset($user_id) && $user_id != '')
 				<span class="b-price-foter__desc js_price_footer">Итого </span>
 
 				<div class="b-price-foter__price js_total_price">
-					<? $totalPrice = $arResult['ORDER_PRICE'] ?>
+					<? $totalPrice = round($arResult['ORDER_PRICE']) ?>
 					<?= $totalPrice > 10000 ? number_format($totalPrice, 0, '', ' ') : $totalPrice ?>
 					<span
 						class="rub">i</span>

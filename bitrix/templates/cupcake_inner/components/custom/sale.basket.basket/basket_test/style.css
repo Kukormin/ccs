@@ -216,10 +216,6 @@
 	margin:20px auto 0;
 	padding:0 20px;
 }
-.bx_ordercart .bx_ordercart_order_pay_left{
-	float:left;
-	width:50%;
-}
 .bx_ordercart .bx_ordercart_order_pay_right{
 	float:left;
 	width:50%;
@@ -896,3 +892,26 @@ input.bt2:active{border:1px solid #d2d2d2}
 }
 
 .bx-touch .quantity_control{ display: none; }
+
+.discount-total {
+    margin-top: 10px;
+    font-family: "PTSansCaptionBold",sans-serif;
+    font-size: 15px;
+    color: #7f7f7f;
+}
+.discount-total.hidden {
+    display: none;
+}
+.discount-total dt {
+    float: left;
+    width: 170px;
+    text-align: right;
+    margin: 0 5px 5px 0;
+}
+.discount-total dd {
+    margin-bottom: 5px;
+    color: #22303d;
+}
+.discount-total em {
+    text-decoration: line-through;
+}

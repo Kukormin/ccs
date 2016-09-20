@@ -209,11 +209,11 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 				}
 
 				$packageTotal += $packagePrice * $arItem2["QUANTITY"];
+				$sum = round(($arItem2['PRICE'] + $packagePrice) * $arItem2["QUANTITY"]);
 				?>
 				<div class="b-total-basket__group">
 							<span class="b-total-basket--price" id="current_price_<?= $arItem2["ID"] ?>"> <span
-									class="js-item-total"><?= (($arItem2['PRICE'] + $packagePrice)*
-									$arItem2["QUANTITY"]) ?></span> <span
+									class="js-item-total"><?= $sum ?></span> <span
 									class="rub">i</span>  </span>
 
 					<div class="b-total-basket--delete js-basket-remove">
@@ -530,8 +530,7 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 		}
 	</style>
 
-
-	<div class="bx_ordercart_order_pay">
+	<div class="bx_ordercart_order_pay clearfix">
 
 		<div class="bx_ordercart_order_pay_left" id="coupons_block">
 			<?
@@ -564,10 +563,10 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 								break;
 						}
 						?>
-						<div class="bx_ordercart_coupon"><input disabled readonly type="text" name="OLD_COUPON[]"
-						                                        value="<?= htmlspecialcharsbx($oneCoupon['COUPON']); ?>"
-						                                        class="<? echo $couponClass; ?>"><span
-							class="<? echo $couponClass; ?>"
+						<div class="bx_ordercart_coupon" id="c_<?= $oneCoupon['ID'] ?>"><input
+							disabled readonly type="text" name="OLD_COUPON[]"
+							value="<?= htmlspecialcharsbx($oneCoupon['COUPON']); ?>"
+							class="<? echo $couponClass; ?>"><span class="<? echo $couponClass; ?>"
 							data-coupon="<? echo htmlspecialcharsbx($oneCoupon['COUPON']); ?>"></span>
 
 						<div class="bx_ordercart_coupon_notes"><?
@@ -584,6 +583,22 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 			{
 				?>&nbsp;<?
 			}
+
+			$cl = ' hidden';
+			if ($arResult['DISCOUNT_PRICE_ALL'] > 0)
+				$cl = '';
+
+			?>
+			<dl class="discount-total<?= $cl ?>">
+				<dt>Итого без скидки:</dt><dd><em id="dtotal1"><?= round($arResult['DISCOUNT_PRICE_ALL'] +
+						$arResult['allSum'])
+				?></em><span class="rub">i</span></dd>
+				<dt>Скидка:</dt><dd><span id="dtotal2"><?= round($arResult['DISCOUNT_PRICE_ALL']) ?></span><span
+						class="rub">i</span></dd>
+				<dt>Стоимость со скидкой:</dt><dd><span id="dtotal3"><?= round($arResult['allSum']) ?></span><span
+						class="rub">i</span></dd>
+			</dl><?
+
 			?>
 		</div>
 	</div>

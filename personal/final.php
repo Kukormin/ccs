@@ -14,8 +14,7 @@ $oid = intval($_GET['id']);
         <div class="b-content-center b-order">
             <div class="b-content-center--title"> спасибо за покупку!</div>
             <div class="b-order--description"> Ваш заказ на сумму <span
-                    class="violet"><?= number_format($price, 0, '', ' ') ?><span class="rub">i</span></span>
-                принят
+                    class="violet"><?= number_format($price, 0, '', ' ') ?><span class="rub">i</span></span> принят
                 <span class="b-order--description--span">Мы перезвоним вам в ближайшее время </span>
                 <span class="b-order--description--span">Вы можете уточнить любые детали вашего заказа по телефону <a class="violet" href="tel:+7 499 322 00 20">+7 499 322 00 20</a> </span>
             </div>

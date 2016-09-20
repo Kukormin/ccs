@@ -116,6 +116,9 @@ function createTable() {
 
 function generateCalendar() {
 	var wrapper = document.getElementById('calendar');
+	if (!wrapper)
+		return;
+
 	var tbl = wrapper.getElementsByTagName('table')[0];
 
 	var months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
@@ -240,6 +243,8 @@ function getNextDeliveryDate(d) {
 function showcalendar(input_date) {
 	input = input_date;
 	var wrapper = document.getElementById('calendar');
+	if (!wrapper)
+		return;
 
 	if (input.value != '') {
 		// Разделяем переданную дату
