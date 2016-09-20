@@ -589,18 +589,16 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 				$cl = '';
 
 			?>
-			<dl class="discount-total<?= $cl ?>">
-				<dt>Итого без скидки:</dt><dd><em id="dtotal1"><?= round($arResult['DISCOUNT_PRICE_ALL'] +
-						$arResult['allSum'])
-				?></em><span class="rub">i</span></dd>
-				<dt>Скидка:</dt><dd><span id="dtotal2"><?= round($arResult['DISCOUNT_PRICE_ALL']) ?></span><span
-						class="rub">i</span></dd>
-				<dt>Стоимость со скидкой:</dt><dd><span id="dtotal3"><?= round($arResult['allSum']) ?></span><span
-						class="rub">i</span></dd>
-			</dl><?
-
-			?>
 		</div>
+		<dl class="discount-total<?= $cl ?>">
+			<dt>Итого без скидки:</dt><dd><em id="dtotal1"><?= round($arResult['DISCOUNT_PRICE_ALL'] +
+						$arResult['allSum'])
+					?></em><span class="rub">i</span></dd>
+			<dt>Скидка:</dt><dd><span id="dtotal2"><?= round($arResult['DISCOUNT_PRICE_ALL']) ?></span><span
+					class="rub">i</span></dd>
+			<dt>Стоимость со скидкой:</dt><dd><span id="dtotal3"><?= round($arResult['allSum']) ?></span><span
+					class="rub">i</span></dd>
+		</dl>
 	</div>
 </div>
 </div>

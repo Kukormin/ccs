@@ -1027,6 +1027,8 @@ function recalcBasketAjax(params)
 			}else{
 				coupon_id.addClass('badCoupon');
 			}
+			if (result.BASKET_DATA.COUPON_LIST)
+				updateCouponsBlock(result.BASKET_DATA.COUPON_LIST, result.BASKET_DATA.allSum, result.BASKET_DATA.DISCOUNT_PRICE_ALL);
 			BX.closeWait();
 		}
 	});
