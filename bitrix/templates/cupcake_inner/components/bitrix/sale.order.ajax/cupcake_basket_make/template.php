@@ -88,7 +88,7 @@ $price = round($arResult['ORDER_PRICE']);
 				},
 				ORDER_PROP_2: {
 					required: 'Обязательное поле',
-					email: 'Введите валидную почту'
+					email: 'Введите верную почту'
 				},
 				ORDER_PROP_3: 'Обязательное поле',
 				date: 'Обязательно',
