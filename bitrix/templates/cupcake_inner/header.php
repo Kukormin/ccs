@@ -28,8 +28,8 @@ if (!isset($_SESSION['retailcrm'])) {
 
     <link href="/bitrix/templates/.default/css/slick.css" rel="stylesheet" type="text/css" />
     <link href="/bitrix/templates/.default/css/about.css?v=1" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/template_styles.css?v=1" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/css/cupcake-media.css?v=1" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/template_styles.css?v=2" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/css/cupcake-media.css?v=2" rel="stylesheet" type="text/css" />
     <link href="/bitrix/templates/.default/css/featherlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 

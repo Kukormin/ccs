@@ -12,63 +12,44 @@ $price = round($arResult['ORDER_PRICE']);
 <script>
 	$(document).ready(function () {
 		function deliveryPrice() {
-			return parseInt($('.js_radio_input input:checked').data('price'));
+			return 400;
 		}
 
 		var price = <?=$price?>;
 		var total_price = 0;
+		var delivery_id = 14;
+		var deliveryType = 0;
 
 		$('.js_radio_input input').change(function () {
 			if ($('.js_radio_input input:checked').data('price') == 0) {
-				total_price = price + deliveryPrice();
-				$('.js_total_price').html((total_price > 10000 ? format_number(total_price) : total_price) + ' ' + '<span class="rub">i</span>');
-				$('.hidden_total_price').html(total_price + ' ' + '<span class="rub">i</span>');
+				total_price = price;
+				deliveryType = parseInt($('.js_radio_input input:checked').data('deltype'));
 				$('.js_footer_label').html('Самовывоз');
 				$('.js_price_footer').html('Итого');
-				$('.hidden_delivery_type').val($('.js_radio_input input:checked').data('deltype'));
-				$('.hidden_del_addr').val($('.js_radio_input input:checked').data('addr'));
+				$('#address_hidden').val($('.js_radio_input input:checked').data('addr'));
 				var position = $('.b-method-shipping-input.js_radio_input input:checked').position().top;
 				if ($('.b-method-shipping-input.js_radio_input input:checked').attr('id') == 'delivery_new') position = $('.b-method-shipping-input.js_radio_input input:checked').parent().position().top - 100;
 				$(".b-method-shipping_item.b-method-shipping_item-date").css('top', position - 40 + 'px');
-			} else if ($('.js_radio_input input:checked').data('paysys') == 'gift') {
-				$('.js_paysystem_type1').hide();
-				$('.js_paysystem_type2').hide();
-				$('.js_footer_label').html('Сделать подарок');
-				$('.js_price_footer').html('Итого');
-				$('.js_total_price').html(price + ' ' + '<span class="rub">i</span>');
-				$('.hidden_total_price').html(price + ' ' + '<span class="rub">i</span>');
 			} else if ($('.js_radio_input input:checked').prop('id') == 'delivery_new') {
-				$('.js_footer_label').html($('.shipping_region').val() + ' ' + $('.shipping_region option:selected').data('price') + ' ' + '<span class="rub">i</span>');
+				total_price = price + deliveryPrice();
+				deliveryType = delivery_id;
+				$('.js_footer_label').html('Доставка ' + deliveryPrice() + ' <span class="rub">i</span>');
 				$('.js_price_footer').html('Итого с доставкой');
-				$('.js_total_price').html(price + parseInt($('.shipping_region option:selected').data('price')) + ' ' + '<span class="rub">i</span>');
-				$('.hidden_total_price').html(price + parseInt($('.shipping_region option:selected').data('price')) + ' ' + '<span class="rub">i</span>');
-				$('.hidden_delivery_type').val($('.shipping_region option:selected').data('deltype'));
+				$('#address_hidden').val('');
 			} else {
 				total_price = price + deliveryPrice();
-				$('.js_footer_label').html($('.js_radio_input input:checked').data('id') + ' ' + $('.js_radio_input input:checked').data('price') + ' ' + '<span class="rub">i</span>');
+				deliveryType = delivery_id;
+				$('.js_footer_label').html('Доставка ' + deliveryPrice() + ' <span class="rub">i</span>');
 				$('.js_price_footer').html('Итого с доставкой');
-				$('.js_total_price').html((total_price > 10000 ? format_number(total_price) : total_price) + ' ' + '<span class="rub">i</span>');
-				$('.hidden_total_price').html(total_price + ' ' + '<span class="rub">i</span>');
-				$('.hidden_delivery_type').val($('.js_radio_input input:checked').data('deltype'));
-				$('.hidden_del_addr').val($('.js_radio_input input:checked').data('addr'));
+				$('#address_hidden').val($('.js_radio_input input:checked').data('addr'));
 				var position = $('.b-method-shipping-input.js_radio_input input:checked').position().top;
 				if ($('.b-method-shipping-input.js_radio_input input:checked').attr('id') == 'delivery_new') position = $('.b-method-shipping-input.js_radio_input input:checked').parent().position().top - 100;
 				$(".b-method-shipping_item.b-method-shipping_item-date").css('top', position - 40 + 'px');
 			}
+			$('.js_total_price').html((total_price > 10000 ? format_number(total_price) : total_price) + ' <span class="rub">i</span>');
+			$('.hidden_total_price').html(total_price + ' <span class="rub">i</span>');
+			$('.hidden_delivery_type').val(deliveryType);
 		});
-
-		$('.shipping_region').change(function () {
-			$('.js_footer_label').html($('.shipping_region').val() + ' ' + $('.shipping_region option:selected').data('price') + ' ' + '<span class="rub">i</span>');
-			$('.js_price_footer').html('Итого с доставкой');
-			$('.js_total_price').html(price + parseInt($('.shipping_region option:selected').data('price')) + ' ' + '<span class="rub">i</span>');
-			$('.hidden_total_price').html(price + parseInt($('.shipping_region option:selected').data('price')) + ' ' + '<span class="rub">i</span>');
-			$('.hidden_delivery_type').val($('.shipping_region option:selected').data('deltype'));
-		});
-
-		/*$('.hidden_addr').focus(function () {
-		 $('.js_radio_input input').prop('checked', false);
-		 $(".b-method-shipping_item.b-method-shipping_item-date").css('top',$('.b-method-shipping__line.b-method-shipping__line--last').position());
-		 });*/
 
 		$('.b-block-adress--add').click(function () {
 			$('.b-block-adress--add').hide();
@@ -95,6 +76,9 @@ $price = round($arResult['ORDER_PRICE']);
 				},
 				timeto: {
 					required: true
+				},
+				address: {
+					required: true
 				}
 			},
 			messages: {
@@ -110,7 +94,7 @@ $price = round($arResult['ORDER_PRICE']);
 				date: 'Обязательно',
 				timefrom: 'Обязательно',
 				timeto: 'Обязательно',
-				ORDER_PROP_7: 'Обязательное поле'
+				address: 'Обязательное поле'
 			},
 			submitHandler: function(form) {
 				var date = $('input[name="date"]').val();
@@ -122,6 +106,9 @@ $price = round($arResult['ORDER_PRICE']);
 				var OD = "Дата и время доставки: " + date + ' ' +
 					intervals[ti] + coupon + ". Комментарий: " + comment;
 				$('input[name=ORDER_DESCRIPTION]').val(OD);
+				var hiddenAddr = $('#address_hidden').val();
+				if (!hiddenAddr)
+					$('#address_hidden').val($('#new_address').val());
 				var data = $('#ORDER_FORM').serialize();
 				$.ajax({
 					type: 'POST',
@@ -129,9 +116,6 @@ $price = round($arResult['ORDER_PRICE']);
 					data: data,
 					success: function (res) {
 						if (res.order.REDIRECT_URL) {
-							/*var ar = res.order.REDIRECT_URL.split('ORDER_ID=');
-							var id = ar[1];
-							location.href = '/personal/final.php?id=' + id;*/
 							location.href = res.order.REDIRECT_URL;
 						}
 					},
@@ -148,9 +132,6 @@ $price = round($arResult['ORDER_PRICE']);
 			'с 16:00 по 20:00'
 		];
 
-		<?if(!$USER->IsAuthorized()) {?>
-		$('.hidden_addr').addClass('required');
-		<? } ?>
 		$('.js_radio_input input').change();
 	})
 </script><?
@@ -171,6 +152,7 @@ if (isset($user_id) && $user_id != '')
 <?=bitrix_sessid_post()?>
 <input type="hidden" name="action" value="saveOrderAjax">
 <input type="hidden" name="ORDER_DESCRIPTION" value="">
+<input id="address_hidden" type="hidden" name="ORDER_PROP_7" value="">
 <input type="hidden" name="PERSON_TYPE" value="1">
 <input type="hidden" name="PERSON_TYPE_OLD" value="1"><?
 
@@ -377,12 +359,14 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 
 						<div class="b-form-item__input" style="margin-left:45px;">
 
-							<input class="hidden_addr" type="text"
-							       name="ORDER_PROP_7"
-							       value="">
+							<input id="new_address" class="hidden_addr" type="text" name="address" value="">
 						</div>
 					</div>
-				</div>
+				</div><?
+
+				/*
+				 Убрал зоны доставки, пока оставим здесь, если захотят вернуть
+				?>
 				<div class="b-application-event__form-item b-form-item--select">
 					<label for=""> зона доставки</label>
 
@@ -398,7 +382,10 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 							<? endforeach; ?>
 						</select>
 					</div>
-				</div>
+				</div><?
+				*/
+
+				?>
 			</div>
 		</div>
 
@@ -493,8 +480,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 				<input class="hidden_total_price" type="hidden"
 				       value="<?= preg_replace('|(\D)|', '', $arResult['ORDER_PRICE_FORMATED']) ?>"
 				       name="total_price">
-				<input type="hidden" class="hidden_delivery_type" value="" name="delivery_type">
-				<input type="hidden" class="hidden_del_addr" val="" name="pickup_adr">
+				<input type="hidden" class="hidden_delivery_type" value="14" name="DELIVERY_ID">
 				<button type="submit" class="b-bnt-form b-bnt-modal-cupcake--white js-ck-buy-btn">Купить
 				</button>
 			</div>
