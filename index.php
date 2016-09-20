@@ -6,16 +6,16 @@ $APPLICATION->SetTitle("Cupcake Story — семейная кондитерск�
 	<div class="carousel-block">
 		<div class="carousel-main">
 			<div class="carousel-main-row">
-				<a href="http://cupcakestory.ru/catalog/cupcakes/assorti/1419">
-					<img src="http://cupcakestory.ru/bitrix/templates/.default/images/custom-cupcakes-banner.jpg" alt="">
+				<a href="http://cupcakestory.ru/catalog/gingerbread/bolshie/1439">
+					<img src="http://cupcakestory.ru/bitrix/templates/.default/images/spasibo-uchitel-%21.jpg" alt="">
 					<div class="details">
-						<h3>Капкейки на заказ</h3>
-						<p>Индивидуальный дизайн: 3D-фигурки, принты, фотографии, таблички. Уникальный подарок на любой праздник.</p>
+						<h3>Пряники на день учителя</h3>
+						<p> Уникальный  и незабываемый подарок.</p>
 					</div>
 				</a>
 			</div>
 			<div class="carousel-main-row">
-				<a href="http://cupcakestory.ru/catalog/cakes/14-fevralya/1038">
+				<a href="http://cupcakestory.ru/catalog/gingerbread/bolshie/1439">
 					<img src="http://cupcakestory.ru/bitrix/templates/.default/images/i-love-you-heart-cake-banner-big-002.jpg" alt="">
 					<div class="details">
 						<h3>I LOVE YOU</h3>
