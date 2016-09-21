@@ -43,7 +43,7 @@ $price = round($arResult['ORDER_PRICE']);
 				deliveryType = delivery_id;
 				$('.js_footer_label').html('Доставка ' + deliveryPrice() + ' <span class="rub">i</span>');
 				$('.js_price_footer').html('Итого с доставкой');
-				$('#address_hidden').val($('.js_radio_input input:checked').data('addr'));
+				$('#address_hidden').val($('.js_radio_input input:checked').siblings('label').text());
 				$('.del_title').text('доставки');
 			}
 			$('.js_total_price').html((total_price > 10000 ? format_number(total_price) : total_price) + ' <span class="rub">i</span>');
