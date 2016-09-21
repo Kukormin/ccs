@@ -28,8 +28,8 @@ if (!isset($_SESSION['retailcrm'])) {
 
     <link href="/bitrix/templates/.default/css/slick.css" rel="stylesheet" type="text/css" />
     <link href="/bitrix/templates/.default/css/about.css?v=1" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/template_styles.css?v=2" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/css/cupcake-media.css?v=2" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/template_styles.css?v=3" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/css/cupcake-media.css?v=3" rel="stylesheet" type="text/css" />
     <link href="/bitrix/templates/.default/css/featherlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 
@@ -39,7 +39,7 @@ if (!isset($_SESSION['retailcrm'])) {
     <script type="text/javascript" src="/bitrix/templates/.default/js/featherlight.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/slick.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/richmarker.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=1"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=2"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/share.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/additional.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.validate.min.js"></script>

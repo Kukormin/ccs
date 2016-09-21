@@ -25,7 +25,7 @@ $hideItemsFrom = array(
 </script>
 
 
-<section class="b-bg-grey b-bg-grey--basket" style="margin-bottom: 100px;">
+<section class="b-bg-grey b-bg-grey--basket" style="margin-bottom: 0;">
 <div class="b-content-center b-block-order">
 <div class="b-block-new--title b-block-order--title"> ваш заказ</div>
 
@@ -163,7 +163,7 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 							?>
 							<div
 								class="b-slider__item js-package-item <?= round($arPack['PRICE'], 0) == 0 ? 'js-free-box' : '' ?> <?= strpos($arPack['NAME'], '9') !== false ? 'js-vip-box' : ''; ?>"
-								data-package-price="<?= $arPack['PRICE'] ?>"
+								data-package-price="<?= intval($arPack['PRICE']) ?>"
 								data-package-name="<?= $arPack['NAME'] ?>"
 								data-package-id="<?= $arPack['ID'] ?>">
 								<div class="b-slider__item-basket">
@@ -185,15 +185,7 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 									}
 
 									if ($arPack['NAME'] == $packageName)
-									{
-										?>
-										<script>
-											$(function () {
-												$('#line_<?=$arItem2['ID']?>').data('package-price', <?=$arPack['PRICE']?>);
-											});
-										</script><?
-										$packagePrice = $arPack['PRICE'];
-									}
+										$packagePrice = intval($arPack['PRICE']);
 
 									?>
 									<div class="b-mod__item-title">
@@ -208,14 +200,16 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 					</div><?
 				}
 
-				$packageTotal += $packagePrice * $arItem2["QUANTITY"];
+				$packageSum = intval($packagePrice * $arItem2["QUANTITY"]);
+				$packageTotal += $packageSum;
 				$sum = round(($arItem2['PRICE'] + $packagePrice) * $arItem2["QUANTITY"]);
 				?>
 				<div class="b-total-basket__group">
-							<span class="b-total-basket--price" id="current_price_<?= $arItem2["ID"] ?>"> <span
-									class="js-item-total"><?= $sum ?></span> <span
-									class="rub">i</span>  </span>
-
+					<span class="b-total-basket--price" id="current_price_<?= $arItem2["ID"] ?>">
+						<span class="js-item-total"><?= $sum ?></span>
+						<input type="hidden" value="<?= $packageSum ?>">
+						<span class="rub">i</span>
+					</span>
 					<div class="b-total-basket--delete js-basket-remove">
 						<span> Удалить</span>
 					</div>
@@ -584,20 +578,14 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 				?>&nbsp;<?
 			}
 
-			$cl = ' hidden';
-			if ($arResult['DISCOUNT_PRICE_ALL'] > 0)
-				$cl = '';
-
 			?>
 		</div>
-		<dl class="discount-total<?= $cl ?>">
-			<dt>Итого без скидки:</dt><dd><em id="dtotal1"><?= round($arResult['DISCOUNT_PRICE_ALL'] +
-						$arResult['allSum'])
-					?></em><span class="rub">i</span></dd>
-			<dt>Скидка:</dt><dd><span id="dtotal2"><?= round($arResult['DISCOUNT_PRICE_ALL']) ?></span><span
-					class="rub">i</span></dd>
-			<dt>Стоимость со скидкой:</dt><dd><span id="dtotal3"><?= round($arResult['allSum']) ?></span><span
-					class="rub">i</span></dd>
+		<script>var discount_price_all = <?= round($arResult['DISCOUNT_PRICE_ALL']) ?>;var allSum = <?= round($arResult['allSum'])
+			?>;</script>
+		<dl class="discount-total hidden">
+			<dt>Итого без скидки:</dt><dd><em id="dtotal1"></em><span class="rub">i</span></dd>
+			<dt>Скидка:</dt><dd><span id="dtotal2"></span><span class="rub">i</span></dd>
+			<dt>Стоимость со скидкой:</dt><dd><span id="dtotal3"></span><span class="rub">i</span></dd>
 		</dl>
 	</div>
 </div>

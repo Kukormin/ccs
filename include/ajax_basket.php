@@ -11,8 +11,8 @@ if($_POST["ajaxaddid"] && $_POST["ajaxaction"] == 'add'){
 		foreach ($_POST['params'] as $code => $value) {
 			$params[] = array(
 				'CODE' => $code,
-				'NAME' => $value['NAME'],
-				'VALUE' => $value['VALUE'],
+				'NAME' => trim($value['NAME']),
+				'VALUE' => trim($value['VALUE']),
 				'SORT' => 'ASC'
 			);
 		}
@@ -29,8 +29,8 @@ if($_POST["ajaxaddid"] && $_POST["ajaxaction"] == 'dupadd'){
 		foreach ($_POST['params'] as $code => $value) {
 			$params[] = array(
 				'CODE' => $code,
-				'NAME' => $value['NAME'],
-				'VALUE' => $value['VALUE'],
+				'NAME' => trim($value['NAME']),
+				'VALUE' => trim($value['VALUE']),
 				'SORT' => 'ASC'
 			);
 		}

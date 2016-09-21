@@ -19,42 +19,51 @@ $price = round($arResult['ORDER_PRICE']);
 		var total_price = 0;
 		var delivery_id = 14;
 		var deliveryType = 0;
+		var new_address = $('#new_address');
 
 		$('.js_radio_input input').change(function () {
+			var isNewDelivery = false;
 			if ($('.js_radio_input input:checked').data('price') == 0) {
 				total_price = price;
 				deliveryType = parseInt($('.js_radio_input input:checked').data('deltype'));
 				$('.js_footer_label').html('Самовывоз');
 				$('.js_price_footer').html('Итого');
 				$('#address_hidden').val($('.js_radio_input input:checked').data('addr'));
-				var position = $('.b-method-shipping-input.js_radio_input input:checked').position().top;
-				if ($('.b-method-shipping-input.js_radio_input input:checked').attr('id') == 'delivery_new') position = $('.b-method-shipping-input.js_radio_input input:checked').parent().position().top - 100;
-				$(".b-method-shipping_item.b-method-shipping_item-date").css('top', position - 40 + 'px');
+				$('.del_title').text('самовывоза');
 			} else if ($('.js_radio_input input:checked').prop('id') == 'delivery_new') {
 				total_price = price + deliveryPrice();
 				deliveryType = delivery_id;
 				$('.js_footer_label').html('Доставка ' + deliveryPrice() + ' <span class="rub">i</span>');
 				$('.js_price_footer').html('Итого с доставкой');
 				$('#address_hidden').val('');
+				isNewDelivery = true;
+				$('.del_title').text('доставки');
 			} else {
 				total_price = price + deliveryPrice();
 				deliveryType = delivery_id;
 				$('.js_footer_label').html('Доставка ' + deliveryPrice() + ' <span class="rub">i</span>');
 				$('.js_price_footer').html('Итого с доставкой');
 				$('#address_hidden').val($('.js_radio_input input:checked').data('addr'));
-				var position = $('.b-method-shipping-input.js_radio_input input:checked').position().top;
-				if ($('.b-method-shipping-input.js_radio_input input:checked').attr('id') == 'delivery_new') position = $('.b-method-shipping-input.js_radio_input input:checked').parent().position().top - 100;
-				$(".b-method-shipping_item.b-method-shipping_item-date").css('top', position - 40 + 'px');
+				$('.del_title').text('доставки');
 			}
 			$('.js_total_price').html((total_price > 10000 ? format_number(total_price) : total_price) + ' <span class="rub">i</span>');
 			$('.hidden_total_price').html(total_price + ' <span class="rub">i</span>');
 			$('.hidden_delivery_type').val(deliveryType);
+			if (isNewDelivery) {
+				new_address.addClass('required');
+			}
+			else
+			{
+				new_address.removeClass('required');
+				new_address.removeClass('error');
+				new_address.siblings('label').remove();
+			}
 		});
 
-		$('.b-block-adress--add').click(function () {
-			$('.b-block-adress--add').hide();
-			$('.b-application-event__form--line').show();
-		});
+		$('#new_address').focus(function() {
+			$(this).parent().siblings('input').prop('checked', 'checked');
+			$('.js_radio_input input').change();
+		})
 
 		$('#ORDER_FORM').validate({
 			rules: {
@@ -76,9 +85,6 @@ $price = round($arResult['ORDER_PRICE']);
 				},
 				timeto: {
 					required: true
-				},
-				address: {
-					required: true
 				}
 			},
 			messages: {
@@ -94,7 +100,7 @@ $price = round($arResult['ORDER_PRICE']);
 				date: 'Обязательно',
 				timefrom: 'Обязательно',
 				timeto: 'Обязательно',
-				address: 'Обязательное поле'
+				new_address: 'Обязательное поле'
 			},
 			submitHandler: function(form) {
 				var date = $('input[name="date"]').val();
@@ -110,6 +116,7 @@ $price = round($arResult['ORDER_PRICE']);
 				if (!hiddenAddr)
 					$('#address_hidden').val($('#new_address').val());
 				var data = $('#ORDER_FORM').serialize();
+				$('#overlay').show();
 				$.ajax({
 					type: 'POST',
 					url: '/personal/order/make/',
@@ -118,6 +125,11 @@ $price = round($arResult['ORDER_PRICE']);
 						if (res.order.REDIRECT_URL) {
 							location.href = res.order.REDIRECT_URL;
 						}
+						else
+							$('#overlay').hide();
+					},
+					error: function() {
+						$('#overlay').hide();
 					},
 					complete: function (res) {
 					}
@@ -144,6 +156,52 @@ if (isset($user_id) && $user_id != '')
 	$rows_q = $rsUser->SelectedRowsCount();
 	if ($rows_q > 0)
 		$arUser = $rsUser->Fetch();
+
+	$rsUserProps = CSaleOrderUserProps::getList(
+		array("DATE_UPDATE" => "DESC"),
+		array("USER_ID" => $user_id)
+	);
+
+	$arUserData = array(
+		'NAME' => '',
+		'EMAIL' => '',
+		'PHONE' => '',
+	    'ADDRESS' => array(),
+	);
+
+	while ($arUserProps = $rsUserProps->Fetch())
+	{
+		$vals = array();
+		$db_propVals = CSaleOrderUserPropsValue::GetList(
+			array("ID" => "ASC"),
+			array("USER_PROPS_ID" => $arUserProps['ID'])
+		);
+		while ($arPropVals = $db_propVals->Fetch())
+		{
+			$vals[$arPropVals['ORDER_PROPS_ID']] = $arPropVals['VALUE'];
+		}
+		if (!$arUserData['NAME'] && $vals[1])
+			$arUserData['NAME'] = $vals[1];
+		if (!$arUserData['EMAIL'] && $vals[2])
+			$arUserData['EMAIL'] = $vals[2];
+		if (!$arUserData['PHONE'] && $vals[3])
+			$arUserData['PHONE'] = $vals[3];
+		$adr = trim($vals[7]);
+		if ($adr)
+		{
+			//!!! Костыли для самовывоза
+			// по-хорошему не нужно сохранять в профиль адрес при самовывозе
+			if ($adr != 'МЕГА Химки, главный вход' && $adr != 'Москва, ул. Самокатная, 4с9')
+				$arUserData['ADDRESS'][$adr] = $adr;
+		}
+	}
+
+	if (!$arUserData['NAME'] && $arUser['NAME'])
+		$arUserData['NAME'] = $arUser['NAME'];
+	if (!$arUserData['EMAIL'] && $arUser['EMAIL'])
+		$arUserData['EMAIL'] = $arUser['EMAIL'];
+	if (!$arUserData['PHONE'] && $arUser['PERSONAL_PHONE'])
+		$arUserData['PHONE'] = $arUser['PERSONAL_PHONE'];
 }
 
 ?>
@@ -199,7 +257,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 				<label for="">ваше имя</label>
 
 				<div class="b-account-form--input">
-					<input type="text" name="ORDER_PROP_1" value="<?= $arUser["NAME"] ?>"
+					<input type="text" name="ORDER_PROP_1" value="<?= $arUserData["NAME"] ?>"
 					       class="required"/>
 				</div>
 			</div>
@@ -207,7 +265,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 				<label for="">Адрес эл. почты</label>
 
 				<div class="b-account-form--input">
-					<input type="email" name="ORDER_PROP_2" value="<?= $arUser["EMAIL"] ?>"
+					<input type="email" name="ORDER_PROP_2" value="<?= $arUserData["EMAIL"] ?>"
 					       class="required email"/>
 				</div>
 			</div>
@@ -216,7 +274,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 
 				<div class="b-account-form--input">
 					<input type="text" name="ORDER_PROP_3"
-					       value="<?= str_replace('+7', '', $arUser["PERSONAL_PHONE"]) ?>"
+					       value="<?= str_replace('+7', '', $arUserData["PHONE"]) ?>"
 					       class="js-phone-mask required" placeholder="+7(926)123-45-67"/>
 				</div>
 			</div>
@@ -229,7 +287,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 	</div>
 
 	<div class="b-method-shipping__line">
-		<div class="b-method-shipping--title js-del-btn" id="xpickup">
+		<div class="b-method-shipping--title js-del-btn">
 			Самовывоз - бесплатно
 		</div>
 		<div class="js-del-slide-wrap">
@@ -299,132 +357,116 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 	</div>
 
 	<div class="b-method-shipping__line b-method-shipping__line--last">
-		<div class="b-method-shipping--title js-del-btn" id="xdelivery">
+		<div class="b-method-shipping--title js-del-btn">
 			<span>Доставка — от 400 руб.</span>
 		</div>
-		<div class="js-del-slide-wrap">
-			<? $APPLICATION->IncludeFile('/include/del_inc.php', array(), array(
+		<div class="js-del-slide-wrap"><?
+			$APPLICATION->IncludeFile('/include/del_inc.php', array(), array(
 					'MODE' => 'html',
 					'TEMPLATE' => 'page_inc.php',
-				)); ?>
+				));
 
-			<div class="b-method-shipping_item b-method-shipping_item-full">
-				<? $checked = true; ?>
-				<? foreach ($arUser['UF_ADRESSES'] as $key => $adress):
-					$text = explode('|', $adress);
+			$new = '';
+			$checked = ' checked';
+			if ($arUserData['ADDRESS'])
+			{
+				?>
+				<div class="addresses">
+				<label>Ваши адреса</label><?
+				$index = 0;
+				foreach ($arUserData['ADDRESS'] as $address)
+				{
+					$index++;
 					?>
 					<div class="b-method-shipping-input js_radio_input">
-						<? if (empty($adress))
-						{ ?>
-							<script>
-								$('.hidden_addr').show().focus();
-							</script>
-						<? }
-						else
-						{ ?>
-							<input class="radio" name="address" type="radio"
-							       id="delivery<?= $key ?>"
-							       data-deltype="<?= $arResult['DELIVERY_TYPES_ARR'][$text[1]][$text[1]] ?>"
-							       data-id="<?= $text[1]; ?>"
-							       data-price="<?= $arResult['DELIVERY_PRICE_ARR'][$text[1]][$text[1]] ?>"
-							       data-addr="<?= $text[0] ?>"
-								<?= $checked ? 'checked' : '' ?> />
-							<label class="b-label-radio"
-							       for="delivery<?= $key ?>"><?= $text[0] ?></label>
-							<input type="hidden"
-							       value="<?= $arResult['DELIVERY_PRICE_ARR'][$text[1]][$text[1]] ?>"
-							       name="delivery_price" />
-							<input type="hidden" name="delivery_adress"
-							       value="<?= $text[0] ?>" />
-							<? $checked = false; ?>
-						<? } ?>
-					</div>
-				<? endforeach; ?>
-			</div>
-
-
-			<div class="b-application-event__form--line">
-				<div class="b-application-event__form-item b-form-item-shipping-address">
-					<label for=""> новый адрес</label>
-
-					<div style="position: relative; margin:0;"
-					     class="b-method-shipping-input js_radio_input">
-						<input id="delivery_new" class="radio" name="address"
-						       type="radio"
-							<?= $checked ? 'checked' : '' ?>
-						       style="position:absolute; left:0; top:5px;"/>
-						<label class="b-label-radio"
-						       for="delivery_new"
-						       style="position:absolute; left:0; top:8px;"></label>
-
-						<div class="b-form-item__input" style="margin-left:45px;">
-
-							<input id="new_address" class="hidden_addr" type="text" name="address" value="">
-						</div>
-					</div>
-				</div><?
-
-				/*
-				 Убрал зоны доставки, пока оставим здесь, если захотят вернуть
-				?>
-				<div class="b-application-event__form-item b-form-item--select">
-					<label for=""> зона доставки</label>
-
-					<div class="b-form-item__input b-form-item__input--select">
-						<p class="select_title">По Москве</p>
-						<select class="shipping_region">
-							<? foreach ($arResult['DELIVERY'] as $key => $region): ?>
-								<? if ($region['NAME'] != 'Самовывоз'): ?>
-									<option value="<?= $region['NAME'] ?>"
-									        data-deltype="<?= $key ?>"
-									        data-price="<?= $arResult['DELIVERY_PRICE_ARR'][$region['NAME']][$region['NAME']] ?>"><?= $region['NAME'] ?></option>
-								<? endif; ?>
-							<? endforeach; ?>
-						</select>
-					</div>
-				</div><?
-				*/
+					<input class="radio" name="address" type="radio" id="delivery<?= $index ?>"<?= $checked ?> />
+					<label class="b-label-radio" for="delivery<?= $index ?>"><?= $address ?></label>
+					</div><?
+					$checked = '';
+					$new = 'Новый ';
+				}
 
 				?>
-			</div>
-		</div>
+				</div><?
+			}
 
-		<div class="b-method-shipping_item b-method-shipping_item-date">
-			<div
-				class="b-application-event__form-item b-application-event__form-item--date i-margin-0">
-				<label for="date"> дата доставки</label>
-
-				<div class="b-form-item__input b-item--date-input">
-					<input type='text' name='date' readonly='readonly'
-					       onclick='showcalendar(this)'/>
-					<span class="b-calendar"> i</span>
+			?>
+			<div class="b-application-event__form-item b-form-item-shipping-address">
+				<label for="delivery_new"><?= $new ?>адрес</label>
+				<div style="position: relative; margin:0;"
+				     class="b-method-shipping-input js_radio_input">
+					<input id="delivery_new" class="radio" name="address" type="radio"<?= $checked ?> />
+					<label class="b-label-radio" for="delivery_new" style="top:8px;"></label>
+					<div class="b-form-item__input" style="margin-left:32px;">
+						<input id="new_address" type="text" name="new_address" value="">
+					</div>
 				</div>
-			</div>
-			<div
-				class="b-application-event__form-item b-application-event__form-item--time">
-				<label for="time_interval"> время доставки</label><?
+			</div><?
 
-				$intervals = array(
-					'10:00 — 13:00',
-					'13:00 — 16:00',
-					'16:00 — 20:00',
-				);
-				?>
+			/*
+			 Убрал зоны доставки, пока оставим здесь, если захотят вернуть
+			?>
+			<div class="b-application-event__form-item b-form-item--select">
+				<label for=""> зона доставки</label>
+
 				<div class="b-form-item__input b-form-item__input--select">
-					<p class="select_title"><?= $intervals[0] ?></p>
-					<select id="time_interval" name="time_interval" class="b-form-item__input"><?
-						foreach ($intervals as $index => $interval)
-						{
-							?>
-							<option value="<?= $index ?>"><?= $interval ?></option><?
-						}
-						?>
+					<p class="select_title">По Москве</p>
+					<select class="shipping_region">
+						<? foreach ($arResult['DELIVERY'] as $key => $region): ?>
+							<? if ($region['NAME'] != 'Самовывоз'): ?>
+								<option value="<?= $region['NAME'] ?>"
+								        data-deltype="<?= $key ?>"
+								        data-price="<?= $arResult['DELIVERY_PRICE_ARR'][$region['NAME']][$region['NAME']] ?>"><?= $region['NAME'] ?></option>
+							<? endif; ?>
+						<? endforeach; ?>
 					</select>
 				</div>
-			</div>
+			</div><?
+			*/
+
+			?>
 		</div>
 	</div>
 
+</div>
+<div class="b-method-shipping b-title--border-top">
+	<div class="b-method-shipping__line">
+		<div class="b-information--title">Дата и время <span class="del_title">доставки</span></div>
+	</div>
+	<div class="b-method-shipping_item b-method-shipping_item-date">
+		<div
+			class="b-application-event__form-item b-application-event__form-item--date i-margin-0">
+			<label for="date"> дата <span class="del_title">доставки</span></label>
+
+			<div class="b-form-item__input b-item--date-input">
+				<input type='text' name='date' readonly='readonly'
+				       onclick='showcalendar(this)'/>
+				<span class="b-calendar"> i</span>
+			</div>
+		</div>
+		<div
+			class="b-application-event__form-item b-application-event__form-item--time">
+			<label for="time_interval"> время <span class="del_title">доставки</span></label><?
+
+			$intervals = array(
+				'10:00 — 13:00',
+				'13:00 — 16:00',
+				'16:00 — 20:00',
+			);
+			?>
+			<div class="b-form-item__input b-form-item__input--select">
+				<p class="select_title"><?= $intervals[0] ?></p>
+				<select id="time_interval" name="time_interval" class="b-form-item__input"><?
+					foreach ($intervals as $index => $interval)
+					{
+						?>
+						<option value="<?= $index ?>"><?= $interval ?></option><?
+					}
+					?>
+				</select>
+			</div>
+		</div>
+	</div>
 </div>
 </div>
 </div>
@@ -451,7 +493,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 	</div>
 </div>
 <div class="b-comments-wrap">
-	<label for="">Комментарий и промо-код</label>
+	<label for="">Комментарий</label>
 
 	<div class="b-order-comments">
 		<textarea name="COMMENT" rows="7" cols="35"

@@ -1029,14 +1029,14 @@ $(document).ready(function () {
 				resp = resp.responseText.replace(/'/g, '"');
 				resp = JSON.parse(resp);
 				line.data('base-price', resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
-				var pack_price = parseFloat(line.data('package-price'));
+				var total = line.find('.js-item-total');
+				var pack_sum = parseInt(total.next().val());
 				var price = parseFloat(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
 				var cnt = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].QUANTITY);
-				var sum = Math.round((price + pack_price)*cnt);
-				line.find('.js-item-total').text(sum);
+				var sum = Math.round(price*cnt + pack_sum);
+				total.text(sum);
 				updateBasketPrice();
-				if (resp.BASKET_DATA.COUPON_LIST)
-					updateCouponsBlock(resp.BASKET_DATA.COUPON_LIST, resp.BASKET_DATA.allSum, resp.BASKET_DATA.DISCOUNT_PRICE_ALL);
+				updateCouponsBlock(resp.BASKET_DATA.COUPON_LIST, resp.BASKET_DATA.allSum, resp.BASKET_DATA.DISCOUNT_PRICE_ALL);
 			}
 		});
 	});
@@ -1086,14 +1086,14 @@ $(document).ready(function () {
 				resp = resp.responseText.replace(/'/g, '"');
 				resp = JSON.parse(resp);
 				line.data('base-price', resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
-				var pack_price = parseFloat(line.data('package-price'));
+				var total = line.find('.js-item-total');
+				var pack_sum = parseInt(total.next().val());
 				var price = parseFloat(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
 				var cnt = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].QUANTITY);
-				var sum = Math.round((price + pack_price)*cnt);
-				line.find('.js-item-total').text(sum);
+				var sum = Math.round(price*cnt + pack_sum);
+				total.text(sum);
 				updateBasketPrice();
-				if (resp.BASKET_DATA.COUPON_LIST)
-					updateCouponsBlock(resp.BASKET_DATA.COUPON_LIST, resp.BASKET_DATA.allSum, resp.BASKET_DATA.DISCOUNT_PRICE_ALL);
+				updateCouponsBlock(resp.BASKET_DATA.COUPON_LIST, resp.BASKET_DATA.allSum, resp.BASKET_DATA.DISCOUNT_PRICE_ALL);
 			}
 		});
 	}
@@ -1130,14 +1130,16 @@ $(document).ready(function () {
 		var name = pack_item.data('package-name');
 
 		$.post('/include/update_package.php', {'bid': bid, 'newid': id, 'gbid': gbid, 'name': name}, function (resp) {
+			var total = line.find('.js-item-total');
 			var price = parseFloat(line.data('base-price'));
-			var pack_price = parseFloat(pack_item.data('package-price'));
+			var pack_price = parseInt(pack_item.data('package-price'));
 			var cnt = parseInt(line.find('#QUANTITY_INPUT_' + gbid).val());
 			var sum = Math.round((price + pack_price)*cnt);
-			line.find('.js-item-total').text(sum);
-			line.data('package-price', pack_price);
+			total.text(sum);
+			total.next().val(Math.round(pack_price*cnt));
 			package_cont.data('package-bid', resp);
 			updateBasketPrice();
+			updateDiscountBlock();
 			/*if (resp != 0) {
 			 line.data('oiid',resp);
 			 $.get('/include/update_price.php?ID='+resp, function (resp) {line.find('.js-item-total').text(resp)});
@@ -1172,6 +1174,7 @@ $(document).ready(function () {
 	}
 
 	updateBasketPrice();
+	updateDiscountBlock();
 	///////////////////////Маски////////////////////
 	$('.js-phone-mask').mask('+7(999)999-99-99');
 	$.mask.definitions['H'] = '[012]';
@@ -1388,40 +1391,6 @@ $(document).ready(function () {
 		$('.b-footer-copy, .b-footer-nav__item a, .b-footer-phones').addClass('b-footer-text-color');
 	}
 
-	if ($(".b-method-shipping-input.js_radio_input").length) {
-		var position = $('.b-method-shipping-input.js_radio_input input:checked').position().top;
-		if ($('.b-method-shipping-input.js_radio_input input:checked').attr('id') == 'delivery_new') position = $('.b-method-shipping-input.js_radio_input input:checked').parent().position().top - 100;
-		$(".b-method-shipping_item.b-method-shipping_item-date").css('top', position - 120 + 'px');
-	} else {
-		if ($('.b-method-shipping_item.b-method-shipping_item-date').length) {
-			$('.b-method-shipping_item.b-method-shipping_item-date').hide();
-		}
-	}
-	/////////////////////////////Слайдер в оформлении покупки///////////////////////////
-	$('.js-del-slide-wrap').eq(0).slideUp();
-	$('.js-del-slide-wrap').eq(1).slideDown();
-	$('.js-del-btn').click(function () {
-		var text = $(this).is('#xpickup') ? 'самовывоза' : 'доставки';
-		var block = $(this).next();
-		if (block.is(":visible")) return;
-		var other_block = $('.js-del-slide-wrap').not(block);
-		$(".b-method-shipping_item.b-method-shipping_item-date").hide();
-		$('.js-del-slide-wrap').slideToggle(function () {
-			if ($('.js_radio_input', block).is(':visible')) {
-				$('.js_radio_input input', block).eq(0).prop('checked', true).change();
-				var position = $('.b-method-shipping-input.js_radio_input input:checked').position().top;
-				if ($('.b-method-shipping-input.js_radio_input input:checked').attr('id') == 'delivery_new')
-					position = $('.b-method-shipping-input.js_radio_input input:checked').parent().position().top - 100;
-				$(".b-method-shipping_item.b-method-shipping_item-date").css('top', position - 40 + 'px').show();
-			} else {
-				$('.js_radio_input input', other_block).prop('checked', false).change();
-			}
-			$('label[for="date"]').text('дата ' + text);
-			$('label[for="time_interval"]').text('время ' + text);
-		});
-
-	});
-
 	$('#js_show_delivery_popup').click(function () {
 		$('.overlay').show();
 		$('.js_delivery_modal').show().css('top', $(window).scrollTop() + 25 + "px");
@@ -1448,39 +1417,49 @@ $(document).ready(function () {
 
 });
 
+var pack_sum = 0;
 function updateBasketPrice() {
 	var sum = 0;
+	pack_sum = 0;
 	$('.js-item-total').each(function() {
 		sum += parseInt($(this).text());
+		pack_sum += parseInt($(this).next().val());
 	});
 	$('.js-order-total').html(sum > 10000 ? format_number(sum) : sum);
 }
 
 function updateCouponsBlock(list, sum, discount) {
-	for (var i in list)
-	{
-		var item = list[i];
-		var div = $('.bx_ordercart_coupon#c_' + item.ID);
-		if (div.length) {
-			var cl = 'disabled';
-			if (item.JS_STATUS === 'BAD')
-				cl = 'bad';
-			else if (item.JS_STATUS === 'APPLYED')
-				cl = 'good';
-			div.children('input').attr('class', cl);
-			div.children('span').attr('class', cl);
-			div.children('.bx_ordercart_coupon_notes').text(item.JS_CHECK_CODE);
+	if (list)
+		for (var i in list)
+		{
+			var item = list[i];
+			var div = $('.bx_ordercart_coupon#c_' + item.ID);
+			if (div.length) {
+				var cl = 'disabled';
+				if (item.JS_STATUS === 'BAD')
+					cl = 'bad';
+				else if (item.JS_STATUS === 'APPLYED')
+					cl = 'good';
+				div.children('input').attr('class', cl);
+				div.children('span').attr('class', cl);
+				div.children('.bx_ordercart_coupon_notes').text(item.JS_CHECK_CODE);
+			}
 		}
-	}
 
+	discount_price_all = Math.round(discount);
+	allSum = Math.round(sum);
+
+	updateDiscountBlock();
+}
+
+function updateDiscountBlock() {
 	var total = $('.discount-total');
 	if (total.length) {
-		if (discount > 0) {
-			console.log(sum);
-			console.log(discount);
-			total.find('#dtotal1').text(Math.round(sum) + Math.round(discount));
-			total.find('#dtotal2').text(Math.round(discount));
-			total.find('#dtotal3').text(Math.round(sum));
+		var sum = allSum + pack_sum;
+		if (discount_price_all > 0) {
+			total.find('#dtotal1').text(sum + discount_price_all);
+			total.find('#dtotal2').text(discount_price_all);
+			total.find('#dtotal3').text(sum);
 			total.removeClass('hidden');
 		}
 		else {
