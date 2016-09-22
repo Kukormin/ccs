@@ -28,7 +28,7 @@ if (!isset($_SESSION['retailcrm'])) {
 
     <link href="/bitrix/templates/.default/css/slick.css" rel="stylesheet" type="text/css" />
     <link href="/bitrix/templates/.default/css/about.css?v=1" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/template_styles.css?v=4" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/template_styles.css?v=5" rel="stylesheet" type="text/css" />
     <link href="/bitrix/templates/.default/css/cupcake-media.css?v=3" rel="stylesheet" type="text/css" />
     <link href="/bitrix/templates/.default/css/featherlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
@@ -141,7 +141,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <div class="b-header__user"><span class="js_login">Вход</span> / <span class="js_register">Регистрация</span></div>
                 <? } ?>
                 <div class="b-header-phones-wrapper">
-                    <div class="b-header__phone">+7 968 622 73 42<br />+7 499 322 00 20</div>
+                    <div class="b-header__phone">+7 499 322 00 20</div>
                     <div class="b-header-watsup">Пишите нам в WhatsApp</div>
                     <div class="b-header-watsup-phone">+7 968 622 73 42</div>
                 </div>
