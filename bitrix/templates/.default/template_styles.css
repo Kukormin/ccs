@@ -3482,8 +3482,9 @@ background: url(../.default/images/arr-post.png) no-repeat center -55px;
 	margin-top:42px;
 	float:left;
 	*/
+    margin-top: 5px;
 	padding-left:40px;
-	line-height:45px;
+	line-height: 24px;
 	font-family: 'PTSansCaptionBold', sans-serif;
 	font-size: 18px;
 	color:#fff;
