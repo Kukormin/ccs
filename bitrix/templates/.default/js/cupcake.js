@@ -790,7 +790,9 @@ $(document).ready(function () {
 				'VALUE': $(this).children('option:selected').text()
 			};
 		});
-		if ($('.js-option-selector', modal).length)
+		if (that.data('addid'))
+			var addid = that.data('addid');
+		else if ($('.js-option-selector', modal).length)
 			var addid = $('.js-option-selector').val();
 		else if ($('.js_cupcake_number').length)
 			var addid = $('.js_cupcake_number').val();

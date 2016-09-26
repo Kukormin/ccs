@@ -214,130 +214,75 @@ $APPLICATION->SetPageProperty("og:image", 'http://'.SITE_SERVER_NAME.$arResult['
 		</div>
 	</section>
 		<div class="item-desc"><?=$arResult["DETAIL_TEXT"]?></div>
-	<section class="b-bg-grey">
-		<?if(isset($arResult['BOUND_PRODUCT_ID'])) { ?>
-			<div class="b-content-center b-grey-block-gift--wrap">
-				<div class="b-grey-wrap-top  b-ordering-accessory__list">
-					<div class="b-grey-wrap-top-right">
-						<div class="b-grey-wrap-bottom">
-							<div class="b-grey-wrap-bottom-right">
-								<div class="b-application-event--title">
-									<span>  <font class="b-block-desktop-only">приятный </font>аксессуар к заказу</span>
-								</div>
+	<section class="b-bg-grey"><?
+	if (isset($arResult['BOUND_PRODUCT_ID']))
+	{
+		?>
+		<div class="b-content-center b-grey-block-gift--wrap">
+		<div class="b-grey-wrap-top  b-ordering-accessory__list">
+			<div class="b-grey-wrap-top-right">
+				<div class="b-grey-wrap-bottom">
+					<div class="b-grey-wrap-bottom-right">
+						<div class="b-application-event--title">
+							<span>  <font class="b-block-desktop-only">приятный </font>аксессуар к заказу</span>
+						</div>
+						<div class="js-postcards-wrap b-addition-order-wrap">
+							<?
 
-								<? //print_r($arResult); ?>
-									<div class="js-postcards-wrap b-addition-order-wrap">
-										<?  
-
-$i = 0;
-$length = count($arResult['BOUND_PRODUCT_ID']) - 1; 
-foreach ($arResult['BOUND_PRODUCT_ID'] as $gid=>$arBoundList) { ?>
-											<div class="b-postcard__item js-postcard-block <?=($i==$length?'b-postcard__item--last':'');?>">
-												<?php $i++; ?>
-												<!--block slider-->
-												<div class="add-postcard-wrap">
-													<div class="add-postcard--title">
-														<?=$arBoundList['NAME'];?> <sup class="sum-add-postcard"> 0</sup></div>
-													<div class="b-postcard-delete" <?=!isset($arResult[ 'BOUND_BASKET'][$gid])? 'style="display: none;"': '';?>>Удалить </div>
-													<div class="b-slider-add-postcard__list">
-														<?php  $j = 0;
-                                    foreach ($arResult['BOUND_BASKET'][$gid] as &$item) { 
-                                        $item['INDEX'] = $j;?>
-														<div class="b-slider__item" data-price="<?=$item[" PRICE "];?>" data-quantity="<?=$item[" QUANTITY "];?>" data-oid="<?=$item['PRODUCT_ID'];?>" data-bid="<?=$item['ID'];?>">
-															<div class="b-mod__item">
-																<div class="b-mod__item-img">
-																	<div class="b-mod__item-img--effect-transform">
-																		<img src="<?=CFile::GetPath($arResult['BOUND'][$gid][$item['PRODUCT_ID']]['BOUND_FIELDS']['DETAIL_PICTURE'])?>" alt="">
-																	</div>
-																</div>
-															</div>
-															<div class="b-mod__item-title">
-																<span class="postcard--name"> <?=$arResult['BOUND'][$gid][$item['PRODUCT_ID']]['BOUND_FIELDS']['NAME']?></span>
-																<span><?=$arResult['BOUND'][$gid][$item['PRODUCT_ID']]['BOUND_FIELDS']['PREVIEW_TEXT']?></span>
-															</div>
-														</div>
-														<?php } ?>
-
-
-													</div>
-
-													<div class="b-add-postcard--quantity" <?=!isset($arResult[ 'BOUND_BASKET'][$gid])? 'style="display: none;"': '';?>>
-														<div class="b-form-item__input b-form-item__input--select add-postcard--select">
-															<p class="select_title">1</p>
-															<select class="js-postcard-counter" name="postcard-counter">
-																<option value="1">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="4">4</option>
-																<option value="5">5</option>
-																<option value="6">6</option>
-																<option value="7">7</option>
-																<option value="8">8</option>
-																<option value="9">9</option>
-																<option value="10">10</option>
-															</select>
-														</div>
-														<div class="add-postcard--quantity__item"> шт</div>
-														<div class="b-mod__item-price"> <span class="js-postcard-total-price"></span> <span class="rub">i</span></div>
+							$i = 0;
+							$length = count($arResult['BOUND_PRODUCT_ID']);
+							foreach ($arResult['BOUND_PRODUCT_ID'] as $gid => $arBoundList)
+							{
+								$i++;
+								$class = $i == $length ? ' b-postcard__item--last' : '';
+								?>
+								<div class="b-postcard__item<?= $class ?>"><?
+									foreach ($arBoundList as $products_id)
+									{
+										foreach ($arResult['BOUND'][$gid][$products_id] as $postcard_fields)
+										{
+											?>
+											<div class="b-mod__item b-mod__item-postcard item_accs"
+											     data-oid="<?= $postcard_fields['ID'] ?>"
+											     data-bid="<?= $arResult['BOUND_BASKET'][$gid][$postcard_fields['ID']]['ID'] ?>">
+												<div class="b-mod__item-img">
+													<div class="b-mod__item-img--effect-transform">
+														<img class="js-postcard-img"
+														     src="<?= CFile::GetPath($postcard_fields['DETAIL_PICTURE']) ?>"
+														     alt="">
 													</div>
 												</div>
-
-												<!--block slider-->
-												<div class="b-slider-wrap-postcard__list">
-													<? foreach($arBoundList as $products_id) { ?>
-														<?foreach($arResult['BOUND'][$gid][$products_id] as $postcard_fields) {?>
-
-															<div class="b-slider__item">
-																<div class="b-mod__item b-mod__item-about-novelty b-mod__item-postcard js-postcard-item" data-oid="<?=$postcard_fields['ID'];?>" data-bid="<?=$arResult['BOUND_BASKET'][$gid][$postcard_fields['ID']]['ID'];?>">
-																	<div class="b-mod__item-img">
-																		<div class="b-mod__item-img--effect-transform">
-																			<img class="js-postcard-img" src="<?=CFile::GetPath($postcard_fields['DETAIL_PICTURE'])?>" alt="">
-																		</div>
-																	</div>
-																	<div class="b-mod__item-checkbox">
-																		<input type="checkbox" class="checkbox js-addable-postcard" id="checkbox<?=$postcard_fields['ID'];?>" <?=(isset($arResult[ 'BOUND_BASKET'][$gid][$postcard_fields[ 'ID']])? 'checked="checked" data-sliderid="'.($arResult[ 'BOUND_BASKET'][$gid][$postcard_fields[
-																						'ID']][ 'INDEX']). '"': '');?>/>
-																		<label for="checkbox<?=$postcard_fields['ID'];?>">
-																			<?=$postcard_fields['ID'];?>
-																		</label>
-																	</div>
-																	<div class="b-mod__item-title">
-																		<span class="postcard--name js-postcard-name"> <?=$postcard_fields['NAME']?></span>
-																		<span class="js-postcard-text"><?=$postcard_fields['PREVIEW_TEXT']?></span>
-																	</div>
-																	<div class="b-mod__item-price js-postcard-price" data-price="<?=$postcard_fields['PRICE']?>">
-																		<?=$postcard_fields['PRICE']?> <span class="rub">i</span></div>
-																</div>
-															</div>
-															<? } }?>
+												<div class="b-mod__item-title">
+													<span
+														class="postcard--name js-postcard-name"> <?= $postcard_fields['NAME'] ?></span>
+													<span
+														class="js-postcard-text"><?= $postcard_fields['PREVIEW_TEXT'] ?></span>
 												</div>
-											</div>
-											<? } ?>
-												<!--<div class="b-close-post-list js-postcard-toggle"> </div>-->
+												<div class="b-mod__item-price js-postcard-price"
+												     data-price="<?= $postcard_fields['PRICE'] ?>">
+													<?= $postcard_fields['PRICE'] ?> <span class="rub">i</span>
+												</div>
+												<div>
+													<button class="b-bnt-form b-bnt-form--green js-modal-tobasket"
+													        data-href="/personal/cart" data-addid="<?= $postcard_fields['ID'] ?>">в корзину</button>
+												</div>
+											</div><?
+										}
+									}
+									?>
+								</div><?
+							}
+							?>
 
-									</div>
-
-									<!--<div class="b-ordering-accessory js-postcards-wrap">
-    <div class="b-grey-assortment--title"> 
-        <span>  Подарить эмоции в одно мгновение ... </span>  <span> возможно ли это ? </span>
-    </div>
-    <span class="b-grey-assortment--desc"> 
-        Cupcake Story дарит вам возможность передать ваши чувства в одно мгновение, в&nbsp;один клик! Вы можете послать вашим близким сладкий сюрприз с&nbsp;пожеланиями  и&nbsp;признанием, лишь заполнив пару строк ! 
-    </span>
-
-    <button class="b-bnt-form b-bnt-form--green js-postcard-toggle">развернуть</button> 
-</div>-->
-
-
-
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<? } ?>
+		</div>
+		</div><?
+	}
 
-
+	?>
 
 				<div class="b-content-center b-slider-about-novelty">
 					<div class="b-title b-title--border-middle">

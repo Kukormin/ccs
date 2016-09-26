@@ -10,7 +10,6 @@ use Bitrix\Sale\DiscountCouponsManager;
 
 //инфоблоки, товары из которых не надо выводить стандартным методом
 $hideItemsFrom = array(
-	16, //аксессуары
 	12, //коробки
 	30, //коробки тортов
 	37, //коробки для эклеров
@@ -65,10 +64,10 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 				?>
 				<div class="b-mod__item--basket">
 					<div class="b-mod__item-img--effect-transform b-mod__item-basket--img">
-						<img src="<?= $arItem['PREVIEW_PICTURE_SRC'] ?>" alt="">
+						<img src="<?= $arItem2['PREVIEW_PICTURE_SRC'] ?>" alt="">
 					</div>
 					<div class="b-mod__item-title--basket">
-						<?= $arItem['PARENT_NAME'] ? $arItem['PARENT_NAME'] : $arItem['NAME']; ?>
+						<?= $arItem2['PARENT_NAME'] ? $arItem2['PARENT_NAME'] : $arItem2['NAME']; ?>
 					</div>
 				</div><?
 			/*

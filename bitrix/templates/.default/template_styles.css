@@ -424,14 +424,6 @@ textarea {
 
 
 
-
-
-
-
-
-
-
-
 /*pay-ship*/
 
 .b-topblock--pay-ship {
@@ -3941,6 +3933,16 @@ a.basket {
 }
 
 
+.b-mod__item.item_accs {
+    width: 230px;
+    padding-bottom: 15px;
+}
+.b-postcard__item .item_accs .b-mod__item-title  {
+    padding-top: 0;
+}
+.item_accs .b-mod__item-price {
+    padding-bottom: 10px;
+}
 
 
 
@@ -7081,7 +7083,10 @@ margin-top: 20px;
 }
 
 .b-mod__item-title > span{
-    display: none !important;
+     display: none !important;
+ }
+.item_accs .b-mod__item-title > span{
+    display: inline-block !important;
 }
 
 .slick-slide{

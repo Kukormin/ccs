@@ -12,7 +12,6 @@
 
 //инфоблоки, товары из которых не надо выводить стандартным методом
 $hideItemsFrom = array(
-	16, //аксессуары
 	12, //коробки
 	30, //коробки тортов
 	37, //коробки для эклеров
@@ -80,7 +79,7 @@ foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
     }
     
     
-    $parent = isset($arResult["GRID"]["ROWS"][$k]['PARENT_NAME'])?$arResult["GRID"]["ROWS"][$k]['PARENT_NAME']:'single';
+    $parent = isset($arResult["GRID"]["ROWS"][$k]['PARENT_NAME'])?$arResult["GRID"]["ROWS"][$k]['PARENT_NAME']:$k;
     if (!$parent) $parent = 'single';
     $arResult['GROUPED_GOODS'][$parent][] = $k;
 }
