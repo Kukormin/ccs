@@ -3939,6 +3939,7 @@ a.basket {
 }
 .b-postcard__item .item_accs .b-mod__item-title  {
     padding-top: 0;
+    height: 120px;
 }
 .item_accs .b-mod__item-price {
     padding-bottom: 10px;
