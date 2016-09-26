@@ -25,22 +25,22 @@ if (!isset($_SESSION['retailcrm'])) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="/bitrix/templates/.default/css/slick.css" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/css/about.css?v=1" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/template_styles.css?v=5" rel="stylesheet" type="text/css" />
-    <link href="/bitrix/templates/.default/css/cupcake-media.css?v=1" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/css/slick.css?v=6" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/css/about.css?v=6" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/template_styles.css?v=6" rel="stylesheet" type="text/css" />
+    <link href="/bitrix/templates/.default/css/cupcake-media.css?v=6" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.stellar.min.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/slick.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/share.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/messages_ru.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js"></script>
-    <script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=1"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.stellar.min.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/slick.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/share.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.validate.min.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/messages_ru.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js?v=6"></script>
+    <script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=6"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
