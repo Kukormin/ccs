@@ -46,7 +46,7 @@ if (!isset($_SESSION['retailcrm'])) {
     <script type="text/javascript" src="/bitrix/templates/.default/js/messages_ru.js?v=6"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js?v=6"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js?v=6"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=6"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=7"></script>
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

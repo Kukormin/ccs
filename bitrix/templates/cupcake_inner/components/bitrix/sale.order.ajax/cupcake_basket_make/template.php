@@ -535,7 +535,10 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 </form><?
 
 $sunday = COption::GetOptionString("grain.customsettings", "SUNDAY") == 'Y';
-$dhour = COption::GetOptionString("grain.customsettings", "DHOUR");
+$dtime = COption::GetOptionString("grain.customsettings", "DHOUR"); // Время в формате 15:30
+$tmp = explode(':', $dtime);
+$dhour = intval($tmp[0]);
+$dminutes = intval($tmp[1]);
 if (!$dhour)
 	$dhour = 16;
 $holidayText = COption::GetOptionString("grain.customsettings", "HOLIDAY");
@@ -556,7 +559,7 @@ while ($s !== false)
 ?>
 <script>var sunday_holidays = <?= $sunday ? 1 : 0 ?>;
 	var holidays = [<?= $holidaysJs ?>];
-	var dhour = <?= ($dhour-3) ?>;</script>
+	var dhour = <?= ($dhour-3) ?>;var dminutes = <?= $dminutes ?>;</script>
 
 
 <script>
