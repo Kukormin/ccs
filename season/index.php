@@ -11,7 +11,6 @@ $dbIb = $iblock->GetList(
 	Array(),
 	Array(
 		'CODE' => 'seasons',
-		'ACTIVE' => 'Y',
 	),
 	false
 );
@@ -22,6 +21,7 @@ while ($arIb = $dbIb->Fetch()) {
 $newSeasonsByCode = array();
 $rsItems = $iblockElement->GetList(array(), array(
 	'IBLOCK_ID' => $seasonsId,
+	'ACTIVE' => 'Y',
 ), false, false, array('ID', 'NAME', 'CODE', 'DETAIL_TEXT'));
 while ($arItem = $rsItems->Fetch())
 {
