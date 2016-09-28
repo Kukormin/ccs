@@ -11,6 +11,7 @@ $dbIb = $iblock->GetList(
 	Array(),
 	Array(
 		'CODE' => 'seasons',
+		'ACTIVE' => 'Y',
 	),
 	false
 );
