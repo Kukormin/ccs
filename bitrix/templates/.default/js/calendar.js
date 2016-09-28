@@ -229,8 +229,10 @@ function inHolidays(s) {
 
 function getNextDeliveryDate(d) {
 	var nowHours = d.getUTCHours();
+	var nowMinutes = d.getMinutes();
+	var evening = (nowHours > dhour) || (nowHours == dhour && nowMinutes >= dminutes);
 	var fromDate = new Date(d);
-	var add = nowHours >= dhour || isHoliday1(fromDate) ? 2 : 1; // сколько рабочих дней добавить
+	var add = evening || isHoliday1(fromDate) ? 2 : 1; // сколько рабочих дней добавить
 	while (add > 0) {
 		fromDate.setDate(fromDate.getDate() + 1);
 		if (!isHoliday1(fromDate))
