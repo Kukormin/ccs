@@ -3,6 +3,7 @@ $(document).ready(function () {
 	$("#new_address").suggestions({
 		serviceUrl: "https://suggestions.dadata.ru/suggestions/api/4_1/rs",
 		token: "af304791ab1e5b8bfeca2736f2dbbe04d4f3a885",
+		addon: 'spinner',
 		type: "ADDRESS",
 		count: 10,
 		scrollOnFocus: $('label[for="delivery_new"]')
