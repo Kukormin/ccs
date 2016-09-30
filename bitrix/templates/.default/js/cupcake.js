@@ -6,6 +6,7 @@ $(document).ready(function () {
 		addon: 'spinner',
 		type: "ADDRESS",
 		count: 10,
+		geoLocation: {kladr_id: '77000000'},
 		scrollOnFocus: $('label[for="delivery_new"]'),
 		onSelect: function() {
 			$(this).focus();
