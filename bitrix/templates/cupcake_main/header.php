@@ -34,6 +34,7 @@ if (!isset($_SESSION['retailcrm'])) {
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.stellar.min.js?v=6"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/slick.js?v=6"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.suggestions.min.js"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=6"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/share.js?v=6"></script>
     <script type="text/javascript" src="/bitrix/templates/.default/js/jquery.validate.min.js?v=6"></script>
