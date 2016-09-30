@@ -44,7 +44,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Агентствам", 
-		"/partners/", 
+		"http://partners.cupcakestory.ru/",
 		Array(), 
 		Array(), 
 		"" 

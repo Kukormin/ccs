@@ -32,8 +32,8 @@
             <div class="b-cards-wrapper">
                 <a href="https://www.instagram.com/cupcake.story/" target="_blank" class="b-footer-instagram-inner"> </a>
                 <a href="#" class="b-footer-mail b-footer-mail-about"> 	</a>
-                <a href="#" class="b-footer-mastercard-main"> </a>
-                <a href="#" class="b-footer-visa-inner"> </a>
+                <a class="b-footer-mastercard-main"> </a>
+                <a class="b-footer-visa-inner"> </a>
             </div>
         </div>
     </div>

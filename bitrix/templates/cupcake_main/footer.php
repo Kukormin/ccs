@@ -16,7 +16,7 @@
                 <div class="b-footer-text__sub">
                     В нашей линейке более 50 различных вкусов! И поверьте, каждый вкус — это маленькая сладкая история, которая без сомнений не оставит вас и ваших близких равнодушными !
                 </div>
-                <a class="b-footer-link" href="/about">О компании  </a>
+                <a class="b-footer-link" href="/about/">О компании  </a>
             </div>
         </div>
         <div class="b-footer-info gl-block-footer-info">
@@ -49,9 +49,9 @@
             <span class="b-footer-phones">7 (499) 322-00-20</span>
             <div class="b-cards-wrapper">
                 <a href="https://www.instagram.com/cupcake.story/" target="_blank" class="b-footer-instagram-main"> </a>
-                <a href="#" class="b-footer-mail"> 	</a>
-                <a href="#" class="b-footer-mastercard-main"> </a>
-                <a href="#" class="b-footer-visa-main"> </a>
+                <a href="#" class="b-footer-mail b-footer-mail-about"> 	</a>
+                <a class="b-footer-mastercard-main"> </a>
+                <a class="b-footer-visa-main"> </a>
             </div>
 
         </div>
