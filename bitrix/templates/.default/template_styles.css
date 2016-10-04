@@ -859,8 +859,8 @@ text-align:left;
 }
 .b-sweet-table-text {
 	margin: 0 auto;
-    padding: 315px 0 112px;
-    max-width: 870px;
+    padding: 315px 0 20px;
+    max-width: 1100px;
 	width:92%;
     position: relative;
 }
@@ -887,7 +887,20 @@ text-align:left;
 	padding: 90px 0 100px;
     text-align: center;
 }
-
+.b-sweet-table-text h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.b-sweet-table-text h4 {
+    font-size: 16px;
+    margin: 10px 0 0px;
+    text-align: left;
+}
+.b-sweet-table-text ul {
+    list-style: outside none disc;
+    margin: 10px 0 10px 40px;
+    text-align: left;
+}
 
 
 
