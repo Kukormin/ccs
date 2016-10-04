@@ -14,6 +14,27 @@ function onEpilog(){
 	}
 }
 
+//
+// Меняем Фамилию на Имя, если Имя не заполнено
+// (по-умолчанию если в ФИО одно слово - считается, что это Фамилия)
+//
+AddEventHandler('main', 'OnAfterUserAdd', 'afterUserAdd');
+function afterUserAdd(&$arFields)
+{
+	$ID = intval($arFields['ID']);
+	if ($ID > 0)
+	{
+		if (!$arFields['NAME'] && $arFields['LAST_NAME'])
+		{
+			$user = new \CUser();
+			$user->Update($ID, array(
+				'NAME' => $arFields['LAST_NAME'],
+				'LAST_NAME' => '',
+			));
+		}
+	}
+}
+
 // Модуль ИБ в основном всегда нужен
 \Bitrix\Main\Loader::includeModule('iblock');
 
