@@ -43,6 +43,13 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Подарочные карты",
+		"https://shop.giftd.tech/cupcakestory",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
 		"Оплата и доставка", 
 		"payment-and-shipment/", 
 		Array(), 
