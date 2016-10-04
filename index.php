@@ -254,4 +254,7 @@ $APPLICATION->SetTitle("Cupcake Story — семейная кондитерск�
 			)
 		); ?>
 	</div>
-	</section><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+	</section><?
+
+\Local\Remarketing::setPageType('home');
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");

@@ -202,6 +202,14 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 				$packageSum = intval($packagePrice * $arItem2["QUANTITY"]);
 				$packageTotal += $packageSum;
 				$sum = round(($arItem2['PRICE'] + $packagePrice) * $arItem2["QUANTITY"]);
+
+				//[PRODUCT_XML_ID] => 1358#1355
+				$productId = $arItem2['PRODUCT_XML_ID'];
+				$tmp = explode('#', $productId);
+				if (count($tmp) > 1)
+					$productId = $tmp[0];
+				\Local\Remarketing::addProductId($productId);
+
 				?>
 				<div class="b-total-basket__group">
 					<span class="b-total-basket--price" id="current_price_<?= $arItem2["ID"] ?>">
@@ -221,6 +229,9 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 		?>
 	</div><?
 }
+
+\Local\Remarketing::setPageType('cart');
+\Local\Remarketing::setTotal($arResult['allSum']);
 
 //товары без SKU
 foreach ($arResult["GRID"]["ROWS"] as $arItem)

@@ -583,4 +583,8 @@ if($ar_res = $cat->GetNext())
                 </div>
             </div>
         </div>
-    </div>
+    </div><?
+
+\Local\Remarketing::setPageType('product');
+\Local\Remarketing::addProductId($arResult['ID']);
+\Local\Remarketing::setTotal($arResult['MIN_PRICE']['VALUE']);

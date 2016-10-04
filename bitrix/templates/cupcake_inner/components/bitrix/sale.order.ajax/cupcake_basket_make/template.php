@@ -561,7 +561,6 @@ while ($s !== false)
 	var holidays = [<?= $holidaysJs ?>];
 	var dhour = <?= ($dhour-3) ?>;var dminutes = <?= $dminutes ?>;</script>
 
-
 <script>
 	$(document).ready(function () {
 		var products = [];
@@ -584,8 +583,22 @@ while ($s !== false)
 						'actionField': {'step': 2, 'option': payType},
 						'products': products
 					}
-				},
+				}
 			});
 		});
 	});
-</script>
+</script><?
+
+$total = 0;
+foreach($arResult['BASKET_ITEMS'] as $key => $arItem)
+{
+	//[PRODUCT_XML_ID] => 1358#1355
+	$productId = $arItem['PRODUCT_XML_ID'];
+	$total += $arItem['PRICE'] * $arItem['QUANTITY'];
+	$tmp = explode('#', $productId);
+	if (count($tmp) > 1)
+		$productId = $tmp[0];
+	\Local\Remarketing::addProductId($productId);
+}
+\Local\Remarketing::setPageType('purchase');
+\Local\Remarketing::setTotal($total);

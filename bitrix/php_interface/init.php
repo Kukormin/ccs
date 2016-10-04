@@ -44,6 +44,7 @@ CModule::AddAutoloadClasses(
 		'Local\\StaticCache' => '/bitrix/php_interface/lib/StaticCache.php',
 		'Local\\ExtCache' => '/bitrix/php_interface/lib/ExtCache.php',
 		'Local\\Package' => '/bitrix/php_interface/lib/Package.php',
+		'Local\\Remarketing' => '/bitrix/php_interface/lib/Remarketing.php',
 	)
 );
 

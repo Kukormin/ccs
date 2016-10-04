@@ -230,5 +230,7 @@ if (isset($_GET["SECTION_CODE"])) {
         </div>
     </div>
 </div>
-<?php }
-?>
+<?
+    }
+
+\Local\Remarketing::setPageType('category');
