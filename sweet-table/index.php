@@ -1,29 +1,32 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Сладкие столы");
-?>
-	<section class="b-topblock b-topblock--pay-ship"> </section> <section class="b-bg-grey">
-	<div class="b-content-center b-reviews">
-		<div class="b-content-center--title i-padding__top-100">
-		<? $APPLICATION->IncludeFile( '/include/sweet_table_title_inc.php', array(),
-			array(
-				'MODE'  => 'html',
-				'TEMPLATE'  => 'page_inc.php',
-			)
-		); ?>
-			</div>
-	<div class="b-content-center--description">
-		<? $APPLICATION->IncludeFile( '/include/sweet_table_text_inc.php', array(),
-			array(
-				'MODE'  => 'html',
-				'TEMPLATE'  => 'page_inc.php',
-			)
-		); ?>
+?><section class="b-topblock b-topblock--sweet-table" style="background-image:url(/images/st.jpg);">
+	<div class="b-sweet-table-text">
+		<div class="b-sweet-table-top-text__title">
+			<? $APPLICATION->IncludeFile( '/include/sweet_table_title_inc.php', array(),
+				array(
+					'MODE'  => 'html',
+					'TEMPLATE'  => 'page_inc.php',
+				)
+			); ?>
+		</div>
+		<div class="b-sweet-table-top-text__sub">
+ <span class="b-sweet-table-top-text__sub-item">
+    <? $APPLICATION->IncludeFile( '/include/sweet_table_text_inc.php', array(),
+	    array(
+		    'MODE'  => 'html',
+		    'TEMPLATE'  => 'page_inc.php',
+	    )
+    ); ?>
+ </span>
+		</div>
 	</div>
+</section>
 
 <?$APPLICATION->IncludeComponent(
-	"bitrix:photogallery", 
-	"cupcake_gallery_sweet", 
+	"bitrix:photogallery",
+	"cupcake_gallery_sweet",
 	array(
 		"ADDITIONAL_SIGHTS" => array(
 		),
@@ -76,8 +79,8 @@ $APPLICATION->SetTitle("Сладкие столы");
 );?>
 
 <?$APPLICATION->IncludeComponent(
-	"custom:main.feedback", 
-	"cupcake_sweet_table", 
+	"custom:main.feedback",
+	"cupcake_sweet_table",
 	array(
 		"COMPONENT_TEMPLATE" => "cupcake_sweet_table",
 		"EMAIL_TO" => "zakaz@cupcakestory.ru",
@@ -91,4 +94,4 @@ $APPLICATION->SetTitle("Сладкие столы");
 	),
 	false
 );?>
-</section><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
