@@ -9,6 +9,8 @@ require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.ph
 @set_time_limit(0);
 @ignore_user_abort(true);
 
+\CAgent::CheckAgents();
+
 // Чтобы агенты корректно работали на кроне:
 // 1) нужно добавить этот скрипт в крон
 // 2) для того, чтоб выполнялись и периодические и нет:
@@ -16,5 +18,3 @@ require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.ph
 // 3) чтобы отключить агенты на хитах
 //      COption::SetOptionString("main", "check_agents", "N");
 // 4) В dbconn.php убрать все упоминания BX_CRONTAB, BX_CRONTAB_SUPPORT, NO_AGENT_CHECK, DisableEventsCheck
-
-\CAgent::CheckAgents();

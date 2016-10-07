@@ -589,7 +589,15 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 			}
 
 			?>
-		</div>
+		</div><?
+		$savingData = \Local\Savings::getCurrentUserData();
+		if ($savingData['LEVEL'])
+		{
+			?>
+			<p class="loyality loyality-value"><?= $savingData['NAME'] ?></p>
+			<p class="loyality loyality-info">Условия <a href="/loyality/">программы лояльности</a></p><?
+		}
+		?>
 		<script>var discount_price_all = <?= round($arResult['DISCOUNT_PRICE_ALL']) ?>;var allSum = <?= round($arResult['allSum'])
 			?>;</script>
 		<dl class="discount-total hidden">

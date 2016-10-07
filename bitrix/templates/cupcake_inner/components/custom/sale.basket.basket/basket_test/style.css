@@ -915,3 +915,14 @@ input.bt2:active{border:1px solid #d2d2d2}
 .discount-total em {
     text-decoration: line-through;
 }
+
+.loyality {
+    font-family: "PTSansCaptionBold",sans-serif;
+}
+.loyality-value {
+    margin-top: 10px;
+    color: #aa6290;
+}
+.loyality-info {
+    color: #7f7f7f;
+}
