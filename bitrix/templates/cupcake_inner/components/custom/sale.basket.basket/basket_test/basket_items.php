@@ -542,14 +542,15 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 			{
 				?>
 				<div class="bx_ordercart_coupon">
-				<span class="coupons_block_span"><?= GetMessage("STB_COUPON_PROMT") ?></span><input type="text"
-				                                                                                    id="coupon"
-				                                                                                    name="COUPON"
-				                                                                                    value=""
-				                                                                                    onchange="enterCoupon();">&nbsp;<a
-					class="bx_bt_button bx_big b-bnt-form" style="font-size: 12px !important;" href="javascript:void(0)"
-					onclick="enterCoupon();"
-					title="<?= GetMessage('SALE_COUPON_APPLY_TITLE'); ?>"><?= GetMessage('SALE_COUPON_APPLY'); ?></a>
+					<span class="coupons_block_span"><?= GetMessage("STB_COUPON_PROMT") ?></span>
+					<input type="text" id="coupon" name="COUPON" value="" onchange="enterCoupon();" />
+					<p class="coupon_btn">
+						<a class="bx_bt_button bx_big b-bnt-form" style="font-size: 12px !important;"
+						   href="javascript:void(0)"
+						   onclick="enterCoupon();" title="<?= GetMessage('SALE_COUPON_APPLY_TITLE'); ?>">
+							<?= GetMessage('SALE_COUPON_APPLY'); ?>
+						</a>
+					</p>
 				</div><?
 				if (!empty($arResult['COUPON_LIST']))
 				{
