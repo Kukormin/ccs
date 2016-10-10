@@ -156,43 +156,42 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 
 					?>
 					<br />
-					<div class="b-slider-wrap-basket__list js-package-cont" data-package-bid="<?= $packageBid ?>"><?
+					<div class="js-package-cont" data-package-bid="<?= $packageBid ?>"><?
 						foreach ($arResult['PACKAGES'][$arItem['PACKAGES']] as $arPack)
 						{
+							$vip = strpos($arPack['NAME'], '9') !== false ? ' js-vip-box' : '';
+							$free = round($arPack['PRICE'], 0) == 0 ? ' js-free-box' : '';
 							?>
-							<div
-								class="b-slider__item js-package-item <?= round($arPack['PRICE'], 0) == 0 ? 'js-free-box' : '' ?> <?= strpos($arPack['NAME'], '9') !== false ? 'js-vip-box' : ''; ?>"
-								data-package-price="<?= intval($arPack['PRICE']) ?>"
-								data-package-name="<?= $arPack['NAME'] ?>"
-								data-package-id="<?= $arPack['ID'] ?>">
-								<div class="b-slider__item-basket">
-									<div class="b-item-basket-img js-package-popup"
-									     data-featherlight="<?= $arPack['DETAIL_PICTURE'] ?>">
-										<img src="<?= $arPack['PREVIEW_PICTURE'] ?>" alt="">
-										<span class="b-modal-basket__link"> </span>
-									</div><?
+							<div class="js-package-item b-slider__item-basket<?= $vip ?><?= $free ?>"
+							     data-package-price="<?= intval($arPack['PRICE']) ?>"
+							     data-package-name="<?= $arPack['NAME'] ?>"
+							     data-package-id="<?= $arPack['ID'] ?>">
+								<div class="b-item-basket-img js-package-popup"
+								     data-featherlight="<?= $arPack['DETAIL_PICTURE'] ?>">
+									<img src="<?= $arPack['PREVIEW_PICTURE'] ?>" alt="">
+									<span class="b-modal-basket__link"> </span>
+								</div><?
 
-									if (count($arResult['PACKAGES'][$arItem['PACKAGES']]) > 1)
-									{
-										?>
-										<div class="b-mod__item-checkbox">
-											<input type="checkbox" class="checkbox em-radio js-package-selector"
-											       id="pack_<?= $arPack['ID'] ?>" <?= $arPack['NAME'] == $packageName ? 'checked' : '' ?>
-											       name="package_<?= $arItem2['ID'] ?>"/>
-											<label for="pack_<?= $arPack['ID'] ?>">чекбокс</label>
-										</div><?
-									}
-
-									if ($arPack['NAME'] == $packageName)
-										$packagePrice = intval($arPack['PRICE']);
-
+								if (count($arResult['PACKAGES'][$arItem['PACKAGES']]) > 1)
+								{
 									?>
-									<div class="b-mod__item-title">
-										<span class="b-slider__item-basket--name"> <?= $arPack['NAME'] ?></span>
-									</div>
-									<div class="b-mod__item-price b-mod__item-price--basket"> <?=
-										$arPack['PRICE'] > 0 ? round($arPack['PRICE'], 0) . '<span class="rub">i</span>' : 'бесплатно' ?></div>
+									<div class="b-mod__item-checkbox">
+										<input type="checkbox" class="checkbox em-radio js-package-selector"
+										       id="pack_<?= $arPack['ID'] ?>" <?= $arPack['NAME'] == $packageName ? 'checked' : '' ?>
+										       name="package_<?= $arItem2['ID'] ?>"/>
+										<label for="pack_<?= $arPack['ID'] ?>"></label>
+									</div><?
+								}
+
+								if ($arPack['NAME'] == $packageName)
+									$packagePrice = intval($arPack['PRICE']);
+
+								?>
+								<div class="b-mod__item-title">
+									<span class="b-slider__item-basket--name"> <?= $arPack['NAME'] ?></span>
 								</div>
+								<div class="b-mod__item-price b-mod__item-price--basket"> <?=
+									$arPack['PRICE'] > 0 ? round($arPack['PRICE'], 0) . '<span class="rub">i</span>' : 'бесплатно' ?></div>
 							</div><?
 						}
 						?>
@@ -596,7 +595,7 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 		{
 			?>
 			<p class="loyality loyality-value"><?= $savingData['NAME'] ?></p>
-			<p class="loyality loyality-info">Условия <a href="/loyality/">программы лояльности</a></p><?
+			<p class="loyality loyality-info">Условия <a href="/loyalty/">программы лояльности</a></p><?
 		}
 		?>
 		<script>var discount_price_all = <?= round($arResult['DISCOUNT_PRICE_ALL']) ?>;var allSum = <?= round($arResult['allSum'])

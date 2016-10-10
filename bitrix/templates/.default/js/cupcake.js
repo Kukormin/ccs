@@ -979,7 +979,6 @@ $(document).ready(function () {
 					line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
 					target.prop('checked', true);
 					updatePackagePrice(target);
-
 				}
 			} else {
 				line.find('.js-package-cont').find('.js-package-item').not('.js-vip-box').removeClass('js-hidden').show();

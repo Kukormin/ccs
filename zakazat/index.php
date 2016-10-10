@@ -1,5 +1,7 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("");?><style>
+$APPLICATION->SetTitle("Заказать продукцию Cupcake Story");
+$APPLICATION->SetPageProperty('title', "Заказать капкейки Cupcakestory");
+?><style>
 .new_descr ul {
 	list-style: initial;
 	margin: 10px;
@@ -80,7 +82,7 @@ text-align: justify;
 		</div>
 	</div>
 	 <div class="new_descr b-catalog-wrap--cupcake">
-<h1>Продукция на заказ</h1>
+<h1>Заказать продукцию Cupcake Story</h1>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 
 	"cupcake_section_slider_final", 

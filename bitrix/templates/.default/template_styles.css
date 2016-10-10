@@ -6057,7 +6057,10 @@ a.basket {
 	display:block;
 }
 
-
+.js-package-cont {
+    float: left;
+    padding: 10px 0;
+}
 
 .b-order-basket__wrap {
     margin-left: 57px;
@@ -6066,19 +6069,7 @@ a.basket {
     vertical-align: top;
     width: 470px;
 }
-.b-slider-wrap-basket__list {
-    font-size: 0;
-    width: 360px;
-    display: inline-block;
-}
-.b-slider-wrap-basket__list .slick-list {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    margin: 0;
-    padding: 10px 0;
-}
-.b-slider-wrap-basket__list .b-mod__item-checkbox {
+.b-slider__item-basket .b-mod__item-checkbox {
     padding: 0 15px 0 30px;
     line-height: 30px;
     text-align: center;
@@ -6086,13 +6077,11 @@ a.basket {
     top: -3px;
     left: -16px;
 }
-
-
-.b-slider__item-basket {        
+.b-slider__item-basket {
 	margin: 0 3px;
     position: relative;
 	padding: 0 15px;
-    width: 100%;  
+    width: 120px;
 	display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
@@ -6102,9 +6091,14 @@ a.basket {
 	margin-bottom: 14px;
     overflow: hidden;
 	border-radius:50%; 
-    width: 100%;
+    width: 90px;
+    height: 90px;
     position: relative;
 	cursor:pointer;
+}
+.b-item-basket-img > img{
+    width: 90px;
+    height: 90px;
 }
 
 .b-item-basket-img:before {
@@ -6119,6 +6113,9 @@ a.basket {
 }
 .b-item-basket-img:hover:before {
     background: rgba(0,0,0,.5);
+}
+.b-slider__item-basket .checkbox:not(checked) + label::before {
+    top: -4px;
 }
 
 .b-modal-basket__link {
@@ -7541,4 +7538,19 @@ section.b-bg-grey.b-bg-grey--order {
     top: 50%;
     border-top: 1px solid rgba(0, 0, 0, 0.4);
     content: '';
+}
+.b-loyalty {
+    text-align: left;
+    font-family: "PTSansRegular",sans-serif;
+    font-size: 22px;
+}
+.b-loyalty ul {
+    margin: 0 0 15px 30px;
+    list-style: outside none disc;
+}
+.b-loyalty li {
+    padding: 0 0 5px;
+}
+.b-loyalty p {
+    margin: 0 0 15px;
 }
