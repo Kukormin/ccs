@@ -2278,9 +2278,6 @@
 	.b-price-foter__price:before {
 		background: none;		
 	}
-	.button-group .b-bnt-modal-cupcake--white {
-		float:right;
-	}
 	.button-group .b-bnt-buy-one-click:before {
 		content:"Назад";
 	}
@@ -2450,10 +2447,7 @@
 		width:auto;
 	}
 	.b-flag-bg--basket  .button-group {
-		padding:0;
-		position:absolute;
-		top:20px;
-		right:20px;
+		padding:0 27px 10px;
 	}
 	.b-flag-bg--basket .b-bnt-form--white {
 		width:225px;
