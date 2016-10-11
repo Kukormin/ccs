@@ -15,9 +15,9 @@ if (isset($_REQUEST['IBLOCK_CODE'])) {
 }else{
     $_REQUEST['IBLOCK_ID'] = 0;
     $iBlockID = 0;
-} 
-?>
-<?$APPLICATION->IncludeComponent(
+}
+
+$APPLICATION->IncludeComponent(
 	"bitrix:catalog.element", 
 	"cupcake_detail", 
 	array(
@@ -137,9 +137,9 @@ if (isset($_REQUEST['IBLOCK_CODE'])) {
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "Y",
 		"SET_META_KEYWORDS" => "Y",
-		"SET_STATUS_404" => "N",
+		"SET_STATUS_404" => "Y",
 		"SET_TITLE" => "Y",
-		"SHOW_404" => "N",
+		"SHOW_404" => "Y",
 		"SHOW_CLOSE_POPUP" => "N",
 		"SHOW_DEACTIVATED" => "N",
 		"SHOW_DISCOUNT_PERCENT" => "N",
@@ -174,5 +174,6 @@ if (isset($_REQUEST['IBLOCK_CODE'])) {
 		"GIFTS_MAIN_PRODUCT_DETAIL_BLOCK_TITLE" => "Выберите один из товаров, чтобы получить подарок"
 	),
 	false
-);?>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);
+
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
