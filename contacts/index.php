@@ -2,9 +2,11 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
 ?><section class="b-topblock b-topblock--pay-ship"></section> <section class="b-bg-grey b-bg-grey--contact">
-<h1 style="text-align:center"><div class="b-content-center--title i-padding__top-100">
-		 Контакты
-	</div></h1>
+<h1 style="text-align:center">
+<div class="b-content-center--title i-padding__top-100">
+	 Контакты
+</div>
+ </h1>
 <div class="b-bg-grey-contact--title">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
@@ -71,13 +73,13 @@ $APPLICATION->SetTitle("Контакты");
 	</div>
 	<div class="b-contact-info__item">
 		<p>
-			 Заказы в интернет-магазине принимаются по телефону с понедельника по пятницу с 10 до 20. По&nbsp;субботам&nbsp;с&nbsp;10&nbsp;до&nbsp;17.
+			 Заказы в интернет-магазине принимаются по телефону с понедельника по пятницу с 10 до 20. По&nbsp;субботам и воскресеньям с&nbsp;10&nbsp;до&nbsp;17.
 		</p>
-<p>
-<strong style="font-weight:bold">Точка самовывоза. Фабрика «Кристалл»</strong><br/>
-Вводите в навигатор &laquo;Самокатная, 4с9&raquo;. Вход на фабрику будет возле больших железных красных ворот.<br/>
-Режим работы: понедельник-пятница с 10 до 20, суббота&nbsp;с&nbsp;10&nbsp;до&nbsp;17.
-</p>
+		<p>
+ <strong style="font-weight:bold">Точка самовывоза. Фабрика «Кристалл»</strong><br>
+			 Вводите в навигатор «Самокатная, 4с9». Вход на фабрику будет возле больших железных красных ворот.<br>
+			 Режим работы: понедельник-пятница с 10 до 20, суббота-воскресенье с&nbsp;10&nbsp;до&nbsp;17.
+		</p>
 	</div>
 </div>
  <!--map-->
@@ -103,5 +105,4 @@ $APPLICATION->SetTitle("Контакты");
 	)
 );?>
 </div>
-
  </section> <br><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

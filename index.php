@@ -7,17 +7,17 @@ $APPLICATION->SetTitle("Cupcake Story — семейная кондитерск�
 			<div class="carousel-block">
 				<div class="carousel-main">
 					<div class="carousel-main-row">
-						<a href="http://cupcakestory.ru/catalog/gingerbread/bolshie/1439">
-							<img src="http://cupcakestory.ru/bitrix/templates/.default/images/spasibo-uchitel-%21.jpg"
+						<a href="http://cupcakestory.ru/sweet-table/">
+							<img src="http://cupcakestory.ru/bitrix/templates/.default/images/stol.jpg"
 							     alt="">
 							<div class="details">
-								<h3>Пряники на день учителя</h3>
-								<p> Уникальный и незабываемый подарок.</p>
+								<h3>Сладкий стол под ключ</h3>
+								<p> Сладкие столы под ключ на 10-15, 15-20, 25-30 человек. В стоимость сладкого стола входят: сладости ручной работы, декор( формление в любой цветовой гамме, фон, топперы, аренда стола, посуды скатерти, задний фон), монтаж/демонтаж с выездом дизайнера и декоратора, доставка по Москве</p>
 							</div>
 						</a>
 					</div>
 					<div class="carousel-main-row">
-						<a href="http://cupcakestory.ru/catalog/cakes/14-fevralya/1038">
+						<a href="http://cupcakestory.ru/sweet-table">
 							<img
 								src="http://cupcakestory.ru/bitrix/templates/.default/images/i-love-you-heart-cake-banner-big-002.jpg"
 								alt="">
