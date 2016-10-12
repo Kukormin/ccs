@@ -46,6 +46,7 @@ CModule::AddAutoloadClasses(
 		'Local\\Package' => '/bitrix/php_interface/lib/Package.php',
 		'Local\\Remarketing' => '/bitrix/php_interface/lib/Remarketing.php',
 		'Local\\Savings' => '/bitrix/php_interface/lib/Savings.php',
+		'Local\\Abandoned' => '/bitrix/php_interface/lib/Abandoned.php',
 	)
 );
 
