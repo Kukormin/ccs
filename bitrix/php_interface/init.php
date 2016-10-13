@@ -35,6 +35,8 @@ function afterUserAdd(&$arFields)
 	}
 }
 
+AddEventHandler('main', 'OnBeforeProlog', array('\Local\Abandoned', 'beforePrologHandler'));
+
 // Модуль ИБ в основном всегда нужен
 \Bitrix\Main\Loader::includeModule('iblock');
 

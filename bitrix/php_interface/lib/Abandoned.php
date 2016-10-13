@@ -122,6 +122,15 @@ class Abandoned
 	}
 
 	/**
+	 * Генерирует хеш для авторизации из письма
+	 * @return string
+	 */
+	private static function getHash()
+	{
+		return md5(md5(time()).uniqid());
+	}
+
+	/**
 	 * Отправляет письмо пользователю
 	 * @param $user
 	 */
@@ -139,9 +148,11 @@ class Abandoned
 			{
 				$rsProduct = \CIBlockElement::GetByID($productInfo['ID']);
 				if ($product = $rsProduct->Fetch())
-					$pic = '<img style="max-width:135px;" alt="' . $item['NAME'] . '" src="' . \CFile::GetPath($product['PREVIEW_PICTURE']) . '" />';
+				{
+					$pic = '<img style="max-width:135px;" alt="' . $item['NAME'] . '" src="http://cupcakestory.ru' .
+						\CFile::GetPath($product['PREVIEW_PICTURE']) . '" />';
+				}
 			}
-			$arResult["GRID"]["ROWS"][$k]['PARENT_NAME'] = $ar_res['NAME'];
 			$total = $item['PRICE'] * $item['QUANTITY'];
 			$i++;
 			$mes .= '<tr>';
@@ -159,12 +170,22 @@ class Abandoned
 		$mes .= '<td style = "border-width: 1px; border-style: solid; border-color: #cccccc; border-left: none; border-right: none;">' . number_format($sum, 0, ',', ' ') . ' Р</td>';
 		$mes .= '</tr>';
 
+		// Генерируем и сохраняем хеш для авторизации пользователя из письма
+		$hash = self::getHash();
+		if ($user['ID'])
+		{
+			global $DB;
+			$sql = 'UPDATE b_user SET STORED_HASH="' . $hash . '" WHERE ID=' . $user['ID'];
+			$DB->Query($sql);
+		}
+
 		// Создаем почтовое событие
 		$eventFields = array(
 			'USER_ID' => $user['ID'],
 			'EMAIL' => $user['EMAIL'],
 			'FIO' => trim($user['NAME'] . ' ' . $user['LAST_NAME']),
 			'TITLE' => 'Сupcake Story. Вы забыли у нас свои сладости',
+			'HASH' => $hash,
 			'MESSAGE' => $mes,
 		);
 		// Письмо пользователю
@@ -173,6 +194,36 @@ class Abandoned
 		{
 			$u = new \CUser;
 			$u->Update($user['ID'], array('UF_ABANDONED_EMAIL' => ConvertTimeStamp(time(), 'FULL')));
+		}
+	}
+
+	/**
+	 * Авторизуем пользователя, если он пришел из письма
+	 */
+	public static function beforePrologHandler()
+	{
+		if (strlen($_REQUEST['autohash']) > 0)
+		{
+			$u = new \CUser();
+			if (!$u->IsAuthorized())
+			{
+				$hash = ($_REQUEST['autohash']);
+				$uid = intval($_REQUEST['uid']);
+				if ($uid)
+				{
+					$rsUser = $u->GetByID($uid);
+					if ($user = $rsUser->Fetch())
+					{
+						if ($user['STORED_HASH'] == $hash)
+						{
+							global $DB;
+							$sql = 'UPDATE b_user SET STORED_HASH="" WHERE ID=' . $user['ID'];
+							$DB->Query($sql);
+							$u->Authorize($user['ID']);
+						}
+					}
+				}
+			}
 		}
 	}
 
