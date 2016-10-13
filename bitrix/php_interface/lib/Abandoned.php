@@ -26,6 +26,7 @@ class Abandoned
 	public static function checkCarts()
 	{
 		\CModule::IncludeModule('sale');
+		\CModule::IncludeModule('catalog');
 
 		// Получаем связь пользователя с FUSER
 		global $DB;
@@ -75,7 +76,13 @@ class Abandoned
 						$users[$userId]['MAX'] = $ts;
 					if ($user['MIN'] === false || $ts < $user['MIN'])
 						$users[$userId]['MIN'] = $ts;
-					$users[$userId]['ITEMS'][$item['ID']] = $item['NAME'];
+					$users[$userId]['ITEMS'][$item['ID']] = array(
+						'NAME' => $item['NAME'],
+						'PRICE' => $item['PRICE'],
+						'QUANTITY' => $item['QUANTITY'],
+						'URL' => $item['DETAIL_PAGE_URL'],
+						'PRODUCT_ID' => $item['PRODUCT_ID'],
+					);
 				}
 			}
 		}
@@ -101,8 +108,6 @@ class Abandoned
 				}
 			}
 		}
-
-
 	}
 
 	/**
@@ -122,26 +127,48 @@ class Abandoned
 	 */
 	private static function sendEmail($user)
 	{
-		if ($user['ID'] != 3938)
-			return;
-
-		$mes = '<ul>';
+		$td = '<TD style="border-width: 1px; border-style: solid; border-color: #cccccc; border-left: none; border-right: none;">';
+		$mes = '';
+		$i = 0;
+		$sum = 0;
 		foreach ($user['ITEMS'] as $item)
 		{
-			$mes .= '<li>' . $item . '</li>';
+			$pic = '';
+			$productInfo = \CCatalogSku::GetProductInfo($item['PRODUCT_ID']);
+			if ($productInfo)
+			{
+				$rsProduct = \CIBlockElement::GetByID($productInfo['ID']);
+				if ($product = $rsProduct->Fetch())
+					$pic = '<img style="max-width:135px;" alt="' . $item['NAME'] . '" src="' . \CFile::GetPath($product['PREVIEW_PICTURE']) . '" />';
+			}
+			$arResult["GRID"]["ROWS"][$k]['PARENT_NAME'] = $ar_res['NAME'];
+			$total = $item['PRICE'] * $item['QUANTITY'];
+			$i++;
+			$mes .= '<tr>';
+			$mes .= $td . $i . '</TD>';
+			$mes .= $td . $pic . '</TD>';
+			$mes .= $td . $item['NAME'] . '</TD>';
+			$mes .= $td . number_format($item['PRICE'], 0, ',', ' ') . ' Р</TD>';
+			$mes .= $td . intval($item['QUANTITY']) . ' шт.</TD>';
+			$mes .= $td . number_format($total, 0, ',', ' ') . ' Р</TD>';
+			$mes .= '</tr>';
+			$sum += $total;
 		}
-		$mes .= '</ul>';
+		$mes .= '<tr style="font-weight:bold;">';
+		$mes .= '<td colspan="5" style = "border-width: 1px; border-style: solid; border-color: #cccccc; border-left: none; border-right: none;">Итого:</td>';
+		$mes .= '<td style = "border-width: 1px; border-style: solid; border-color: #cccccc; border-left: none; border-right: none;">' . number_format($sum, 0, ',', ' ') . ' Р</td>';
+		$mes .= '</tr>';
 
 		// Создаем почтовое событие
 		$eventFields = array(
 			'USER_ID' => $user['ID'],
 			'EMAIL' => $user['EMAIL'],
 			'FIO' => trim($user['NAME'] . ' ' . $user['LAST_NAME']),
-		    'MESSAGE' => $mes,
+			'TITLE' => 'Сupcake Story. Вы забыли у нас свои сладости',
+			'MESSAGE' => $mes,
 		);
 		// Письмо пользователю
 		$res = \CEvent::Send('ABANDONED_CART', 's1', $eventFields);
-
 		if ($res)
 		{
 			$u = new \CUser;
