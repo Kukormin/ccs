@@ -182,9 +182,10 @@ $APPLICATION->SetPageProperty("og:image", 'http://'.SITE_SERVER_NAME.$arResult['
 									<?php endif; ?>
 
 									<!--<button class="b-bnt-present b-bnt-form">сделать подарок</button>-->
-				</div>
+				</div><?
 
-
+				/*
+				?>
 				<div class="b-block-social i-margin-left-30">
 					<div class="b-block-social-title is-color-white">
 						поделиться ссылкой:
@@ -205,11 +206,10 @@ $APPLICATION->SetPageProperty("og:image", 'http://'.SITE_SERVER_NAME.$arResult['
 						<li class="b-social__item">
 							<a data-share="gp" class="b-g b-g--white" href="#"></a>
 						</li>
-						<!--<li class="b-social__item"> <a class="b-pl" href="#"></a></li>-->
 					</ul>
-				</div>
+				</div><?*/
 
-
+				?>
 			</div>
 		</div>
 	</section>

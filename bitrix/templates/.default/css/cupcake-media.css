@@ -1358,9 +1358,6 @@
 		right: -25px;
 		top: -3px;
 	}	
-	.b-content-center--title {
-		font-size: 30px;
-	}
 	.b-form-item--select-assortment {
 		width: 35%;
 	}
@@ -3900,9 +3897,12 @@
 
 
 	.b-history-total--price{
-		margin-left: -30px;		
-		margin-top: 20px;
+		margin-left: -30px;
 	}
+    .b-assortment-total--btn{
+        float: none;
+        margin-top: 80px;
+    }
  
 	.b-topscreen-slider{
 		margin-top: 55px;

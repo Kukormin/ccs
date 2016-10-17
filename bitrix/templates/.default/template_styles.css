@@ -1281,8 +1281,8 @@ text-align:left;
 .b-content-center--title {
 	padding: 70px 0 65px;
     color: #22303d;
-    font-size: 35px;
-    line-height: 30px;
+    font-size: 28px;
+    line-height: 32px;
     font-family: 'Lasco Bold', sans-serif;
     text-transform: uppercase;
 }
@@ -2584,7 +2584,7 @@ label.is-color-white,
 
 .b-block-assortment__wrap .b-content-center--title {
 	color:#fff;
-	padding: 33px 0 23px;
+	padding: 23px 0;
     max-width: 570px;
 }
 .b-product-card__content {
