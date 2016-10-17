@@ -1113,7 +1113,7 @@ $(document).ready(function () {
 	}
 
 	if ($('.js-package-popup').length) {
-		$('.js-package-popup').featherlight();
+		//$('.js-package-popup').featherlight();
 	}
 
 

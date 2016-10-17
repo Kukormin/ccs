@@ -169,7 +169,6 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 								<div class="b-item-basket-img js-package-popup"
 								     data-featherlight="<?= $arPack['DETAIL_PICTURE'] ?>">
 									<img src="<?= $arPack['PREVIEW_PICTURE'] ?>" alt="">
-									<span class="b-modal-basket__link"> </span>
 								</div><?
 
 								if (count($arResult['PACKAGES'][$arItem['PACKAGES']]) > 1)

@@ -245,46 +245,6 @@
     box-sizing: border-box;
 }
 
-.b-item-basket-img{   
-	margin-bottom: 14px;
-    overflow: hidden;
-	border-radius:50%; 
-    width: 100%;
-    position: relative;
-	cursor:pointer;
-}
-
-.b-item-basket-img:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    transition: background 300ms ease;
-}
-.b-item-basket-img:hover:before {
-    background: rgba(0,0,0,.5);
-}
-
-.b-modal-basket__link {
-	background:url(../images/basket-modal-img.png) no-repeat;
-	position:absolute;
-	top:0;
-	left:0;
-	right:0;    
-	bottom: 0;
-	margin:auto;
-	width:22px;
-	height:22px;
-	display:none;
-}
-.b-item-basket-img:hover .b-modal-basket__link {
-	display:block;
-	z-index:2;
-}
-
 .b-total-basket--delete {
     padding-left: 25px;
     position: relative;
