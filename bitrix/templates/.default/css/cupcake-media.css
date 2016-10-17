@@ -1166,7 +1166,14 @@
 	
 	.b-mod__item--basket {
 		width: 270px;
-	}	
+	}
+
+    .b-item-basket-img:before {
+        transition: none;
+    }
+    .b-item-basket-img:hover:before {
+        background: none;
+    }
 }
 
 
