@@ -26,8 +26,8 @@ if (!isset($_SESSION['retailcrm'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link href="/bitrix/templates/.default/css/slick.css?v=6" rel="stylesheet" type="text/css" />
-	<link href="/bitrix/templates/.default/css/about.css?v=6" rel="stylesheet" type="text/css" />
-	<link href="/bitrix/templates/.default/template_styles.css?v=10" rel="stylesheet" type="text/css" />
+	<link href="/bitrix/templates/.default/css/about.css?v=12" rel="stylesheet" type="text/css" />
+	<link href="/bitrix/templates/.default/template_styles.css?v=12" rel="stylesheet" type="text/css" />
 	<link href="/bitrix/templates/.default/css/cupcake-media.css?v=10" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 

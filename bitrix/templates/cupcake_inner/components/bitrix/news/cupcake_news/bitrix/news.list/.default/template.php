@@ -25,8 +25,10 @@ $this->setFrameMode(true);
 			<ul class="b-category-list js-ajax-content-block">
 				<?foreach($arResult["ITEMS"] as $arItem):?>
 					<li class="b-news__category-item">
-						<div class="b-news__category-img">
-							<img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>" alt=""/>
+						<div class="b-news__category-img b-mod__item-img--effect-transform">
+							<a href="<?echo $arItem["DETAIL_PAGE_URL"]?>">
+								<img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>" alt="" />
+							</a>
 						</div>
 						<span class="b-news__category-date"><?echo $arItem["PROPERTIES"]["publication_date"]["VALUE"]?></span>
 						<a class="b-news__category-link" href="<?echo $arItem["DETAIL_PAGE_URL"]?>"><?echo $arItem["NAME"]?></a>
