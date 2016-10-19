@@ -125,11 +125,21 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 				<a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>"><img src="<?= $arItem['PREVIEW_PICTURE']['SRC'] ?>"
 				                                                      alt=""></a>
 			</div>
-			<? if ($arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да' || $arItem['PROPERTIES']['NEW']['VALUE_ENUM'] == 'Да')
+			<?
+			if ($arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да' ||
+				$arItem['PROPERTIES']['NEW']['VALUE_ENUM'] == 'Да' ||
+				$arItem['PROPERTIES']['HIT']['VALUE'])
 			{
+				if ($arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да')
+					$name = 'акция';
+				elseif ($arItem['PROPERTIES']['NEW']['VALUE_ENUM'] == 'Да')
+					$name = 'новинка';
+				else
+					$name = 'хит';
 				?>
 				<div
-					class="b-mod__item-label <?= $arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да' ? 'b-mod__item-label--discont' : '' ?>"> <?= $arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да' ? 'акция' : 'новинка' ?></div>
+					class="b-mod__item-label <?= $arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да' ?
+						'b-mod__item-label--discont' : '' ?>"> <?= $name ?></div>
 			<? } ?>
 
 			<?php if (!$arItem['PROPERTIES']['NOT_AVAILABLE']['VALUE']): ?>

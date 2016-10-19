@@ -497,7 +497,19 @@ foreach($main_section as $ids) {
 
     }
     $filter = $arrFilter + Array('ACTIVE' => 'Y', "IBLOCK_ID" => $ids);
-    $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $filter, false, false, Array("ID", "NAME", "IBLOCK_ID","PREVIEW_PICTURE", "IBLOCK_NAME", "DETAIL_PICTURE", "DATE_CREATE", "CATALOG_GROUP_1", "OF_IBLOCK_ID", "DETAIL_PAGE_URL"));
+	$res = CIBlockElement::GetList(Array("SORT" => "ASC"), $filter, false, false, Array(
+		"ID",
+		"NAME",
+		"IBLOCK_ID",
+		"PREVIEW_PICTURE",
+		"IBLOCK_NAME",
+		"DETAIL_PICTURE",
+		"DATE_CREATE",
+		"CATALOG_GROUP_1",
+		"OF_IBLOCK_ID",
+		"DETAIL_PAGE_URL",
+		"PROPERTY_HIT",
+	));
     while($ar = $res->GetNext())
     {
         $prices_ib = array();
@@ -533,5 +545,3 @@ usort($arResult['ITEMS'], function ($a, $b) {
     }
     return ($a1 > $b1) ? 1 : -1;
 });
-
-?>
