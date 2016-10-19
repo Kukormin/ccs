@@ -101,10 +101,24 @@ foreach ($arResult['ITEMS'] as $key => $arItem) {
 										<div class="b-mod__item-img--effect-transform">
 											<a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>"><img src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>" alt=""></a>
 										</div>
-                                        <? if($arItem['PROPERTIES']['ACTION']['VALUE_ENUM']=='Да' || $arItem['PROPERTIES']['NEW']['VALUE_ENUM']=='Да') {?>
-                                            <div class="b-mod__item-label <?=$arItem['PROPERTIES']['ACTION']['VALUE_ENUM']=='Да' && !isset($_REQUEST['new']) ? 'b-mod__item-label--discont':''?>"> <?=$arItem['PROPERTIES']['ACTION']['VALUE_ENUM']=='Да'  && !isset($_REQUEST['new']) ? 'акция':'новинка'?></div>
-                                        <? } ?>
-                                        <?php if(!$arItem['PROPERTIES']['NOT_AVAILABLE']['VALUE']):?>
+                                        <?
+                                        if ($arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да' ||
+	                                        $arItem['PROPERTIES']['NEW']['VALUE_ENUM'] == 'Да' ||
+	                                        $arItem['PROPERTIES']['HIT']['VALUE'])
+                                        {
+	                                        if ($arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да')
+		                                        $name = 'акция';
+	                                        elseif ($arItem['PROPERTIES']['NEW']['VALUE_ENUM'] == 'Да')
+		                                        $name = 'новинка';
+	                                        else
+		                                        $name = 'хит';
+	                                        ?>
+	                                        <div
+		                                        class="b-mod__item-label <?= $arItem['PROPERTIES']['ACTION']['VALUE_ENUM'] == 'Да' ?
+			                                        'b-mod__item-label--discont' : '' ?>"> <?= $name ?></div>
+                                        <? }
+
+                                        if(!$arItem['PROPERTIES']['NOT_AVAILABLE']['VALUE']):?>
 											<div class="basket-button" data-btn_id="<?=$arItem['ID']?>" data-block_id="<?=$arItem['IBLOCK_ID'];?>"></div>
 										<?php endif;?>
 									</div>
