@@ -22,7 +22,8 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 
 <div class="b-catalog-wrap--cupcake js-ajax-content-block">
 <h1><?= $APPLICATION->ShowTitle(false) ?></h1>
-<ul class="b-catalog-cupcake__list">
+<div style="margin-top:15px;text-align: left;">
+<ul style="display:inline-block;padding-top: 4px;vertical-align:top;" class="b-catalog-cupcake__list">
 	<li class="b-catalog-cupcake--all <?= !isset($_REQUEST['new']) && !isset($_REQUEST['action']) ? 'active' : ''; ?> js-catalog-filter"
 	    data-param="">Все
 	</li>
@@ -32,7 +33,41 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 	<li class="b-catalog-cupcake--discounts <?= isset($_REQUEST['action']) ? 'active' : ''; ?> js-catalog-filter"
 	    data-param="action">Акции
 	</li>
+	
 </ul>
+
+<?if($APPLICATION->GetCurPage()=='/catalog/cupcakes/children/'):?>
+<div style="display:inline-block;vertical-align:top;" >
+		<?$APPLICATION->IncludeComponent(
+			"bitrix:catalog.smart.filter",
+			".default",
+			Array(
+				"CACHE_GROUPS" => "Y",
+				"CACHE_TIME" => "36000000",
+				"CACHE_TYPE" => "A",
+				"CONVERT_CURRENCY" => "N",
+				"DISPLAY_ELEMENT_COUNT" => "Y",
+				"FILTER_NAME" => "arrFilter",
+				"FILTER_VIEW_MODE" => "vertical",
+				"HIDE_NOT_AVAILABLE" => "N",
+				"IBLOCK_ID" => $arResult['IBLOCK_ID'],
+				"IBLOCK_TYPE" => "catalog",
+				"PAGER_PARAMS_NAME" => "arrPager",
+				"PRICE_CODE" => array("BASE"),
+				"SAVE_IN_SESSION" => "N",
+				"SECTION_CODE" => $_REQUEST['SECTION_CODE'],
+				"SECTION_DESCRIPTION" => "-",
+				"SECTION_ID" => "",
+				"SECTION_TITLE" => "-",
+				"SEF_MODE" => "N",
+				"TEMPLATE_THEME" => "blue",
+				"XML_EXPORT" => "N"
+			),
+			$component
+		);?>
+</div>
+<?endif?>
+</div>
 
 <div class="b-mod-catalog--cupcake">
 
