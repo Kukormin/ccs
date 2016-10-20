@@ -3923,9 +3923,6 @@
 		width: 100%;
 	}*/
 	
-	.b-pagination__item:nth-child(3) {
-		display: none;
-	}	
 	.b-order .b-content-center--title {
 		padding: 95px 0 35px;
 	}

@@ -28,7 +28,7 @@ if (!isset($_SESSION['retailcrm'])) {
 	<link href="/bitrix/templates/.default/css/slick.css?v=6" rel="stylesheet" type="text/css" />
 	<link href="/bitrix/templates/.default/css/about.css?v=12" rel="stylesheet" type="text/css" />
 	<link href="/bitrix/templates/.default/template_styles.css?v=12" rel="stylesheet" type="text/css" />
-	<link href="/bitrix/templates/.default/css/cupcake-media.css?v=10" rel="stylesheet" type="text/css" />
+	<link href="/bitrix/templates/.default/css/cupcake-media.css?v=11" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
