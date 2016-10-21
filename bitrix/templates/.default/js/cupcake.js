@@ -803,14 +803,20 @@ $(document).ready(function () {
 				'VALUE': $(this).children('option:selected').text()
 			};
 		});
-		if (that.data('addid'))
-			var addid = that.data('addid');
-		else if ($('.js-option-selector', modal).length)
-			var addid = $('.js-option-selector').val();
-		else if ($('.js_cupcake_number').length)
-			var addid = $('.js_cupcake_number').val();
-		else
-			var addid = modal.data('id');
+		var selectorId = $('.js-option-selector', modal);
+		var addid = 0;
+		if (that.data('addid')) {
+			addid = that.data('addid');
+		}
+		else if (selectorId.length) {
+			addid = selectorId.val();
+		}
+		else if ($('.js_cupcake_number').length) {
+			addid = $('.js_cupcake_number').val();
+		}
+		else {
+			addid = modal.data('id');
+		}
 
 		$.post('/include/ajax_basket.php', {
 			'ajaxaction': 'add',
