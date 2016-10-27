@@ -14,6 +14,8 @@
 /local/php_interface/dbconn.php
 /upload
 
+/retailcrm/send.txt
+
 /_dev/
 /_log/
 /_tmp/

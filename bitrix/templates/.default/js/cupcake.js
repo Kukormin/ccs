@@ -530,7 +530,7 @@ $(document).ready(function () {
 	/*menuleft*/
 
 
-	var el = $('#nav_list_asaide li a');
+	/*var el = $('#nav_list_asaide li a');
 	$('#nav_list_asaide li:has("ul")').append('<span></span>');
 	el.click(function (e) {
 		e.preventDefault();
@@ -558,7 +558,7 @@ $(document).ready(function () {
 		if (checkElement.is('ul')) {
 			return false;
 		}
-	});
+	});*/
 
 
 	$(window).stellar({

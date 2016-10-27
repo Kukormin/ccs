@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "На данной странице вы можете ознакомиться c отзывами о нас");
+$APPLICATION->SetPageProperty("title", "Отзывы");
 $APPLICATION->SetTitle("Отзывы");
 ?><section class="b-topblock b-topblock--pay-ship"> </section> <section class="b-bg-grey">
 <div class="b-content-center b-reviews">

@@ -22,6 +22,3 @@ foreach ($arResult["ITEMS"] as $id=>$arItem) {
         unset($arResult["ITEMS"][$id]);
     }
 }
-echo '<!--';
-print_r($arResult);
-echo '-->';

@@ -1,5 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("title", "Cupcake Story — семейная кондитерская. Капкейки, торты, эклеры, пряники, пирожные с доставкой на дом");
 $APPLICATION->SetTitle("ШОКОЛАДНЫЙ ТОРТ КРЕМ ЧИЗ (4 ВАРИАНТ) от Cupcake Story");
 
 

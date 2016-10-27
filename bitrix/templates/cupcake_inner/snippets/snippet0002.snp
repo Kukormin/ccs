@@ -1,0 +1,50 @@
+<st yle>
+.new_descr ul {
+	list-style: initial;
+	margin: 10px;
+	margin-left: 30px;
+}
+
+h2 {
+	font-family: 'PTSansRegular', sans-serif;
+	font-size: 21px !important;
+	font-weight: bold;
+	text-align: left;
+	margin: 10px 0 !important;
+}
+
+h3 {
+	font-family: 'PTSansRegular', sans-serif;
+	font-size: 19px;
+}
+
+h4 {
+	font-family: 'PTSansRegular', sans-serif;
+	font-size: 17px;
+}
+
+h1 {
+	font-size: 18px;
+	line-height: 30px;
+	font-family: 'Lasco Bold', sans-serif;
+	text-transform: uppercase;
+	color: #a3a67b;
+}
+
+.new_descr p {
+	text-align: justify;
+	color: #22303d;
+	font-size: 14px;
+	line-height: 25px;
+	font-family: 'PTSansRegular', sans-serif;
+}
+
+.new_descr {
+	margin-top: 50px;
+text-align: justify;
+	color: #22303d;
+	font-size: 14px;
+	line-height: 25px;
+	font-family: 'PTSansRegular', sans-serif;
+}
+</style>

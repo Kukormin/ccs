@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "На данной странице предоставлены контакты нашей компании");
+$APPLICATION->SetPageProperty("title", "Контакты");
 $APPLICATION->SetTitle("Контакты");
 ?><section class="b-topblock b-topblock--pay-ship"></section> <section class="b-bg-grey b-bg-grey--contact">
 <h1 style="text-align:center">
@@ -69,7 +71,7 @@ $APPLICATION->SetTitle("Контакты");
  <!--info-->
 <div class="b-content-center b-contact-info">
 	<div class="b-contact-info__link-wrap">
- <a href="tel:74993220020" class="b-contact-info__link-phone">+7 (499) 322-00-20</a> <a href="mailto:zakaz@cupcakestory.ru" class="b-contact-info__link-email">zakaz@cupcakestory.ru</a>
+ <a href="tel:+74993220020" class="b-contact-info__link-phone">+7 499 322 00 20</a> <a href="mailto:zakaz@cupcakestory.ru" class="b-contact-info__link-email">zakaz@cupcakestory.ru</a>
 	</div>
 	<div class="b-contact-info__item">
 		<p>

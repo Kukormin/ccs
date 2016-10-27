@@ -70,3 +70,31 @@ function intarocrm_before_order_send($resOrder){
 
 	return $resOrder;
 }
+
+
+AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", "MinMaxSKUPriceUpdate");
+
+function MinMaxSKUPriceUpdate(&$arFields){
+   $isProduct = CCatalogSKU::GetInfoByProductIBlock($arFields['IBLOCK_ID']);
+   if (is_array($isProduct)){ 
+      $rsOffers = CIBlockElement::GetList(array(),array('ACTIVE'=>'Y', 'IBLOCK_ID' => $isProduct['IBLOCK_ID'], 'PROPERTY_'.$isProduct['SKU_PROPERTY_ID'] => $arFields['ID']), false, false, array('IBLOCK_ID', 'ID', 'CATALOG_GROUP_1'));
+       while ($arOffer = $rsOffers->GetNext()){
+       
+         if(!isset($MIN_PRICE)){$MIN_PRICE = $arOffer['CATALOG_PRICE_1'];}
+         if(!isset($MAX_PRICE)){$MAX_PRICE = $arOffer['CATALOG_PRICE_1'];}
+         if($MIN_PRICE > $arOffer['CATALOG_PRICE_1']){
+            $MIN_PRICE = $arOffer['CATALOG_PRICE_1'];
+         }
+         if($MAX_PRICE < $arOffer['CATALOG_PRICE_1']){
+            $MAX_PRICE = $arOffer['CATALOG_PRICE_1'];
+         }
+      }
+	  
+	  
+      $arFields['PROPERTY_VALUES']['MINIMUM_PRICE'] = $MIN_PRICE;
+      $arFields['PROPERTY_VALUES']['MAXIMUM_PRICE'] = $MIN_PRICE;
+   }
+}
+
+
+

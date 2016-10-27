@@ -172,6 +172,40 @@ if (isset($_REQUEST['new'])) {
 if (isset($_REQUEST['action'])) {
     $arrFilter['!PROPERTY_ACTION'] = false;
 }
+
+?>
+
+<?$APPLICATION->IncludeComponent(
+	"bitrix:catalog.smart.filter", 
+	"pyst", 
+	array(
+		"CACHE_GROUPS" => "Y",
+		"SHOW_ALL_WO_SECTION" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CONVERT_CURRENCY" => "N",
+		"DISPLAY_ELEMENT_COUNT" => "Y",
+		"FILTER_NAME" => "arrFilter",
+		"FILTER_VIEW_MODE" => "vertical",
+		"HIDE_NOT_AVAILABLE" => "N",
+		"IBLOCK_ID" => $iBlockID["ID"],
+		"IBLOCK_TYPE" => "catalog",
+		"PAGER_PARAMS_NAME" => "arrPager",
+		"PRICE_CODE" => "",
+		"SAVE_IN_SESSION" => "N",
+		"SECTION_CODE" => $_REQUEST["SECTION_CODE"],
+		"SECTION_DESCRIPTION" => "-",
+		"SECTION_ID" => "",
+		"SECTION_TITLE" => "-",
+		"SEF_MODE" => "N",
+		"TEMPLATE_THEME" => "blue",
+		"XML_EXPORT" => "N",
+		"COMPONENT_TEMPLATE" => "pyst",
+		"POPUP_POSITION" => "left"
+	),
+	false
+);?>
+<?
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 
 	"cupcake_catalog_section", 
@@ -281,7 +315,7 @@ $APPLICATION->IncludeComponent(
 			3 => "NEW",
 			4 => "STAR_GIFT",
 			5 => "PACKAGE",
-			6 => "",
+			6 => "MINIMUM_PRICE",
 		),
 		"SECTION_CODE" => $_REQUEST["SECTION_CODE"],
 		"SECTION_ID" => "",
@@ -310,7 +344,7 @@ $APPLICATION->IncludeComponent(
 		"SHOW_OLD_PRICE" => "N",
 		"SHOW_PRICE_COUNT" => "1",
 		"TEMPLATE_THEME" => "blue",
-		"USE_MAIN_ELEMENT_SECTION" => "N",
+		"USE_MAIN_ELEMENT_SECTION" => "Y",
 		"USE_PRICE_COUNT" => "N",
 		"USE_PRODUCT_QUANTITY" => "Y",
 		"SEF_RULE" => "",

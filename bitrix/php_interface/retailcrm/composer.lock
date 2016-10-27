@@ -1,0 +1,67 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "426f14f81feb984cf67104d0150ddbfc",
+    "content-hash": "6561044ba503eb1ee0a509915ffce58a",
+    "packages": [
+        {
+            "name": "retailcrm/api-client-php",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/retailcrm/api-client-php.git",
+                "reference": "49f253c228407774a9935383f9abafb1e715b745"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/retailcrm/api-client-php/zipball/49f253c228407774a9935383f9abafb1e715b745",
+                "reference": "49f253c228407774a9935383f9abafb1e715b745",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "RetailCrm\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "retailCRM",
+                    "email": "support@retailcrm.pro"
+                }
+            ],
+            "description": "PHP client for retailCRM API",
+            "homepage": "http://www.retailcrm.pro/",
+            "keywords": [
+                "api",
+                "rest",
+                "retailCRM"
+            ],
+            "time": "2016-07-21 22:37:53"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

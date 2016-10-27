@@ -13,16 +13,16 @@ $arUrlRewrite = array(
 		"PATH" => "/catalog/list.php",
 	),
 	array(
-		"CONDITION" => "#^/catalog/([^/]+?)/\\??(.*)#",
-		"RULE" => "IBLOCK_CODE=\$1&\$2",
-		"ID" => "",
-		"PATH" => "/catalog/index.php",
-	),
-	array(
 		"CONDITION" => "#^/bitrix/services/ymarket/#",
 		"RULE" => "",
 		"ID" => "",
 		"PATH" => "/bitrix/services/ymarket/index.php",
+	),
+	array(
+		"CONDITION" => "#^/catalog/([^/]+?)/\\??(.*)#",
+		"RULE" => "IBLOCK_CODE=\$1&\$2",
+		"ID" => "",
+		"PATH" => "/catalog/index.php",
 	),
 	array(
 		"CONDITION" => "#^/season/(.+?)/\\??(.*)#",

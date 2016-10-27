@@ -36,13 +36,14 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 	
 </ul>
 
-<?if($APPLICATION->GetCurPage()=='/catalog/cupcakes/children/'):?>
+<?//if($APPLICATION->GetCurPage()=='/catalog/cupcakes/children/'):?>
 <div style="display:inline-block;vertical-align:top;" >
 		<?$APPLICATION->IncludeComponent(
 			"bitrix:catalog.smart.filter",
 			".default",
 			Array(
 				"CACHE_GROUPS" => "Y",
+				"SHOW_ALL_WO_SECTION"=> "Y",
 				"CACHE_TIME" => "36000000",
 				"CACHE_TYPE" => "A",
 				"CONVERT_CURRENCY" => "N",
@@ -53,7 +54,7 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 				"IBLOCK_ID" => $arResult['IBLOCK_ID'],
 				"IBLOCK_TYPE" => "catalog",
 				"PAGER_PARAMS_NAME" => "arrPager",
-				"PRICE_CODE" => array("BASE"),
+				"PRICE_CODE" => "",
 				"SAVE_IN_SESSION" => "N",
 				"SECTION_CODE" => $_REQUEST['SECTION_CODE'],
 				"SECTION_DESCRIPTION" => "-",
@@ -61,12 +62,12 @@ $arElementDeleteParams = array("CONFIRM" => GetMessage('CT_BCS_TPL_ELEMENT_DELET
 				"SECTION_TITLE" => "-",
 				"SEF_MODE" => "N",
 				"TEMPLATE_THEME" => "blue",
-				"XML_EXPORT" => "N"
+				"XML_EXPORT" => "N",
 			),
 			$component
 		);?>
 </div>
-<?endif?>
+<?//endif?>
 </div>
 
 <div class="b-mod-catalog--cupcake">

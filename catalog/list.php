@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("title", "Классические торты от Cupcake Story");
+$APPLICATION->SetTitle("");
 if (isset($_REQUEST['IBLOCK_CODE'])) {
     CModule::IncludeModule("iblock");
     $res = CIBlock::GetList(
@@ -13,82 +15,124 @@ if (isset($_REQUEST['IBLOCK_CODE'])) {
     $_REQUEST['IBLOCK_ID'] = 0;
     $iBlockID = 0;
 }
-?>
-<section class="b-topblock b-topblock--pay-ship">
-	</section>
+?><style>
+.new_descr ul {
+	list-style: initial;
+	margin: 10px;
+	margin-left: 30px;
+}
 
+h2 {
+	font-family: 'PTSansRegular', sans-serif;
+	font-size: 21px !important;
+	font-weight: bold;
+	text-align: left;
+	margin: 10px 0 !important;
+}
 
-    <section class="b-bg-grey">
-		<!--block slider-->
-        <div class="b-content-center b-slider-stock b-slider-cupcake">
-            <div class="b-slider-stock-wrap">
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:news.list",
-                        "cupcake_banners_inner",
-                        Array(
-                            "ACTIVE_DATE_FORMAT" => "d.m.Y",
-                            "ADD_SECTIONS_CHAIN" => "N",
-                            "AJAX_MODE" => "N",
-                            "AJAX_OPTION_ADDITIONAL" => "",
-                            "AJAX_OPTION_HISTORY" => "N",
-                            "AJAX_OPTION_JUMP" => "N",
-                            "AJAX_OPTION_STYLE" => "Y",
-                            "CACHE_FILTER" => "N",
-                            "CACHE_GROUPS" => "Y",
-                            "CACHE_TIME" => "0",
-                            "CACHE_TYPE" => "A",
-                            "CHECK_DATES" => "Y",
-                            "COMPONENT_TEMPLATE" => "cupcake_banners",
-                            "DETAIL_URL" => "",
-                            "DISPLAY_BOTTOM_PAGER" => "Y",
-                            "DISPLAY_DATE" => "Y",
-                            "DISPLAY_NAME" => "Y",
-                            "DISPLAY_PICTURE" => "Y",
-                            "DISPLAY_PREVIEW_TEXT" => "Y",
-                            "DISPLAY_TOP_PAGER" => "N",
-                            "FIELD_CODE" => array(0=>"ID",1=>"CODE",2=>"XML_ID",3=>"NAME",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",6=>"DATE_ACTIVE_FROM",7=>"ACTIVE_FROM",8=>"DATE_ACTIVE_TO",9=>"ACTIVE_TO",10=>"IBLOCK_TYPE_ID",11=>"IBLOCK_ID",12=>"IBLOCK_CODE",13=>"IBLOCK_NAME",14=>"IBLOCK_EXTERNAL_ID",15=>"",),
-                            "FILTER_NAME" => "",
-                            "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-                            "IBLOCK_ID" => "21",
-                            "IBLOCK_TYPE" => "banner",
-                            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-                            "INCLUDE_SUBSECTIONS" => "Y",
-                            "MESSAGE_404" => "",
-                            "NEWS_COUNT" => "0",
-                            "PAGER_BASE_LINK_ENABLE" => "N",
-                            "PAGER_DESC_NUMBERING" => "N",
-                            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-                            "PAGER_SHOW_ALL" => "N",
-                            "PAGER_SHOW_ALWAYS" => "N",
-                            "PAGER_TEMPLATE" => ".default",
-                            "PAGER_TITLE" => "Новости",
-                            "PARENT_SECTION" => "",
-                            "PARENT_SECTION_CODE" => "",
-                            "PREVIEW_TRUNCATE_LEN" => "",
-                            "PROPERTY_CODE" => array(0=>"LINK_NAME",1=>"DISPLAY_MAIN",2=>"LINK",3=>"",),
-                            "SET_BROWSER_TITLE" => "N",
-                            "SET_LAST_MODIFIED" => "N",
-                            "SET_META_DESCRIPTION" => "N",
-                            "SET_META_KEYWORDS" => "N",
-                            "SET_STATUS_404" => "N",
-                            "SET_TITLE" => "N",
-                            "SHOW_404" => "N",
-                            "SORT_BY1" => "ACTIVE_FROM",
-                            "SORT_BY2" => "SORT",
-                            "SORT_ORDER1" => "DESC",
-                            "SORT_ORDER2" => "ASC"
-                        )
-                    );?>
-            </div>
-        </div>
+h3 {
+	font-family: 'PTSansRegular', sans-serif;
+	font-size: 19px;
+}
 
-			<div class="b-content-center b-content-center--cupcake">
+h4 {
+	font-family: 'PTSansRegular', sans-serif;
+	font-size: 17px;
+}
 
+h1 {
+	font-size: 18px;
+	line-height: 30px;
+	font-family: 'Lasco Bold', sans-serif;
+	text-transform: uppercase;
+	color: #a3a67b;
+}
 
-                <?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list", 
-	"cupcake_section_list", 
-	array(
+.new_descr p {
+	text-align: justify;
+	color: #22303d;
+	font-size: 14px;
+	line-height: 25px;
+	font-family: 'PTSansRegular', sans-serif;
+}
+
+.new_descr {
+	margin-top: 50px;
+text-align: justify;
+	color: #22303d;
+	font-size: 14px;
+	line-height: 25px;
+	font-family: 'PTSansRegular', sans-serif;
+}
+</style>
+<section class="b-topblock b-topblock--pay-ship"> </section> <section class="b-bg-grey">
+<!--block slider-->
+<div class="b-content-center b-slider-stock b-slider-cupcake">
+	<div class="b-slider-stock-wrap">
+		 <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"cupcake_banners_inner",
+	Array(
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "0",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"COMPONENT_TEMPLATE" => "cupcake_banners",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_DATE" => "Y",
+		"DISPLAY_NAME" => "Y",
+		"DISPLAY_PICTURE" => "Y",
+		"DISPLAY_PREVIEW_TEXT" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"FIELD_CODE" => array(0=>"ID",1=>"CODE",2=>"XML_ID",3=>"NAME",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",6=>"DATE_ACTIVE_FROM",7=>"ACTIVE_FROM",8=>"DATE_ACTIVE_TO",9=>"ACTIVE_TO",10=>"IBLOCK_TYPE_ID",11=>"IBLOCK_ID",12=>"IBLOCK_CODE",13=>"IBLOCK_NAME",14=>"IBLOCK_EXTERNAL_ID",15=>"",),
+		"FILTER_NAME" => "",
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+		"IBLOCK_ID" => "21",
+		"IBLOCK_TYPE" => "banner",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"INCLUDE_SUBSECTIONS" => "Y",
+		"MESSAGE_404" => "",
+		"NEWS_COUNT" => "0",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_DESC_NUMBERING" => "N",
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALWAYS" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Новости",
+		"PARENT_SECTION" => "",
+		"PARENT_SECTION_CODE" => "",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"PROPERTY_CODE" => array(0=>"LINK_NAME",1=>"DISPLAY_MAIN",2=>"LINK",3=>"",),
+		"SET_BROWSER_TITLE" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_404" => "N",
+		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER1" => "DESC",
+		"SORT_ORDER2" => "ASC"
+	)
+);?>
+	</div>
+</div>
+<div class="b-content-center b-content-center--cupcake">
+	 <?$APPLICATION->IncludeComponent(
+	"bitrix:catalog.section.list",
+	"cupcake_section_list",
+	Array(
 		"ADD_SECTIONS_CHAIN" => "N",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "15",
@@ -98,44 +142,15 @@ if (isset($_REQUEST['IBLOCK_CODE'])) {
 		"IBLOCK_ID" => $iBlockID["ID"],
 		"IBLOCK_TYPE" => "catalog",
 		"SECTION_CODE" => "",
-		"SECTION_FIELDS" => array(
-			0 => "ID",
-			1 => "CODE",
-			2 => "XML_ID",
-			3 => "NAME",
-			4 => "SORT",
-			5 => "DESCRIPTION",
-			6 => "PICTURE",
-			7 => "DETAIL_PICTURE",
-			8 => "IBLOCK_TYPE_ID",
-			9 => "IBLOCK_ID",
-			10 => "IBLOCK_CODE",
-			11 => "IBLOCK_EXTERNAL_ID",
-			12 => "DATE_CREATE",
-			13 => "CREATED_BY",
-			14 => "TIMESTAMP_X",
-			15 => "MODIFIED_BY",
-			16 => "NOT_AVAILABLE",
-		),
+		"SECTION_FIELDS" => array(0=>"ID",1=>"CODE",2=>"XML_ID",3=>"NAME",4=>"SORT",5=>"DESCRIPTION",6=>"PICTURE",7=>"DETAIL_PICTURE",8=>"IBLOCK_TYPE_ID",9=>"IBLOCK_ID",10=>"IBLOCK_CODE",11=>"IBLOCK_EXTERNAL_ID",12=>"DATE_CREATE",13=>"CREATED_BY",14=>"TIMESTAMP_X",15=>"MODIFIED_BY",16=>"NOT_AVAILABLE",),
 		"SECTION_ID" => "",
 		"SECTION_URL" => "/catalog/#IBLOCK_CODE#/#SECTION_CODE#/",
-		"SECTION_USER_FIELDS" => array(
-			0 => "",
-			1 => "UF_ACSESS_BOUND",
-			2 => "UF_DISPLAY_MAIN",
-			3 => "UF_DATE",
-			4 => "UF_PASSWORD",
-			5 => "",
-		),
+		"SECTION_USER_FIELDS" => array(0=>"",1=>"UF_ACSESS_BOUND",2=>"UF_DISPLAY_MAIN",3=>"UF_DATE",4=>"UF_PASSWORD",5=>"",),
 		"SHOW_PARENT_NAME" => "Y",
 		"TOP_DEPTH" => "3",
 		"VIEW_MODE" => "LIST"
-	),
-	false
-);
-?>
-
-<?
+	)
+);?> <?
 $arrFilter = array(
     'SECTION_CODE' => $_REQUEST['SECTION_CODE']
 );
@@ -145,6 +160,42 @@ if (isset($_REQUEST['new'])) {
 if (isset($_REQUEST['action'])) {
     $arrFilter['!PROPERTY_ACTION'] = false;
 }
+
+
+?>
+<?//if($APPLICATION->GetCurPage()=='/catalog/cupcakes/children/'):?>
+<div style="display:none;">
+<?$APPLICATION->IncludeComponent(
+	"bitrix:catalog.smart.filter",
+	"pyst",
+	Array(
+		"CACHE_GROUPS" => "Y",
+		"SHOW_ALL_WO_SECTION"=> "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CONVERT_CURRENCY" => "N",
+		"DISPLAY_ELEMENT_COUNT" => "Y",
+		"FILTER_NAME" => "arrFilter",
+		"FILTER_VIEW_MODE" => "vertical",
+		"HIDE_NOT_AVAILABLE" => "N",
+		"IBLOCK_ID" => $iBlockID["ID"],
+		"IBLOCK_TYPE" => "catalog",
+		"PAGER_PARAMS_NAME" => "arrPager",
+		"PRICE_CODE" => "",
+		"SAVE_IN_SESSION" => "N",
+		"SECTION_CODE" => $_REQUEST['SECTION_CODE'],
+		"SECTION_DESCRIPTION" => "-",
+		"SECTION_ID" => "",
+		"SECTION_TITLE" => "-",
+		"SEF_MODE" => "N",
+		"TEMPLATE_THEME" => "blue",
+		"XML_EXPORT" => "N"
+	)
+);?>
+</div>
+<?//endif?>
+
+<?
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 
 	"cupcake_catalog_section", 
@@ -290,10 +341,9 @@ $APPLICATION->IncludeComponent(
 	),
 	false
 );?>
-
-</section>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
-<? /*$APPLICATION->IncludeComponent(
+</div>
+ </section>
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?> <? /*$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 
 	"", 
 	array(
@@ -435,4 +485,4 @@ $APPLICATION->IncludeComponent(
 	),
 	false
 );*/
-?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+?><br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
