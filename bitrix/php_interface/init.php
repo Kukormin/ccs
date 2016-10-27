@@ -49,8 +49,13 @@ CModule::AddAutoloadClasses(
 		'Local\\Remarketing' => '/bitrix/php_interface/lib/Remarketing.php',
 		'Local\\Savings' => '/bitrix/php_interface/lib/Savings.php',
 		'Local\\Abandoned' => '/bitrix/php_interface/lib/Abandoned.php',
+		'Local\\UserTypeNYesNo' => '/bitrix/php_interface/lib/UserTypeNYesNo.php',
 	)
 );
+
+
+AddEventHandler('iblock', 'OnIBlockPropertyBuildList',
+	array('\Local\UserTypeNYesNo', 'GetUserTypeDescription'));
 
 function intarocrm_before_order_send($resOrder){
 	if(!CModule::IncludeModule("sale") || !CModule::IncludeModule("intaro.intarocrm") || empty($resOrder))
