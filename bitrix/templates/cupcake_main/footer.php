@@ -66,8 +66,8 @@
         <span class="b-close-modal">close</span>
         <!--form-->
         <?$APPLICATION->IncludeComponent(
-            "bitrix:main.register", 
-            "cupcake_registration", 
+            "bitrix:main.register",
+            "cupcake_registration",
             array(
                 "AUTH" => "Y",
                 "COMPONENT_TEMPLATE" => "cupcake_registration",

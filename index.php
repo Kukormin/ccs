@@ -1,4 +1,6 @@
 <?
+define('INDEX_PAGE', true);
+
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Cupcake Story — семейная кондитерская. Капкейки, торты, эклеры, пряники, пирожные с доставкой на дом");
 //$APPLICATION->ShowTitle();?><section class="b-topblock main-screen">
@@ -265,5 +267,5 @@ $APPLICATION->SetTitle("Cupcake Story — семейная кондитерск�
 </div>
  </section><?
 
-\Local\Remarketing::setPageType('home');
+\Local\Utils\Remarketing::setPageType('home');
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");

@@ -2,7 +2,7 @@
 if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true)
 	return;
 
-\Local\Remarketing::printHtml();
+\Local\Utils\Remarketing::printHtml();
 
 ?>
 <script> window._txq = window._txq || []; var s = document.createElement('script'); s.type = 'text/javascript'; s

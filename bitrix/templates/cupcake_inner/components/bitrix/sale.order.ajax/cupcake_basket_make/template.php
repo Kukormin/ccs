@@ -598,7 +598,7 @@ foreach($arResult['BASKET_ITEMS'] as $key => $arItem)
 	$tmp = explode('#', $productId);
 	if (count($tmp) > 1)
 		$productId = $tmp[0];
-	\Local\Remarketing::addProductId($productId);
+	\Local\Utils\Remarketing::addProductId($productId);
 }
-\Local\Remarketing::setPageType('purchase');
-\Local\Remarketing::setTotal($total);
+\Local\Utils\Remarketing::setPageType('purchase');
+\Local\Utils\Remarketing::setTotal($total);

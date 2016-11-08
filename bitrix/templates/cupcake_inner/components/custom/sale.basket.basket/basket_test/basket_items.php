@@ -228,8 +228,8 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 	</div><?
 }
 
-\Local\Remarketing::setPageType('cart');
-\Local\Remarketing::setTotal($arResult['allSum']);
+\Local\Utils\Remarketing::setPageType('cart');
+\Local\Utils\Remarketing::setTotal($arResult['allSum']);
 
 //товары без SKU
 foreach ($arResult["GRID"]["ROWS"] as $arItem)

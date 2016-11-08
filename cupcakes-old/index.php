@@ -2,11 +2,13 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Капкейки");
 ?>
+	<section class="b-topblock b-topblock--pay-ship">
+	</section>
 <?
 
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
-	"cupcake_catalog", 
+	"",
 	array(
 		"ACTION_VARIABLE" => "action",
 		"ADD_ELEMENT_CHAIN" => "N",
@@ -74,7 +76,7 @@ $APPLICATION->IncludeComponent(
 		),
 		"FILTER_VIEW_MODE" => "HORIZONTAL",
 		"HIDE_NOT_AVAILABLE" => "N",
-		"IBLOCK_ID" => "4",
+		"IBLOCK_ID" => "44",
 		"IBLOCK_TYPE" => "catalog",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"LABEL_PROP" => "-",
@@ -88,10 +90,7 @@ $APPLICATION->IncludeComponent(
 		"LIST_META_KEYWORDS" => "-",
 		"LIST_PROPERTY_CODE" => array(
 			0 => "ACTION",
-			1 => "FILLING",
-			2 => "NEW",
-			3 => "STAR_GIFT",
-			4 => "SECTION_BOUND",
+			1 => "COUNT",
 			5 => "",
 		),
 		"MESSAGE_404" => "",
@@ -150,10 +149,8 @@ $APPLICATION->IncludeComponent(
 		"TOP_LINE_ELEMENT_COUNT" => "3",
 		"TOP_PROPERTY_CODE" => array(
 			0 => "ACTION",
-			1 => "FILLING",
+			1 => "HIT",
 			2 => "NEW",
-			3 => "STAR_GIFT",
-			4 => "SECTION_BOUND",
 			5 => "",
 		),
 		"TOP_VIEW_MODE" => "SECTION",
@@ -194,11 +191,8 @@ $APPLICATION->IncludeComponent(
 			10 => "",
 		),
 		"TOP_OFFERS_PROPERTY_CODE" => array(
-			0 => "ARTICLE",
-			1 => "NUMBER",
-			2 => "TAGS",
-			3 => "STAR_GIFT_PRICE",
-			4 => "DISCOUNT_PRICE",
+			0 => "OFFER_ARTICLE",
+			1 => "COUNT",
 			5 => "",
 		),
 		"TOP_OFFERS_LIMIT" => "5",

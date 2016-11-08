@@ -1,4 +1,6 @@
 <?
+define('HIDE_HEADER', true);
+
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Заказы");
 
@@ -42,7 +44,7 @@ if (!$arOrder)
 			if ($arBasketItems["DELAY"] == "N" && $arBasketItems["CAN_BUY"] == "Y")
 			{
 				// 12.09.2016 - Проверку позиции на упаковку пока оставлю для корзин старого типа
-				$pack = \Local\Package::getById($arBasketItems['PRODUCT_ID']);
+				$pack = \Local\Utils\Package::getById($arBasketItems['PRODUCT_ID']);
 				if ($pack)
 					CSaleBasket::Delete($arBasketItems['ID']);
 
@@ -52,7 +54,7 @@ if (!$arOrder)
 					));
 				if ($prop = $rsProps->Fetch())
 				{
-					$pack = \Local\Package::getById($prop['SORT']);
+					$pack = \Local\Utils\Package::getById($prop['SORT']);
 					if (!$pack)
 					{
 						$iblockId = 0;
@@ -70,7 +72,7 @@ if (!$arOrder)
 								$iblockId = $ar_res['IBLOCK_ID'];
 						}
 						if ($iblockId)
-							$pack = \Local\Package::getByName($prop['VALUE'], $iblockId);
+							$pack = \Local\Utils\Package::getByName($prop['VALUE'], $iblockId);
 					}
 
 					if ($pack && $pack['PRICE'] > 0)

@@ -1,8 +1,7 @@
 <?
 $arTemplate = array (
-  'NAME' => 'Шаблон внутренних страниц',
+  'NAME' => 'Общий шаблон',
   'DESCRIPTION' => '',
   'SORT' => '',
   'TYPE' => '',
 );
-?>

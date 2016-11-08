@@ -136,4 +136,4 @@ if($arParams["SHOW_TOP_ELEMENTS"]!="N")
 	unset($basketAction);
 }
 
-\Local\Remarketing::setPageType('category');
+\Local\Utils\Remarketing::setPageType('category');

@@ -6,6 +6,8 @@
 
 $this->setFrameMode(true);
 
+$arResult["nEndPage"] = 30;
+
 if(!$arResult["NavShowAlways"])
 {
 	if ($arResult["NavRecordCount"] == 0 || ($arResult["NavPageCount"] == 1 && $arResult["NavShowAll"] == false))

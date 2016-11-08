@@ -1,4 +1,12 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?></div>
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+
+/** @global CMain $APPLICATION */
+
+//<div class=".b-content-wrap">
+
+
+?>
+</div>
 <section class="b-footer-wrap b-footer-wrap-about">
     <div class="b-footer b-footer-about">
         <div class="b-footer-info b-footer-info-about">
@@ -11,19 +19,9 @@
                     "bitrix:menu",
                     "cupcakes_menu_bottom",
                     array(
-                        "ALLOW_MULTI_SELECT" => "N",
-                        "CHILD_MENU_TYPE" => "left",
-                        "COMPONENT_TEMPLATE" => "cupcakes_menu_bottom",
-                        "DELAY" => "N",
-                        "MAX_LEVEL" => "1",
-                        "MENU_CACHE_GET_VARS" => array(
-                        ),
-                        "MENU_CACHE_TIME" => "3600",
-                        "MENU_CACHE_TYPE" => "N",
-                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "MENU_CACHE_TIME" => "3600000",
+                        "MENU_CACHE_TYPE" => "A",
                         "ROOT_MENU_TYPE" => "bottom2",
-                        "USE_EXT" => "N",
-                        "MENU_THEME" => "site"
                     ),
                     false
                 );?>
@@ -37,7 +35,9 @@
             </div>
         </div>
     </div>
-</section>
+</section><?
+
+?>
 <!--modal-->
 <div class="b-modal">
     <div id="overlay" class="overlay" style="display: none"></div>
@@ -179,7 +179,10 @@
 );?>
     </div>
 
-</div>
+</div><?
+
+
+?>
 </div><?
 
 $APPLICATION->IncludeFile('/include/body_bottom.php', array());

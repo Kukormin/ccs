@@ -3842,6 +3842,7 @@ a.basket {
 	margin-bottom:14px;
 	width:100%;
 	position:relative;
+    height: 200px;
 }
 
 
@@ -3889,6 +3890,10 @@ a.basket {
 }
 .b-mod__item-price span {
 	color:#7c7d70;
+}
+.b-mod__item-price em {
+    color: #aaa;
+    text-decoration: line-through;
 }
 
 .b-mod__item-label {
@@ -4925,7 +4930,10 @@ a.basket {
 }
 .b-mod-catalog--cupcake .b-mod__item {
 	padding-bottom:35px;
-	width:33%; 
+	width:290px;
+}
+.b-mod-catalog--cupcake .b-mod__item .b-mod__item-img--effect-transform {
+    height: 200px;
 }
 .b-grey-wrap-top--asaide {
 	margin: 0 0 0 20px;
@@ -7305,7 +7313,7 @@ margin-top: 20px;
 
 .main-screen{
     background: #302529;
-    padding:265px 0 30px;
+    padding:285px 0 10px;
 }
 .carousel-block:after{
     content:"";

@@ -86,4 +86,4 @@ else
 ?>
 </div><?
 
-\Local\Remarketing::setPageType('category');
+\Local\Utils\Remarketing::setPageType('category');

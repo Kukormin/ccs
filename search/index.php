@@ -12,16 +12,13 @@ $APPLICATION->SetTitle("Поиск");
 		"DEFAULT_SORT" => "rank",	// Сортировка по умолчанию
 		"arrFILTER" => array(	// Ограничение области поиска
 			0 => "main",
-			1 => "iblock_catalog",
+			1 => "iblock_services",
 		),
 		"arrFILTER_main" => "",	// Путь к файлу начинается с любого из перечисленных
 		"arrFILTER_iblock_services" => array(
 			0 => "all",
 		),
 		"arrFILTER_iblock_news" => array(
-			0 => "all",
-		),
-		"arrFILTER_iblock_catalog" => array(	// Искать в информационных блоках типа "iblock_catalog"
 			0 => "all",
 		),
 		"SHOW_WHERE" => "N",	// Показывать выпадающий список "Где искать"
