@@ -27,7 +27,7 @@ foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
 	//debugmessage($arItem['NAME']);
 	//debugmessage($arItem['PROPS']);
 	// 12.09.2016 - Проверку позиции на упаковку пока оставлю для корзин старого типа
-	$pack = \Local\Package::getById($arItem['PRODUCT_ID']);
+	$pack = \Local\Utils\Package::getById($arItem['PRODUCT_ID']);
 	if ($pack)
 		CSaleBasket::Delete($arItem['ID']);
 
@@ -115,7 +115,7 @@ while($ob = $res->GetNext())
 $arResult['PACKAGES'] = $packages;
 
 $arFilter = Array("IBLOCK_ID"=>16, "ACTIVE"=>"Y");
-$res = CIBlockSection::GetList(Array(), $arFilter, false, Array(), array());
+$res = CIBlockSection::GetList(Array(), $arFilter, false, Array());
 while($ob = $res->GetNextElement())
 {
     $arFields = $ob->GetFields();

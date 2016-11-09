@@ -97,7 +97,7 @@ class TimCatalog extends \CBitrixComponent
 			$this->products = Products::get($this->sort['QUERY'], $this->filter['PRODUCTS_IDS'], $this->navParams);
 		}
 
-		//$this->SetPageProperties();
+		$this->SetPageProperties();
 
 		$this->includeComponentTemplate();
 	}
@@ -219,7 +219,7 @@ class TimCatalog extends \CBitrixComponent
 	 */
 	private function setPageProperties()
 	{
-		$seo = array();
+		/*$seo = array();
 		if ($this->arResult['QUERY'])
 		{
 			$seo['H1'] = 'Результаты поиска по запросу "' . $this->arResult['QUERY'] . '"';
@@ -256,6 +256,6 @@ class TimCatalog extends \CBitrixComponent
 			$seo['TEXT'] = '';
 		}
 
-		$this->arResult['SEO'] = $seo;
+		$this->arResult['SEO'] = $seo;*/
 	}
 }

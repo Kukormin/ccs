@@ -1191,7 +1191,6 @@
 		display: none;
 	}
 	
->>>>>>> 6df7d4ac704e552e1160976cafe72fc5c766a7d9
 	.b-block-account-address__list{
 		padding-top: 40px;
 	}
@@ -1728,7 +1727,7 @@
 	}
 	
 	
-		.account__navigation--mobile {
+	.account__navigation--mobile {
 		visibility: visible;
 		position: absolute;
 		right: 0;

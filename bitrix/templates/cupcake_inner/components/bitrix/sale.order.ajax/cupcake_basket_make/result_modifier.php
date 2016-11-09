@@ -35,7 +35,7 @@ foreach ($arResult['BASKET_ITEMS'] as $item) {
 	{
 		if ($prop['CODE'] == 'PACKAGE')
 		{
-			$pack = \Local\Package::getById($prop['SORT']);
+			$pack = \Local\Utils\Package::getById($prop['SORT']);
 			if (!$pack)
 			{
 				$iblockId = 0;
@@ -52,7 +52,7 @@ foreach ($arResult['BASKET_ITEMS'] as $item) {
 						$iblockId = $ar_res['IBLOCK_ID'];
 				}
 				if ($iblockId)
-					$pack = \Local\Package::getByName($prop['VALUE'], $iblockId);
+					$pack = \Local\Utils\Package::getByName($prop['VALUE'], $iblockId);
 			}
 			if ($pack && $pack['PRICE'] > 0)
 				$packTotal += $pack['PRICE'] * $item['QUANTITY'];

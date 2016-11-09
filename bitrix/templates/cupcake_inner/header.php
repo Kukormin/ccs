@@ -57,10 +57,15 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 
 $APPLICATION->IncludeFile('/include/body_top.php', array());
 
+$headerLine = \Local\Media\Banners::getBySectionCode('header', 1);
+if ($headerLine)
+	$headerLine = $headerLine[0]['NAME'];
+$class = $headerLine ? ' with_header_alert' : '';
+
 ?>
 <div id="panel"><?$APPLICATION->ShowPanel(); ?></div>
 
-<div class="b-content-wrap"><?
+<div class="b-content-wrap<?= $class ?>"><?
 
 $hideHeader = defined('HIDE_HEADER') && HIDE_HEADER;
 if (!$hideHeader)
@@ -68,11 +73,11 @@ if (!$hideHeader)
 	?>
 	<section class="b-header"><?
 
-	// Плашка сверу на всю ширину экрана (акции и т.п.)
-	$APPLICATION->IncludeFile('/include/header_alert.php', array(), array(
-		'MODE' => 'html',
-		'TEMPLATE' => 'page_inc.php',
-	));
+	if ($headerLine)
+	{
+		?>
+		<div class="header-alert"><?= $headerLine ?></div><?
+	}
 
 	// Самое верхнее меню
 	?>
@@ -86,7 +91,6 @@ if (!$hideHeader)
 			));?>
 		</ul>
 	</nav><?
-
 
 	?>
 	<div class="b-panel">

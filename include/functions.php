@@ -421,7 +421,7 @@ function MOD_BasketAdd($arFields)
         /** @var \Bitrix\Sale\BasketItem $basketItem */
         if (!($basketItem = \Bitrix\Sale\Compatible\BasketCompatibility::add($arFields)))
         {
-            $APPLICATION->ThrowException(Localization\Loc::getMessage('BT_MOD_SALE_BASKET_ERR_ID_ABSENT'), "BASKET_ITEM");
+            $APPLICATION->ThrowException(Loc::getMessage('BT_MOD_SALE_BASKET_ERR_ID_ABSENT'), "BASKET_ITEM");
             return false;
         }
 

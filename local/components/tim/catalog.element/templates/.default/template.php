@@ -123,17 +123,20 @@ $APPLICATION->SetPageProperty("og:image", 'http://' . SITE_SERVER_NAME . $produc
 							<span class="rub">i</span>
 						</div><?
 					}
-
+/*
 					?>
 					<div class="b-assortment-total--btn">
 						<button class="b-bnt-form b-bnt-form--green i-padd-12x40 js-modal-tobasket"
 						        data-href="/personal/cart">в корзину</button>
-					</div>
+					</div><?
 
+					?>
 					<div class="b-delivery_popup">
 						Самовывоз — бесплатно,
 						<span class="show_delivery_popup" id="js_show_delivery_popup">выбрать магазин</span>.
-					</div>
+					</div><?*/
+
+					?>
 				</div>
 			</div>
 		</div>

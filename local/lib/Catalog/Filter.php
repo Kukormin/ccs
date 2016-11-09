@@ -51,11 +51,6 @@ class Filter
 	private static $SEF_URL = '';
 
 	/**
-	 * @var array хлебные крошки
-	 */
-	private static $BREAD_CRUMB = array();
-
-	/**
 	 * @var array данные для Seo
 	 */
 	private static $SEO_VALUES = array();
@@ -91,10 +86,8 @@ class Filter
 		// Скрываем варианты, которые не попали в пользовательский фильтр
 		// (напр. в куртках не представлен бренд Asics)
 		self::hideVars();
-		// Добавляем хлебные крошки
-		/*self::setBreadCrumb();
 		// Формируем данные для Seo
-		self::setSeoValues();*/
+		self::setSeoValues();
 
 		$data = self::$DATA_BY_KEY[self::$PRODUCTS_KEY];
 
@@ -111,7 +104,9 @@ class Filter
 			// Красивый урл (по нему подгружаются SEO свойства)
 			'SEF_URL' => self::$SEF_URL,
 			// Хлебные крошки
-			'BC' => self::$BREAD_CRUMB,
+			'BC' => self::getBreadCrumb(),
+			// Хлебные крошки
+			'CUR_FILTERS' => self::getCurrentFilters(),
 			// Seo
 			'SEO' => self::$SEO_VALUES,
 		);
@@ -127,6 +122,7 @@ class Filter
 
 		$return[] = array(
 			'NAME' => 'Тип товара',
+			'BC' => true,
 		    'ITEMS' => Categories::getGroup(),
 		);
 		$flags = Flags::getAll();
@@ -137,6 +133,7 @@ class Filter
 			);
 		$return[] = array(
 			'NAME' => 'Праздник',
+			'BC' => true,
 			'ITEMS' => Holidays::getGroup(),
 		);
 		$return[] = array(
@@ -356,65 +353,106 @@ class Filter
 	/**
 	 * Формирует массив для добавления в хлебные крошки
 	 */
-	private static function setBreadCrumb()
+	private static function getBreadCrumb()
 	{
-		$sefUrl = self::$CATALOG_PATH;
-		$params = array();
+		$href = self::$CATALOG_PATH;
+		$return = array(
+			array(
+				'NAME' => 'Главная',
+				'HREF' => '/',
+			),
+			array(
+				'NAME' => 'Весь каталог',
+				'HREF' => $href,
+			),
+		);
+
 		foreach (self::$GROUPS as $group)
 		{
-			if (!$group['FCNT'])
+			if (!$group['CNT'])
 				continue;
 
-			foreach ($group['PROPS'] as $prop)
+			if (!$group['BC'])
+				continue;
+
+			$cnt = 0;
+			$singleCode = '';
+
+			foreach ($group['ITEMS'] as $code => $item)
 			{
-				if (!$prop['FCNT'])
-					continue;
-
-				if ($prop['ADD']['BREAD'])
+				if ($item['CHECKED'])
 				{
-					if ($filter[$prop['CODE']] && $filter[$prop['CODE']]['COUNT'] == 1)
-					{
-						$tmpName = array();
-						$tmpHref = array();
-						foreach ($prop['VARS'] as $variant)
-						{
-							if ($variant['CHECKED'])
-							{
-								$tmpName[] = $variant['NAME'];
-								if ($prop['ADD']['IN_URL'] && $variant['CODE'])
-									$tmpHref[] = $variant['CODE'];
-								//									$sefUrl .= $variant['CODE'] . '/';
-								else
-								{
-									$sign = $prop['MULTI'] ? '[]=' : '=';
-									$params[] = $prop['ADD']['URL_PARAM'] . $sign . $variant['ID'];
-								}
-
-								$href = $sefUrl;
-							}
-						}
-						if (!empty($tmpName))
-						{
-							$sefUrl .= implode(';', $tmpHref);
-							if (count($tmpHref) > 0)
-								$sefUrl .= '/';
-							$href = $sefUrl;
-							if ($params)
-								$href .= '?' . implode('&', $params);
-							self::$BREAD_CRUMB[] = array(
-								'NAME' => implode(', ', $tmpName),
-								'HREF' => $href,
-							);
-						}
-					}
+					$singleCode = $code;
+					$cnt++;
 				}
 			}
+
+			if ($cnt == 1)
+			{
+				$item = $group['ITEMS'][$singleCode];
+				$href .= $singleCode . '/';
+				$return[] = array(
+					'NAME' => $item['NAME'],
+					'HREF' => $href,
+				);
+			}
 		}
-		//Удаляем ссылку последнего элемента
-		if (is_array(self::$BREAD_CRUMB) && count(self::$BREAD_CRUMB) > 0)
+
+		return $return;
+	}
+
+	/**
+	 * Формирует массив для добавления в хлебные крошки
+	 */
+	private static function getCurrentFilters()
+	{
+		$return = array();
+
+		foreach (self::$GROUPS as $g1 => $group1)
 		{
-			unset(self::$BREAD_CRUMB[count(self::$BREAD_CRUMB) - 1]['HREF']);
+			if (!$group1['CNT'])
+				continue;
+
+			$href = self::$CATALOG_PATH;
+			$name = '';
+			foreach ($group1['ITEMS'] as $item)
+			{
+				if ($item['CHECKED'])
+				{
+					if ($name)
+						$name .= ', ';
+					$name .= $item['NAME'];
+				}
+			}
+			if ($name)
+			{
+				foreach (self::$GROUPS as $g2 => $group2)
+				{
+					if ($g1 == $g2)
+						continue;
+
+					$part = '';
+					foreach ($group2['ITEMS'] as $code => $item)
+					{
+						if ($item['CHECKED'])
+						{
+							if ($part)
+								$part .= self::SEPARATOR;
+							$part .= $code;
+						}
+					}
+					if ($part)
+						$href .= $part . '/';
+				}
+
+				$return[] = array(
+					'NAME' => '<b>' . $group1['NAME'] . '</b>: ' . $name,
+					'HREF' => $href,
+				);
+			}
 		}
+
+		return $return;
 	}
 
 	/**

@@ -10,12 +10,15 @@
 /** @var string $templateFolder */
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
+
+
+/*
 ?>
+<a href="#" class="b-mailing__item-img b-mailing__item-img--subscribe">
+	<img src="/bitrix/templates/.default/images/mail.png" alt="">
+</a><?*/
 
-
-	<a href="#" class="b-mailing__item-img b-mailing__item-img--subscribe">
-		<img src="/bitrix/templates/.default/images/mail.png" alt="">
-	</a>
+?>
 	<form method="POST" action="<?echo $arResult["FORM_ACTION"]?>">
 		<?foreach($arResult["RUBRICS"] as $arRubric):?>
 			<div style="display: none;"><input name="RUB_ID[]" value="<?echo $arRubric["ID"]?>" id="RUB_<?echo $arRubric["ID"]?>" type="checkbox" <?=$arResult["RUBRICS"][0]["CHECKED"] == 1 ? '' : 'checked="checked"'?>><label for="RUB_<?echo $arRubric["ID"]?>"><?echo $arRubric["NAME"]?></label></div>

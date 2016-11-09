@@ -1,7 +1,7 @@
 <?
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-require($_SERVER["DOCUMENT_ROOT"]."/include/functions.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/include/functions.php");
 
 if (empty($_POST['NAME']) || empty($_POST['EMAIL']) || empty($_POST['PERSONAL_PHONE'])) die;
 

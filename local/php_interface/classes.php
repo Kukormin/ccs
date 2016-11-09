@@ -15,5 +15,6 @@ CModule::AddAutoloadClasses(
 		'Local\\Catalog\\Filter' => '/local/lib/Catalog/Filter.php',
 		'Local\\Catalog\\Categories' => '/local/lib/Catalog/Categories.php',
 		'Local\\Catalog\\Holidays' => '/local/lib/Catalog/Holidays.php',
+		'Local\\Media\\Banners' => '/local/lib/Media/Banners.php',
 	)
 );

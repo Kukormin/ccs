@@ -13,6 +13,24 @@ $filter = $component->filter;
 $products = $component->products['ITEMS'];
 ?>
 
+<div id="bc"><?
+	$last = count($filter['BC']) - 1;
+	foreach ($filter['BC'] as $i => $item)
+	{
+		if ($i == $last)
+		{
+			?>
+			<span><?= $item['NAME'] ?></span><?
+		}
+		else
+		{
+			?>
+			<a href="<?= $item['HREF'] ?>"><?= $item['NAME'] ?></a> /<?
+		}
+	}
+
+?>
+</div>
 
 <div id="filters-panel">
 	<input type="hidden" name="catalog_path" value="<?= $filter['CATALOG_PATH'] ?>">
@@ -158,8 +176,24 @@ $products = $component->products['ITEMS'];
 
 ?>
 <div class="b-catalog-wrap--cupcake js-ajax-content-block">
-	<h1><? $APPLICATION->ShowTitle(false) ?></h1>
+	<h1><? $APPLICATION->ShowTitle(false) ?></h1><?
 
+	if ($filter['CUR_FILTERS'])
+	{
+		?>
+		<div id="current-filters"><?
+
+			foreach ($filter['CUR_FILTERS'] as $item)
+			{
+				?>
+				<span><?= $item['NAME'] ?> <a href="<?= $item['HREF'] ?>">x</a></span><?
+			}
+
+			?>
+		</div><?
+	}
+
+	?>
 	<div class="b-mod-catalog--cupcake">
 
 
@@ -177,7 +211,7 @@ $products = $component->products['ITEMS'];
 			<div class="b-mod__item">
 				<div class="b-mod__item-img">
 					<div class="b-mod__item-img--effect-transform">
-						<a href="<? echo $item['DETAIL_PAGE_URL'] ?>">
+						<a href="<?= $item['DETAIL_PAGE_URL'] ?>">
 							<img src="<?= $item['PREVIEW_PICTURE'] ?>"
 							     alt="<?= $item['PIC_ALT'] ?>" title="<?= $item['PIC_TITLE'] ?>" />
 						</a>
@@ -208,8 +242,7 @@ $products = $component->products['ITEMS'];
 					<a href="<?= $item['DETAIL_PAGE_URL'] ?>"><?= $item['TITLE'] ?></a>
 					<span><?= $item['NAME'] ?></span>
 				</div>
-				<div class="b-mod__item-price">
-					<?
+				<div class="b-mod__item-price"><?
 
 					if ($item['PRICE_D'] > $item['PRICE'])
 					{

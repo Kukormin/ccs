@@ -5094,7 +5094,7 @@ a.basket {
 	max-width:420px;
 	display:block;
 }
-.b-method-shipping_item .b-bnt-form--green { `
+.b-method-shipping_item .b-bnt-form--green {
     padding: 7px 26px;
     display: block;
 } 
@@ -5199,10 +5199,6 @@ a.basket {
     left: 0;
     background: none;
 }
-
-
-
-
 
 
 

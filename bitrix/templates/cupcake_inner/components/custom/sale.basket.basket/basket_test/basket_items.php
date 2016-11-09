@@ -206,7 +206,7 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 				$tmp = explode('#', $productId);
 				if (count($tmp) > 1)
 					$productId = $tmp[0];
-				\Local\Remarketing::addProductId($productId);
+				\Local\Utils\Remarketing::addProductId($productId);
 
 				?>
 				<div class="b-total-basket__group">
@@ -589,7 +589,7 @@ foreach ($arResult["GRID"]["ROWS"] as $arItem)
 
 			?>
 		</div><?
-		$savingData = \Local\Savings::getCurrentUserData();
+		$savingData = \Local\Utils\Savings::getCurrentUserData();
 		if ($savingData['LEVEL'])
 		{
 			?>

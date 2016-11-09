@@ -518,13 +518,29 @@ $(document).ready(function () {
 
 	/*scroll*/
 
-	$(window).scroll(function () {
-		if ($(document).scrollTop() > 178) {
-			$('.b-header__bottom').addClass('menu-fixed');
-		} else {
-			$('.b-header__bottom').removeClass('menu-fixed');
+	var catalogMenu = $('.b-header__bottom');
+	if (catalogMenu.length) {
+		var bitixOffset = $('#bx-panel').height();
+		var pos = catalogMenu.position();
+		var menuTop = pos.top + bitixOffset;
+		$(window).scroll(function () {
+			fixMenu();
+		});
+
+		$(window).resize(function () {
+			var bitixOffset = $('#bx-panel').height();
+			var pos = catalogMenu.position();
+			menuTop = pos.top + bitixOffset;
+			fixMenu();
+		});
+
+		function fixMenu() {
+			if ($(document).scrollTop() > menuTop)
+				$('.b-header__bottom').addClass('menu-fixed');
+			else
+				$('.b-header__bottom').removeClass('menu-fixed');
 		}
-	});
+	}
 
 
 	/*menuleft*/
@@ -865,19 +881,6 @@ $(document).ready(function () {
 
 
 	});
-
-	$('.js-basket-fastbuy').on('click', function () {
-		$('.js_modal_fastorder').show().css('top', $(window).scrollTop() + 25 + "px");
-		$('.overlay').show();
-		$('.js-ajax-fastorder').html('<div class="preloader"></div>');
-		$.get('/include/fast_order.php', function (resp) {
-			$('.js-ajax-fastorder').html(resp);
-		});
-	});
-
-	/*$('body').on('submit','.js-fastorder-form', function () {
-
-	 });*/
 
 	$('.js-address-delete').click(function (e) {
 		e.preventDefault();
