@@ -1,4 +1,4 @@
-<div class="header-alert" style="display:none;text-align:center;background-color: #d60059; color: white; font-family:arial, sans; padding:6px 0 6px 0">
-	 Акция! При заказе сегодня —скидка 20%
+<div class="header-alert" style="display:block;text-align:center;background-color: #d60059; color: white; font-family:arial, sans; padding:6px 0 6px 0">
+	 Акция! Пряники с привидениями —скидка 50%. Спешите только 10 наборов!
 </div>
-<br>
+ <br>

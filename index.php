@@ -5,26 +5,36 @@ $APPLICATION->SetTitle("Cupcake Story — семейная кондитерск�
 <div class="b-content-center">
 	<div class="carousel-block">
 		<div class="carousel-main">
+		<div class="carousel-main-row">
+				<a href="/news/aktsiya_30_skidki_na_kapkeyki_pri_pokupke_torta_brauni_s_vishney/">
+					<img src="/images/broun.jpg" alt="">
+					<div class="details">
+						<h3>Капкейки за 1200р станут 900р</h3>
+						<p>при заказе торта брауни, только в эту среду, четверг и пятницу.</p>
+					</div>
+				</a>
+			</div>
 			<div class="carousel-main-row">
- <a href="http://cupcakestory.ru/news/_lyubite_sladosti_i_khotite_popast_na_yubileynyy_kontsert_ruki_vverkh/"> <img src="http://cupcakestory.ru/bitrix/templates/.default/images/%D0%90%D0%BA%D1%86%D0%B8%D1%8F.png" alt="">
+ <a href="http://cupcakestory.ru/catalog/cakes/detskie/1811 "> <img src="/bitrix/templates/.default/images/2.jpg" alt="">
 				<div class="details">
-					<h3>Акция: билеты на концерт в честь 20-летия Руки Вверх</h3>
+					<h3>ТОРТ "МОЯ МАЛЕНЬКАЯ ПРИНЦЕССА"</h3>
 					<p>
-						 Приглашаем вас принять участие в акции: все, кто до 31 октября оформит и оплатит заказ на сумму от 3000 р., попадет в список для розыгрыша билетов.
+						 Восхитительный торт из воздушного сливочного бисквита, со сливочно-ванильным кремом : высота 12 см, диаметр 16 см.
 					</p>
 				</div>
  </a>
 			</div>
 			<div class="carousel-main-row">
- <a href="/catalog/eclairs/prazdnichnye/1723"> <img src="http://cupcakestory.ru/bitrix/templates/.default/images/%D0%B1%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%2050%25-2.jpg">
+ <a href="http://cupcakestory.ru/sweet-table/"> <img src="http://cupcakestory.ru/bitrix/templates/.default/images/stol.jpg" alt="">
 				<div class="details">
-					<h3>Акция на halloween</h3>
+					<h3>Сладкий стол под ключ</h3>
 					<p>
-						 В этот четверг и пятницу скидка 50% на пряники с привидениями, при покупке коробки эклеров "Маскарад призраков" <br>
+						 Сладкие столы под ключ на 10-15, 15-20, 25-30 человек. В стоимость сладкого стола входят: сладости ручной работы, декор (оформление в любой цветовой гамме, фон, топперы, аренда стола, посуды скатерти, задний фон), монтаж/демонтаж с выездом дизайнера и декоратора, доставка по Москве<br>
 					</p>
 				</div>
  </a>
 			</div>
+			
 			 <!--
 <div class="carousel-main-row">
 						<a href="http://cupcakestory.ru/sweet-table/">
@@ -39,21 +49,21 @@ $APPLICATION->SetTitle("Cupcake Story — семейная кондитерск�
 		</div>
 		<div class="carousel-thumbs">
 			<div class="carousel-thumbs-row">
- <a href="http://cupcakestory.ru/catalog/eclairs/prazdnichnye/1723"> <img src="http://cupcakestory.ru/bitrix/templates/.default/images/3.jpg">
+ <a href="http://cupcakestory.ru/catalog/cakes/detskie/1781"> <img src="http://cupcakestory.ru/bitrix/templates/.default/images/%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BE%D1%80%201.jpg">
 				<div class="details">
-					<h3>Эклеры "Маскарад призраков"</h3>
+					<h3>Торт "Едет трактор по полям"</h3>
 					<p>
-						 Нежные, традиционно воздушные эклеры с нежнейшим кремом и потрясающей глазурью. Ассорти вкусов: клубника/шоколадный/карамель/ваниль. Дизайн — бельгийский шоколад.
+						 Торт из воздушного шоколадного бисквита и нежного шоколадного крем чиза: высота 12 см, диаметр 16 см, вес 1670 г (8-12 чел.)
 					</p>
 				</div>
  </a>
 			</div>
 			<div class="carousel-thumbs-row">
- <a href="http://cupcakestory.ru/catalog/gingerbread/"> <img src="http://cupcakestory.ru/bitrix/templates/.default/images/HO5A2590.jpg" alt="">
+ <a href="http://cupcakestory.ru/catalog/cakes/detskie/1782"> <img src="http://cupcakestory.ru/bitrix/templates/.default/images/%D0%B4%D0%B8%D0%BD%D0%BE%D0%B7%D0%B0%D0%B2%D1%80.jpg" alt="">
 				<div class="details">
-					<h3>Наборы пряников на Halloween</h3>
+					<h3>Потрясающий торт "Сладкий дино"</h3>
 					<p>
-						 Медово-имбирные пряники с росписью из айсинга. Доступны для заказа 3 набора по 5 пряников в каждом
+						 Торт из воздушного белого бисквита, нежного крем-чиза, клубничного желе, тонкий хрустящий слой-нугатин. Торт высотой 10 см, диаметр 16 см, вес 1850 г (8-12 чел.).
 					</p>
 				</div>
  </a>
@@ -264,6 +274,9 @@ $APPLICATION->SetTitle("Cupcake Story — семейная кондитерск�
 );?>
 </div>
  </section><?
+?>
 
+
+<?
 \Local\Remarketing::setPageType('home');
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");

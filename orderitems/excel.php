@@ -12,7 +12,7 @@ if ($USER->IsAuthorized() && $USER->IsAdmin()) {
     $dateTo = trim(htmlspecialchars($_REQUEST['date_to']));
     $status = trim(htmlspecialchars($_REQUEST['status']));
 
-    $apiKey = "GUdWqj3mIyFmUuXkL6H9br4VoPQrBzIS";
+    $apiKey = "xCQ6xmYWuC5FaiQ4E7ZkLvtRylQycv50";
     $apiUrl = "https://cupcakestory.retailcrm.ru";
 
     $statuses = array(
@@ -76,9 +76,61 @@ if ($USER->IsAuthorized() && $USER->IsAdmin()) {
         }
     }
 
+
+
     if (empty($orders)) {
         die("нет заказов");
     }
+
+    //получаем ид товаров
+    $productsFilter = array();
+    foreach ($orders as $arorder) {
+        foreach ($arorder as $order) {
+            foreach ($order['items'] as $item) {
+                $productsFilter['offerIds'][] = $item['offer']['id'];
+            }
+        }
+    }
+
+    try {
+        $response = $client->storeProducts($productsFilter, 1, 100);
+    } catch (\RetailCrm\Exception\CurlException $e) {
+        echo "Connection error: " . $e->getMessage();
+    }
+
+    if ($response->isSuccessful() && $pages = $response->pagination) {
+        if (isset($pages['totalPageCount'])) {
+            for($page = 1; $page <= $pages['totalPageCount']; $page++) {
+                try {
+                    $response = $client->storeProducts($productsFilter, $page, 100);
+                } catch (\RetailCrm\Exception\CurlException $e) {
+//                    echo "Connection error: " . $e->getMessage();
+                }
+                $products[] = $response->products;
+                time_nanosleep(0, 200000000);
+            }
+        }
+    } else {
+        if ($response->isSuccessful()) {
+            $products[] = $response->products;
+        } else {
+//            echo sprintf(
+//                "Error: [HTTP-code %s] %s",
+//                $response->getStatusCode(),
+//                $response->getErrorMsg()
+//            );
+
+        }
+    }
+
+    foreach ($products as $aproduct) {
+        foreach ($aproduct as $product) {
+            foreach ($product['offers'] as $offer) {
+                $offerHelper[$offer['id']] = $offer['name'];
+            }
+        }
+    }
+
     $xls = new PHPExcel();
     $xls->setActiveSheetIndex(0);
     $sheet = $xls->getActiveSheet();
@@ -94,7 +146,7 @@ if ($USER->IsAuthorized() && $USER->IsAdmin()) {
     $sheet->getColumnDimension('B')->setWidth(15);
     $sheet->getColumnDimension('C')->setWidth(15);
     $sheet->getColumnDimension('D')->setWidth(15);
-    $sheet->getColumnDimension('E')->setWidth(40);
+    $sheet->getColumnDimension('E')->setWidth(50);
     $sheet->getColumnDimension('F')->setWidth(10);
 
     $i = 2;
@@ -109,7 +161,7 @@ if ($USER->IsAuthorized() && $USER->IsAdmin()) {
                 } else {
                     $sheet->setCellValueByColumnAndRow(3, $i, 'отсутствует');
                 }
-                $sheet->setCellValueByColumnAndRow(4, $i, $item['offer']['name']);
+                $sheet->setCellValueByColumnAndRow(4, $i, $offerHelper[$item['offer']['id']]);
                 $sheet->setCellValueByColumnAndRow(5, $i, $item['quantity']);
                 $sheet->getStyleByColumnAndRow(0, $i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                 $sheet->getStyleByColumnAndRow(1, $i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
