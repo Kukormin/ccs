@@ -138,7 +138,7 @@ while ($arDiscount = $dbDiscounts->Fetch()) {
 // выгрузка цен
 $dbProducts = CIBlockElement::GetList(
     [],
-    ['IBLOCK_TYPE' => 'catalog', 'ID' => 561],
+    ['IBLOCK_TYPE' => 'catalog'],
     false,
     false,
     ['ID', 'CATALOG_GROUP_' . $basePriceId]
@@ -153,13 +153,11 @@ while ($arProduct = $dbProducts->Fetch()) {
         "s1"
     );
 
-    if (empty($arDiscounts)) {
-        continue;
-    }
+    if (empty($arDiscounts)) continue;
 
     $dbOffers = CIBlockElement::GetList(
         [],
-        ['IBLOCK_TYPE' => 'offers', 'PROPERTY_CML2_LINK' => $arProduct['ID']],
+        ['IBLOCK_ID' => [34,39,41,31,23,15], 'IBLOCK_TYPE' => 'offers', 'PROPERTY_CML2_LINK' => $arProduct['ID']],
         false,
         false,
         ['ID', 'PARENT_ID', 'CATALOG_GROUP_' . $basePriceId]
@@ -169,7 +167,6 @@ while ($arProduct = $dbProducts->Fetch()) {
         $arOffer['PARENT_ID'] = $arProduct['ID'];
         $priceId = $arOffer['CATALOG_PRICE_ID_' . $basePriceId];
         $price = $arOffer['CATALOG_PRICE_' . $basePriceId];
-
         $prices = [];
         foreach ($arDiscounts as $arDiscount) {
             $prices[$arDiscount['ID']] = CCatalogProduct::CountPriceWithDiscount($price, $currencyCode, [$arDiscount]);
@@ -187,7 +184,7 @@ while ($arProduct = $dbProducts->Fetch()) {
         $allProducts[$arProduct['ID']] = $prices;
     }
 }
-
+echo "<pre>";print_r($allProducts);echo "</pre>";
 $allProducts = array_chunk($allProducts, 250, true);
 
 foreach ($allProducts as $chunk) {
