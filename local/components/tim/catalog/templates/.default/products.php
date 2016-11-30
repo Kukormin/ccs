@@ -116,6 +116,12 @@ if ($iEnd > 1) {
 		$iFinish = $iEnd;
 	}
 
+	$url = $component->filter['URL'];
+	if (strpos($url, '?') !== false)
+		$urlPage = $url . '&page=';
+	else
+		$urlPage = $url . '?page=';
+
 	?>
 	<div class="js-catalog-pager">
 	<div class="b-content-center b-pagination b-title--border-top">
@@ -123,12 +129,12 @@ if ($iEnd > 1) {
 
 			if ($iCur > 1) {
 				if ($iCur == 2)
-					$href = $APPLICATION->GetCurPageParam('', array('page'));
+					$href = $url;
 				else
-					$href = $APPLICATION->GetCurPageParam('page=' . ($iCur-1), array('page'));
+					$href = $urlPage . ($iCur-1);
 				?>
 				<li class="b-pagination__item b-pagination--prev">
-				<a class="b-pagination_link" href="<?= $href ?>" data-page="<?= ($iCur-1) ?>"></a>
+					<a class="b-pagination_link" href="<?= $href ?>" data-page="<?= ($iCur-1) ?>"></a>
 				</li><?
 			}
 			else {
@@ -138,10 +144,10 @@ if ($iEnd > 1) {
 				</li><?
 			}
 			if ($iStart > 1) {
-				$href = $APPLICATION->GetCurPageParam('', array('page'));
+				$href = $url;
 				?>
 				<li class="b-pagination__item">
-				<a class="b-pagination_link" href="<?= $href ?>" data-page="1">1</a>
+					<a class="b-pagination_link" href="<?= $href ?>" data-page="1">1</a>
 				</li><?
 
 				if ($iStart > 2) {
@@ -155,17 +161,17 @@ if ($iEnd > 1) {
 				if ($i == $iCur) {
 					?>
 					<li class="b-pagination__item">
-					<span class="b-pagination_link active"><?= $i ?></span>
+						<span class="b-pagination_link active"><?= $i ?></span>
 					</li><?
 				}
 				else {
 					if ($i == 1)
-						$href = $APPLICATION->GetCurPageParam('', array('page'));
+						$href = $url;
 					else
-						$href = $APPLICATION->GetCurPageParam('page=' . $i, array('page'));
+						$href = $urlPage . $i;
 					?>
 					<li class="b-pagination__item">
-					<a class="b-pagination_link" href="<?= $href ?>" data-page="<?= $i ?>"><?= $i ?></a>
+						<a class="b-pagination_link" href="<?= $href ?>" data-page="<?= $i ?>"><?= $i ?></a>
 					</li><?
 				}
 			}
@@ -177,14 +183,14 @@ if ($iEnd > 1) {
 					</li><?
 				}
 
-				$href = $APPLICATION->GetCurPageParam('page=' . $iEnd, array('page'));
+				$href = $urlPage . $iEnd;
 				?>
 				<li class="b-pagination__item">
 				<a class="b-pagination_link" href="<?= $href ?>" data-page="<?= $iEnd ?>"><?= $iEnd ?></a>
 				</li><?
 			}
 			if ($iCur < $iEnd) {
-				$href = $APPLICATION->GetCurPageParam('page=' . ($iCur+1), array('page'));
+				$href = $urlPage . ($iCur+1);
 				?>
 				<li class="b-pagination__item b-pagination--next">
 				<a class="b-pagination_link" href="<?= $href ?>" data-page="<?= ($iCur+1) ?>"></a>

@@ -83,6 +83,8 @@ class Filter
 			'CUR_FILTERS' => self::getCurrentFilters($searchQuery),
 			// Seo
 			'SEO' => self::getSeoValues($searchQuery),
+		    // текущий урл
+		    'URL' => self::getUrlWithoutGroup($searchQuery),
 		);
 	}
 
