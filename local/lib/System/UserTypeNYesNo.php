@@ -27,6 +27,10 @@ class UserTypeNYesNo
 				__CLASS__,
 				'GetAdminFilterHTML'
 			),
+			/*'GetSettingsHTML' => array(
+				__CLASS__,
+				'GetSettingsHTML'
+			),*/
 			'ConvertToDB' => array(
 				__CLASS__,
 				'ConvertToDB'

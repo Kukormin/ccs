@@ -313,6 +313,20 @@ class Products
 
 			if ($productIds)
 			{
+				$return['NAV'] = array(
+					'COUNT' => count($productIds),
+					'PAGE' => $nav['iNumPage'],
+				);
+
+				// В случае поиска - ручная пагинация
+				if ($sort['SEARCH'] == 'asc' && $nav)
+				{
+					$l = $nav['nPageSize'];
+					$offset = ($nav['iNumPage'] - 1) * $l;
+					$productIds = array_slice($productIds, $offset, $l);
+					$nav = false;
+				}
+
 				// Товары
 				$iblockElement = new \CIBlockElement();
 				$rsItems = $iblockElement->GetList($sort, array(
@@ -345,6 +359,7 @@ class Products
 					$return['ITEMS'][$item['ID']] = $product;
 				}
 
+				// Восстановление сортировки для поиска
 				if ($sort['SEARCH'] == 'asc')
 				{
 					$items = array();
@@ -355,11 +370,6 @@ class Products
 					}
 					$return['ITEMS'] = $items;
 				}
-
-				$return['NAV'] = array(
-					'COUNT' => $rsItems->NavRecordCount,
-					'PAGE' => $rsItems->NavPageNomer,
-				);
 			}
 
 			$extCache->endDataCache($return);
@@ -592,23 +602,39 @@ class Products
 	public static function viewedCounters($productId)
 	{
 		\CIBlockElement::CounterInc($productId);
-
-		if (isset($_SESSION['usee']))
-		{
-			if (!in_array($productId, $_SESSION['usee'])) {
-				$_SESSION['usee'][] = $productId;
-			}
-		}
 	}
 
+	/**
+	 * Формирует поисковый контент для товара
+	 * (добавляет категорию в заголовок и праздник в текст)
+	 * @param $arFields
+	 * @return mixed
+	 */
 	public static function beforeSearchIndex($arFields)
 	{
 		$productId = intval($arFields['ITEM_ID']);
 		if ($productId && array_key_exists('BODY', $arFields))
 		{
-			$product = self::getById($productId);
-			foreach ($product['OFFERS'] as $offer)
-				$arFields['BODY'] .= ' ' . $offer['ARTICLE'];
+			$product = self::getSimpleById($productId);
+			if ($product)
+			{
+				// Название категории в заголовок
+				$category = Categories::getById($product['CATEGORY']);
+				$arFields['TITLE'] .= ' ' . $category['NAME'];
+
+				// Праздники в тело
+				foreach ($product['HOLIDAY'] as $hid)
+				{
+					$h = Holidays::getById($hid);
+					$arFields['BODY'] .= ' ' . $h['NAME'];
+				}
+				// Флаги в тело
+				$flags = Flags::getAll();
+				foreach ($flags as $group)
+					foreach ($group as $item)
+						if ($product[$item['CODE']])
+							$arFields['BODY'] .= ' ' . $item['NAME'];
+			}
 		}
 
 		return $arFields;

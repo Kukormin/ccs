@@ -749,13 +749,4 @@ class Filter
 			$res[] = $tmp;
 	}
 
-	/**
-	 * Очищает кеш, связанный с товарами каталога
-	 */
-	public static function clearCatalogCache()
-	{
-		$phpCache = new \CPHPCache();
-		$phpCache->CleanDir(static::CACHE_PATH . 'getGroupsWithVars');
-	}
-
 }

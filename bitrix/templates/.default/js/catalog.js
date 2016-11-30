@@ -424,7 +424,7 @@ var Detail = {
 		var modalId = '#modal_' + id;
 		Detail.overlay.show();
 		if (!$(modalId).length) {
-			var url = '/include/item_modal.php?id=' + id;
+			var url = '/ajax/product_modal.php?id=' + id;
 			$.get(url, function (data) {
 				Detail.modals.append(data);
 				Detail.showModal(modalId);

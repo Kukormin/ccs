@@ -5,6 +5,8 @@ $product = \Local\Catalog\Products::getById($_REQUEST['id']);
 if (!$product)
 	return;
 
+\Local\Catalog\Products::viewedCounters($product['ID']);
+
 $disc = $product['ACTION'] ? ' b-modal--cupcake-discont' : '';
 $select = empty($product['OFFERS']) ? ' without_select' : '';
 
@@ -89,32 +91,8 @@ $select = empty($product['OFFERS']) ? ' without_select' : '';
 					<span class="v"><?= number_format($price, 0, '', ' ') ?></span>
 					<span class="rub">i</span>
 				</div>
-			</div><?
+			</div>
 
-			/*if ($product['ACTION'])
-			{
-				?>
-				<div
-					class="b-old--total-price b-history-total--price b-modal-cupcake-total--price js-modal-priceblock js-priceblock"
-					data-price="<?= $item['MIN_PRICE']['DISCOUNT_VALUE']; ?>"
-					data-oldprice="<?= $item['MIN_PRICE']['VALUE']; ?>">
-					<div class="b-old-price"> <?= number_format($item['MIN_PRICE']['VALUE'], 0, '', ' '); ?> <span
-							class="rub">i</span></div>
-					<div
-						class="b-new-price"> <?= number_format($item['MIN_PRICE']['DISCOUNT_VALUE'], 0, '', ' '); ?>
-						<span class="rub">i</span></div>
-				</div><?
-			}
-			else
-			{
-				?>
-				<div class="b-history-total--price b-modal-cupcake-total--price js-modal-priceblock js-priceblock"
-				     data-price="<?= $price ?>" data-oldprice="0">
-					<?= number_format($price, 0, '', ' ') ?> <span class="rub">i</span>
-				</div><?
-			}*/
-
-			?>
 			<button class="b-bnt-form b-bnt-modal-cupcake--white js-add-to-basket"
 			        data-id="<?= $product['ID'] ?>" data-offer="<?= $offerId ?>"
 			        data-href="/personal/cart">в корзину</button>

@@ -96,25 +96,8 @@ class TimCatalog extends \CBitrixComponent
 
 		if ($this->product)
 		{
-			/*$this->arResult['IN_BASKET'] = false;
-
-			if (
-				!empty($this->arResult['PRODUCT']['OFFERS'])
-				&& Loader::includeModule('sb.main')
-			)
-			{
-				$this->arResult['IN_BASKET'] = (BasketTable::getList(array(
-					'filter' => array(
-						'FUSER_ID' => CSaleBasket::GetBasketUserID(),
-						'=ORDER_ID' => false,
-						'=PRODUCT_ID' => array_keys($this->arResult['PRODUCT']['OFFERS'])
-					),
-					'limit' => 1
-				))->getSelectedRowsCount() > 0);
-			}
-
 			// Счетчик просмотренных
-			Products::viewedCounters($this->arResult['PRODUCT']['ID']);*/
+			Products::viewedCounters($this->product['ID']);
 		}
 		else
 		{

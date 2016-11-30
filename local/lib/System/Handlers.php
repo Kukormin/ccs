@@ -243,8 +243,8 @@ class Handlers
 	 */
 	public static function beforeSearchIndex($arFields)
 	{
-		/*if ($arFields["MODULE_ID"] == "iblock" && $arFields["PARAM2"] == Products::IB_PRODUCTS)
-			$arFields = Products::beforeSearchIndex($arFields);*/
+		if ($arFields['MODULE_ID'] == 'iblock' && $arFields['PARAM2'] == Products::IB_PRODUCTS)
+			$arFields = Products::beforeSearchIndex($arFields);
 
 		return $arFields;
 	}
