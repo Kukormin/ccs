@@ -3,14 +3,14 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("О компании");
 ?><section class="b-topblock b-topblock--about">
 <div class="b-about-text">
-	<h1><div class="b-about-top-text__title">
+	<h1>
+	<div class="b-about-top-text__title">
 		 Добро пожаловать в&nbsp;сладкий, волшебный мир Cupcake Story!
-	</div></h1>
+	</div>
+ </h1>
 	<div class="b-about-top-text__sub">
  <span class="b-about-top-text__sub-item">
-		Cupcake Story &mdash; это сладкий, звездный проект Сергея Жукова и Регины Бурд . Cupcake Story &mdash; это не просто кондитерская, создающая дизайнерские капкейки и десерты для особенных событий вашей жизни. Это семья, вкладывающая в каждый заказ частичку души и создающая маленькую, вкусную историю для вас и ваших близких. </span>
-<span class="b-about-top-text__sub-item">Cupcake Story &mdash; это более 50 потрясающих вкусов, неповторимый дизайн каждого капкейка и торта, натуральные ингредиенты и индивидуальный подход к каждому вашему заказу!</span><span class="b-about-top-text__sub-item"> 
-Выбрав кондитерскую Cupcake Story один раз, вы непременно захотите стать частичкой сладкой семьи и останетесь с нами надолго.</span>
+		Cupcake Story — это сладкий, звездный проект Сергея Жукова и Регины Бурд . Cupcake Story — это не просто кондитерская, создающая дизайнерские капкейки и десерты для особенных событий вашей жизни. Это семья, вкладывающая в каждый заказ частичку души и создающая маленькую, вкусную историю для вас и ваших близких. </span> <span class="b-about-top-text__sub-item">Cupcake Story — это более 50 потрясающих вкусов, неповторимый дизайн каждого капкейка и торта, натуральные ингредиенты и индивидуальный подход к каждому вашему заказу!</span><span class="b-about-top-text__sub-item"> Выбрав кондитерскую Cupcake Story один раз, вы непременно захотите стать частичкой сладкой семьи и останетесь с нами надолго.</span>
 	</div>
 </div>
  </section> <section class="b-bg-grey">
@@ -32,7 +32,7 @@ $APPLICATION->SetTitle("О компании");
  <img src="/bitrix/templates/.default/images/pic/about-pic2.png" alt="">
 		</div>
 		<div class="b-ingredients__text">
-			 Мы предлагаем самое большое разнообразие вкусов капкейков и макаронс! Собирая рецепты, ароматы и вкусовые сочетания со всего света, мы создаем свои уникальные капкейки, которые могут порадовать самого искушенного сладкоежку.
+			 Мы предлагаем самое большое разнообразие вкусов капкейков и эклеров! Собирая рецепты, ароматы и вкусовые сочетания со всего света, мы создаем свои уникальные капкейки, которые могут порадовать самого искушенного сладкоежку.
 		</div>
  </li>
 		<li class="b-ingredients__item">
@@ -64,17 +64,16 @@ $APPLICATION->SetTitle("О компании");
  <img src="/bitrix/templates/.default/images/pic/about-pic6.png" alt="">
 		</div>
 		<div class="b-ingredients__text">
-			 Мы делаем наши капкейки не только вкусными, но и красивыми! Помимо классического, авторского дизайна, Вы всегда можете заказать индивидуальный дизайн капкейков и макаронс для вашего торжества!
+			 Мы делаем наши капкейки не только вкусными, но и красивыми! Помимо классического, авторского дизайна, Вы всегда можете заказать индивидуальный дизайн капкейков и эклеров для вашего торжества!
 		</div>
  </li>
 	</ul>
 </div>
  <?$APPLICATION->IncludeComponent(
-	"bitrix:photogallery", 
-	"cupcake_gallery", 
-	array(
-		"ADDITIONAL_SIGHTS" => array(
-		),
+	"bitrix:photogallery",
+	"cupcake_gallery",
+	Array(
+		"ADDITIONAL_SIGHTS" => array(),
 		"ALBUM_PHOTO_SIZE" => "120",
 		"CACHE_TIME" => "3600",
 		"CACHE_TYPE" => "A",
@@ -100,9 +99,7 @@ $APPLICATION->SetTitle("О компании");
 		"SEF_MODE" => "N",
 		"SET_TITLE" => "N",
 		"SHOWN_ITEMS_COUNT" => "50",
-		"SHOW_LINK_ON_MAIN_PAGE" => array(
-			0 => "comments",
-		),
+		"SHOW_LINK_ON_MAIN_PAGE" => array(0=>"comments",),
 		"SHOW_NAVIGATION" => "N",
 		"SHOW_TAGS" => "N",
 		"THUMBNAIL_SIZE" => "100",
@@ -111,16 +108,10 @@ $APPLICATION->SetTitle("О компании");
 		"USE_LIGHT_VIEW" => "Y",
 		"USE_RATING" => "N",
 		"USE_WATERMARK" => "Y",
+		"VARIABLE_ALIASES" => array("SECTION_ID"=>"SECTION_ID","ELEMENT_ID"=>"ELEMENT_ID","PAGE_NAME"=>"PAGE_NAME","ACTION"=>"ACTION",),
 		"WATERMARK_MIN_PICTURE_SIZE" => "800",
-		"WATERMARK_RULES" => "USER",
-		"VARIABLE_ALIASES" => array(
-			"SECTION_ID" => "SECTION_ID",
-			"ELEMENT_ID" => "ELEMENT_ID",
-			"PAGE_NAME" => "PAGE_NAME",
-			"ACTION" => "ACTION",
-		)
-	),
-	false
+		"WATERMARK_RULES" => "USER"
+	)
 );?>
 <div class="b-content-center b-slider-about-novelty">
 	<div class="b-title b-title--border-middle">

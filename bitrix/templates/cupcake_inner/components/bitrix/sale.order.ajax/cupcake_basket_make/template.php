@@ -363,7 +363,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 	</div><?
 
 	// !!! Костыль для отключения доставок
-	if ($arResult['ORDER_PRICE'] >= 1200)
+	if ($arResult['ORDER_PRICE'] >= 2000)
 	{
 		?>
 		<div class="b-method-shipping__line b-method-shipping__line--last">
