@@ -13,10 +13,14 @@ class Export
 	protected $fp;
 	protected $url;
 
+	/**
+	 * Сохраняет каталог в xml файл
+	 * @return bool
+	 */
 	public function start()
 	{
 		$this->url = 'http://cupcakestory.ru';
-		$this->filename = $_SERVER["DOCUMENT_ROOT"] . '/bitrix/catalog_export/intarocrm1.xml';
+		$this->filename = $_SERVER["DOCUMENT_ROOT"] . '/bitrix/catalog_export/new_catalog.xml';
 
 		$this->fp = $this->prepareFile($this->filename. '.tmp');
 		if (!$this->fp)

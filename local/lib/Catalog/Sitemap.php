@@ -12,6 +12,10 @@ class Sitemap
 	protected $fp;
 	protected $url;
 
+	/**
+	 * Обновляет файл sitemap.xml
+	 * @return bool
+	 */
 	public function start()
 	{
 		$this->url = 'http://cupcakestory.ru';

@@ -1,6 +1,7 @@
 <?
 
 namespace Local\Sale;
+
 use Local\Catalog\Categories;
 use Local\System\ExtCache;
 
@@ -112,24 +113,5 @@ class Package
 
 		return $return;
 	}
-
-	/**
-	 * Возвращает упаковку по названию и ID инфоблока
-	 * @param $name
-	 * @param $iblockId
-	 * @return array
-	 */
-	/*public static function getByName($name, $iblockId)
-	{
-		$all = self::getAll();
-		$packIblockId = $all['MAP'][$iblockId];
-		foreach ($all['BY_IBLOCK_ID'][$packIblockId] as $id)
-		{
-			$item = $all['ITEMS'][$id];
-			if ($item['NAME'] == $name)
-				return $item;
-		}
-		return array();
-	}*/
 
 }

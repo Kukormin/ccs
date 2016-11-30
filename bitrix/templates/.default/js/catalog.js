@@ -413,29 +413,32 @@ var Detail = {
 		this.overlay = $('.overlay');
 		this.countSelect = $('.js_detail_count');
 		this.addBtn = $('.js-add-to-basket');
+		this.pickupBtn = $('#js_show_delivery_popup');
+		this.pickupModal = $('.js_delivery_modal');
 
 		this.cont.on('click', '.quick-detail', this.loadModal);
 		this.countSelect.on('change', this.countChange);
 		this.addBtn.click(this.addToCart);
 		this.modals.on('change', '.js_detail_count', this.countChange);
 		this.modals.on('click', '.js-add-to-basket', this.addToCart);
+		this.pickupBtn.click(this.showPickupPopup);
 	},
 	loadModal: function() {
 		var id = $(this).data('id');
-		var modalId = '#modal_' + id;
+		var modal = $('#modal_' + id);
 		Detail.overlay.show();
-		if (!$(modalId).length) {
+		if (!modal.length) {
 			var url = '/ajax/product_modal.php?id=' + id;
 			$.get(url, function (data) {
 				Detail.modals.append(data);
-				Detail.showModal(modalId);
+				Detail.showModal(modal);
 			});
 		}
 		else
-			Detail.showModal(modalId);
+			Detail.showModal(modal);
 	},
-	showModal: function(modalId) {
-		$(modalId).show().css('top', $(window).scrollTop() + 25 + "px");
+	showModal: function(modal) {
+		modal.show().css('top', $(window).scrollTop() + 25 + "px");
 	},
 	countChange: function () {
 		var id = $(this).val();
@@ -483,6 +486,12 @@ var Detail = {
 			v = v.substr(0, x) + ' ' + v.substr(x);
 		}
 		return v;
+	},
+	showPickupPopup: function() {
+		console.log(Detail.addBtn.data('offer'));
+		Detail.pickupModal.find('#offer_id').val(Detail.addBtn.data('offer'));
+		Detail.overlay.show();
+		Detail.showModal(Detail.pickupModal);
 	}
 };
 

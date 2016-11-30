@@ -1,8 +1,5 @@
 <?
-
 namespace Local\Catalog;
-
-use Local\System\ExtCache;
 
 /**
  * Class Filter Панель фильтров, формирование свойств страницы, в зависимости от выбранных фильтров
@@ -53,21 +50,16 @@ class Filter
 	 */
 	public static function getData($searchIds = array(), $searchQuery = '')
 	{
-		// Получаем все свойства для фильтров
-		// (Состояние, когда мы в корне каталога и ни один фильтр не выбран пользователем)
+		// Получаем все свойства для фильтров в сгруппированном виде
 		self::$GROUPS = self::getGroups();
-
-		// ------ Далее работа в случае, если выбран какой-нибудь фильтр -------
 		// Помечаем выбранные пользователем варианты
 		$cnt = self::setChecked();
 		// Формируем фильтры для каждого свойства, чтобы отсеять варианты с учетом пользовательских фильтров
 		self::getUserFilter($searchIds);
 		// Получаем товары для всех фильтров
 		self::getProductsByFilters();
-		// Проверяем на пустой результат и редиректим
-		//self::checkEmptyResult();
 		// Скрываем варианты, которые не попали в пользовательский фильтр
-		// (напр. в куртках не представлен бренд Asics)
+		// (напр. среди новинок нет тортов)
 		self::hideVars();
 
 		$data = self::$DATA_BY_KEY[self::$PRODUCTS_KEY];
@@ -285,7 +277,7 @@ class Filter
 	}
 
 	/**
-	 * Получаем ID товаров для всех фильтров
+	 * Получаем данные для всех фильтров
 	 */
 	public static function getProductsByFilters()
 	{
@@ -295,18 +287,8 @@ class Filter
 	}
 
 	/**
-	 * Проверка на пустой результат и редирект если нужно
-	 */
-	public static function checkEmptyResult()
-	{
-		$data = self::$DATA_BY_KEY[self::$PRODUCTS_KEY];
-		if (!$data['COUNT'])
-			LocalRedirect(self::$CATALOG_PATH);
-	}
-
-	/**
 	 * Помечаем скрытыми варианты свойств, которых нет среди товаров, отфильтрованных пользователем
-	 * (выставляем количество товаров FCNT, если оно = 0, то вариант считается скрытым)
+	 * (выставляем количество товаров CNT, если оно = 0, то вариант считается скрытым)
 	 */
 	public static function hideVars()
 	{
@@ -402,7 +384,12 @@ class Filter
 		return $return;
 	}
 
-
+	/**
+	 * Возвращает url для быстрых плашек
+	 * @param string $searchQuery
+	 * @param bool $groupKey
+	 * @return string
+	 */
 	private static function getUrlWithoutGroup($searchQuery = '', $groupKey = false)
 	{
 		$href = self::$CATALOG_PATH;
@@ -478,13 +465,9 @@ class Filter
 			if ($group['TYPE'] == 'price')
 			{
 				if (isset($group['FROM']) && $group['FROM'] > $group['MIN'])
-				{
 					$name = 'от ' . $group['FROM'];
-				}
 				if (isset($group['TO']) && $group['TO'] < $group['MAX'])
-				{
 					$name .= ' до ' . $group['TO'];
-				}
 			}
 			else
 			{
@@ -633,6 +616,11 @@ class Filter
 		);
 	}
 
+	/**
+	 * Формирует ссылки для карты сайта
+	 * (перебирает разные фильтры и проверяет, есть ли товары для них)
+	 * @return array
+	 */
 	public static function getSiteMap()
 	{
 		$parts = array();
@@ -723,6 +711,7 @@ class Filter
 		return $return;
 	}
 
+	// Служебный метод для комбинирования фильтров
 	private static function f1($i, $l, $parts, $tmp, $cur, $max, &$res, $sep)
 	{
 		if ($i < $l && $cur < $max)
@@ -735,6 +724,7 @@ class Filter
 			$res[] = $tmp;
 	}
 
+	// Служебный метод для комбинирования фильтров
 	private static function f2($i, $l, $parts, &$tmp, &$res)
 	{
 		if ($i < $l)

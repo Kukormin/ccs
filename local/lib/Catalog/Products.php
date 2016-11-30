@@ -1,6 +1,7 @@
 <?
 
 namespace Local\Catalog;
+
 use Bitrix\Iblock\InheritedProperty\ElementValues;
 use Local\Sale\Package;
 use Local\System\ExtCache;

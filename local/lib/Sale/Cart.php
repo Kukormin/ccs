@@ -1,5 +1,6 @@
 <?
 namespace Local\Sale;
+
 use Bitrix\Sale\Compatible\BasketCompatibility;
 use Local\Catalog\Products;
 
@@ -189,6 +190,12 @@ class Cart
 		return 0;
 	}
 
+	/**
+	 * Замена предложения для товара
+	 * @param $bid
+	 * @param $oid
+	 * @return int
+	 */
 	public static function offer($bid, $oid)
 	{
 		$saleBasket = new \CSaleBasket();

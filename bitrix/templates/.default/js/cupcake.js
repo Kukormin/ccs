@@ -1360,21 +1360,6 @@ $(document).ready(function () {
 		$('.b-footer-copy, .b-footer-nav__item a, .b-footer-phones').addClass('b-footer-text-color');
 	}
 
-	$('#js_show_delivery_popup').click(function () {
-		$('.overlay').show();
-		$('.js_delivery_modal').show().css('top', $(window).scrollTop() + 25 + "px");
-		if ($('.js_cupcake_number').length > 0) {
-			$('.popup_el_id').val($('.js_cupcake_number').selected().val());
-		} else {
-			$('.popup_el_id').val($('.js-modal-window').data('id'));
-		}
-		if ($(window).width() < 500) {
-			$('body').css('overflow', 'hidden');
-			$('.b-modal').addClass('js-active');
-		}
-		$('.popup_quantity').val(parseInt($('.js-modal-counter').html()));
-	});
-
 	/*$(".carousel-main .details h3").dotdotdot({
 	 ellipsis	: '... ',
 	 height		: 30,

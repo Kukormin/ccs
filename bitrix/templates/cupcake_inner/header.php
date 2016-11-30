@@ -18,20 +18,20 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-	<link href="/bitrix/templates/.default/css/slick.css?v=6" rel="stylesheet" type="text/css"/>
-	<link href="/bitrix/templates/.default/css/about.css?v=12" rel="stylesheet" type="text/css"/>
-	<link href="/bitrix/templates/.default/template_styles.css?v=12" rel="stylesheet" type="text/css"/>
-	<link href="/bitrix/templates/.default/css/cupcake-media.css?v=11" rel="stylesheet" type="text/css"/>
-	<link href="/bitrix/templates/.default/css/featherlight.css?v=6" rel="stylesheet" type="text/css"/>
+	<link href="/bitrix/templates/.default/css/slick.css?v=7" rel="stylesheet" type="text/css"/>
+	<link href="/bitrix/templates/.default/css/about.css?v=13" rel="stylesheet" type="text/css"/>
+	<link href="/bitrix/templates/.default/template_styles.css?v=13" rel="stylesheet" type="text/css"/>
+	<link href="/bitrix/templates/.default/css/cupcake-media.css?v=12" rel="stylesheet" type="text/css"/>
+	<link href="/bitrix/templates/.default/css/featherlight.css?v=7" rel="stylesheet" type="text/css"/>
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.stellar.min.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/nouislider.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/featherlight.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/slick.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.suggestions.min.js"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=8"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=9"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/share.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/additional.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.validate.min.js?v=6"></script>
@@ -39,8 +39,8 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=7"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/catalog.js?v=1"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/iphone-style-checkboxes.js?v=1"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/catalog.js?v=2"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/iphone-style-checkboxes.js?v=2"></script>
 
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

@@ -56,7 +56,7 @@ class Seo
 			    'PROPERTY_H1',
 			    'PROPERTY_TEXT',
 			));
-			while ($item = $rsItems->Fetch())
+			if ($item = $rsItems->Fetch())
 			{
 				$return = array(
 					'CHILDREN' => $item['PROPERTY_CHILDREN_VALUE'] == 1,

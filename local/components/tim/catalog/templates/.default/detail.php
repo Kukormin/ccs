@@ -110,11 +110,11 @@ $product = $component->product;
 						        data-href="/personal/cart">в корзину</button>
 					</div><?
 
-					?>
+					/*?>
 					<div class="b-delivery_popup">
 						Самовывоз — бесплатно,
 						<span class="show_delivery_popup" id="js_show_delivery_popup">выбрать магазин</span>.
-					</div><?
+					</div><?*/
 
 					?>
 				</div>
@@ -209,86 +209,58 @@ $product = $component->product;
 		?>
 	</section><?
 
-	/*
-	$category = '';
-	$cat = CIBlock::GetByID($arResult['IBLOCK_ID']);
-	if ($ar_res = $cat->GetNext())
-		$category = $ar_res['NAME'];
+	// TODO: вынести в js
 	?>
 	<script>
 		$(document).ready(function () {
-			dataLayer.push({
-				'ecommerce': {
-					'currencyCode': 'RUR',
-					'impressions': [{
-						'name': '<?=$arResult['
-							NAME ']?>',
-						'id': '<?=$arResult['
-							ID ']?>',
-						'price': '<?=$arResult['
-							MIN_PRICE ']['
-							VALUE ']?>',
-						'category': '<?=$category?>'
-					}]
-				}
-			});
-			$('.js-modal-tobasket').click(function () {
-				if ($('.js-modal-tobasket').html() == 'в корзину') {
-					dataLayer.push({
-						'event': 'addToCart',
-						'ecommerce': {
-							'currencyCode': 'RUR',
-							'add': {
-								'products': [{
-									'name': '<?=$arResult['
-										NAME ']?>',
-									'id': '<?=$arResult['
-										ID ']?>',
-									'price': '<?=$arResult['
-										MIN_PRICE ']['
-										VALUE ']?>',
-									'category': '<?=$category?>',
-									'quantity': parseInt($('.js-modal-counter').html())
-								}]
+			if (typeof(dataLayer) != 'undefined') {
+				dataLayer.push({
+					'ecommerce': {
+						'currencyCode': 'RUR',
+						'impressions': [{
+							'name': '<?= $product['NAME'] ?>',
+							'id': '<?= $product['ID '] ?>',
+							'price': '<?= $price ?>',
+							'category': '<?= $product['CATEGORY']['NAME'] ?>'
+						}]
+					}
+				});
+				$('.js-add-to-basket').click(function () {
+					if ($('.js-add-to-basket').html() == 'в корзину') {
+						dataLayer.push({
+							'event': 'addToCart',
+							'ecommerce': {
+								'currencyCode': 'RUR',
+								'add': {
+									'products': [{
+										'name': '<?= $product['NAME'] ?>',
+										'id': '<?= $product['ID '] ?>',
+										'price': '<?= $price ?>',
+										'category': '<?= $product['CATEGORY']['NAME'] ?>',
+										'quantity': 1
+									}]
+								}
 							}
-						}
-					});
-				}
-			});
+						});
+					}
+				});
+			}
 		});
 	</script><?
-	*/
 
 	?>
 </div>
 
 
-	<!--modal delivery-->
 <div class="b-modal-personal_account js_delivery_modal" style="display: none">
-	<span class="b-close-modal">close</span>
-	<!-- form -->
-	<?
-	$arUser = array();
-	$pickupAddr = array();
-	$i = 0;
+	<span class="b-close-modal">close</span><?
 
+	$arUser = array();
 	$user_id = $USER->GetID();
 	if (isset($user_id) && $user_id != '')
 	{
 		$rsUser = $USER->GetByID($user_id);
 		$arUser = $rsUser->Fetch();
-	}
-
-	$result = CIBlockElement::GetList(array(), array('IBLOCK_ID' => 27), false, false, array(
-			'*',
-			'PROPERTY_PICKUP_ADR',
-			'PROPERTY_SCHEDULE'
-		));
-	while ($item = $result->fetch())
-	{
-		$pickupAddr[$i]['addr'] = $item['PROPERTY_PICKUP_ADR_VALUE'];
-		$pickupAddr[$i]['sch'] = $item['PROPERTY_SCHEDULE_VALUE'];
-		$i++;
 	}
 
 	?>
@@ -303,59 +275,63 @@ $product = $component->product;
 						<div class="b-personal_account__form-wrap">
 							<form name="delivery" action="/include/cart_sd_step.php" method="post"
 							      enctype="multipart/form-data">
-								<input type="hidden" name="form_type" value="popup">
-								<input class="popup_el_id" type="hidden" name="product_id" value="">
-								<input class="popup_quantity" type="hidden" name="quantity" value="">
+								<input type="hidden" name="form_type" value="popup" />
+								<input type="hidden" name="product_id" value="<?= $product['ID '] ?>" />
+								<input type="hidden" name="offer_id" value="<?= $offerId ?>" />
 
 								<div class="b-personal_account__form--line">
-									<!--form item-->
 									<div class="pickup-personal-info">
 										<div class="b-personal_account__form-item popup-form-item">
-											<label for=""> как вас зовут</label>
-
+											<label for="">как вас зовут</label>
 											<div class="b-form-item__input">
 												<input type="text" name="NAME" value="<?= $arUser["NAME"] ?>"/>
 											</div>
 										</div>
 										<div class="b-personal_account__form-item popup-form-item">
-											<label for=""> адрес эл. почты</label>
-
+											<label for="">адрес эл. почты</label>
 											<div class="b-form-item__input">
 												<input class="" type="text" name="EMAIL"
 												       value="<?= $arUser["EMAIL"] ?>"/>
 											</div>
 										</div>
 										<div class="b-personal_account__form-item popup-form-item">
-											<label for=""> телефон</label>
-
+											<label for="">телефон</label>
 											<div class="b-form-item__input">
 												<input class="" type="text" name="PERSONAL_PHONE"
-												       value="<?= $arUser["PERSONAL_PHONE"] ?>"/>
+												       value="<?= $arUser["PERSONAL_PHONE"] ?>" required />
 											</div>
 										</div>
 									</div>
-									<!--end form item-->
 
 									<div class="b-pickup_address">
 										<div class="pickup-addr-list">Адреса самовывоза</div>
-										<ul>
-											<? foreach ($pickupAddr as $key => $addr): ?>
+										<ul><?
+
+											$shops = \Local\Sale\Shops::getAll();
+											$checked = ' checked';
+											foreach ($shops as $shop)
+											{
+												?>
 												<li>
-													<input class="radio" type="radio" value="<?= $addr['addr'] ?>"
-													       id="addr<?= $key ?>"
-													       name="pickup_adr" <?= $key == 0 ? 'checked' : '' ?>>
-													<label class="b-label-radio"
-													       for="addr<?= $key ?>"><?= $addr['addr'] . ', </br>Время работы: ' . $addr['sch'] ?></label>
-												</li>
-											<? endforeach; ?>
+													<input class="radio" type="radio" value="<?= $shop['ID'] ?>"
+													       id="addr<?= $shop['ID'] ?>" name="pickup_adr"<?= $checked ?>>
+													<label class="b-label-radio" for="addr<?= $shop['ID'] ?>"><?=
+														$shop['ADR'] . ', </br>Время работы: ' . $shop['SCHEDULE'] ?></label>
+												</li><?
+												$checked = '';
+											}
+											?>
 										</ul>
 									</div>
 								</div>
-								<div class="popup-info-text">
-									<? $APPLICATION->IncludeFile('/include/delivery_modal_text.php', array(), array(
-											'MODE' => 'html',
-											'TEMPLATE' => 'page_inc.php',
-										)); ?>
+								<div class="popup-info-text"><?
+
+									$APPLICATION->IncludeFile('/include/delivery_modal_text.php', array(), array(
+										'MODE' => 'html',
+										'TEMPLATE' => 'page_inc.php',
+									));
+
+									?>
 								</div>
 								<button type="submit" class="b-bnt-form">Заказать самовывоз</button>
 							</form>
