@@ -2,42 +2,42 @@
 $aMenuLinks = Array(
 	Array(
 		"Капкейки", 
-		"catalog/cupcakes/", 
+		"/cat/cupcakes/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Торты", 
-		"/catalog/cakes/", 
+		"/cat/cakes/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Пряники", 
-		"/catalog/gingerbread/", 
+		"/cat/gingerbread/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Happy Box", 
-		"/catalog/happybox/", 
+		"/cat/happy/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Эклеры", 
-		"/catalog/eclairs/", 
+		"/cat/eclairs/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Пирожные", 
-		"/catalog/minicakes/", 
+		"/cat/minicakes/",
 		Array(), 
 		Array(), 
 		"" 
