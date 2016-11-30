@@ -45,15 +45,16 @@ class Filter
 	/**
 	 * Возвращает данные для построения панели фильтров, хлебные крошки и ID отфильтрованных товаров
 	 * @param array $searchIds товары, отфильтрованные поисковым запросом
-	 * @param $searchQuery
+	 * @param string $searchQuery
+	 * @param array $urlParams
 	 * @return array
 	 */
-	public static function getData($searchIds = array(), $searchQuery = '')
+	public static function getData($searchIds = array(), $searchQuery = '', $urlParams = array())
 	{
 		// Получаем все свойства для фильтров в сгруппированном виде
 		self::$GROUPS = self::getGroups();
 		// Помечаем выбранные пользователем варианты
-		$cnt = self::setChecked();
+		$cnt = self::setChecked($urlParams);
 		// Формируем фильтры для каждого свойства, чтобы отсеять варианты с учетом пользовательских фильтров
 		self::getUserFilter($searchIds);
 		// Получаем товары для всех фильтров
@@ -121,8 +122,10 @@ class Filter
 
 	/**
 	 * По текущему URL определяет какие из вариантов фильтров нажаты
+	 * @param $urlParams
+	 * @return int
 	 */
-	private static function setChecked()
+	private static function setChecked($urlParams)
 	{
 		$url = urldecode($_SERVER['REQUEST_URI']);
 		$urlDirs = explode('/', $url);
@@ -141,14 +144,14 @@ class Filter
 			$cnt = 0;
 			if ($group['TYPE'] == 'price')
 			{
-				if (isset($_REQUEST['p-from']))
+				if (isset($urlParams['p-from']))
 				{
-					$group['FROM'] = intval($_REQUEST['p-from']);
+					$group['FROM'] = intval($urlParams['p-from']);
 					$cnt++;
 				}
-				if (isset($_REQUEST['p-to']))
+				if (isset($urlParams['p-to']))
 				{
-					$group['TO'] = intval($_REQUEST['p-to']);
+					$group['TO'] = intval($urlParams['p-to']);
 					$cnt++;
 				}
 			}

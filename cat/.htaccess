@@ -1,9 +1,0 @@
-<IfModule mod_rewrite.c>
-	Options +FollowSymLinks
-	RewriteEngine On  
-  
-	RewriteCond %{SCRIPT_FILENAME} !-d
-	RewriteCond %{SCRIPT_FILENAME} !-f
-
-	RewriteRule ^(.*)$ /cat/index.php  [QSA,NC,L]
-</IfModule>

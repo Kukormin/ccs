@@ -41,6 +41,11 @@ class TimCatalog extends \CBitrixComponent
 	);
 
 	/**
+	 * @var array параметры в урле
+	 */
+	private $urlParams;
+
+	/**
 	 * @var array текущая сортировка
 	 */
 	private $sort;
@@ -117,7 +122,7 @@ class TimCatalog extends \CBitrixComponent
 
 			if (!$empty)
 			{
-				$this->filter = Filter::getData($this->searchIds, $this->searchQuery);
+				$this->filter = Filter::getData($this->searchIds, $this->searchQuery, $this->urlParams);
 				$this->products = Products::get($this->sort['QUERY'], $this->filter['PRODUCTS_IDS'], $this->navParams);
 			}
 
@@ -132,10 +137,23 @@ class TimCatalog extends \CBitrixComponent
 	 */
 	private function prepareParameters()
 	{
+		// Без апача редиректы ведут себя странно, поэтому пришлось реализовать вручную
+		$tmp = explode('?', $_SERVER['REQUEST_URI']);
+		$this->urlParams = array();
+		if (count($tmp) > 1)
+		{
+			$ar = explode('&', $tmp[1]);
+			foreach ($ar as $param)
+			{
+				$ar1 = explode('=', $param);
+				$this->urlParams[$ar1[0]] = urldecode($ar1[1]);
+			}
+		}
+
 		//
 		// Поиск
 		//
-		$query = $_REQUEST['q'];
+		$query = $this->urlParams['q'];
 		$this->arResult['~QUERY'] = $query;
 		$this->searchQuery = htmlspecialchars($query);
 
@@ -151,8 +169,8 @@ class TimCatalog extends \CBitrixComponent
 				$defaultSortKey = $key;
 		}
 
-		$sortKey = $_REQUEST['sort'];
-		$sortOrder = $_REQUEST['order'];
+		$sortKey = $this->urlParams['sort'];
+		$sortOrder = $this->urlParams['order'];
 		$sortOrder = $sortOrder == 'asc' ? 'asc' : 'desc';
 		// Если задано непосредственно
 		if ($this->sortParams[$sortKey])
@@ -206,7 +224,7 @@ class TimCatalog extends \CBitrixComponent
 		//
 		// Постраничная навигация
 		//
-		$page = $_REQUEST['page'];
+		$page = $this->urlParams['page'];
 		if (intval($page) <= 0)
 			$page = 1;
 		$this->navParams = array(
