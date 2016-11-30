@@ -43,7 +43,7 @@ class TimCatalog extends \CBitrixComponent
 	/**
 	 * @var array параметры в урле
 	 */
-	private $urlParams;
+	public $urlParams;
 
 	/**
 	 * @var array текущая сортировка
