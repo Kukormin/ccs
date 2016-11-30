@@ -445,7 +445,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 		?>
 		<div class="b-method-shipping__line b-method-shipping__line--last">
 			<div class="b-method-shipping--title js-del-btn">
-				<span>Доставка осуществляется при заказе от 1200 <span class="rub">i</span></span>
+				<span>Доставка осуществляется при заказе от 2000 <span class="rub">i</span></span>
 			</div>
 		</div><?
 	}
