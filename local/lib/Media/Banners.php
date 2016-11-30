@@ -16,7 +16,7 @@ class Banners
 	/**
 	 * ID инфоблока
 	 */
-	const IB_BANNERS = 21;
+	const IB_BANNERS = 51;
 
 	/**
 	 * Возвращает все баннеры с группировкой по разделам
