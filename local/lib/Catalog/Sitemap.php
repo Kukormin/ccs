@@ -2,12 +2,11 @@
 namespace Local\Catalog;
 
 /**
- * Class Export Экспорт каталога
+ * Class Sitemap Генерация карты сайта
  * @package Local\Catalog
  */
-class Export
+class Sitemap
 {
-
 	protected $error;
 	protected $filename;
 	protected $fp;
@@ -16,7 +15,7 @@ class Export
 	public function start()
 	{
 		$this->url = 'http://cupcakestory.ru';
-		$this->filename = $_SERVER["DOCUMENT_ROOT"] . '/bitrix/catalog_export/intarocrm1.xml';
+		$this->filename = $_SERVER["DOCUMENT_ROOT"] . '/sitemap.xml';
 
 		$this->fp = $this->prepareFile($this->filename. '.tmp');
 		if (!$this->fp)
@@ -27,10 +26,10 @@ class Export
 
 		$this->preWrite();
 
-		//$data = $this->getStatic();
-		//$this->writeStatic($data);
-		//$data = Products::export();
-		//$this->write($data);
+		$data = $this->getStatic();
+		$this->writeStatic($data);
+		$data = Filter::getSiteMap();
+		$this->write($data);
 
 		$this->postWrite();
 		$this->closeFile();
@@ -63,20 +62,20 @@ class Export
 	protected function writeStatic($data)
 	{
 		foreach ($data as $url => $p) {
-			@fwrite($this->fp, "\t<url>\n");
+			@fwrite($this->fp, "<url>\n");
 			@fwrite($this->fp, "\t<loc>" . $this->url . $url . "</loc>\n");
 			@fwrite($this->fp, "\t<priority>$p</priority>\n");
-			@fwrite($this->fp, "\t</url>\n");
+			@fwrite($this->fp, "</url>\n");
 		}
 	}
 
 	protected function write($data)
 	{
 		foreach ($data as $url) {
-			@fwrite($this->fp, "\t<url>\n");
+			@fwrite($this->fp, "<url>\n");
 			@fwrite($this->fp, "\t<loc>" . $this->url . $url . "</loc>\n");
 			@fwrite($this->fp, "\t<priority>0.50</priority>\n");
-			@fwrite($this->fp, "\t</url>\n");
+			@fwrite($this->fp, "</url>\n");
 		}
 	}
 

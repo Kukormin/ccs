@@ -18,7 +18,7 @@ class Filter
 	/**
 	 * Разделитель вариантов в URL
 	 */
-	const SEPARATOR = ';';
+	const SEPARATOR = '-';
 
 	/**
 	 * @var array Полная структура панели фильтров
@@ -46,29 +46,12 @@ class Filter
 	public static $CATALOG_PATH = '/cat/';
 
 	/**
-	 * @var string url, сформированный панелью фильтров
-	 */
-	private static $SEF_URL = '';
-
-	/**
-	 * @var array данные для Seo
-	 */
-	private static $SEO_VALUES = array();
-
-
-	protected static $redirectsEnabled = true;
-
-	public static function setRedirectsEnabled($flag)
-	{
-		static::$redirectsEnabled = (bool)$flag;
-	}
-
-	/**
 	 * Возвращает данные для построения панели фильтров, хлебные крошки и ID отфильтрованных товаров
 	 * @param array $searchIds товары, отфильтрованные поисковым запросом
+	 * @param $searchQuery
 	 * @return array
 	 */
-	public static function getData($searchIds = array())
+	public static function getData($searchIds = array(), $searchQuery = '')
 	{
 		// Получаем все свойства для фильтров
 		// (Состояние, когда мы в корне каталога и ни один фильтр не выбран пользователем)
@@ -76,18 +59,16 @@ class Filter
 
 		// ------ Далее работа в случае, если выбран какой-нибудь фильтр -------
 		// Помечаем выбранные пользователем варианты
-		self::setChecked();
+		$cnt = self::setChecked();
 		// Формируем фильтры для каждого свойства, чтобы отсеять варианты с учетом пользовательских фильтров
 		self::getUserFilter($searchIds);
 		// Получаем товары для всех фильтров
 		self::getProductsByFilters();
 		// Проверяем на пустой результат и редиректим
-		self::checkEmptyResult();
+		//self::checkEmptyResult();
 		// Скрываем варианты, которые не попали в пользовательский фильтр
 		// (напр. в куртках не представлен бренд Asics)
 		self::hideVars();
-		// Формируем данные для Seo
-		self::setSeoValues();
 
 		$data = self::$DATA_BY_KEY[self::$PRODUCTS_KEY];
 
@@ -95,20 +76,20 @@ class Filter
 		return array(
 			// Данные для построения панели
 			'GROUPS' => self::$GROUPS,
+			// Данные для построения панели
+			'CHECKED_CNT' => $cnt,
 			// Базовый путь к каталогу
 			'CATALOG_PATH' => self::$CATALOG_PATH,
 			// Разделитель
 			'SEPARATOR' => self::SEPARATOR,
 			// Айдишники товаров
 			'PRODUCTS_IDS' => $data['IDS'],
-			// Красивый урл (по нему подгружаются SEO свойства)
-			'SEF_URL' => self::$SEF_URL,
 			// Хлебные крошки
-			'BC' => self::getBreadCrumb(),
-			// Хлебные крошки
-			'CUR_FILTERS' => self::getCurrentFilters(),
+			'BC' => self::getBreadCrumb($searchQuery),
+			// Плашки выбранных фильтров
+			'CUR_FILTERS' => self::getCurrentFilters($searchQuery),
 			// Seo
-			'SEO' => self::$SEO_VALUES,
+			'SEO' => self::getSeoValues($searchQuery),
 		);
 	}
 
@@ -122,6 +103,7 @@ class Filter
 
 		$return[] = array(
 			'NAME' => 'Тип товара',
+			'TYPE' => 'cat',
 			'BC' => true,
 		    'ITEMS' => Categories::getGroup(),
 		);
@@ -133,6 +115,7 @@ class Filter
 			);
 		$return[] = array(
 			'NAME' => 'Праздник',
+			'TYPE' => 'holiday',
 			'BC' => true,
 			'ITEMS' => Holidays::getGroup(),
 		);
@@ -151,7 +134,6 @@ class Filter
 	{
 		$url = urldecode($_SERVER['REQUEST_URI']);
 		$urlDirs = explode('/', $url);
-		self::$CATALOG_PATH = '/' . $urlDirs[1] . '/';
 
 		$urlCodes = array();
 		for ($i = 2; $i < count($urlDirs) - 1; $i++)
@@ -161,26 +143,41 @@ class Filter
 				$urlCodes[$part] = true;
 		}
 
+		$allCnt = 0;
 		foreach (self::$GROUPS as &$group)
 		{
+			$cnt = 0;
 			if ($group['TYPE'] == 'price')
 			{
 				if (isset($_REQUEST['p-from']))
+				{
 					$group['FROM'] = intval($_REQUEST['p-from']);
+					$cnt++;
+				}
 				if (isset($_REQUEST['p-to']))
+				{
 					$group['TO'] = intval($_REQUEST['p-to']);
+					$cnt++;
+				}
 			}
 			else
 			{
 				foreach ($group['ITEMS'] as $code => &$item)
 				{
 					if ($urlCodes[$code])
+					{
 						$item['CHECKED'] = true;
+						$cnt++;
+					}
 				}
 				unset($item);
 			}
+			$group['CHECKED_CNT'] = $cnt;
+			$allCnt += $cnt;
 		}
 		unset($group);
+
+		return $allCnt;
 	}
 
 	/**
@@ -193,9 +190,10 @@ class Filter
 	public static function getUserFilter($searchIds = array())
 	{
 		// Коды свойств, участвующие в фильтрации
-		// По ключу _ALL будет фильтр по всем свойствам, т.е. итоговый фильтр для товаров
+		// По ключу _PRODUCTS будет фильтр по всем свойствам, т.е. итоговый фильтр для товаров
 		$codes = array(
 			'_ALL' => '_ALL',
+			'_PRODUCTS' => '_PRODUCTS',
 		    'PRICE' => 'PRICE',
 		);
 		foreach (self::$GROUPS as $group)
@@ -212,6 +210,10 @@ class Filter
 				'KEY' => '',
 				'DATA' => array(),
 			);
+
+			if ($code == '_ALL')
+				continue;
+
 			foreach (self::$GROUPS as $group)
 			{
 				if ($group['TYPE'] == 'price')
@@ -279,7 +281,7 @@ class Filter
 		unset($group);
 
 		// Общий фильтр
-		self::$PRODUCTS_KEY = $filters['_ALL']['KEY'];
+		self::$PRODUCTS_KEY = $filters['_PRODUCTS']['KEY'];
 	}
 
 	/**
@@ -297,19 +299,9 @@ class Filter
 	 */
 	public static function checkEmptyResult()
 	{
-		/*$filter = self::$FILTER_BY_KEY[self::$PRODUCTS_KEY];
-		$tmpProducts = Products::getByFilter($filter);
-		debugmessage($tmpProducts);
-		if (!$tmpProducts)
-		{
-			$url = self::getResultUrl(true);
-
-			if (static::$redirectsEnabled)
-			{
-				define('ERROR_404', 'Y');
-				\CHTTP::SetStatus('404 Not Found');
-			}
-		}*/
+		$data = self::$DATA_BY_KEY[self::$PRODUCTS_KEY];
+		if (!$data['COUNT'])
+			LocalRedirect(self::$CATALOG_PATH);
 	}
 
 	/**
@@ -324,9 +316,10 @@ class Filter
 
 			if ($group['TYPE'] == 'price')
 			{
-				$data = self::$DATA_BY_KEY[$group['KEY']];
-				$group['MIN'] = $data['PRICE']['MIN'];
-				$group['MAX'] = $data['PRICE']['MAX'];
+				// Цены - для всех товаров
+				$data = self::$DATA_BY_KEY[''];
+				$group['MIN'] = floor($data['PRICE']['MIN'] / 100) * 100;
+				$group['MAX'] = ceil($data['PRICE']['MAX'] / 100) * 100;
 				$cntGroup = $group['MIN'] == $group['MAX'] ? 0 : 1;
 			}
 			else
@@ -352,8 +345,10 @@ class Filter
 
 	/**
 	 * Формирует массив для добавления в хлебные крошки
+	 * @param $searchQuery
+	 * @return array
 	 */
-	private static function getBreadCrumb()
+	private static function getBreadCrumb($searchQuery)
 	{
 		$href = self::$CATALOG_PATH;
 		$return = array(
@@ -366,6 +361,12 @@ class Filter
 				'HREF' => $href,
 			),
 		);
+
+		if ($searchQuery)
+			$return[] = array(
+				'NAME' => 'Результаты поиска',
+				'HREF' => $href . '?q=' . $searchQuery,
+			);
 
 		foreach (self::$GROUPS as $group)
 		{
@@ -380,7 +381,7 @@ class Filter
 
 			foreach ($group['ITEMS'] as $code => $item)
 			{
-				if ($item['CHECKED'])
+				if ($item['CHECKED'] && $item['CNT'])
 				{
 					$singleCode = $code;
 					$cnt++;
@@ -401,53 +402,107 @@ class Filter
 		return $return;
 	}
 
+
+	private static function getUrlWithoutGroup($searchQuery = '', $groupKey = false)
+	{
+		$href = self::$CATALOG_PATH;
+		$params = '';
+
+		if ($searchQuery)
+		{
+			$params .= $params ? '&' : '?';
+			$params .= 'q=' . $searchQuery;
+		}
+
+		foreach (self::$GROUPS as $key => $group)
+		{
+			if ($groupKey === $key)
+				continue;
+
+			if ($group['TYPE'] == 'price')
+			{
+				if (isset($group['FROM']) && $group['FROM'] > $group['MIN'])
+				{
+					$params .= $params ? '&' : '?';
+					$params .= 'p-from=' . $group['FROM'];
+				}
+				if (isset($group['TO']) && $group['TO'] < $group['MAX'])
+				{
+					$params .= $params ? '&' : '?';
+					$params .= 'p-to=' . $group['TO'];
+				}
+			}
+			else
+			{
+				$part = '';
+				foreach ($group['ITEMS'] as $code => $item)
+				{
+					if ($item['CHECKED'])
+					{
+						if ($part)
+							$part .= self::SEPARATOR;
+						$part .= $code;
+					}
+				}
+				if ($part)
+					$href .= $part . '/';
+			}
+		}
+
+		return $href . $params;
+	}
+
 	/**
-	 * Формирует массив для добавления в хлебные крошки
+	 * Формирует массив для отображения плашек выбранных фильтров
+	 * @param $searchQuery
+	 * @return array
 	 */
-	private static function getCurrentFilters()
+	private static function getCurrentFilters($searchQuery)
 	{
 		$return = array();
 
-		foreach (self::$GROUPS as $g1 => $group1)
+		if ($searchQuery)
 		{
-			if (!$group1['CNT'])
+			$return[] = array(
+				'NAME' => '<b>Поиск</b>: ' . $searchQuery,
+				'HREF' => self::getUrlWithoutGroup(),
+			);
+		}
+
+		foreach (self::$GROUPS as $key => $group)
+		{
+			if (!$group['CNT'])
 				continue;
 
-			$href = self::$CATALOG_PATH;
 			$name = '';
-			foreach ($group1['ITEMS'] as $item)
+			if ($group['TYPE'] == 'price')
 			{
-				if ($item['CHECKED'])
+				if (isset($group['FROM']) && $group['FROM'] > $group['MIN'])
 				{
-					if ($name)
-						$name .= ', ';
-					$name .= $item['NAME'];
+					$name = 'от ' . $group['FROM'];
+				}
+				if (isset($group['TO']) && $group['TO'] < $group['MAX'])
+				{
+					$name .= ' до ' . $group['TO'];
+				}
+			}
+			else
+			{
+				foreach ($group['ITEMS'] as $item)
+				{
+					if ($item['CHECKED'])
+					{
+						if ($name)
+							$name .= ', ';
+						$name .= $item['NAME'];
+					}
 				}
 			}
 			if ($name)
 			{
-				foreach (self::$GROUPS as $g2 => $group2)
-				{
-					if ($g1 == $g2)
-						continue;
-
-					$part = '';
-					foreach ($group2['ITEMS'] as $code => $item)
-					{
-						if ($item['CHECKED'])
-						{
-							if ($part)
-								$part .= self::SEPARATOR;
-							$part .= $code;
-						}
-					}
-					if ($part)
-						$href .= $part . '/';
-				}
-
 				$return[] = array(
-					'NAME' => '<b>' . $group1['NAME'] . '</b>: ' . $name,
-					'HREF' => $href,
+					'NAME' => '<b>' . $group['NAME'] . '</b>: ' . $name,
+					'HREF' => self::getUrlWithoutGroup($searchQuery, $key),
 				);
 			}
 		}
@@ -457,401 +512,241 @@ class Filter
 
 	/**
 	 * Формирует данные для Seo
+	 * @param $searchQuery
+	 * @return array
 	 */
-	private static function setSeoValues()
+	private static function getSeoValues($searchQuery)
 	{
-		$cats = '';
-		$brand = '';
-		$brandRus = '';
-		$brandOnlyRus = '';
-		$m = false;
-		$w = false;
-		$size = '';
-		$sizeSuffix = ' размера';
-		$color = '';
-		$material = '';
-		$season = '';
-		$shoesType = '';
-		$series = '';
-		$seriesOnlyRus = '';
+		if ($searchQuery)
+		{
+			return array(
+				'H1' => 'Результаты поиска по запросу «' . $searchQuery . '»',
+				'TITLE' => 'Результаты поиска по запросу «' . $searchQuery . '» - Cupcake Story',
+			);
+		}
+
+		$name = '';
+		$type = 'сладости';
+		$holiday = '';
 		$gender = '';
+		$suffix = '';
+		$prefix = '';
+
+		$href = self::$CATALOG_PATH;
+		$parts = array();
+
 		foreach (self::$GROUPS as $group)
 		{
-			foreach ($group['PROPS'] as $prop)
-			{
-				if ($prop['CODE'] == 'PRICE')
-					continue;
-
-				foreach ($prop['VARS'] as $variant)
-				{
-					if ($variant['CHECKED'])
-					{
-						if ($prop['CODE'] == 'SECTION')
-						{
-							if ($cats)
-								$cats .= ', ';
-							$cats .= mb_strtolower($variant['NAME']);
-						}
-						if ($prop['CODE'] == 'FOR_M')
-							$m = true;
-						if ($prop['CODE'] == 'FOR_W')
-							$w = true;
-						if ($prop['CODE'] == 'BRAND')
-						{
-							if ($brand)
-							{
-								$brand .= ', ';
-								$brandRus .= ', ';
-							}
-							$brand .= $variant['NAME'];
-							$brandRus .= $variant['NAME'];
-							if ($variant['ADD']['NAME_RUS'])
-							{
-								$brandRus .= ' (' . $variant['ADD']['NAME_RUS'] . ')';
-								if ($brandOnlyRus)
-									$brandOnlyRus .= ', ';
-								$brandOnlyRus .= $variant['ADD']['NAME_RUS'];
-							}
-						}
-						if ($prop['CODE'] == 'SIZE')
-						{
-							if ($size)
-							{
-								$size .= ', ';
-								$sizeSuffix = ' размеров';
-							}
-							$size .= $variant['NAME'];
-						}
-						if ($prop['CODE'] == 'MAIN_COLOR')
-						{
-							if ($color)
-								$color .= ', ';
-							$color .= ($variant['ADD']['NAME_MULTI'] ? $variant['ADD']['NAME_MULTI'] : $variant['NAME']);
-						}
-						if ($prop['CODE'] == 'MATERIAL_UPPER')
-						{
-							if ($variant['ADD']['ID'] > 0)
-							{
-								$iblock = \CIBlockElement::GetList(array(), array('ID' => $variant['ADD']['ID']), false, false, array('IBLOCK_ID'))->Fetch();
-								$iterator = \CIBlockElement::GetProperty($iblock['IBLOCK_ID'], $variant['ADD']['ID'], array(), array('CODE' => 'NAME_MULTI'))->Fetch();
-								if (!empty($iterator['VALUE']))
-								{
-									$variant['ADD']['NAME_MULTI'] = $iterator['VALUE'];
-								}
-							}
-							if ($material)
-								$material .= ', ';
-							$material .= ($variant['ADD']['NAME_MULTI'] ? $variant['ADD']['NAME_MULTI'] : $variant['NAME']);
-						}
-						if ($prop['CODE'] == 'SEASON')
-						{
-							$seasonVal = 'season';
-							switch ($variant['NAME'])
-							{
-								case 'зима' :
-									$seasonVal = 'зимние';
-									break;
-								case 'лето' :
-									$seasonVal = 'летние';
-									break;
-								case 'весна/осень' :
-									$seasonVal = 'демисезонные';
-									break;
-							}
-							if ($season)
-								$season .= ', ';
-							$season .= $seasonVal;
-						}
-						if ($prop['CODE'] == 'VID_OBUVI')
-						{
-							if ($shoesType)
-								$shoesType .= ', ';
-							$shoesType .= $variant['NAME'];
-						}
-						if ($prop['CODE'] == 'SERIES')
-						{
-							foreach ($prop['VARS'] as $variant)
-							{
-								if ($variant['CHECKED'] > 0)
-								{
-									if (in_array($variant['NAME'], $seriesList))
-										continue;
-									$seriesList[] = $variant['NAME'];
-									if ($series)
-										$series .= ', ';
-									$series .= $variant['NAME'];
-									if ($seriesOnlyRus)
-										$seriesOnlyRus .= ', ';
-									$seriesOnlyRus .= $variant['ADD']['NAME_RUS'];
-								}
-							}
-						}
-						if ($prop['CODE'] == 'SALE')
-						{
-							$sale = true;
-						}
-						if ($prop['CODE'] == 'NEW')
-						{
-							$new = true;
-						}
-					}
-				}
-			}
-		}
-		$keywords = '';
-		$description = '';
-		$productsName = 'товары';
-		$h1 = $cats;
-		if ($m && !$w)
-		{
-			if ($h1)
-				$h1 = 'мужские ' . $h1;
-			else
-				$h1 = 'мужские ' . $productsName;
-			$gender = 'мужские';
-		}
-		if ($w && !$m)
-		{
-			if ($h1)
-				$h1 = 'женские ' . $h1;
-			else
-				$h1 = 'женские ' . $productsName;
-			$gender = 'женские';
-
-		}
-		$description = $h1 . ' ' . $brand . $description;
-		if ($color)
-		{
-			$keywords .= $color . ' ';
-		}
-		if ($material)
-		{
-			$keywords .= $material . ' ';
-		}
-		if ($season)
-		{
-			$keywords .= $season . ' ';
-		}
-		if ($shoesType)
-		{
-			if ($h1)
-				$h1 = $shoesType . ' ' . $h1;
-			else
-				$h1 = $shoesType . ' ' . $productsName;
-			$keywords .= $shoesType . ' ';
-			$description = $shoesType . ' ' . $description;
-		}
-		if ($season)
-		{
-			if ($h1)
-				$h1 = $season . ' ' . $h1;
-			else
-				$h1 = $season . ' ' . $productsName;
-			$description = $season . ' ' . $description;
-		}
-		if ($material)
-		{
-			if ($h1)
-				$h1 = $material . ' ' . $h1;
-			else
-				$h1 = $material . ' ' . $productsName;
-			$description = $material . ' ' . $description;
-		}
-		if ($color)
-		{
-			if ($h1)
-				$h1 = $color . ' ' . $h1;
-			else
-				$h1 = $color . ' ' . $productsName;
-			$description = $color . ' ' . $description;
-		}
-		$title = $h1;
-		if ($brand)
-			if ($h1)
-			{
-				$h1 .= ' ' . $brand;
-				$title .= ' ' . $brand;
-			}
-			else
-			{
-				$h1 = $productsName . ' ' . $brand;
-				$title = $productsName . ' ' . $brandRus;
-			}
-		if ($series)
-			if ($h1)
-			{
-				$h1 .= ' ' . $series;
-				$title .= ' ' . $series;
-				$description .= ' ' . $series;
-			}
-			else
-			{
-				$h1 = $productsName . ' ' . $series;
-				$title = $productsName . ' ' . $series;
-				$description = $productsName . ' ' . $series;
-			}
-		if ($size)
-			if ($h1)
-			{
-				$h1 .= ' ' . $size . $sizeSuffix;
-				$title .= ' ' . $size . $sizeSuffix;
-				$description .= ' ' . $size . $sizeSuffix;
-			}
-			else
-			{
-				$h1 = $productsName . ' ' . $size . $sizeSuffix;
-				$title = $productsName . ' ' . $size . $sizeSuffix;
-				$description = $productsName . ' ' . $size . $sizeSuffix;
-			}
-
-		if ($h1)
-		{
-			$title = 'Купить ' . $title . ($sale ? ' - распродажа в' : ($new ? ' - актуальные новинки в' : ' -')) . ' Street Beat';
-			$description = ($sale ? 'Скидки на ' : '') . $description . ($new ? ' из новой коллекции ' : '');
-			$description .= ' в Сети фирменных магазинов Street Beat';
-			$h1 = ($sale ? 'Скидки на ' : '') . $h1 . ($new ? ' из новой коллекции ' : '');
-		}
-		else
-		{
-			$h1 = 'Каталог';
-			$title = 'Каталог товаров';
-			$description = 'Каталог товаров StreetBeat';
-		}
-
-		if ($gender)
-		{
-			$keywords .= $gender . ' ';
-		}
-		if ($productsName)
-		{
-			$keywords .= $cats . ' ';
-		}
-		if ($brand)
-		{
-			$keywords .= $brand . ' ';
-		}
-		if ($brandOnlyRus)
-		{
-			$keywords .= $brandOnlyRus . ' ';
-		}
-		if ($series)
-		{
-			$keywords .= $series . ' ';
-		}
-		if ($seriesOnlyRus)
-		{
-			$keywords .= $seriesOnlyRus . ' ';
-		}
-		if ($size)
-		{
-			$keywords .= $size . $sizeSuffix . ' ';
-		}
-		$keywords .= 'купить продажа цена интернет магазин';
-		if ($sale)
-			$keywords .= ' распродажа акции скидки';
-		if ($new)
-			$keywords .= ' новые новинки коллекции';
-
-		$keywords = str_replace(',', '', $keywords);
-
-		$keywords = mb_strtoupper(substr($keywords, 0, 1)) . substr($keywords, 1);
-		$h1 = mb_strtoupper(substr($h1, 0, 1)) . substr($h1, 1);
-
-		$description = mb_strtoupper(substr($description, 0, 1)) . substr($description, 1);
-
-		self::$SEO_VALUES = array(
-			'H1' => $h1,
-			'TITLE' => $title,
-			'KEYWORDS' => $keywords,
-			'DESCRIPTION' => $description,
-		);
-	}
-
-	/**
-	 * Для всех свойств выставляем фильтр по ID заданного товара
-	 * @param $productId
-	 */
-	public static function getUserFilterForProduct($productId)
-	{
-		foreach (self::$GROUPS as &$group)
-		{
-			foreach ($group['PROPS'] as &$prop)
-			{
-				$prop['FILTER'] = array(
-					'ID' => array($productId => $productId),
-				);
-			}
-			unset($prop);
-		}
-		unset($group);
-	}
-
-	public static function getBreadCrumbsByProduct($productId)
-	{
-		// Получаем все свойства для фильтров
-		// (Состояние, когда мы в корне каталога и ни один фильтр не выбран пользователем)
-		self::getGroupsWithVars();
-
-		// Формируем фильтры для каждого свойства, по заданному ID товара
-		self::getUserFilterForProduct($productId);
-		// Скрываем варианты, которые не попали в пользовательский фильтр
-		self::hideVars();
-
-		$sefUrl = self::$CATALOG_PATH;
-		$return = array(
-			array(
-				'NAME' => 'Каталог',
-				'HREF' => $sefUrl,
-			),
-		);
-		$params = array();
-		$man = false;
-		foreach (self::$GROUPS as $group)
-		{
-			if (!$group['FCNT'])
+			if (!$group['CNT'])
 				continue;
 
-			foreach ($group['PROPS'] as $prop)
+			$itemsCnt = 0;
+			$lastItem = false;
+			$part = '';
+			foreach ($group['ITEMS'] as $code => $item)
 			{
-				if (!$prop['FCNT'])
-					continue;
-				if ($prop['CODE'] == 'FOR_W' && $man)
-					continue;
-
-				if ($prop['ADD']['BREAD'])
+				if ($item['CHECKED'] && $item['CNT'])
 				{
-					foreach ($prop['VARS'] as $variant)
+					if ($part)
+						$part .= self::SEPARATOR;
+					$part .= $code;
+					$itemsCnt++;
+					$lastItem = $item;
+
+					if ($code == 'logo')
+						$suffix .= ' с логотипом';
+					elseif ($code == 'action')
+						$suffix .= ' по акции';
+					elseif ($code == 'hit' && !$name)
+						$name = 'Хиты';
+					elseif ($code == 'new' && !$name)
+						$name = 'Новинки';
+
+					if (!$prefix)
 					{
-						if ($prop['USER_TYPE'] == 'SASDCheckboxNum' && $variant['VALUE'] == 0)
-							continue;
-
-						if ($variant['FCNT'])
-						{
-							if ($prop['CODE'] == 'FOR_M')
-								$man = true;
-
-							if ($prop['ADD']['IN_URL'] && $variant['CODE'])
-								$sefUrl .= $variant['CODE'] . '/';
-							else
-							{
-								$sign = $prop['MULTI'] ? '[]=' : '=';
-								$params[] = $prop['ADD']['URL_PARAM'] . $sign . $variant['ID'];
-							}
-
-							$href = $sefUrl;
-							if ($params)
-								$href .= '?' . implode('&', $params);
-							$return[] = array(
-								'NAME' => $variant['NAME'],
-								'HREF' => $href,
-							);
-						}
+						if ($code == 'classic')
+							$prefix = 'Классические ';
+						elseif ($code == 'fitness')
+							$prefix = 'Фитнес ';
 					}
 				}
 			}
+			if ($part)
+			{
+				$href .= $part . '/';
+				$parts[] = $part;
+			}
+
+			if (!$itemsCnt)
+				continue;
+
+			if ($group['TYPE'] == 'cat')
+			{
+				if ($itemsCnt == 1)
+				{
+					$name = $lastItem['NAME'];
+					$type = strtolower($lastItem['NAME']);
+				}
+			}
+
+			if ($group['TYPE'] == 'holiday')
+			{
+				if ($itemsCnt == 1)
+				{
+					$h = Holidays::getById($lastItem['ID']);
+					if ($h['SEO'])
+						$holiday = ' ' . $h['SEO'];
+				}
+				else
+					$holiday = ' на праздники';
+			}
+
+			if ($group['NAME'] == 'Для кого')
+			{
+				if ($itemsCnt == 1)
+					$gender = ' ' . strtolower($lastItem['NAME']);
+				elseif ($itemsCnt == 2)
+				{
+					if ($group['ITEMS']['girl']['CHECKED'] && $group['ITEMS']['boy']['CHECKED'])
+						$gender = ' для детей';
+				}
+			}
+		}
+
+		if (!$name)
+			$name = 'Сладости';
+
+		// Капкейки для девочек ко Дню Рождения
+		if ($prefix)
+			$name = strtolower($name);
+		$h1 = $prefix . $name . $suffix . $gender . $holiday;
+		$title = $h1 . ' от Cupcake Story';
+		$description = $h1 . ' с доставкой в Москве по оптимальным ценам. У нас Вы можете купить ' .
+			$type . ' на любой вкус.';
+
+		return array(
+			'H1' => $h1,
+			'TITLE' => $title,
+			'DESCRIPTION' => $description,
+		    'URL' => $href,
+		    'PARTS' => $parts,
+		);
+	}
+
+	public static function getSiteMap()
+	{
+		$parts = array();
+
+		$categories = Categories::getAll();
+		$codes = array();
+		foreach ($categories['ITEMS'] as $item)
+			$codes[] = array($item['ID'], $item['CODE']);
+
+		$res = array();
+		self::f1(0, count($codes), $codes, array(), 0, 3, $res, self::SEPARATOR);
+		$parts[] = array(
+			'CODE' => 'CATEGORY',
+		    'ITEMS' => $res,
+		);
+
+		$flags = Flags::getAll();
+		foreach ($flags as $i => $group)
+		{
+			$codes = array();
+			foreach ($group as $k => $f)
+				if ($f['MAP'])
+					$codes[] = array($f['CODE'], $k);
+			$res = array();
+			self::f1(0, count($codes), $codes, array(), 0, 10, $res, self::SEPARATOR);
+			if (count($res) > 1)
+				$parts[] = array(
+					'CODE' => $i,
+					'ITEMS' => $res,
+				);
+		}
+
+		$holidays = Holidays::getAll();
+		$codes = array();
+		foreach ($holidays['ITEMS'] as $item)
+			$codes[] = array($item['ID'], $item['CODE']);
+
+		$res = array();
+		self::f1(0, count($codes), $codes, array(), 0, 2, $res, self::SEPARATOR);
+		$parts[] = array(
+			'CODE' => 'HOLIDAY',
+			'ITEMS' => $res,
+		);
+
+		$path = array();
+		$tmp = array();
+		self::f2(0, count($parts), $parts, $tmp, $path);
+
+		$return = array();
+		foreach ($path as $item)
+		{
+
+			$filter = array();
+			foreach ($item as $group => $items)
+			{
+				foreach ($items as $id => $v)
+				{
+					if ($group == 'CATEGORY' || $group == 'HOLIDAY')
+						$filter[$group][$id] = $id;
+					else
+						$filter[$id] = true;
+				}
+			}
+
+			$ex = Products::exByFilter($filter);
+
+			if ($ex)
+			{
+				$url = self::$CATALOG_PATH;
+				foreach ($item as $group => $items)
+				{
+					$p = implode(self::SEPARATOR, $items);
+					if ($p)
+						$url .= $p . '/';
+				}
+				$return[] = $url;
+			}
+
+		}
+
+		$products = Products::getAll();
+		foreach ($products as $item)
+		{
+			$category = Categories::getById($item['CATEGORY']);
+			$return[] = Products::getDetailUrl($item, $category['CODE']);
 		}
 
 		return $return;
+	}
+
+	private static function f1($i, $l, $parts, $tmp, $cur, $max, &$res, $sep)
+	{
+		if ($i < $l && $cur < $max)
+		{
+			self::f1($i + 1, $l, $parts, $tmp, $cur, $max, $res, $sep);
+			$tmp[$parts[$i][0]] = $parts[$i][1];
+			self::f1($i + 1, $l, $parts, $tmp, $cur + 1, $max, $res, $sep);
+		}
+		else
+			$res[] = $tmp;
+	}
+
+	private static function f2($i, $l, $parts, &$tmp, &$res)
+	{
+		if ($i < $l)
+		{
+			foreach ($parts[$i]['ITEMS'] as $s)
+			{
+				$tmp[$parts[$i]['CODE']] = $s;
+				self::f2($i + 1, $l, $parts, $tmp, $res);
+			}
+		}
+		else
+			$res[] = $tmp;
 	}
 
 	/**

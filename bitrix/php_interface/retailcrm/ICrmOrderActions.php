@@ -182,8 +182,8 @@ class ICrmOrderActions
         }
 
         $order = array(
-            'number'          => $arFields['ACCOUNT_NUMBER'],
-            'externalId'      => $arFields['ID'],
+            'number'          => $arFields['ACCOUNT_NUMBER'] . '-tim',
+            'externalId'      => $arFields['ID'] . '-tim',
             'createdAt'       => new \DateTime($arFields['DATE_INSERT']),
             'customerId'      => $arFields['USER_ID'],
             'discount'        => $arFields['DISCOUNT_VALUE'],

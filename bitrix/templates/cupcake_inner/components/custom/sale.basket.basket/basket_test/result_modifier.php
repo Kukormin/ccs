@@ -17,19 +17,10 @@ $hideItemsFrom = array(
 	37, //коробки для эклеров
 );
 
-//коробки
-$packages = array();
-
 $props_list = array();
 $arResult['GROUPED_GOODS'] = [];
 
 foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
-	//debugmessage($arItem['NAME']);
-	//debugmessage($arItem['PROPS']);
-	// 12.09.2016 - Проверку позиции на упаковку пока оставлю для корзин старого типа
-	$pack = \Local\Utils\Package::getById($arItem['PRODUCT_ID']);
-	if ($pack)
-		CSaleBasket::Delete($arItem['ID']);
 
     $res = CCatalogSku::GetProductInfo($arItem['PRODUCT_ID']);
     if ($res) {
@@ -83,36 +74,6 @@ foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
     if (!$parent) $parent = 'single';
     $arResult['GROUPED_GOODS'][$parent][] = $k;
 }
-
-$arFilter = array('CODE' => 'PACKAGE');
-$res = CIBlockProperty::GetList(array(), $arFilter);
-while($ob = $res->GetNext())
-{    
-    if (!isset($packages[$ob['LINK_IBLOCK_ID']])) {
-    
-        $arFilter = array('IBLOCK_ID'=>$ob['LINK_IBLOCK_ID'], "ACTIVE"=>"Y");
-        $elements = CIBlockElement::GetList(array(), $arFilter);
-        
-        while ($el = $elements->GetNextElement()) {
-            $arFields = $el->GetFields();
-            $price = CPrice::GetList(array(), array("PRODUCT_ID" => $arFields['ID']));
-            if ($ar_price = $price->Fetch())
-            {
-                $arFields['PRICE'] = $ar_price['PRICE'];
-            }
-            $arFields['PREVIEW_PICTURE'] = CFile::GetPath($arFields['PREVIEW_PICTURE']);
-            $arFields['DETAIL_PICTURE'] = CFile::GetPath($arFields['DETAIL_PICTURE']);
-            $packages[$ob['LINK_IBLOCK_ID']][] = $arFields;
-        }
-        usort($packages[$ob['LINK_IBLOCK_ID']], function ($a, $b) {
-            if ($a['PRICE']==$b['PRICE']) {
-                return 0;
-            }
-            return $a['PRICE']>$b['PRICE']?1:-1;
-        });
-    }
-}
-$arResult['PACKAGES'] = $packages;
 
 $arFilter = Array("IBLOCK_ID"=>16, "ACTIVE"=>"Y");
 $res = CIBlockSection::GetList(Array(), $arFilter, false, Array());

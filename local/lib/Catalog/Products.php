@@ -2,6 +2,7 @@
 
 namespace Local\Catalog;
 use Bitrix\Iblock\InheritedProperty\ElementValues;
+use Local\Sale\Package;
 use Local\System\ExtCache;
 
 /**
@@ -64,7 +65,7 @@ class Products
 					'CATEGORY' => intval($item['PROPERTY_CATEGORY_VALUE']),
 					'HOLIDAY' => $item['PROPERTY_HOLIDAY_VALUE'],
 					'PRICE' => intval($item['PROPERTY_PRICE_VALUE']),
-					'PRICE_D' => intval($item['PROPERTY_PRICE_WO_DISCOUNT_VALUE']),
+					'PRICE_WO_DISCOUNT' => intval($item['PROPERTY_PRICE_WO_DISCOUNT_VALUE']),
 				);
 
 				foreach ($codes as $code)
@@ -207,10 +208,79 @@ class Products
 				}
 			}
 
+			if ($filter['ID'])
+			{
+				$ids = array();
+				foreach ($return['IDS'] as $id)
+					$ids[$id] = true;
+				$res = array();
+				foreach ($filter['ID'] as $id)
+				{
+					if ($ids[$id])
+						$res[] = $id;
+				}
+				$return['IDS'] = $res;
+			}
+
 			$extCache->endDataCache($return);
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Есть ли хоть один товар по фильтру?
+	 * @param $filter
+	 * @return bool
+	 */
+	public static function exByFilter($filter)
+	{
+		$all = self::getAll();
+		foreach ($all as $productId => $product)
+		{
+			$ok = true;
+			foreach ($filter as $key => $value)
+			{
+				if ($key == 'CATEGORY')
+				{
+					if (!$value[$product['CATEGORY']])
+					{
+						$ok = false;
+						break;
+					}
+				}
+				elseif ($key == 'HOLIDAY')
+				{
+					$ex = false;
+					foreach ($product['HOLIDAY'] as $h)
+					{
+						if ($value[$h])
+						{
+							$ex = true;
+							break;
+						}
+					}
+					if (!$ex)
+					{
+						$ok = false;
+						break;
+					}
+				}
+				else
+				{
+					if (!$product[$key])
+					{
+						$ok = false;
+						break;
+					}
+				}
+			}
+
+			if ($ok)
+				return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -250,10 +320,8 @@ class Products
 				), false, $nav, array(
 					'ID', 'NAME', 'CODE',
 					'PREVIEW_PICTURE',
-					'PREVIEW_TEXT',
-					'PROPERTY_ARTICLE',
 					'PROPERTY_PRICE_COUNT',
-
+					'PROPERTY_CATEGORY',
 				));
 				while ($item = $rsItems->GetNext())
 				{
@@ -262,19 +330,30 @@ class Products
 					$ipropValues = new ElementValues(self::IB_PRODUCTS, $item['ID']);
 					$iprop = $ipropValues->getValues();
 
+					$category = Categories::getById($item['PROPERTY_CATEGORY_VALUE']);
+					$detail =  self::getDetailUrl($item, $category['CODE']);
+
 					$product['NAME'] = $item['NAME'];
-					$product['TITLE'] = $iprop['ELEMENT_PAGE_TITLE'] ? $iprop['ELEMENT_PAGE_TITLE'] : $item['NAME'];
 					$product['PIC_ALT'] = $iprop['ELEMENT_PREVIEW_PICTURE_FILE_ALT'] ?
 						$iprop['ELEMENT_PREVIEW_PICTURE_FILE_ALT'] : $item['NAME'];
 					$product['PIC_TITLE'] = $iprop['ELEMENT_PREVIEW_PICTURE_FILE_TITLE'] ?
 						$iprop['ELEMENT_PREVIEW_PICTURE_FILE_TITLE'] : $item['NAME'];
-					$product['DETAIL_PAGE_URL'] = '/d/' . ($item['CODE'] ? $item['CODE'] : $item['ID']) . '/';
-					$product['PREVIEW_TEXT'] = $item['~PREVIEW_TEXT'];
+					$product['DETAIL_PAGE_URL'] = $detail;
 					$product['PREVIEW_PICTURE'] = \CFile::GetPath($item['PREVIEW_PICTURE']);
-					$product['ARTICLE'] = $item['PROPERTY_ARTICLE_VALUE'];
 					$product['PRICE_COUNT'] = $item['PROPERTY_PRICE_COUNT_VALUE'];
 
 					$return['ITEMS'][$item['ID']] = $product;
+				}
+
+				if ($sort['SEARCH'] == 'asc')
+				{
+					$items = array();
+					foreach ($productIds as $id)
+					{
+						if ($return['ITEMS'][$id])
+							$items[$id] = $return['ITEMS'][$id];
+					}
+					$return['ITEMS'] = $items;
 				}
 
 				$return['NAV'] = array(
@@ -345,6 +424,18 @@ class Products
 	}
 
 	/**
+	 * Возвращает url карточки товара
+	 * @param $item
+	 * @param $cat
+	 * @return string
+	 */
+	public static function getDetailUrl($item, $cat)
+	{
+		//return Filter::$CATALOG_PATH . $cat . '/' .($item['CODE'] ? $item['CODE'] : $item['ID']) . '/';
+		return Filter::$CATALOG_PATH . $cat . '/' . $item['ID'] . '/';
+	}
+
+	/**
 	 * Возвращает карточку товара по ID
 	 * @param int $id
 	 * @param bool|false $refreshCache
@@ -353,6 +444,10 @@ class Products
 	public static function getById($id, $refreshCache = false)
 	{
 		$return = array();
+
+		$id = intval($id);
+		if (!$id)
+			return $return;
 
 		$extCache = new ExtCache(
 			array(
@@ -373,19 +468,26 @@ class Products
 				'ID' => $id,
 			);
 			$select = array(
-				'ID', 'NAME', 'CODE', 'PREVIEW_TEXT', 'DETAIL_TEXT',
+				'ID', 'NAME', 'CODE', 'PREVIEW_PICTURE', 'PREVIEW_TEXT', 'DETAIL_TEXT',
 				'PROPERTY_PICTURES',
-				'PROPERTY_ARTICLE',
 				'PROPERTY_CATEGORY',
 				'PROPERTY_HIT',
 				'PROPERTY_ACTION',
+				'PROPERTY_ACTION_TEXT',
 				'PROPERTY_NEW',
 			    'CATALOG_GROUP_1',
 			);
 			$rsItems = $iblockElement->GetList(array(), $filter, false, false, $select);
 			if ($item = $rsItems->GetNext())
 			{
-				$detail = '/d/' . ($item['CODE'] ? $item['CODE'] : $item['ID']) . '/';
+				$category = Categories::getById($item['PROPERTY_CATEGORY_VALUE']);
+				$detail =  self::getDetailUrl($item, $category['CODE']);
+				$ipropValues = new ElementValues(self::IB_PRODUCTS, $item['ID']);
+				$iprop = $ipropValues->getValues();
+				$title = $iprop['ELEMENT_META_TITLE'] ? $iprop['ELEMENT_META_TITLE'] :
+					$item['NAME'] . ' - от Cupcake Story';
+				$desc = $iprop['ELEMENT_META_DESCRIPTION'] ? $iprop['ELEMENT_META_DESCRIPTION'] :
+					 'Купить «' . $item['NAME'] . '». Самые вкусные сладости только в Cupcake Story. Доставка по Москве.';
 				$pictures = array();
 				$file = new \CFile();
 				foreach ($item['PROPERTY_PICTURES_VALUE'] as $picId)
@@ -394,20 +496,30 @@ class Products
 				$return = array(
 					'ID' => $item['ID'],
 					'NAME' => $item['NAME'],
+					'TITLE' => $title,
+					'DESCRIPTION' => $desc,
 					'CODE' => $item['CODE'],
-					'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
 					'DETAIL_PAGE_URL' => $detail,
+					'PREVIEW_PICTURE' => $file->GetPath($item['PREVIEW_PICTURE']),
 					'PREVIEW_TEXT' => $item['~PREVIEW_TEXT'],
 					'DETAIL_TEXT' => $item['~DETAIL_TEXT'],
-					'CATEGORY' => Categories::getById($item['PROPERTY_CATEGORY_VALUE']),
+					'CATEGORY' => $category,
 					'PICTURES' => $pictures,
 					'HIT' => $item['PROPERTY_HIT_VALUE'],
 					'ACTION' => $item['PROPERTY_ACTION_VALUE'],
+					'ACTION_TEXT' => $item['PROPERTY_ACTION_TEXT_VALUE'],
 					'NEW' => $item['PROPERTY_NEW_VALUE'],
 					'OFFERS' => $offers,
 				);
-				if ($item['CATALOG_PRICE_ID_1'])
-					$return['PRICE'] = intval($item['CATALOG_PRICE_1']);
+				if (!$offers)
+				{
+					$price = intval($item['CATALOG_PRICE_1']);
+					$discounts = self::getDiscounts($item['ID'], self::IB_PRODUCTS, $price);
+					$return['PRICE'] = $discounts['PRICE'];
+					$return['PRICE_ID'] = $item['CATALOG_PRICE_1_ID'];
+					$return['PRICE_WO_DISCOUNT'] = $price;
+					$return['ACTION_TEXT'] = $discounts['TEXT'];
+				}
 
 				$extCache->endDataCache($return);
 			}
@@ -422,51 +534,40 @@ class Products
 	/**
 	 * Возвращает предложения для заданного товара
 	 * @param $productId
-	 * @param bool|false $refreshCache
-	 * @return array|mixed
+	 * @return array
 	 */
-	public static function getOffersByProduct($productId, $refreshCache = false)
+	public static function getOffersByProduct($productId)
 	{
 		$return = array();
 
-		$extCache = new ExtCache(
-			array(
-				__FUNCTION__,
-				$productId,
-			),
-			static::CACHE_PATH . __FUNCTION__ . '/',
-			static::CACHE_TIME
-		);
-		if(!$refreshCache && $extCache->initCache()) {
-			$return = $extCache->getVars();
-		} else {
-			$extCache->startDataCache();
-
-			$iblockElement = new \CIBlockElement();
-			$rsItems = $iblockElement->GetList(array(), array(
-				'PROPERTY_CML2_LINK' => $productId,
-				'ACTIVE' => 'Y',
-			), false, false, array(
-				'ID',
-				'IBLOCK_ID',
-				'PROPERTY_COUNT',
-				'PROPERTY_OFFER_ARTICLE',
-				'CATALOG_GROUP_1',
-			));
-			while ($item = $rsItems->Fetch())
-			{
-				$return[$item['ID']] = array(
-					'ID' => $item['ID'],
-					'COUNT' => $item['PROPERTY_COUNT_VALUE'],
-					'ARTICLE' => $item['PROPERTY_OFFER_ARTICLE_VALUE'],
-					'PRICE' => intval($item['CATALOG_PRICE_1']),
-				);
-			}
-
-			uasort($arReturn, '\Local\Catalog\Products::countCmp');
-
-			$extCache->endDataCache($return);
+		$iblockElement = new \CIBlockElement();
+		$rsItems = $iblockElement->GetList(array(), array(
+			'IBLOCK_ID' => self::IB_OFFERS,
+			'PROPERTY_CML2_LINK' => $productId,
+			'ACTIVE' => 'Y',
+		), false, false, array(
+			'ID',
+			'IBLOCK_ID',
+			'PROPERTY_COUNT',
+			'PROPERTY_OFFER_ARTICLE',
+			'CATALOG_GROUP_1',
+		));
+		while ($item = $rsItems->Fetch())
+		{
+			$price = intval($item['CATALOG_PRICE_1']);
+			$discounts = self::getDiscounts($item['ID'], self::IB_OFFERS, $price);
+			$return[$item['ID']] = array(
+				'ID' => $item['ID'],
+				'COUNT' => $item['PROPERTY_COUNT_VALUE'],
+				'ARTICLE' => $item['PROPERTY_OFFER_ARTICLE_VALUE'],
+				'PRICE' => $discounts['PRICE'],
+				'PRICE_ID' => $item['CATALOG_PRICE_1_ID'],
+				'PRICE_WO_DISCOUNT' => $price,
+				'ACTION_TEXT' => $discounts['TEXT'],
+			);
 		}
+
+		uasort($arReturn, '\Local\Catalog\Products::countCmp');
 
 		return $return;
 	}
@@ -555,6 +656,41 @@ class Products
 	}
 
 	/**
+	 * Возвращает цену с учетом скидки и описание скидки для заданного товара
+	 * @param $productId
+	 * @param $iblockId
+	 * @param $price
+	 * @return array
+	 */
+	public static function getDiscounts($productId, $iblockId, $price) {
+		$discounts = \CCatalogDiscount::GetDiscount(
+			$productId,
+			$iblockId,
+			array(1),
+			array(2),
+			'N',
+			's1',
+			array()
+		);
+		$discountPrice = \CCatalogProduct::CountPriceWithDiscount(
+			intval($price),
+			'RUB',
+			$discounts
+		);
+		$discountText = '';
+		foreach ($discounts as $tmp)
+		{
+			$discountText = $tmp['NAME'];
+			break;
+		}
+
+		return array(
+			'PRICE' => intval($discountPrice),
+			'TEXT' => $discountText,
+		);
+	}
+
+	/**
 	 * Устанавливает цену товара = цене самого дешевого из ТП (с учетом скидок битрикса)
 	 * считается что пользователь принадлежит только группе 2 (все пользователи)
 	 * @param $productId
@@ -593,25 +729,13 @@ class Products
 
 		if ($min !== false)
 		{
-			$discounts = \CCatalogDiscount::GetDiscount(
-				$productId,
-				self::IB_PRODUCTS,
-				array(1),
-				array(2),
-				'N',
-				's1',
-				array()
-			);
-			$discountPrice = \CCatalogProduct::CountPriceWithDiscount(
-				intval($min),
-				'RUB',
-				$discounts
-			);
+			$discounts = self::getDiscounts($productId, self::IB_PRODUCTS, $min);
 			$iblockElement->SetPropertyValuesEx($productId, self::IB_PRODUCTS, array(
-				'PRICE' => intval($discountPrice),
+				'PRICE' => $discounts['PRICE'],
 				'PRICE_WO_DISCOUNT' => intval($min),
 				'PRICE_COUNT' => intval($count),
-				'ACTION' => $discountPrice < $min ? 1 : 0,
+				'ACTION' => $discounts['PRICE'] < $min ? 1 : 0,
+				'ACTION_TEXT' => $discounts['TEXT'],
 			));
 		}
 	}
@@ -628,32 +752,358 @@ class Products
 		foreach ($products as $item)
 		{
 			$productId = $item['ID'];
-			$discounts = \CCatalogDiscount::GetDiscount(
-				$productId,
-				self::IB_PRODUCTS,
-				array(1),
-				array(2),
-				'N',
-				's1',
-				array()
-			);
-			$discountPrice = \CCatalogProduct::CountPriceWithDiscount(
-				$item['PRICE_D'],
-				'RUB',
-				$discounts
-			);
-			if ($discountPrice != $item['PRICE'])
+			$discounts = self::getDiscounts($productId, self::IB_PRODUCTS, $item['PRICE_WO_DISCOUNT']);
+			if ($discounts['PRICE'] != $item['PRICE'])
 			{
 				$iblockElement->SetPropertyValuesEx($productId, self::IB_PRODUCTS, array(
-					'PRICE' => intval($discountPrice),
-					'ACTION' => $discountPrice < $item['PRICE_D'] ? 1 : 0,
+					'PRICE' => $discounts['PRICE'],
+					'ACTION' => $discounts['PRICE'] < $item['PRICE_WO_DISCOUNT'] ? 1 : 0,
+				    'ACTION_TEXT' => $discounts['TEXT'],
 				));
 				$clearCache = true;
 			}
 		}
 
 		if ($clearCache)
+		{
+			self::clearCatalogCache();
 			self::getAll(true);
+		}
+	}
+
+	/**
+	 * Возвращает ID товара по старому ID
+	 * @param $id
+	 * @param bool|false $refreshCache
+	 * @return int|mixed
+	 */
+	public static function getIdByOldId($id, $refreshCache = false)
+	{
+		$return = 0;
+
+		$id = intval($id);
+
+		$extCache = new ExtCache(
+			array(
+				__FUNCTION__,
+				$id,
+			),
+			static::CACHE_PATH . __FUNCTION__ . '/',
+			static::CACHE_TIME
+		);
+		if(!$refreshCache && $extCache->initCache()) {
+			$return = $extCache->getVars();
+		} else {
+			$extCache->startDataCache();
+
+			$iblockElement = new \CIBlockElement();
+			$rsItems = $iblockElement->GetList(array(), array(
+				'IBLOCK_ID' => self::IB_PRODUCTS,
+				'=XML_ID' => $id,
+			), false, false, array('ID'));
+			if ($item = $rsItems->Fetch())
+			{
+				$return = $item['ID'];
+				$extCache->endDataCache($return);
+			}
+			else
+				$extCache->abortDataCache();
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Возвращает категории, товары, предложения для экспорта
+	 * @return array
+	 */
+	public static function export()
+	{
+		$return = array();
+
+		$iblockSection = new \CIBlockSection();
+		$iblockElement = new \CIBlockElement();
+		$file = new \CFile();
+
+		//
+		// Разделы
+		//
+		$rsItems = $iblockSection->GetList(array(
+			'SORT' => 'ASC',
+			'NAME' => 'ASC',
+		), Array(
+			'IBLOCK_ID' => self::IB_PRODUCTS,
+		));
+		while ($item = $rsItems->Fetch()) {
+
+			$return['CAT'][$item['ID']] = array(
+				'ID' => $item['ID'],
+				'NAME' => $item['NAME'],
+				'CODE' => $item['CODE'],
+			);
+		}
+
+		// Для упаковок добавляем отдельную категорию
+		$return['CAT'][1] = array(
+			'ID' => 1,
+			'NAME' => 'Упаковка',
+		);
+
+		//
+		// Разделы старого каталога
+		// TODO: убрать позже
+		//
+		$iblockIds = array(4, 5, 6, 7, 12, 16, 30, 33, 37, 38, 40);
+		foreach ($iblockIds as $iblockId)
+		{
+			$rsItems = $iblockSection->GetList(array('left_margin' => 'asc'), array(
+				'IBLOCK_ID' => $iblockId,
+			));
+			$hasCategories = false;
+			while ($item = $rsItems->Fetch()) {
+				$return['CAT'][$item['ID']] = array(
+					'ID' => $item['ID'],
+					'NAME' => $item['NAME'],
+					'CODE' => $item['CODE'],
+					'PARENT' => $item['IBLOCK_SECTION_ID'],
+					'OLD' => true,
+				);
+				$hasCategories = true;
+			}
+			if (!$hasCategories) {
+				$iblock = \CIBlock::GetByID($iblockId)->Fetch();
+				$iid = 1000000 + $iblockId;
+				$return['CAT'][$iid] = array(
+					'ID' => $iid,
+					'NAME' => $iblock['NAME'],
+					'CODE' => $iblock['CODE'],
+					'OLD' => true,
+				);
+			}
+		}
+
+		//
+		// Товары
+		//
+		$products = array();
+		$rsItems = $iblockElement->GetList(array(), array(
+			'IBLOCK_ID' => self::IB_PRODUCTS,
+		), false, false, array(
+			'ID', 'NAME', 'ACTIVE', 'CODE',
+			'PREVIEW_PICTURE',
+			'PROPERTY_CATEGORY',
+			'PROPERTY_ARTICLE',
+			'CATALOG_GROUP_1',
+		));
+		while ($item = $rsItems->GetNext())
+		{
+			$catId = $item['PROPERTY_CATEGORY_VALUE'];
+			$cat = $return['CAT'][$catId];
+			$price = floatval($item['CATALOG_PRICE_1']);
+
+			$tmp = array(
+				'ID' => $item['ID'],
+				'CODE' => $item['CODE'],
+			);
+			$products[$item['ID']] = array(
+				'ID' => $item['ID'],
+				'ACTIVE' => $item['ACTIVE'],
+				'NAME' => $item['NAME'],
+				'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
+			    'PICTURE' => $file->GetPath($item['PREVIEW_PICTURE']),
+			    'DETAIL_PAGE_URL' => self::getDetailUrl($tmp, $cat['CODE']),
+			    'CATEGORY_ID' => $catId,
+			    'CATEGORY_NAME' => $cat['NAME'],
+			    'PRICE' => $price,
+			    'OFFERS' => 0,
+			);
+		}
+
+		$rsItems = $iblockElement->GetList(array(), array(
+			'IBLOCK_ID' => self::IB_OFFERS,
+		), false, false, array(
+			'ID',
+			'NAME',
+			'PROPERTY_OFFER_ARTICLE',
+			'PROPERTY_CML2_LINK',
+			'CATALOG_GROUP_1',
+		));
+		while ($item = $rsItems->Fetch())
+		{
+			$productId = $item['PROPERTY_CML2_LINK_VALUE'];
+			$product = $products[$productId];
+			$price = floatval($item['CATALOG_PRICE_1']);
+
+			$return['OFFERS'][] = array(
+				'ID' => $item['ID'],
+				'NAME' => $item['NAME'],
+				'PRODUCT_ID' => $productId,
+				'PRODUCT_ACTIVE' => $product['ACTIVE'],
+				'PRODUCT_NAME' => $product['NAME'],
+				'PICTURE' => $product['PICTURE'],
+				'DETAIL_PAGE_URL' => $product['DETAIL_PAGE_URL'],
+				'ARTICLE' => $item['PROPERTY_OFFER_ARTICLE_VALUE'],
+				'PRICE' => $price,
+				'CATEGORY_ID' => $product['CATEGORY_ID'],
+				'CATEGORY_NAME' => $product['CATEGORY_NAME'],
+			);
+
+			$products[$productId]['OFFERS']++;
+		}
+
+		foreach ($products as $product)
+		{
+			if ($product['OFFERS'])
+				continue;
+			if (!$product['PRICE'])
+				continue;
+
+			$return['OFFERS'][] = array(
+				'ID' => $product['ID'],
+				'NAME' => $product['NAME'],
+				'PRODUCT_ID' => $product['ID'],
+				'PRODUCT_ACTIVE' => $product['ACTIVE'],
+				'PRODUCT_NAME' => $product['NAME'],
+				'PICTURE' => $product['PICTURE'],
+				'DETAIL_PAGE_URL' => $product['DETAIL_PAGE_URL'],
+				'ARTICLE' => $product['ARTICLE'],
+				'PRICE' => $product['PRICE'],
+				'CATEGORY_ID' => $product['CATEGORY_ID'],
+				'CATEGORY_NAME' => $product['CATEGORY_NAME'],
+			);
+		}
+
+		$rsItems = $iblockElement->GetList(array(), array(
+			'IBLOCK_ID' => Package::IBLOCK_ID,
+		), false, false, array(
+			'ID',
+			'NAME',
+			'ACTIVE',
+			'DETAIL_PICTURE',
+			'PROPERTY_ARTICLE',
+			'CATALOG_GROUP_1',
+		));
+		while ($item = $rsItems->Fetch())
+		{
+			$cat = $return['CAT'][1];
+			$price = floatval($item['CATALOG_PRICE_1']);
+			$return['OFFERS'][] = array(
+				'ID' => $item['ID'],
+				'NAME' => $item['NAME'],
+				'PRODUCT_ID' => $item['ID'],
+				'PRODUCT_ACTIVE' => $item['ACTIVE'],
+				'PRODUCT_NAME' => $item['NAME'],
+				'PICTURE' => $file->GetPath($item['DETAIL_PICTURE']),
+				'DETAIL_PAGE_URL' => '',
+				'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
+				'PRICE' => $price,
+				'CATEGORY_ID' => 1,
+				'CATEGORY_NAME' => $cat['NAME'],
+			);
+		}
+
+		//
+		// Товары старого каталога
+		// TODO: убрать позже
+		//
+		foreach ($iblockIds as $iblockId)
+		{
+			$iblockOffer = \CCatalogSKU::GetInfoByProductIBlock($iblockId);
+			$rsItems = $iblockElement->GetList(array(), array(
+				'IBLOCK_ID' => $iblockId,
+			), false, false, array(
+				'ID', 'NAME', 'ACTIVE', 'CODE',
+				'DETAIL_PICTURE', 'IBLOCK_SECTION_ID', 'DETAIL_PAGE_URL',
+				'PROPERTY_ARTICLE',
+				'PROPERTY_VENDOR_CODE',
+				'CATALOG_GROUP_1',
+			));
+			while ($item = $rsItems->GetNext())
+			{
+				$catId = $item['IBLOCK_SECTION_ID'];
+				$cat = $return['CAT'][$catId];
+				$price = floatval($item['CATALOG_PRICE_1']);
+
+				$article = trim($item['PROPERTY_ARTICLE_VALUE']);
+				if (!$article)
+					$article = trim($item['PROPERTY_VENDOR_CODE_VALUE']);
+
+				$product = array(
+					'ID' => $item['ID'],
+					'ACTIVE' => $item['ACTIVE'],
+					'NAME' => $item['NAME'],
+					'ARTICLE' => $article,
+					'PICTURE' => $file->GetPath($item['DETAIL_PICTURE']),
+					'DETAIL_PAGE_URL' => $item['DETAIL_PAGE_URL'],
+					'CATEGORY_ID' => $catId,
+					'CATEGORY_NAME' => $cat['NAME'],
+					'PRICE' => $price,
+					'OFFERS' => 0,
+				);
+				$products[$item['ID']] = $product;
+
+				if (!$iblockOffer['IBLOCK_ID'] || $price > 0)
+				{
+					$detail = $product['DETAIL_PAGE_URL'];
+					if (!$detail)
+						$detail = '/catalog/detail.php?ID=' . $product['ID'];
+					$return['OFFERS'][] = array(
+						'ID' => $product['ID'],
+						'NAME' => $product['NAME'],
+						'PRODUCT_ID' => $product['ID'],
+						'PRODUCT_ACTIVE' => $product['ACTIVE'],
+						'PRODUCT_NAME' => $product['NAME'],
+						'PICTURE' => $product['PICTURE'],
+						'DETAIL_PAGE_URL' => $detail,
+						'ARTICLE' => $product['ARTICLE'],
+						'PRICE' => $product['PRICE'],
+						'CATEGORY_ID' => $product['CATEGORY_ID'],
+						'CATEGORY_NAME' => $product['CATEGORY_NAME'],
+					);
+				}
+			}
+
+			if ($iblockOffer['IBLOCK_ID'])
+			{
+				$rsItems = $iblockElement->GetList(array(), array(
+					'IBLOCK_ID' => $iblockOffer['IBLOCK_ID'],
+				), false, false, array(
+					'ID',
+					'NAME',
+					'PROPERTY_ARTICLE',
+					'PROPERTY_CML2_LINK',
+					'CATALOG_GROUP_1',
+				));
+				while ($item = $rsItems->GetNext())
+				{
+					$productId = $item['PROPERTY_CML2_LINK_VALUE'];
+					if ($productId <= 0)
+						continue;
+
+					$product = $products[$productId];
+					$price = floatval($item['CATALOG_PRICE_1']);
+
+					$return['OFFERS'][] = array(
+						'ID' => $item['ID'],
+						'NAME' => $item['NAME'],
+						'PRODUCT_ID' => $productId,
+						'PRODUCT_ACTIVE' => $product['ACTIVE'],
+						'PRODUCT_NAME' => $product['NAME'],
+						'PICTURE' => $product['PICTURE'],
+						'DETAIL_PAGE_URL' => $product['DETAIL_PAGE_URL'],
+						'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
+						'PRICE' => $price,
+						'CATEGORY_ID' => $product['CATEGORY_ID'],
+						'CATEGORY_NAME' => $product['CATEGORY_NAME'],
+					);
+
+					$products[$productId]['OFFERS']++;
+
+				}
+			}
+		}
+
+		return $return;
 	}
 
 	/**
@@ -663,10 +1113,9 @@ class Products
 	{
 		$phpCache = new \CPHPCache();
 		$phpCache->CleanDir(static::CACHE_PATH . 'getAll');
-		$phpCache->CleanDir(static::CACHE_PATH . 'getSimpleById');
+		$phpCache->CleanDir(static::CACHE_PATH . 'getDataByFilter');
 		$phpCache->CleanDir(static::CACHE_PATH . 'get');
 		$phpCache->CleanDir(static::CACHE_PATH . 'getById');
-		$phpCache->CleanDir(static::CACHE_PATH . 'getOffersByProduct');
 	}
 
 }

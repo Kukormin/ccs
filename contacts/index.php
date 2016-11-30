@@ -3,6 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetPageProperty("description", "На данной странице предоставлены контакты нашей компании");
 $APPLICATION->SetPageProperty("title", "Контакты");
 $APPLICATION->SetTitle("Контакты");
+
 ?><section class="b-topblock b-topblock--pay-ship"></section> <section class="b-bg-grey b-bg-grey--contact">
 <h1 style="text-align:center">
 <div class="b-content-center--title i-padding__top-100">
@@ -86,11 +87,12 @@ $APPLICATION->SetTitle("Контакты");
 </div>
  <!--map-->
 <div class="b-maps">
-	<div id="gmap" class="b-gmap">
-	</div>
-	<div class="b-contact-label">
-		 пункты самовывоза
-	</div>
+	<div id="gmap" class="b-gmap"></div><?
+
+	/*?>
+	<div class="b-contact-label">пункты самовывоза</div><?*/
+
+	?>
 </div>
  <!--form-->
 <div class="b-content-center b-contact-table--form">
@@ -107,4 +109,6 @@ $APPLICATION->SetTitle("Контакты");
 	)
 );?>
 </div>
- </section> <br><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+ </section> <br>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

@@ -1,21 +1,21 @@
 <?
-require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
-
 /** @global CMain $APPLICATION */
 
-$APPLICATION->SetTitle('Каталог товаров');
+$isAjax = isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'ajax';
+if ($isAjax)
+{
+	define('PUBLIC_AJAX_MODE', true);
+	define('STOP_STATISTICS', true);
+	define('NO_AGENT_CHECK', true);
+	require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
+}
+else
+	require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
-?>
-<section class="b-topblock b-topblock--pay-ship">
-</section>
+$APPLICATION->IncludeComponent('tim:catalog', '', array(
+	'AJAX' => $isAjax,
+));
 
-<section class="b-bg-grey">
-	<div class="b-content-center b-content-center--cupcake" style="padding-top: 45px;"><?
+if (!$isAjax)
+	require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
 
-		$APPLICATION->IncludeComponent('tim:catalog', '', array());
-
-		?>
-	</div>
-</section><?
-
-require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php');

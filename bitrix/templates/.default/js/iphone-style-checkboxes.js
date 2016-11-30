@@ -156,25 +156,33 @@
       }
       if (iOSCheckbox.dragging) {
         p = (x - iOSCheckbox.dragStartPosition) / this.rightSide;
-        this.elem.prop('checked', p >= 0.5).change();
+		  var bef = this.elem.prop('checked');
+		  var aft = p >= 0.5;
+		  if (bef != aft)
+        	this.elem.prop('checked', aft).change();
+		  else {
+			  iOSCheckbox.currentlyClicking = null;
+			  iOSCheckbox.dragging = null;
+			  return;
+		  }
       } else {
         this.elem.prop('checked', !this.elem.prop('checked')).change();
       }
       iOSCheckbox.currentlyClicking = null;
       iOSCheckbox.dragging = null;
+
+		if (typeof this.onChange === "function") {
+			this.onChange(this.elem, this.elem.prop('checked'));
+		}
+
       return this.didChange();
     };
 
-    iOSCheckbox.prototype.refresh = function() {
-      return this.didChange();
-    };
+    iOSCheckbox.prototype.refresh = function() {};
 
     iOSCheckbox.prototype.didChange = function() {
       var new_left;
 
-      if (typeof this.onChange === "function") {
-        this.onChange(this.elem, this.elem.prop('checked'));
-      }
       if (this.isDisabled()) {
         this.container.addClass(this.disabledClass);
         return false;

@@ -5,15 +5,9 @@
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
 /** @global CUser $USER */
-/** @var Local\Catalog\TimCatalogElement $component */
+/** @var Local\Catalog\TimCatalog $component */
 
 $product = $component->product;
-
-$APPLICATION->SetPageProperty("fb:app_id", '574393899375304');
-$APPLICATION->SetPageProperty("og:title", $product['NAME']);
-$APPLICATION->SetPageProperty("og:description", strip_tags($product['PREVIEW_TEXT']));
-$APPLICATION->SetPageProperty("og:url", 'http://' . SITE_SERVER_NAME . $product['DETAIL_PAGE_URL']);
-$APPLICATION->SetPageProperty("og:image", 'http://' . SITE_SERVER_NAME . $product['PICTURES'][0]);
 
 ?>
 	<section class="b-topblock b-min-height-213 b-topblock-mobhide">
@@ -126,234 +120,96 @@ $APPLICATION->SetPageProperty("og:image", 'http://' . SITE_SERVER_NAME . $produc
 				</div>
 			</div>
 		</div>
-	</section>
-	<div class="item-desc"><?= $product["DETAIL_TEXT"] ?></div>
+	</section><?
 
-	<section class="b-bg-grey"><?
-	if (isset($arResult['BOUND_PRODUCT_ID']))
+	if ($product["DETAIL_TEXT"])
 	{
 		?>
-		<div class="b-content-center b-grey-block-gift--wrap">
-		<div class="b-grey-wrap-top  b-ordering-accessory__list">
-			<div class="b-grey-wrap-top-right">
-				<div class="b-grey-wrap-bottom">
-					<div class="b-grey-wrap-bottom-right">
-						<div class="b-application-event--title">
-							<span>  <font class="b-block-desktop-only">приятный </font>аксессуар к заказу</span>
-						</div>
-						<div class="js-postcards-wrap b-addition-order-wrap">
-							<?
+		<div class="item-desc"><?= $product["DETAIL_TEXT"] ?></div><?
+	}
 
-							$i = 0;
-							$length = count($arResult['BOUND_PRODUCT_ID']);
-							foreach ($arResult['BOUND_PRODUCT_ID'] as $gid => $arBoundList)
-							{
-								$i++;
-								$class = $i == $length ? ' b-postcard__item--last' : '';
-								?>
-								<div class="b-postcard__item<?= $class ?>"><?
-								foreach ($arBoundList as $products_id)
+	?>
+	<section class="b-bg-grey"><?
+		/*if (isset($arResult['BOUND_PRODUCT_ID']))
+		{
+			?>
+			<div class="b-content-center b-grey-block-gift--wrap">
+			<div class="b-grey-wrap-top  b-ordering-accessory__list">
+				<div class="b-grey-wrap-top-right">
+					<div class="b-grey-wrap-bottom">
+						<div class="b-grey-wrap-bottom-right">
+							<div class="b-application-event--title">
+								<span>  <font class="b-block-desktop-only">приятный </font>аксессуар к заказу</span>
+							</div>
+							<div class="js-postcards-wrap b-addition-order-wrap">
+								<?
+
+								$i = 0;
+								$length = count($arResult['BOUND_PRODUCT_ID']);
+								foreach ($arResult['BOUND_PRODUCT_ID'] as $gid => $arBoundList)
 								{
-									foreach ($arResult['BOUND'][$gid][$products_id] as $postcard_fields)
+									$i++;
+									$class = $i == $length ? ' b-postcard__item--last' : '';
+									?>
+									<div class="b-postcard__item<?= $class ?>"><?
+									foreach ($arBoundList as $products_id)
 									{
-										?>
-									<div class="b-mod__item b-mod__item-postcard item_accs"
-									     data-oid="<?= $postcard_fields['ID'] ?>"
-									     data-bid="<?= $arResult['BOUND_BASKET'][$gid][$postcard_fields['ID']]['ID'] ?>">
-										<div class="b-mod__item-img">
-											<div class="b-mod__item-img--effect-transform">
-												<img class="js-postcard-img"
-												     src="<?= CFile::GetPath($postcard_fields['DETAIL_PICTURE']) ?>"
-												     alt="">
+										foreach ($arResult['BOUND'][$gid][$products_id] as $postcard_fields)
+										{
+											?>
+										<div class="b-mod__item b-mod__item-postcard item_accs"
+										     data-oid="<?= $postcard_fields['ID'] ?>"
+										     data-bid="<?= $arResult['BOUND_BASKET'][$gid][$postcard_fields['ID']]['ID'] ?>">
+											<div class="b-mod__item-img">
+												<div class="b-mod__item-img--effect-transform">
+													<img class="js-postcard-img"
+													     src="<?= CFile::GetPath($postcard_fields['DETAIL_PICTURE']) ?>"
+													     alt="">
+												</div>
 											</div>
-										</div>
-										<div class="b-mod__item-title">
-													<span
-														class="postcard--name js-postcard-name"> <?= $postcard_fields['NAME'] ?></span>
-													<span
-														class="js-postcard-text"><?= $postcard_fields['PREVIEW_TEXT'] ?></span>
-										</div>
-										<div class="b-mod__item-price js-postcard-price"
-										     data-price="<?= $postcard_fields['PRICE'] ?>">
-											<?= $postcard_fields['PRICE'] ?> <span class="rub">i</span>
-										</div>
-										<div>
-											<button class="b-bnt-form b-bnt-form--green js-modal-tobasket"
-											        data-href="/personal/cart"
-											        data-addid="<?= $postcard_fields['ID'] ?>">в корзину
-											</button>
-										</div>
-										</div><?
+											<div class="b-mod__item-title">
+														<span
+															class="postcard--name js-postcard-name"> <?= $postcard_fields['NAME'] ?></span>
+														<span
+															class="js-postcard-text"><?= $postcard_fields['PREVIEW_TEXT'] ?></span>
+											</div>
+											<div class="b-mod__item-price js-postcard-price"
+											     data-price="<?= $postcard_fields['PRICE'] ?>">
+												<?= $postcard_fields['PRICE'] ?> <span class="rub">i</span>
+											</div>
+											<div>
+												<button class="b-bnt-form b-bnt-form--green js-modal-tobasket"
+												        data-href="/personal/cart"
+												        data-addid="<?= $postcard_fields['ID'] ?>">в корзину
+												</button>
+											</div>
+											</div><?
+										}
 									}
+									?>
+									</div><?
 								}
 								?>
-								</div><?
-							}
-							?>
 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		</div><?
-	}
+			</div><?
+		}*/
 
-	?>
+		//
+		// Перелинковка ("У нас есть много вкусных сладостей")
+		//
+		$APPLICATION->IncludeComponent('tim:empty', 'detail_relinks', array(
+			'CATEGORY' => $product['CATEGORY']['ID'],
+		));
 
-	<div class="b-content-center b-slider-about-novelty">
-		<div class="b-title b-title--border-middle">
-			<div class="b-title__item b-title__item--grey">
-							<span href="#" class="b-mod--about-novelty__item-img">
-							У нас есть много вкусных сладостей
-						</span>
-			</div>
-		</div>
-		<!--block slider-->
+		?>
+	</section><?
 
-		<?$APPLICATION->IncludeComponent("bitrix:catalog.section", "cupcake_section_slider", array(
-				"ACTION_VARIABLE" => "action",
-				"ADD_PICT_PROP" => "-",
-				"ADD_PROPERTIES_TO_BASKET" => "Y",
-				"ADD_SECTIONS_CHAIN" => "N",
-				"ADD_TO_BASKET_ACTION" => "ADD",
-				"AJAX_MODE" => "N",
-				"AJAX_OPTION_ADDITIONAL" => "",
-				"AJAX_OPTION_HISTORY" => "N",
-				"AJAX_OPTION_JUMP" => "N",
-				"AJAX_OPTION_STYLE" => "Y",
-				"BACKGROUND_IMAGE" => "-",
-				"BASKET_URL" => "/personal/cart",
-				"BROWSER_TITLE" => "-",
-				"CACHE_FILTER" => "N",
-				"CACHE_GROUPS" => "Y",
-				"CACHE_TIME" => "36000000",
-				"CACHE_TYPE" => "A",
-				"COMPONENT_TEMPLATE" => "cupcake_section_slider",
-				"CONVERT_CURRENCY" => "N",
-				"DETAIL_URL" => "",
-				"DISPLAY_BOTTOM_PAGER" => "Y",
-				"DISPLAY_TOP_PAGER" => "N",
-				"ELEMENT_SORT_FIELD" => "created",
-				"ELEMENT_SORT_FIELD2" => "",
-				"ELEMENT_SORT_ORDER" => "desc",
-				"ELEMENT_SORT_ORDER2" => "",
-				"FILTER_NAME" => "arrFilter",
-				"HIDE_NOT_AVAILABLE" => "N",
-				"IBLOCK_ID" => "4",
-				"IBLOCK_TYPE" => "catalog",
-				"INCLUDE_SUBSECTIONS" => "Y",
-				"LABEL_PROP" => "-",
-				"LINE_ELEMENT_COUNT" => "3",
-				"MESSAGE_404" => "",
-				"MESS_BTN_ADD_TO_BASKET" => "В корзину",
-				"MESS_BTN_BUY" => "Купить",
-				"MESS_BTN_DETAIL" => "Подробнее",
-				"MESS_BTN_SUBSCRIBE" => "Подписаться",
-				"MESS_NOT_AVAILABLE" => "Нет в наличии",
-				"META_DESCRIPTION" => "-",
-				"META_KEYWORDS" => "-",
-				"OFFERS_CART_PROPERTIES" => array(
-					0 => "ARTICLE",
-					1 => "NUMBER",
-					2 => "TAGS",
-					3 => "STAR_GIFT_PRICE",
-				),
-				"OFFERS_FIELD_CODE" => array(
-					0 => "ID",
-					1 => "CODE",
-					2 => "XML_ID",
-					3 => "NAME",
-					4 => "TAGS",
-					5 => "SORT",
-					6 => "PREVIEW_TEXT",
-					7 => "PREVIEW_PICTURE",
-					8 => "DETAIL_TEXT",
-					9 => "DETAIL_PICTURE",
-					10 => "IBLOCK_TYPE_ID",
-					11 => "IBLOCK_ID",
-					12 => "IBLOCK_CODE",
-					13 => "IBLOCK_NAME",
-					14 => "IBLOCK_EXTERNAL_ID",
-					15 => "DATE_CREATE",
-					16 => "",
-				),
-				"OFFERS_LIMIT" => "5",
-				"OFFERS_PROPERTY_CODE" => array(
-					0 => "ARTICLE",
-					1 => "NUMBER",
-					2 => "TAGS",
-					3 => "STAR_GIFT_PRICE",
-					4 => "FILLING",
-					5 => "",
-				),
-				"OFFERS_SORT_FIELD" => "sort",
-				"OFFERS_SORT_FIELD2" => "id",
-				"OFFERS_SORT_ORDER" => "asc",
-				"OFFERS_SORT_ORDER2" => "desc",
-				"PAGER_BASE_LINK_ENABLE" => "N",
-				"PAGER_DESC_NUMBERING" => "N",
-				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-				"PAGER_SHOW_ALL" => "N",
-				"PAGER_SHOW_ALWAYS" => "N",
-				"PAGER_TEMPLATE" => ".default",
-				"PAGER_TITLE" => "Товары",
-				"PAGE_ELEMENT_COUNT" => "15",
-				"PARTIAL_PRODUCT_PROPERTIES" => "N",
-				"PRICE_CODE" => array(
-					0 => "BASE",
-				),
-				"PRICE_VAT_INCLUDE" => "Y",
-				"PRODUCT_DISPLAY_MODE" => "N",
-				"PRODUCT_ID_VARIABLE" => "id",
-				"PRODUCT_PROPERTIES" => array(
-					0 => "ACTION",
-					1 => "NEW",
-					2 => "STAR_GIFT",
-				),
-				"PRODUCT_PROPS_VARIABLE" => "prop",
-				"PRODUCT_QUANTITY_VARIABLE" => "items_num",
-				"PRODUCT_SUBSCRIPTION" => "N",
-				"PROPERTY_CODE" => array(
-					0 => "ACTION",
-					1 => "NEW",
-					2 => "STAR_GIFT",
-					3 => "",
-				),
-				"SECTION_CODE" => "",
-				"SECTION_ID" => $_REQUEST["SECTION_ID"],
-				"SECTION_ID_VARIABLE" => "SECTION_ID",
-				"SECTION_URL" => "",
-				"SECTION_USER_FIELDS" => array(
-					0 => "UF_ACSESS_BOUND",
-					1 => "UF_DISPLAY_MAIN",
-					2 => "UF_DATE",
-					3 => "UF_PASSWORD",
-					4 => "",
-				),
-				"SEF_MODE" => "N",
-				"SET_BROWSER_TITLE" => "Y",
-				"SET_LAST_MODIFIED" => "N",
-				"SET_META_DESCRIPTION" => "Y",
-				"SET_META_KEYWORDS" => "Y",
-				"SET_STATUS_404" => "N",
-				"SET_TITLE" => "Y",
-				"SHOW_404" => "N",
-				"SHOW_ALL_WO_SECTION" => "Y",
-				"SHOW_CLOSE_POPUP" => "N",
-				"SHOW_DISCOUNT_PERCENT" => "N",
-				"SHOW_OLD_PRICE" => "N",
-				"SHOW_PRICE_COUNT" => "1",
-				"TEMPLATE_THEME" => "blue",
-				"USE_MAIN_ELEMENT_SECTION" => "N",
-				"USE_PRICE_COUNT" => "N",
-				"USE_PRODUCT_QUANTITY" => "Y"
-			), false);?>
-
-	</div>
-
-	</section>
-	<?
+	/*
 	$category = '';
 	$cat = CIBlock::GetByID($arResult['IBLOCK_ID']);
 	if ($ar_res = $cat->GetNext())
@@ -400,8 +256,11 @@ $APPLICATION->SetPageProperty("og:image", 'http://' . SITE_SERVER_NAME . $produc
 				}
 			});
 		});
-	</script>
-	</div>
+	</script><?
+	*/
+
+	?>
+</div>
 
 
 	<!--modal delivery-->
@@ -507,6 +366,17 @@ $APPLICATION->SetPageProperty("og:image", 'http://' . SITE_SERVER_NAME . $produc
 		</div>
 	</div>
 </div><?
+
+if ($product['TITLE'])
+	$APPLICATION->SetPageProperty('title', $product['TITLE']);
+if ($product['DESCRIPTION'])
+	$APPLICATION->SetPageProperty('description', $product['DESCRIPTION']);
+
+$APPLICATION->AddHeadString('<meta property="fb:app_id" content="' . 574393899375304 . '">', true);
+$APPLICATION->AddHeadString('<meta property="og:title" content="' . $product['NAME'] . '">', true);
+$APPLICATION->AddHeadString('<meta property="og:description" content="' . strip_tags($product['PREVIEW_TEXT']) . '">', true);
+$APPLICATION->AddHeadString('<meta property="og:url" content="http://' . SITE_SERVER_NAME . $product['DETAIL_PAGE_URL'] . '">', true);
+$APPLICATION->AddHeadString('<meta property="og:image" content="http://' . SITE_SERVER_NAME . $product['PICTURES'][0] . '">', true);
 
 \Local\Utils\Remarketing::setPageType('product');
 \Local\Utils\Remarketing::addProductId($arResult['ID']);

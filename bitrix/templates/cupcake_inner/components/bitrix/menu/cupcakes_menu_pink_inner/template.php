@@ -21,7 +21,7 @@ foreach($arResult["ALL_ITEMS"] as $arColumns)
 	$style = !empty($arColumns["PARAMS"]["IMG"]) ? ' style="background: url(' . $arColumns["PARAMS"]["IMG"] .
 		') no-repeat center top;"' : '';
 
-	?><li class="b-bottom-nav__item<?= $active ?>">
+	?><li class="b-bottom-nav__item<?= $class ?>">
 		<a href="<?= $href ?>"<?= $style ?> class="b-bottom-nav__link"><?= $arColumns["TEXT"] ?></a>
 	</li><?
 }

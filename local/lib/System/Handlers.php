@@ -1,7 +1,9 @@
 <?
 
 namespace Local\System;
+use Local\Catalog\Holidays;
 use Local\Catalog\Products;
+use Local\Sale\Package;
 use Local\Utils\Abandoned;
 
 /**
@@ -17,16 +19,10 @@ class Handlers
 		static $added = false;
 		if (!$added) {
 			$added = true;
-			/*AddEventHandler('iblock', 'OnBeforeIBlockElementDelete',
+			AddEventHandler('iblock', 'OnBeforeIBlockElementDelete',
 				array(__NAMESPACE__ . '\Handlers', 'beforeIBlockElementDelete'));
 			AddEventHandler('iblock', 'OnBeforeIBlockElementUpdate',
 				array(__NAMESPACE__ . '\Handlers', 'beforeIBlockElementUpdate'));
-			AddEventHandler('iblock', 'OnAfterIBlockAdd',
-				array(__NAMESPACE__ . '\Handlers', 'afterIBlockUpdate'));
-			AddEventHandler('iblock', 'OnAfterIBlockUpdate',
-				array(__NAMESPACE__ . '\Handlers', 'afterIBlockUpdate'));
-			AddEventHandler('iblock', 'OnIBlockDelete',
-				array(__NAMESPACE__ . '\Handlers', 'afterIBlockUpdate'));*/
 			AddEventHandler('iblock', 'OnIBlockPropertyBuildList',
 				array(__NAMESPACE__ . '\Handlers', 'iBlockPropertyBuildList'));
 			AddEventHandler('iblock', 'OnBeforeIBlockElementAdd',
@@ -51,8 +47,8 @@ class Handlers
 				array(__NAMESPACE__ . '\Handlers', 'afterUserAdd'));
 			AddEventHandler('main', 'OnBeforeProlog',
 				array(__NAMESPACE__ . '\Handlers', 'beforeProlog'));
-			/*AddEventHandler('search', 'BeforeIndex',
-				array(__NAMESPACE__ . '\Handlers', 'beforeSearchIndex'));*/
+			AddEventHandler('search', 'BeforeIndex',
+				array(__NAMESPACE__ . '\Handlers', 'beforeSearchIndex'));
 		}
 	}
 
@@ -113,11 +109,16 @@ class Handlers
 		}
 	}
 
+	/**
+	 * Корректировка цен товаров после добавления, редактирования или удаления скидок
+	 */
 	public static function discountAdd() {
-		//Products::priceChange($fields['PRODUCT_ID']);
+		Products::setSortPriceAllProducts();
 	}
-
 	public static function discountUpdate() {
+		Products::setSortPriceAllProducts();
+	}
+	public static function discountDelete() {
 		Products::setSortPriceAllProducts();
 	}
 
@@ -146,13 +147,10 @@ class Handlers
 	 * @param $ID
 	 */
 	public static function elementDelete($ID) {
-		$rs = \CIBlockElement::GetByID($ID);
-		if ($element = $rs->Fetch())
-		{
-			// нужно обновить цену товара, если удалили ТП
-			if ($element['IBLOCK_ID'] == Products::IB_OFFERS)
-				Products::offerDelete($ID);
-		}
+		$iblockId = self::getIblockByElementId($ID);
+		// нужно обновить цену товара, если удалили ТП
+		if ($iblockId == Products::IB_OFFERS)
+			Products::offerDelete($ID);
 	}
 
 	/**
@@ -172,7 +170,28 @@ class Handlers
 	 */
 	public static function beforeIBlockElementDelete($id)
 	{
-
+		global $APPLICATION;
+		$iblockId = self::getIblockByElementId($id);
+		if ($iblockId == Products::IB_PRODUCTS)
+		{
+			$APPLICATION->throwException("\nНельзя просто так взять и удалить товар");
+			return false;
+		}
+		elseif ($iblockId == Products::IB_OFFERS)
+		{
+			$APPLICATION->throwException("\nНельзя просто так взять и удалить торговое предложение");
+			return false;
+		}
+		elseif ($iblockId == Holidays::IB_HOLIDAYS)
+		{
+			$APPLICATION->throwException("\nНельзя просто так взять и удалить праздник");
+			return false;
+		}
+		elseif ($iblockId == Package::IBLOCK_ID)
+		{
+			$APPLICATION->throwException("\nНельзя просто так взять и удалить упаковку");
+			return false;
+		}
 
 		return true;
 	}
@@ -184,7 +203,6 @@ class Handlers
 	 */
 	public static function beforeIBlockElementUpdate(&$arFields)
 	{
-
 
 		return true;
 	}
@@ -214,6 +232,7 @@ class Handlers
 	 */
 	public static function beforeProlog()
 	{
+		// Авторизуем пользователя, если он пришел из письма
 		Abandoned::authorizeEmailUser();
 	}
 
@@ -224,10 +243,30 @@ class Handlers
 	 */
 	public static function beforeSearchIndex($arFields)
 	{
-		if ($arFields["MODULE_ID"] == "iblock" && $arFields["PARAM2"] == Products::IB_PRODUCTS)
-			$arFields = Products::beforeSearchIndex($arFields);
+		/*if ($arFields["MODULE_ID"] == "iblock" && $arFields["PARAM2"] == Products::IB_PRODUCTS)
+			$arFields = Products::beforeSearchIndex($arFields);*/
 
 		return $arFields;
+	}
+
+	/**
+	 * Находит ID инфоблока по ID элемента
+	 * @param $id
+	 * @return string
+	 */
+	private static function getIblockByElementId($id)
+	{
+		$iblock = 0;
+		$iblockElement = new \CIBlockElement();
+		$rsItems = $iblockElement->GetList(array(), array(
+			'ID' => $id,
+		), false, false, array(
+			'IBLOCK_ID',
+		));
+		if ($item = $rsItems->Fetch())
+			$iblock = $item['IBLOCK_ID'];
+
+		return $iblock;
 	}
 
 }

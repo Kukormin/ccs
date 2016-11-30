@@ -29,7 +29,7 @@ $APPLICATION->IncludeComponent(
 		"COMPONENT_TEMPLATE" => "basket",
 		"COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",
 		"HIDE_COUPON" => "N",
-		"OFFERS_PROPS" => array(0=>"NUMBER",),
+		"OFFERS_PROPS" => array(),
 		"PATH_TO_ORDER" => "/personal/order/make/",
 		"PRICE_VAT_SHOW_VALUE" => "Y",
 		"QUANTITY_FLOAT" => "N",

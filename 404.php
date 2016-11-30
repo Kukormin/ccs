@@ -6,26 +6,45 @@ CHTTP::SetStatus("404 Not Found");
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
-$APPLICATION->SetTitle("Страница не найдена");?>
+$APPLICATION->SetTitle("Страница не найдена");
 
+?>
+<section class="b-topblock b-topblock--pay-ship">
+</section>
 
-<style>
-p {
-	text-align: center !important;
-	font-size: 20px;
-}
+<section class="b-bg-grey">
+	<div class="b-content-center b-content-center--cupcake b-content-center--cupcake-catalog">
+		<div id="bc">
+			Вы сейчас здесь: <a href="/">Главная</a> / <span>Ошибка 404</span>
+		</div>
 
-.error {
-	width: 100%;
-	text-align: center;
-	font-size: 200px;
-	line-height: 200px;
-	color: #CCCCCC;
-}
-</style>
-<div style="margin-top:250px">
-<div class="error">404</div>
-<div class="error-text">
-<p>Вы набрали неправильный адрес страницы.<br>Пожалуйста, перейдите на главную страницу сайта или воспользуйтесь формой поиска</p>
-</div></div>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+		<div class="b-catalog-wrap--cupcake js-ajax-content-block not-found">
+			<h1>Вы набрали неправильный адрес страницы</h1>
+			<ul id="a404">
+				<li>
+					<table>
+						<tr>
+							<td><b class="index"></b></td>
+							<td>
+								<a href="/">Перейти на главную</a>
+							</td>
+						</tr>
+					</table>
+				</li>
+				<li>
+					<table>
+						<tr>
+							<td><b class="cat"></b></td>
+							<td>
+								<a href="/cat/">Каталог товаров</a>
+							</td>
+						</tr>
+					</table>
+				</li>
+			</ul>
+		</div>
+
+		<img src="/images/new404.png" alt="404" />
+</section><?
+
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

@@ -41,10 +41,10 @@ if (!$products)
 					</div>
 					<div class="b-mod__item-price"><?
 
-						if ($item['PRICE_D'] > $item['PRICE'])
+						if ($item['PRICE_WO_DISCOUNT'] > $item['PRICE'])
 						{
 							?>
-							<em><?= number_format($item['PRICE_D'], 0, '', ' ') ?></em><?
+							<em><?= number_format($item['PRICE_WO_DISCOUNT'], 0, '', ' ') ?></em><?
 						}
 						?>
 						<?= number_format($item['PRICE'], 0, '', ' ') ?> P<?

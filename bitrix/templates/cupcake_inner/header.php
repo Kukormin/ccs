@@ -19,20 +19,17 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 
 
 	<link href="/bitrix/templates/.default/css/slick.css?v=6" rel="stylesheet" type="text/css"/>
-	<link href="/bitrix/templates/.default/css/nouislider.min.css" rel="stylesheet" type="text/css"/>
 	<link href="/bitrix/templates/.default/css/about.css?v=12" rel="stylesheet" type="text/css"/>
 	<link href="/bitrix/templates/.default/template_styles.css?v=12" rel="stylesheet" type="text/css"/>
 	<link href="/bitrix/templates/.default/css/cupcake-media.css?v=11" rel="stylesheet" type="text/css"/>
 	<link href="/bitrix/templates/.default/css/featherlight.css?v=6" rel="stylesheet" type="text/css"/>
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.stellar.min.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/nouislider.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/featherlight.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/slick.js?v=6"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/richmarker.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.suggestions.min.js"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=8"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/share.js?v=6"></script>
@@ -43,6 +40,7 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=7"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/catalog.js?v=1"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/iphone-style-checkboxes.js?v=1"></script>
 
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -99,7 +97,7 @@ if (!$hideHeader)
 			// Поиск
 			$APPLICATION->IncludeComponent("bitrix:search.form", "header-search2", Array(
 				"USE_SUGGEST" => "Y",
-				"PAGE" => "#SITE_DIR#search/index.php",
+				"PAGE" => "/cat/",
 				"COMPONENT_TEMPLATE" => ".default"
 			), false);
 

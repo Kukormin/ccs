@@ -1,114 +1,242 @@
 <?
-namespace Local\Catalog;
-use Local\System\ExtCache;
+namespace Local\Sale;
+use Bitrix\Sale\Compatible\BasketCompatibility;
+use Local\Catalog\Products;
 
 /**
- * Class Holidays Праздники
- * @package Local\Catalog
+ * Class Cart Корзина
+ * @package Local\Sale
  */
-class Holidays
+class Cart
 {
 	/**
 	 * Путь для кеширования
 	 */
-	const CACHE_PATH = 'Local/Catalog/Holidays/';
+	const CACHE_PATH = 'Local/Sale/Cart/';
 
 	/**
-	 * ID инфоблока
+	 * Добавление товара (или предложения) в корзину
+	 * @param $id
+	 * @param $offer
+	 * @param $quantity
+	 * @return bool|int
 	 */
-	const IB_HOLIDAYS = 49;
-
-	/**
-	 * Возвращает все праздники
-	 * @param bool|false $refreshCache
-	 * @return array
-	 */
-	public static function getAll($refreshCache = false)
+	public static function add($id, $offer, $quantity)
 	{
-		$return = array();
+		$productId = intval($id);
+		if ($productId <= 0)
+			return false;
 
-		$extCache = new ExtCache(
-			array(
-				__FUNCTION__,
-			),
-			static::CACHE_PATH . __FUNCTION__ . '/',
-			86400000
-		);
-		if(!$refreshCache && $extCache->initCache()) {
-			$return = $extCache->getVars();
-		} else {
-			$extCache->startDataCache();
+		$quantity = intval($quantity);
+		if ($quantity <= 0)
+			$quantity = 1;
 
-			$iblockElement = new \CIBlockElement();
-			$rsItems = $iblockElement->GetList(array(), array(
-				'IBLOCK_ID' => self::IB_HOLIDAYS,
-				'ACTIVE' => 'Y',
-			), false, false, array(
-				'ID', 'NAME', 'CODE',
-			));
-			while ($item = $rsItems->Fetch())
-			{
-				$return['ITEMS'][$item['ID']] = array(
-					'ID' => $item['ID'],
-					'NAME' => $item['NAME'],
-					'CODE' => $item['CODE'],
-				);
-				if ($item['CODE']) {
-					$return['BY_CODE'][$item['CODE']] = $item['ID'];
-				}
-			}
+		$product = Products::getById($productId);
+		if (!$product)
+			return false;
 
-			$extCache->endDataCache($return);
+		$price = $product['PRICE'];
+		$priceId = $product['PRICE_ID'];
+		$xmlId = $productId;
+		$props = array();
+
+		$offerId = intval($offer);
+		if ($offerId)
+		{
+			$offer = $product['OFFERS'][$offerId];
+			if (!$offer)
+				return false;
+
+			$productId = $offerId;
+			$price = $offer['PRICE'];
+			$priceId = $offer['PRICE_ID'];
+			$xmlId .= '#' . $offerId;
+
+			$props[] = array(
+				'NAME' => 'Количество',
+				'CODE' => 'COUNT',
+				'VALUE' => $offer['COUNT'],
+			);
 		}
 
-		return $return;
-	}
-
-	/**
-	 * Возвращает праздник по ID элемента
-	 * @param $id
-	 * @return mixed
-	 */
-	public static function getById($id) {
-		$all = self::getAll();
-		return $all['ITEMS'][$id];
-	}
-
-	/**
-	 * Возвращает ID праздника по коду
-	 * @param $code
-	 * @return mixed
-	 */
-	public static function getIdByCode($code) {
-		$all = self::getAll();
-		return $all['BY_CODE'][$code];
-	}
-
-	/**
-	 * Возвращает группу для панели фильтров
-	 * @return array
-	 */
-	public static function getGroup()
-	{
-		$return = array();
-
-		$all = self::getAll();
-		foreach ($all['ITEMS'] as $item)
-			$return[$item['CODE']] = array(
-				'ID' => $item['ID'],
-				'CODE' => 'HOLIDAY',
-				'NAME' => $item['NAME'],
+		$packages = Package::getByCategory($product['CATEGORY']['ID']);
+		if ($packages[0]['ID'])
+			$props[] = array(
+				'NAME' => 'Упаковка',
+				'CODE' => 'PACKAGE',
+				'VALUE' => $packages[0]['NAME'],
+				'SORT' => $packages[0]['ID'],
 			);
 
-		return $return;
+		$fields = array(
+			"PRODUCT_ID" => $productId,
+			"PRODUCT_PRICE_ID" => $priceId,
+			"PRICE" => $price,
+			"CURRENCY" => 'RUB',
+			"QUANTITY" => $quantity,
+			"LID" => SITE_ID,
+			"DELAY" => "N",
+			"CAN_BUY" => "Y",
+			"NAME" => $product['NAME'],
+			"MODULE" => "catalog",
+			"DETAIL_PAGE_URL" => $product['DETAIL_PAGE_URL'],
+			"CATALOG_XML_ID" => $product['ID'],
+			"PRODUCT_XML_ID" => $xmlId,
+			"VAT_INCLUDED" => 'Y',
+		    "VAT_RATE" => '18',
+		    "PROPS" => $props,
+		);
+
+		$basket = new \CSaleBasket();
+		$basket->Init();
+		if (!$basket->CheckFields('ADD', $fields))
+			return false;
+
+		$basketItem = BasketCompatibility::add($fields);
+		if (!$basketItem)
+			return false;
+
+		$ID = $basketItem->getId();
+
+		return $ID;
 	}
 
 	/**
-	 * Очищает кеш
+	 * Добавляет упакову в корзину
+	 * @param $pack
+	 * @param $quantity
+	 * @return bool|int
 	 */
-	public static function clearCache()
+	public static function addPackage($pack, $quantity)
 	{
-		$phpCache = new \CPHPCache();
-		$phpCache->CleanDir(static::CACHE_PATH . 'getAll');
+		$quantity = intval($quantity);
+		if ($quantity <= 0)
+			$quantity = 1;
+
+		$fields = array(
+			"PRODUCT_ID" => $pack['ID'],
+			"PRODUCT_PRICE_ID" => $pack['PRICE_ID'],
+			"PRICE" => $pack['PRICE'],
+			"CURRENCY" => 'RUB',
+			"QUANTITY" => $quantity,
+			"LID" => SITE_ID,
+			"DELAY" => "N",
+			"CAN_BUY" => "Y",
+			"NAME" => $pack['NAME'],
+			"MODULE" => "catalog",
+			"DETAIL_PAGE_URL" => '',
+			"CATALOG_XML_ID" => $pack['ID'],
+			"PRODUCT_XML_ID" => $pack['ID'],
+			"VAT_INCLUDED" => 'Y',
+			"VAT_RATE" => '18',
+		);
+
+		$basket = new \CSaleBasket();
+		$basket->Init();
+		if (!$basket->CheckFields('ADD', $fields))
+			return false;
+
+		$basketItem = BasketCompatibility::add($fields);
+		if (!$basketItem)
+			return false;
+
+		$ID = $basketItem->getId();
+
+		return $ID;
+	}
+
+	/**
+	 * Меняем упаковку для товара в корзине
+	 * @param $bid
+	 * @param $pid
+	 * @return int
+	 */
+	public static function pack($bid, $pid)
+	{
+		$pack = Package::getById($pid);
+		if (!$pack)
+			return 0;
+
+		$saleBasket = new \CSaleBasket();
+		$rsProps = $saleBasket->GetPropsList(array(), array("BASKET_ID" => $bid));
+		$props = array();
+		while ($prop = $rsProps->Fetch())
+		{
+			$prop = array(
+				'CODE' => $prop['CODE'],
+				'NAME' => $prop['NAME'],
+				'VALUE' => $prop['VALUE'],
+				'SORT' => $prop['SORT'],
+			);
+			if ($prop['CODE'] == 'PACKAGE')
+			{
+				$prop['VALUE'] = $pack['NAME'];
+				$prop['SORT'] = $pack['ID'];
+			}
+			$props[] = $prop;
+		}
+
+		if ($props)
+		{
+			$data = array(
+				'PROPS' => $props,
+			);
+			$saleBasket->Update($bid, $data);
+
+			return intval($pid);
+		}
+
+		return 0;
+	}
+
+	public static function offer($bid, $oid)
+	{
+		$saleBasket = new \CSaleBasket();
+		$item = $saleBasket->GetByID($bid);
+
+		$productId = $item['CATALOG_XML_ID'];
+		$offerId = $item['PRODUCT_ID'];
+		if (!$offerId)
+			return 0;
+
+		$product = Products::getById($productId);
+		$offer = $product['OFFERS'][$oid];
+		if (!$offer)
+			return 0;
+
+		$rsProps = $saleBasket->GetPropsList(array(), array("BASKET_ID" => $bid));
+		$props = array();
+		while ($prop = $rsProps->Fetch())
+		{
+			$prop = array(
+				'CODE' => $prop['CODE'],
+				'NAME' => $prop['NAME'],
+				'VALUE' => $prop['VALUE'],
+				'SORT' => $prop['SORT'],
+			);
+			if ($prop['CODE'] == 'COUNT')
+			{
+				$prop['VALUE'] = $offer['COUNT'];
+			}
+			$props[] = $prop;
+		}
+
+		if ($props)
+		{
+			$price = $offer['PRICE'];
+			$priceId = $offer['PRICE_ID'];
+			$data = array(
+				'PRODUCT_ID' => $oid,
+				'PRODUCT_XML_ID' => $productId . '#' . $oid,
+				"PRODUCT_PRICE_ID" => $priceId,
+				"PRICE" => $price,
+				'PROPS' => $props,
+			);
+			$saleBasket->Update($bid, $data);
+
+			return intval($oid);
+		}
+
+		return 0;
 	}
 }

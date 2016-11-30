@@ -975,92 +975,47 @@ $(document).ready(function () {
 		});
 	});
 
-	$('.js-basket-item-cont').each(function () {
-		var line = $(this);
+	function hidePackages(line)
+	{
 		var that = line.find('.js-basket-option');
 		if (!that.length) return true;
-		if (that.data('code') == 'NUMBER')
-			if (parseInt(that.find("option:selected").text().trim()) == 9) {
-				line.find('.js-package-cont').find('.js-package-item').not('.js-free-box, .js-vip-box').addClass('js-hidden').hide();
-				line.find('.js-package-cont').find('.js-free-box, .js-vip-box').removeClass('js-hidden').show();
-				if ($(".js-package-selector:checked").closest('.js-hidden').length) {
-					var target = line.find('.js-package-cont .js-vip-box, .js-package-cont .js-free-box').eq(0).find('.js-package-selector');
-					line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
-					target.prop('checked', true);
-					updatePackagePrice(target);
-				}
-			} else {
-				line.find('.js-package-cont').find('.js-package-item').not('.js-vip-box').removeClass('js-hidden').show();
-				line.find('.js-package-cont').find('.js-vip-box').addClass('js-hidden').hide();
-				if ($(".js-package-selector:checked").closest('.js-hidden').length) {
-					var target = line.find('.js-package-cont .js-package-item').not('.js-vip-box').eq(0).find('.js-package-selector');
-					line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
-					target.prop('checked', true);
-					updatePackagePrice(target);
-				}
+		if (parseInt(that.find("option:selected").text().trim()) == 9) {
+			line.find('.js-package-cont').find('.js-package-item').not('.js-free-box, .js-vip-box').addClass('js-hidden').hide();
+			line.find('.js-package-cont').find('.js-free-box, .js-vip-box').removeClass('js-hidden').show();
+			if ($(".js-package-selector:checked").closest('.js-hidden').length) {
+				var target = line.find('.js-package-cont .js-vip-box, .js-package-cont .js-free-box').eq(0).find('.js-package-selector');
+				line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
+				target.prop('checked', true);
+				updatePackagePrice(target);
 			}
+		}
+		else {
+			line.find('.js-package-cont').find('.js-package-item').not('.js-vip-box').removeClass('js-hidden').show();
+			line.find('.js-package-cont').find('.js-vip-box').addClass('js-hidden').hide();
+			if ($(".js-package-selector:checked").closest('.js-hidden').length) {
+				var target = line.find('.js-package-cont .js-package-item').not('.js-vip-box').eq(0).find('.js-package-selector');
+				line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
+				target.prop('checked', true);
+				updatePackagePrice(target);
+			}
+		}
+	}
+
+	$('.js-basket-item-cont').each(function () {
+		var line = $(this);
+		hidePackages(line);
 	});
 
 	$('.js-basket-option').on('change', function () {
-		var line = $(this).closest('.js-basket-item-cont');
 		var that = $(this);
-		var offers_props = [];
-		var props = {};
-		if (that.data('code') == 'NUMBER')
-			if (parseInt(that.find("option:selected").text().trim()) == 9) {
-				line.find('.js-package-cont').find('.js-package-item').not('.js-free-box, .js-vip-box').addClass('js-hidden').hide();
-				line.find('.js-package-cont').find('.js-free-box, .js-vip-box').removeClass('js-hidden').show();
-				if ($(".js-package-selector:checked").closest('.js-hidden').length) {
-					var target = line.find('.js-package-cont .js-vip-box, .js-package-cont .js-free-box').eq(0).find('.js-package-selector');
-					line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
-					target.prop('checked', true);
-					updatePackagePrice(target);
-
-				}
-			} else {
-				line.find('.js-package-cont').find('.js-package-item').not('.js-vip-box').removeClass('js-hidden').show();
-				line.find('.js-package-cont').find('.js-vip-box').addClass('js-hidden').hide();
-				if ($(".js-package-selector:checked").closest('.js-hidden').length) {
-					var target = line.find('.js-package-cont .js-package-item').not('.js-vip-box').eq(0).find('.js-package-selector');
-					line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
-					target.prop('checked', true);
-					updatePackagePrice(target);
-				}
-			}
-		/*$('.js-basket-prop').each(function () {
-		 params[$(this).data('code')] = {'NAME': $(this).data('name'), 'VALUE': $(this).children('option:selected').text()};
-		 });*/
-		$('.js-basket-option', line).each(function () {
-			offers_props.push($(this).data('code'));
-			props[$(this).data('code')] = $(this).children('option:selected').data('value-id');
-		});
+		var line = that.closest('.js-basket-item-cont');
 		var bid = line.data('oiid');
-		var opts = {
-			'action_var': basket_settings.action_var,
-			'basketItemId': bid,
-			'sessid': basket_settings.sid,
-			'offers_props': offers_props.join(','),
-			'props': props
-		};
-		opts[basket_settings.action_var] = 'select_item';
-		$.ajax({
-			type: 'POST',
-			url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
-			data: opts,
-			dataType: 'json',
-			complete: function (resp) {
-				resp = resp.responseText.replace(/'/g, '"');
-				resp = JSON.parse(resp);
-				line.data('base-price', resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
-				var total = line.find('.js-item-total');
-				var pack_sum = parseInt(total.next().val());
-				var price = parseFloat(resp.BASKET_DATA.GRID.ROWS[bid].PRICE);
-				var cnt = parseInt(resp.BASKET_DATA.GRID.ROWS[bid].QUANTITY);
-				var sum = Math.round(price*cnt + pack_sum);
-				total.text(sum);
-				updateBasketPrice();
-				updateCouponsBlock(resp.BASKET_DATA.COUPON_LIST, resp.BASKET_DATA.allSum, resp.BASKET_DATA.DISCOUNT_PRICE_ALL);
-			}
+		var oid = that.val();
+
+		$.post('/ajax/cart_action.php', {'action': 'offer', 'bid': bid, 'oid': oid}, function () {
+			var input = line.find('#QUANTITY_INPUT_' + bid);
+			hidePackages(line);
+			sendCntAjax(line, input.val());
 		});
 	});
 
@@ -1145,14 +1100,11 @@ $(document).ready(function () {
 	function updatePackagePrice(that) {
 		var that = $(that);
 		var line = that.closest('.js-basket-item-cont');
-		var package_cont = that.closest('.js-package-cont');
-		var bid = package_cont.data('package-bid');
 		var gbid = line.data('oiid');
 		var pack_item = that.closest('.js-package-item');
 		var id = pack_item.data('package-id');
-		var name = pack_item.data('package-name');
 
-		$.post('/include/update_package.php', {'bid': bid, 'newid': id, 'gbid': gbid, 'name': name}, function (resp) {
+		$.post('/ajax/cart_action.php', {'action': 'pack' , 'bid': gbid, 'pid': id}, function () {
 			var total = line.find('.js-item-total');
 			var price = parseFloat(line.data('base-price'));
 			var pack_price = parseInt(pack_item.data('package-price'));
@@ -1160,18 +1112,12 @@ $(document).ready(function () {
 			var sum = Math.round((price + pack_price)*cnt);
 			total.text(sum);
 			total.next().val(Math.round(pack_price*cnt));
-			package_cont.data('package-bid', resp);
 			updateBasketPrice();
 			updateDiscountBlock();
-			/*if (resp != 0) {
-			 line.data('oiid',resp);
-			 $.get('/include/update_price.php?ID='+resp, function (resp) {line.find('.js-item-total').text(resp)});
-			 updateBasketPrice();
-			 }*/
 		});
 	}
 
-	$(".js-duplicate-item").on('click', function (e) {
+	/*$(".js-duplicate-item").on('click', function (e) {
 		e.preventDefault();
 		var id = $(this).data('id');
 		var line = $(this).closest('ol').children('li').last();
@@ -1190,7 +1136,7 @@ $(document).ready(function () {
 			document.location.hash = '#an_' + id;
 			document.location.reload();
 		});
-	});
+	});*/
 
 	if (document.location.hash.indexOf('#an_') !== -1) {
 		$('html,body').animate({scrollTop: $('#anchit_' + document.location.hash.substr(4).replace(/\D/g, '')).offset().top - 300}, 10);
@@ -1438,6 +1384,27 @@ $(document).ready(function () {
 	 $(".carousel-main .details h3").trigger("update");
 	 })*/
 
+	var mapCont = $('#gmap');
+	if (mapCont.length && map_info && map_info[0]) {
+		var pm = map_info[0];
+		var coords = pm.coords.split(',');
+		ymaps.ready(initMap);
+
+		function initMap() {
+			var map = new ymaps.Map("gmap", {
+				center: coords,
+				zoom: 15
+			});
+
+			var myPlacemark = new ymaps.Placemark(coords, {
+				hintContent: pm.name,
+				balloonContent: '<b>' + pm.name + '</b><br />' + pm.adr + '<br />' + pm.schedule
+			});
+
+			map.geoObjects.add(myPlacemark);
+		}
+	}
+
 });
 
 var pack_sum = 0;
@@ -1493,7 +1460,7 @@ function updateDiscountBlock() {
 }
 
 $(function () {
-	if (document.location.href.indexOf('contact') !== -1) {
+	/*if (document.location.href.indexOf('contact') !== -1) {
 		google.maps.event.addDomListener(window, 'load', gmaps_init);
 	}
 
@@ -1553,7 +1520,7 @@ $(function () {
 			}
 			google.maps.event.removeListener(listener);
 		});
-	}
+	}*/
 });
 
 function declension(num, expressions) {

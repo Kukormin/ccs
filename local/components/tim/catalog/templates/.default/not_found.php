@@ -1,11 +1,5 @@
 <?
-use Bitrix\Main\Localization\Loc;
-
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-
-Loc::loadMessages(__FILE__);
-
-// TODO: все строки в языковой файл
 
 /**
  * @var array $arParams
@@ -14,18 +8,50 @@ Loc::loadMessages(__FILE__);
  */
 
 ?>
-<div class="catalog">
-	<h1>По вашему запросу ничего не найдено</h1><?
+<section class="b-topblock b-topblock--pay-ship">
+</section>
 
-	$APPLICATION->IncludeFile(
-		SITE_TEMPLATE_PATH . '/include_areas/' . LANGUAGE_ID . '/mustlike.php',
-		array(),
-		array(
-			"MODE"      => "html",
-			"TEMPLATE"  => "include.php",
-			"NAME"      => "Могут понравиться"
-		)
-	);
+<section class="b-bg-grey">
+	<div class="b-content-center b-content-center--cupcake b-content-center--cupcake-catalog">
+	<div id="bc">
+		Вы сейчас здесь: <a href="/">Главная</a> / <a href="/cat/">Весь каталог</a> / <span>Ничего не найдено</span>
+	</div>
 
-	?>
+	<div class="b-catalog-wrap--cupcake js-ajax-content-block not-found">
+	<h1>По вашему запросу ничего не найдено</h1>
+	<ul id="a404">
+		<li>
+			<table>
+				<tr>
+					<td><b class="search"></b></td>
+					<td>
+						<a href="/search/?q=<?= $arResult['~QUERY'] ?>">Искать "<?= $arResult['~QUERY'] ?>" в новостях и
+							статьях</a>
+					</td>
+				</tr>
+			</table>
+		</li>
+		<li>
+			<table>
+				<tr>
+					<td><b class="index"></b></td>
+					<td>
+						<a href="/">Перейти на главную</a>
+					</td>
+				</tr>
+			</table>
+		</li>
+		<li>
+			<table>
+				<tr>
+					<td><b class="cat"></b></td>
+					<td>
+						<a href="/cat/">Все товары</a>
+					</td>
+				</tr>
+			</table>
+		</li>
+	</ul>
+
 </div>
+</section><?

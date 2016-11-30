@@ -1,5 +1,21 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
+$url = '';
+$id = \Local\Catalog\Products::getIdByOldId($_REQUEST["ELEMENT_ID"]);
+if ($id)
+{
+	$product = \Local\Catalog\Products::getById($id);
+	$url = $product['DETAIL_PAGE_URL'];
+}
+
+if (!$url)
+	$url = '/cat/';
+
+LocalRedirect($url, false, '301 Moved Permanently');
+die();
+
+
 $APPLICATION->SetPageProperty("title", "Cupcake Story — семейная кондитерская. Капкейки, торты, эклеры, пряники, пирожные с доставкой на дом");
 $APPLICATION->SetTitle("ШОКОЛАДНЫЙ ТОРТ КРЕМ ЧИЗ (4 ВАРИАНТ) от Cupcake Story");
 

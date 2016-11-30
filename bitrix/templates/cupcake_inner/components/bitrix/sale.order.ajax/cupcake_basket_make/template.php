@@ -63,7 +63,13 @@ $price = round($arResult['ORDER_PRICE']);
 		$('#new_address').focus(function() {
 			$(this).parent().siblings('input').prop('checked', 'checked');
 			$('.js_radio_input input').change();
-		})
+		});
+
+		// !!! Костыль для отключения доставок
+		if (!$('.b-method-shipping__line--last .js_radio_input input').length) {
+			$('.js_radio_input:first input').prop('checked', 'checked');
+			$('.js_radio_input input').change();
+		}
 
 		$('#ORDER_FORM').validate({
 			rules: {
@@ -354,17 +360,21 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 				?>
 			</div>
 		</div>
-	</div>
+	</div><?
 
-	<div class="b-method-shipping__line b-method-shipping__line--last">
+	// !!! Костыль для отключения доставок
+	if ($arResult['ORDER_PRICE'] >= 1200)
+	{
+		?>
+		<div class="b-method-shipping__line b-method-shipping__line--last">
 		<div class="b-method-shipping--title js-del-btn">
 			<span>Доставка — от 400 руб.</span>
 		</div>
 		<div class="js-del-slide-wrap"><?
 			$APPLICATION->IncludeFile('/include/del_inc.php', array(), array(
-					'MODE' => 'html',
-					'TEMPLATE' => 'page_inc.php',
-				));
+				'MODE' => 'html',
+				'TEMPLATE' => 'page_inc.php',
+			));
 
 			$new = '';
 			$checked = ' checked';
@@ -393,10 +403,12 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 			?>
 			<div class="b-application-event__form-item b-form-item-shipping-address">
 				<label for="delivery_new"><?= $new ?>адрес</label>
+
 				<div style="position: relative; margin:0;"
 				     class="b-method-shipping-input js_radio_input">
 					<input id="delivery_new" class="radio" name="address" type="radio"<?= $checked ?> />
 					<label class="b-label-radio" for="delivery_new" style="top:8px;"></label>
+
 					<div class="b-form-item__input" style="margin-left:32px;">
 						<input id="new_address" type="text" name="new_address" value="">
 					</div>
@@ -426,8 +438,18 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 
 			?>
 		</div>
-	</div>
-
+		</div><?
+	}
+	else
+	{
+		?>
+		<div class="b-method-shipping__line b-method-shipping__line--last">
+			<div class="b-method-shipping--title js-del-btn">
+				<span>Доставка осуществляется при заказе от 1200 <span class="rub">i</span></span>
+			</div>
+		</div><?
+	}
+	?>
 </div>
 <div class="b-method-shipping b-title--border-top">
 	<div class="b-method-shipping__line">

@@ -45,6 +45,7 @@ class Holidays
 				'ACTIVE' => 'Y',
 			), false, false, array(
 				'ID', 'NAME', 'CODE',
+				'PROPERTY_SEO',
 			));
 			while ($item = $rsItems->Fetch())
 			{
@@ -52,6 +53,7 @@ class Holidays
 					'ID' => $item['ID'],
 					'NAME' => $item['NAME'],
 					'CODE' => $item['CODE'],
+					'SEO' => $item['PROPERTY_SEO_VALUE'],
 				);
 				if ($item['CODE']) {
 					$return['BY_CODE'][$item['CODE']] = $item['ID'];

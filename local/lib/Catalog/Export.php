@@ -69,7 +69,10 @@ class Export
 	{
 		@fwrite($this->fp, "\t<categories>\n");
 		foreach ($categories as $category) {
-			@fwrite($this->fp, "\t\t<category id=\"" . $category['ID'] . "\">"
+			$parent = '';
+			if ($category['PARENT'])
+				$parent = ' parentId="' . $category['PARENT'] . '"';
+			@fwrite($this->fp, "\t\t<category id=\"" . $category['ID'] . "\"" . $parent . ">"
 				. $this->prepareValue($category['NAME']) . "</category>\n");
 		}
 		@fwrite($this->fp, "\t</categories>\n");
@@ -91,9 +94,13 @@ class Export
 		if ($offer['PRODUCT_ACTIVE'] == 'N')
 			$res .= "\t\t\t<productActivity>N</productActivity>\n";
 
-		$res .= "\t\t\t<picture>" . $this->url . $this->PrepareValue($offer['PICTURE']) . "</picture>\n";
+		$pic = '';
+		if ($offer['PICTURE'])
+			$pic = $this->url . $this->PrepareValue($offer['PICTURE']);
+
+		$res .= "\t\t\t<picture>" . $pic . "</picture>\n";
 		$res .= "\t\t\t<url>" . $this->url . $this->PrepareValue($offer['DETAIL_PAGE_URL']) . "</url>\n";
-		$res .= "\t\t\t<price>" . $offer['PRICE'] . "</price>\n";
+		$res .= "\t\t\t<price>" . number_format($offer['PRICE'], 2, '.', '') . "</price>\n";
 		$res .= "\t\t\t<categoryId>" . $offer['CATEGORY_ID'] . "</categoryId>\n";
 		$res .= "\t\t\t<categoryName>" . $this->PrepareValue($offer['CATEGORY_NAME']) . "</categoryName>\n";
 		$res .= "\t\t\t<name>" . $this->PrepareValue($offer['NAME']) . "</name>\n";

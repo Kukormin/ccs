@@ -2040,7 +2040,24 @@
 		box-sizing: border-box;
 	}
 	
-	
+	#filters-panel {
+        display: none;
+    }
+    #mobile-filters {
+        display: block;
+    }
+    #bc {
+        display: none;
+    }
+    #current-filters {
+        margin: 10px -22px 0 -22px;
+    }
+    #current-filters > span {
+        margin: 3px;
+    }
+    .b-header-phones-wrapper {
+        display: none;
+    }
 	.b-topblock--pay-ship,
 	.b-scroll-to-top {
 		display:none;
@@ -2049,16 +2066,13 @@
 		padding-top: 70px;
 		background: #252939;
 	}
-	.b-content-center--cupcake {
-		padding-top:30px;
-	}
 	.b-grey-wrap-top--asaide {
 		display:none;
 	}
 	.b-catalog-wrap--cupcake {
 		margin:0 auto;
 		width: 100%;
-		padding: 30px 30px 0;
+		padding: 20px 25px 0;
 		box-sizing: border-box;
 	}
 	.b-catalog-cupcake__list{
@@ -2501,6 +2515,7 @@
 	.b-mod-catalog--cupcake .b-mod__item {
 		padding: 0 0 35px;
         display: block;
+        width: 270px;
 	}
 	
 	.b-slider-stock__list .slick-next,
@@ -3374,8 +3389,7 @@
 
     .header-alert {
         width:100%;
-        top: 60px;
-        position: absolute;
+        margin-top: 20px;
     }
 	
 	.b-addition-order-wrap .b-postcard__item {

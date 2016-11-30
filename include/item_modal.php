@@ -1,119 +1,156 @@
-<?php
-//require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+<?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-?><?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.element", 
-	"item_modal", 
-	array(
-		"ACTION_VARIABLE" => "action",
-		"ADD_DETAIL_TO_SLIDER" => "N",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_PICT_PROP" => "-",
-		"ADD_PROPERTIES_TO_BASKET" => "Y",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"ADD_TO_BASKET_ACTION" => array(
-			0 => "BUY",
-		),
-		"BACKGROUND_IMAGE" => "-",
-		"BASKET_URL" => "/personal/cart",
-		"BRAND_USE" => "N",
-		"BROWSER_TITLE" => "-",
-		"CACHE_GROUPS" => "N",
-		"CACHE_TIME" => "3600",
-		"CACHE_TYPE" => "N",
-		"CHECK_SECTION_ID_VARIABLE" => "N",
-		"COMPONENT_TEMPLATE" => "item_modal",
-		"CONVERT_CURRENCY" => "N",
-		"DETAIL_PICTURE_MODE" => "IMG",
-		"DETAIL_URL" => "",
-		"DISPLAY_COMPARE" => "N",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PREVIEW_TEXT_MODE" => "E",
-		"ELEMENT_CODE" => "",
-		"ELEMENT_ID" => $_GET['ID'],
-		"HIDE_NOT_AVAILABLE" => "N",
-		"IBLOCK_ID" => $_GET['IBLOCK'],
-		"IBLOCK_TYPE" => "catalog",
-		"LABEL_PROP" => "-",
-		"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
-		"LINK_IBLOCK_ID" => "",
-		"LINK_IBLOCK_TYPE" => "",
-		"LINK_PROPERTY_SID" => "",
-		"MESSAGE_404" => "",
-		"MESS_BTN_ADD_TO_BASKET" => "В корзину",
-		"MESS_BTN_BUY" => "Купить",
-		"MESS_BTN_COMPARE" => "Сравнить",
-		"MESS_BTN_SUBSCRIBE" => "Подписаться",
-		"MESS_NOT_AVAILABLE" => "Нет в наличии",
-		"META_DESCRIPTION" => "-",
-		"META_KEYWORDS" => "-",
-		"OFFERS_CART_PROPERTIES" => array(
-			0 => "NUMBER",
-		),
-		"OFFERS_FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"OFFERS_LIMIT" => "0",
-		"OFFERS_PROPERTY_CODE" => array(
-			0 => "NUMBER",
-			1 => "",
-		),
-		"OFFERS_SORT_FIELD" => "sort",
-		"OFFERS_SORT_FIELD2" => "id",
-		"OFFERS_SORT_ORDER" => "asc",
-		"OFFERS_SORT_ORDER2" => "desc",
-		"OFFER_ADD_PICT_PROP" => "-",
-		"OFFER_TREE_PROPS" => array(
-			0 => "NUMBER",
-		),
-		"PARTIAL_PRODUCT_PROPERTIES" => "N",
-		"PRICE_CODE" => array(
-			0 => "BASE",
-		),
-		"PRICE_VAT_INCLUDE" => "Y",
-		"PRICE_VAT_SHOW_VALUE" => "N",
-		"PRODUCT_ID_VARIABLE" => "id",
-		"PRODUCT_PROPERTIES" => array(
-			0 => "FILLING",
-		),
-		"PRODUCT_PROPS_VARIABLE" => "prop",
-		"PRODUCT_QUANTITY_VARIABLE" => "",
-		"PRODUCT_SUBSCRIPTION" => "N",
-		"PROPERTY_CODE" => array(
-			0 => "ACTION",
-			1 => "FILLING",
-			2 => "NEW",
-			3 => "STAR_GIFT",
-			4 => "",
-		),
-		"SECTION_CODE" => "",
-		"SECTION_ID" => "",
-		"SECTION_ID_VARIABLE" => "SECTION_ID",
-		"SECTION_URL" => "",
-		"SEF_MODE" => "N",
-		"SET_BROWSER_TITLE" => "Y",
-		"SET_CANONICAL_URL" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "Y",
-		"SET_META_KEYWORDS" => "Y",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "Y",
-		"SHOW_404" => "N",
-		"SHOW_CLOSE_POPUP" => "N",
-		"SHOW_DEACTIVATED" => "N",
-		"SHOW_DISCOUNT_PERCENT" => "N",
-		"SHOW_MAX_QUANTITY" => "N",
-		"SHOW_OLD_PRICE" => "N",
-		"SHOW_PRICE_COUNT" => "1",
-		"TEMPLATE_THEME" => "blue",
-		"USE_COMMENTS" => "N",
-		"USE_ELEMENT_COUNTER" => "Y",
-		"USE_MAIN_ELEMENT_SECTION" => "N",
-		"USE_PRICE_COUNT" => "N",
-		"USE_PRODUCT_QUANTITY" => "Y",
-		"USE_VOTE_RATING" => "N",
-		"SHOW_BASIS_PRICE" => "N"
-	),
-	false
-);?>
+
+$product = \Local\Catalog\Products::getById($_REQUEST['id']);
+if (!$product)
+	return;
+
+$disc = $product['ACTION'] ? ' b-modal--cupcake-discont' : '';
+$select = empty($product['OFFERS']) ? ' without_select' : '';
+
+?>
+<div class="b-modal--cupcake<?= $disc ?><?= $select ?> js-modal-window" id="modal_<?= $product['ID'] ?>"
+     style="display:block;" data-id="<?= $product['ID'] ?>">
+	<a href="#" class="b-modal-add-products">Продолжить покупки</a>
+	<span class="b-close-modal">close</span>
+	<div class="b-modal--cupcake__wrap js-product">
+		<div class="b-modal-cupcake__img-product">
+			<img src="<?= $product['PREVIEW_PICTURE'] ?>" alt="<?= $product['NAME'] ?>">
+		</div><?
+
+		if ($product['ACTION'])
+		{
+			?>
+			<div class="b-modal-cupcake__date-discont">
+				<div class="b-mod__item-label b-mod__item-label--discont">акция</div>
+				<?= $product['ACTION_TEXT'] ?>
+			</div><?
+		}
+
+		$border = $product['ACTION'] ? ' b-modal-border-top' : '';
+		?>
+		<div class="b-mod__item-title b-modal-cupcake__item-title--white <?= $border ?>">
+			<?= $product['NAME'] ?>
+		</div>
+
+		<div class="b-block-assortment--select b-modal-cupcake--select"><?
+
+			$price = $product['PRICE'];
+			$dPrice = $product['PRICE_WO_DISCOUNT'];
+			$offerId = 0;
+
+			if (count($product['OFFERS']))
+			{
+				$firstCount = 0;
+				foreach ($product['OFFERS'] as $offer)
+				{
+					if (!$offerId)
+					{
+						$offerId = $offer['ID'];
+						$firstCount = $offer['COUNT'];
+						$price = $offer['PRICE'];
+						$dPrice = $offer['PRICE_WO_DISCOUNT'];
+					}
+					?><input type="hidden" id="p-<?= $offer['ID'] ?>" value="<?= $offer['PRICE'] ?>"><?
+					?><input type="hidden" id="dp-<?= $offer['ID'] ?>" value="<?= $offer['PRICE_WO_DISCOUNT'] ?>"><?
+				}
+
+
+				?>
+				<div class="b-application-event__form-item">
+					<label class="is-color-white" for="count_select_<?= $product['ID'] ?>">Количество</label>
+					<div class="b-form-item__input b-form-item__input--select">
+						<p class="select_title"><?= $firstCount ?></p>
+						<select id="count_select_<?= $product['ID'] ?>" class="js_detail_count"><?
+							foreach ($product['OFFERS'] as $offer)
+							{
+								?>
+								<option value="<?= $offer['ID'] ?>"><?= $offer['COUNT'] ?></option><?
+							}
+							?>
+						</select>
+					</div>
+				</div><?
+			}
+
+			?>
+		</div>
+
+		<div class="b-block-modal-cupcake--total"><?
+
+			$action = $dPrice > $price ? '' : ' hide-old-price';
+			?>
+			<div class="b-old--total-price b-modal-cupcake-total--price js-priceblock<?= $action ?>">
+				<div class="b-old-price">
+					<span class="v"><?= number_format($dPrice, 0, '', ' ') ?></span>
+					<span class="rub">i</span>
+				</div>
+				<div class="b-new-price">
+					<span class="v"><?= number_format($price, 0, '', ' ') ?></span>
+					<span class="rub">i</span>
+				</div>
+			</div><?
+
+			/*if ($product['ACTION'])
+			{
+				?>
+				<div
+					class="b-old--total-price b-history-total--price b-modal-cupcake-total--price js-modal-priceblock js-priceblock"
+					data-price="<?= $item['MIN_PRICE']['DISCOUNT_VALUE']; ?>"
+					data-oldprice="<?= $item['MIN_PRICE']['VALUE']; ?>">
+					<div class="b-old-price"> <?= number_format($item['MIN_PRICE']['VALUE'], 0, '', ' '); ?> <span
+							class="rub">i</span></div>
+					<div
+						class="b-new-price"> <?= number_format($item['MIN_PRICE']['DISCOUNT_VALUE'], 0, '', ' '); ?>
+						<span class="rub">i</span></div>
+				</div><?
+			}
+			else
+			{
+				?>
+				<div class="b-history-total--price b-modal-cupcake-total--price js-modal-priceblock js-priceblock"
+				     data-price="<?= $price ?>" data-oldprice="0">
+					<?= number_format($price, 0, '', ' ') ?> <span class="rub">i</span>
+				</div><?
+			}*/
+
+			?>
+			<button class="b-bnt-form b-bnt-modal-cupcake--white js-add-to-basket"
+			        data-id="<?= $product['ID'] ?>" data-offer="<?= $offerId ?>"
+			        data-href="/personal/cart">в корзину</button>
+
+			<button class="b-bnt-form b-bnt-buy-one-click i-margin-left-30 js-buy-fastorder">купить в один клик</button>
+		</div>
+	</div>
+</div>
+<?
+
+/*
+$category = '';
+$cat = CIBlock::GetByID($item['IBLOCK_ID']);
+if ($ar_res = $cat->GetNext())
+	$category = $ar_res['NAME'];
+?>
+<script>
+	$(document).ready(function () {
+		$('.js-modal-tobasket').click(function () {
+			if ($('.js-modal-tobasket').html() == 'в корзину') {
+				dataLayer.push({
+					'event': 'addToCart',
+					'ecommerce': {
+						'currencyCode': 'RUR',
+						'add': {
+							'products': [{
+								'name': '<?=$item['NAME']?>',
+								'id': '<?=$item['ID']?>',
+								'price': '<?=$item['MIN_PRICE']['VALUE']?>',
+								'category': '<?=$category?>',
+								'quantity': parseInt($('.js-modal-counter').html())
+							}]
+						}
+					}
+				});
+			}
+		});
+	});
+</script>*/

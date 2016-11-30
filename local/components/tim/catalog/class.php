@@ -53,7 +53,7 @@ class TimCatalog extends \CBitrixComponent
 	/**
 	 * @var string поисковый запрос
 	 */
-	private $searchQuery = '';
+	public $searchQuery = '';
 
 	/**
 	 * @var array айдишники найденных товаров
@@ -68,36 +68,78 @@ class TimCatalog extends \CBitrixComponent
 	/**
 	 * @var array товары
 	 */
+	public $product = array();
+
+	/**
+	 * @var array товары
+	 */
 	public $products = array();
+
+	/**
+	 * @var array свойства SEO
+	 */
+	public $seo = array();
 
 	/**
 	 * @inherit
 	 */
 	public function executeComponent()
 	{
-		//$this->arResult['AJAX'] = $_GET['request_mode'] == 'ajax';
+		$url = urldecode($_SERVER['REQUEST_URI']);
+		$urlDirs = explode('/', $url);
+		$code = $urlDirs[3];
+		if ($code && count($urlDirs) > 4)
+			if (is_numeric($code))
+				$this->product = Products::getById($code);
+			else
+				$this->product = Products::getByCode($code);
 
-		// Обработка входных данных (сортировка, постраничка...)
-		$this->prepareParameters();
-
-		// Поиск
-		$empty = false;
-		if ($this->searchQuery)
+		if ($this->product)
 		{
-			$this->searchIds = $this->search();
-			if (!$this->searchIds)
-				$empty = true;
+			/*$this->arResult['IN_BASKET'] = false;
 
-			$this->arResult['NOT_FOUND'] = $empty;
+			if (
+				!empty($this->arResult['PRODUCT']['OFFERS'])
+				&& Loader::includeModule('sb.main')
+			)
+			{
+				$this->arResult['IN_BASKET'] = (BasketTable::getList(array(
+					'filter' => array(
+						'FUSER_ID' => CSaleBasket::GetBasketUserID(),
+						'=ORDER_ID' => false,
+						'=PRODUCT_ID' => array_keys($this->arResult['PRODUCT']['OFFERS'])
+					),
+					'limit' => 1
+				))->getSelectedRowsCount() > 0);
+			}
+
+			// Счетчик просмотренных
+			Products::viewedCounters($this->arResult['PRODUCT']['ID']);*/
 		}
-
-		if (!$empty)
+		else
 		{
-			$this->filter = Filter::getData($this->searchIds);
-			$this->products = Products::get($this->sort['QUERY'], $this->filter['PRODUCTS_IDS'], $this->navParams);
-		}
+			// Обработка входных данных (сортировка, постраничка...)
+			$this->prepareParameters();
 
-		$this->SetPageProperties();
+			// Поиск
+			$empty = false;
+			if ($this->searchQuery)
+			{
+				$this->searchIds = $this->search();
+				if (!$this->searchIds)
+					$empty = true;
+
+				$this->arResult['NOT_FOUND'] = $empty;
+			}
+
+			if (!$empty)
+			{
+				$this->filter = Filter::getData($this->searchIds, $this->searchQuery);
+				$this->products = Products::get($this->sort['QUERY'], $this->filter['PRODUCTS_IDS'], $this->navParams);
+			}
+
+			$this->SetPageProperties();
+		}
 
 		$this->includeComponentTemplate();
 	}
@@ -139,6 +181,14 @@ class TimCatalog extends \CBitrixComponent
 			$_SESSION['CATALOG']['SORT']['KEY'] = $sortKey;
 			$_SESSION['CATALOG']['SORT']['ORDER'] = $sortOrder;
 		}
+		// Есть ли поиск?
+		elseif ($this->searchQuery)
+		{
+			$this->sort = array(
+				'KEY' => 'search',
+				'ORDER' => 'asc',
+			);
+		}
 		// Смотрим в сессии
 		elseif ($_SESSION['CATALOG']['SORT']['KEY'])
 		{
@@ -157,11 +207,18 @@ class TimCatalog extends \CBitrixComponent
 			);
 		}
 		$sortQuery = array();
-		if ($sortKey == 'shows')
-			$sortQuery['SORT'] = $this->sort['ORDER'] == 'asc' ? 'desc' : 'asc';
-		$sortQuery[$this->sortParams[$this->sort['KEY']]['FIELD']] = $this->sort['ORDER'];
+		if ($this->sort['KEY'] == 'search')
+		{
+			$sortQuery['SEARCH'] = 'asc';
+		}
+		else
+		{
+			if ($sortKey == 'shows')
+				$sortQuery['SORT'] = $this->sort['ORDER'] == 'asc' ? 'desc' : 'asc';
+			$sortQuery[$this->sortParams[$this->sort['KEY']]['FIELD']] = $this->sort['ORDER'];
+			$this->sortParams[$this->sort['KEY']]['ORDER'] = $this->sort['ORDER'];
+		}
 		$this->sort['QUERY'] = $sortQuery;
-		$this->sortParams[$this->sort['KEY']]['ORDER'] = $this->sort['ORDER'];
 
 		//
 		// Постраничная навигация
@@ -187,10 +244,10 @@ class TimCatalog extends \CBitrixComponent
 		{
 			$search = new \CSearch();
 			$params = array(
-				'QUERY' => $this->arResult['QUERY'],
+				'QUERY' => $this->searchQuery,
 				'SITE_ID' => 's1',
 				'MODULE_ID' => 'iblock',
-				'PARAM1' => 'catalog',
+				'PARAM1' => 'new_catalog',
 				'PARAM2' => array(
 					Products::IB_PRODUCTS,
 				),
@@ -206,6 +263,7 @@ class TimCatalog extends \CBitrixComponent
 			$search->Search($params, $sort);
 			if ($search->errorno == 0)
 			{
+
 				while ($item = $search->GetNext())
 					$return[$item['ITEM_ID']] = $item['ITEM_ID'];
 			}
@@ -219,43 +277,33 @@ class TimCatalog extends \CBitrixComponent
 	 */
 	private function setPageProperties()
 	{
-		/*$seo = array();
-		if ($this->arResult['QUERY'])
+		$this->seo = array();
+		if ($this->searchQuery)
 		{
-			$seo['H1'] = 'Результаты поиска по запросу "' . $this->arResult['QUERY'] . '"';
-			$seo['TITLE'] = $seo['H1'];
+			$this->seo = $this->filter['SEO'];
 		}
-		elseif ($this->arResult['FILTER'])
+		elseif ($this->filter)
 		{
-			$seo = Seo::getByUrl($this->arResult['FILTER']['SEF_URL']);
-			if (!$seo['H1'])
+			$this->seo = Seo::getByUrl($this->filter['SEO']['URL']);
+			$parts = $this->filter['SEO']['PARTS'];
+			while (!$this->seo)
 			{
-				$seo['H1'] = $this->arResult['FILTER']['SEO']['H1'];
-			}
-			if (!$seo['TITLE'])
-			{
-				$seo['TITLE'] = $this->arResult['FILTER']['SEO']['TITLE'];
-			}
-			if (!$seo['KEYWORDS'])
-			{
-				$seo['KEYWORDS'] = $this->arResult['FILTER']['SEO']['KEYWORDS'];
-			}
-			if (!$seo['DESCRIPTION'])
-			{
-				$seo['DESCRIPTION'] = $this->arResult['FILTER']['SEO']['DESCRIPTION'];
+				array_pop($parts);
+				if (!$parts)
+					break;
+
+				$url = Filter::$CATALOG_PATH . implode('/', $parts) . '/';
+				$seo = Seo::getByUrl($url);
+				if ($seo['CHILDREN'])
+					$this->seo = $seo;
 			}
 
-			if ($detailPicture = Seo::getDetailPictureByUrl($this->arResult['FILTER']['SEF_URL']))
-			{
-				$seo['DETAIL_PICTURE'] = $detailPicture;
-			}
+			if (!$this->seo['H1'])
+				$this->seo['H1'] = $this->filter['SEO']['H1'];
+			if (!$this->seo['TITLE'])
+				$this->seo['TITLE'] = $this->filter['SEO']['TITLE'];
+			if (!$this->seo['DESCRIPTION'])
+				$this->seo['DESCRIPTION'] = $this->filter['SEO']['DESCRIPTION'];
 		}
-
-		if ($this->arResult['PAGE']['PAGE'] > 1)
-		{
-			$seo['TEXT'] = '';
-		}
-
-		$this->arResult['SEO'] = $seo;*/
 	}
 }

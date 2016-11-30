@@ -1,18 +1,24 @@
 <?
 
-namespace Local\Utils;
+namespace Local\Sale;
+use Local\Catalog\Categories;
 use Local\System\ExtCache;
 
 /**
  * Class Package Упаковки товара
- * @package Local\Utils
+ * @package Local\Sale
  */
 class Package
 {
 	/**
 	 * Путь для кеширования
 	 */
-	const CACHE_PATH = 'Local/Package/';
+	const CACHE_PATH = 'Local/Sale/Package/';
+
+	/**
+	 * Инфоблок
+	 */
+	const IBLOCK_ID = 47;
 
 	/**
 	 * Возвращает все упаковки
@@ -36,40 +42,35 @@ class Package
 		} else {
 			$extCache->startDataCache();
 
-			//
-			$return['MAP'] = array();
-			$packIblocks = array();
-			$rsProperties = \CIBlockProperty::GetList(array(), array('CODE' => 'PACKAGE'));
-			while ($prop = $rsProperties->Fetch())
-			{
-				if ($prop['PROPERTY_TYPE'] == 'E')
-				{
-					$return['MAP'][$prop['IBLOCK_ID']] = $prop['LINK_IBLOCK_ID'];
-					$packIblocks[$prop['LINK_IBLOCK_ID']] = $prop['LINK_IBLOCK_ID'];
-				}
+			$iblockSection = new \CIBlockSection();
+			$categories = array();
+			$rsItems = $iblockSection->GetList(array(), array(
+				'IBLOCK_ID' => self::IBLOCK_ID,
+			));
+			while ($item = $rsItems->Fetch()) {
+				$id = Categories::getIdByCode($item['CODE']);
+				$categories[$item['ID']] = $id;
 			}
 
 			$iblockElement = new \CIBlockElement();
 			$rsItems = $iblockElement->GetList(array(), array(
-				'IBLOCK_ID' => $packIblocks,
-				'ACTIVE' => 'Y')
-			);
+				'IBLOCK_ID' => self::IBLOCK_ID,
+				'ACTIVE' => 'Y',
+			), false, false, array(
+				'ID', 'NAME', 'IBLOCK_SECTION_ID', 'PREVIEW_PICTURE', 'DETAIL_PICTURE',
+				'CATALOG_GROUP_1',
+			));
 			while ($item = $rsItems->Fetch()) {
-				$price = 0;
-				$rsPrice = \CPrice::GetList(array(), array('PRODUCT_ID' => $item['ID']));
-				if ($arPrice = $rsPrice->Fetch())
-					$price = intval($arPrice['PRICE']);
-				$item['PREVIEW_PICTURE'] = \CFile::GetPath($item['PREVIEW_PICTURE']);
-				$item['DETAIL_PICTURE'] = \CFile::GetPath($item['DETAIL_PICTURE']);
+				$categoryId = $categories[$item['IBLOCK_SECTION_ID']];
 				$return['ITEMS'][$item['ID']] = array(
 					'ID' => $item['ID'],
 					'NAME' => $item['NAME'],
-					'IBLOCK_ID' => $item['IBLOCK_ID'],
-					'PRICE' => $price,
+					'CATEGORY' => $categoryId,
+					'PRICE' => intval($item['CATALOG_PRICE_1']),
+					'PRICE_ID' => $item['CATALOG_PRICE_1_ID'],
 					'PREVIEW_PICTURE' => \CFile::GetPath($item['PREVIEW_PICTURE']),
 					'DETAIL_PICTURE' => \CFile::GetPath($item['DETAIL_PICTURE']),
 				);
-				$return['BY_IBLOCK_ID'][$item['IBLOCK_ID']][] = $item['ID'];
 			}
 
 			uasort($return['ITEMS'], function ($a, $b) {
@@ -96,12 +97,29 @@ class Package
 	}
 
 	/**
+	 * Возвращает упаковки для типа товара
+	 * @param $categoryId
+	 * @return mixed
+	 */
+	public static function getByCategory($categoryId)
+	{
+		$return = array();
+
+		$all = self::getAll();
+		foreach ($all['ITEMS'] as $item)
+			if ($item['CATEGORY'] == $categoryId)
+				$return[] = $item;
+
+		return $return;
+	}
+
+	/**
 	 * Возвращает упаковку по названию и ID инфоблока
 	 * @param $name
 	 * @param $iblockId
 	 * @return array
 	 */
-	public static function getByName($name, $iblockId)
+	/*public static function getByName($name, $iblockId)
 	{
 		$all = self::getAll();
 		$packIblockId = $all['MAP'][$iblockId];
@@ -112,6 +130,6 @@ class Package
 				return $item;
 		}
 		return array();
-	}
+	}*/
 
 }

@@ -1,5 +1,90 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
+$redirect = array(
+
+	'/catalog/gingerbread/1-sentyabrya/' => '/cat/gingerbread/knowledge/',
+	'/catalog/gingerbread/bolshie/' => '/cat/gingerbread/big/',
+	'/catalog/gingerbread/detskie/' => '/cat/gingerbread/',
+	'/catalog/gingerbread/malye/' => '/cat/gingerbread/small/',
+	'/catalog/gingerbread/pryanichnye-bukety/' => '/cat/gingerbread/',
+	'/catalog/gingerbread/imbirnye-pryaniki/' => '/cat/gingerbread/',
+	'/catalog/gingerbread/pryaniki-s-logotipom/' => '/cat/gingerbread/logo/',
+	'/catalog/gingerbread/' => '/cat/gingerbread/',
+
+	'/catalog/cakes/14-fevralya/' => '/cat/cakes/14feb/',
+	'/catalog/cakes/8-marta/' => '/cat/cakes/8march/',
+	'/catalog/cakes/klassicheskie/' => '/cat/cakes/classic/',
+	'/catalog/cakes/novogodnie/' => '/cat/cakes/newyear/',
+	'/catalog/cakes/prazdnichnye/' => '/cat/cakes/',
+	'/catalog/cakes/torty-na-den-rozhdeniya/' => '/cat/cakes/birthday/',
+	'/catalog/cakes/torty-na-yubilej/' => '/cat/cakes/jubilee/',
+	'/catalog/cakes/svadebnye-torty/' => '/cat/cakes/wedding/',
+	'/catalog/cakes/detskie/' => '/cat/cakes/',
+	'/catalog/cakes/' => '/cat/cakes/',
+
+	'/catalog/happybox/' => '/cat/happy/',
+	'/catalog/minicakes/' => '/cat/minicakes/',
+
+	'/catalog/eclairs/assorti/' => '/cat/eclairs/happy/',
+	'/catalog/eclairs/detskie/' => '/cat/eclairs/',
+	'/catalog/eclairs/klassicheskie/' => '/cat/eclairs/classic/',
+	'/catalog/eclairs/prazdnichnye/' => '/cat/eclairs/',
+	'/catalog/eclairs/' => '/cat/eclairs/',
+
+	'/catalog/cupcakes/bestseller/' => '/cat/cupcakes/choice/',
+	'/catalog/cupcakes/assorti/' => '/cat/cupcakes/happy/',
+	'/catalog/cupcakes/children/' => '/cat/cupcakes/girl/',
+	'/catalog/cupcakes/dlya-devochek/' => '/cat/cupcakes/girl/',
+	'/catalog/cupcakes/dlya-malchikov/' => '/cat/cupcakes/boy/',
+	'/catalog/cupcakes/holyday/' => '/cat/cupcakes/',
+	'/catalog/cupcakes/calendar/' => '/cat/cupcakes/',
+	'/catalog/cupcakes/14-fevralya/' => '/cat/cupcakes/14feb/',
+	'/catalog/cupcakes/8-marta/' => '/cat/cupcakes/8march/',
+	'/catalog/cupcakes/9-maya/' => '/cat/cupcakes/9may/',
+	'/catalog/cupcakes/vypusknoj/' => '/cat/cupcakes/graduation/',
+	'/catalog/cupcakes/den-zashhity-detej/' => '/cat/cupcakes/children/',
+	'/catalog/cupcakes/den-znaniy/' => '/cat/cupcakes/knowledge/',
+	'/catalog/cupcakes/den-materi/' => '/cat/cupcakes/mothers/',
+	'/catalog/cupcakes/den-semi-vernosti-i-lyubvi/' => '/cat/cupcakes/family/',
+	'/catalog/cupcakes/novogodnie/' => '/cat/cupcakes/newyear/',
+	'/catalog/cupcakes/pasha/' => '/cat/cupcakes/easter/',
+	'/catalog/cupcakes/rozhdestvo/' => '/cat/cupcakes/christmas/',
+	'/catalog/cupcakes/halloween/' => '/cat/cupcakes/halloween/',
+	'/catalog/cupcakes/family/' => '/cat/cupcakes/',
+	'/catalog/cupcakes/devichnik/' => '/cat/cupcakes/henparty/',
+	'/catalog/cupcakes/birthday/' => '/cat/cupcakes/birthday/',
+	'/catalog/cupcakes/kreshchenie/' => '/cat/cupcakes/epiphany/',
+	'/catalog/cupcakes/malchishnik/' => '/cat/cupcakes/stagparty/',
+	'/catalog/cupcakes/rozhdenie-rebenka/' => '/cat/cupcakes/child/',
+	'/catalog/cupcakes/anniversary/' => '/cat/cupcakes/jubilee/',
+	'/catalog/cupcakes/raznoe/' => '/cat/cupcakes/',
+	'/catalog/cupcakes/wedding/' => '/cat/cupcakes/wedding/',
+	'/catalog/cupcakes/kapkeyki-dlya-lyubimogo/' => '/cat/cupcakes/man/',
+	'/catalog/cupcakes/kapkeyki-dlya-vlyublennyh/' => '/cat/cupcakes/love/',
+	'/catalog/cupcakes/kapkeyki-na-godovshchinu/' => '/cat/cupcakes/anniversary/',
+	'/catalog/cupcakes/fitness/' => '/cat/cupcakes/fitness/',
+	'/catalog/cupcakes/' => '/cat/cupcakes/',
+
+);
+
+$dir = $APPLICATION->GetCurDir();
+$url = '';
+foreach ($redirect as $old => $new)
+{
+	if (strpos($dir, $old) === 0)
+	{
+		$url = $new;
+		break;
+	}
+}
+
+if (!$url)
+	$url = '/cat/';
+
+LocalRedirect($url, false, '301 Moved Permanently');
+die();
+
 if (isset($_REQUEST['IBLOCK_CODE'])) {
     CModule::IncludeModule("iblock");
     $res = CIBlock::GetList(

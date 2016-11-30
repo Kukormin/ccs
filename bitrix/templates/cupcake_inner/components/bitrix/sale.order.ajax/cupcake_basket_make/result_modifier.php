@@ -35,25 +35,7 @@ foreach ($arResult['BASKET_ITEMS'] as $item) {
 	{
 		if ($prop['CODE'] == 'PACKAGE')
 		{
-			$pack = \Local\Utils\Package::getById($prop['SORT']);
-			if (!$pack)
-			{
-				$iblockId = 0;
-				$res = CCatalogSku::GetProductInfo($item['PRODUCT_ID']);
-				if ($res) {
-					$parent =  CIBlockElement::GetByID($res['ID']);
-					while($ar_res = $parent->GetNext())
-						$iblockId = $ar_res['IBLOCK_ID'];
-				}
-				if (!$iblockId)
-				{
-					$product = CIBlockElement::GetByID($item['PRODUCT_ID']);
-					while($ar_res = $product->GetNext())
-						$iblockId = $ar_res['IBLOCK_ID'];
-				}
-				if ($iblockId)
-					$pack = \Local\Utils\Package::getByName($prop['VALUE'], $iblockId);
-			}
+			$pack = \Local\Sale\Package::getById($prop['SORT']);
 			if ($pack && $pack['PRICE'] > 0)
 				$packTotal += $pack['PRICE'] * $item['QUANTITY'];
 			break;

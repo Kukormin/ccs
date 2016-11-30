@@ -3,33 +3,37 @@ namespace Local\Catalog;
 use Local\System\ExtCache;
 
 /**
- * Class Holidays Праздники
+ * Class Seo Seo-свойства для списочных страниц
  * @package Local\Catalog
  */
-class Holidays
+class Seo
 {
 	/**
 	 * Путь для кеширования
 	 */
-	const CACHE_PATH = 'Local/Catalog/Holidays/';
+	const CACHE_PATH = 'Local/Catalog/Seo/';
 
 	/**
 	 * ID инфоблока
 	 */
-	const IB_HOLIDAYS = 49;
+	const IBLOCK_ID = 50;
 
 	/**
 	 * Возвращает все праздники
+	 * @param string $url
 	 * @param bool|false $refreshCache
 	 * @return array
 	 */
-	public static function getAll($refreshCache = false)
+	public static function getByUrl($url, $refreshCache = false)
 	{
 		$return = array();
+
+		$url = trim($url);
 
 		$extCache = new ExtCache(
 			array(
 				__FUNCTION__,
+				$url,
 			),
 			static::CACHE_PATH . __FUNCTION__ . '/',
 			86400000
@@ -41,21 +45,26 @@ class Holidays
 
 			$iblockElement = new \CIBlockElement();
 			$rsItems = $iblockElement->GetList(array(), array(
-				'IBLOCK_ID' => self::IB_HOLIDAYS,
+				'IBLOCK_ID' => self::IBLOCK_ID,
 				'ACTIVE' => 'Y',
+			    '=NAME' => $url,
 			), false, false, array(
 				'ID', 'NAME', 'CODE',
+			    'PROPERTY_CHILDREN',
+			    'PROPERTY_TITLE',
+			    'PROPERTY_DESCRIPTION',
+			    'PROPERTY_H1',
+			    'PROPERTY_TEXT',
 			));
 			while ($item = $rsItems->Fetch())
 			{
-				$return['ITEMS'][$item['ID']] = array(
-					'ID' => $item['ID'],
-					'NAME' => $item['NAME'],
-					'CODE' => $item['CODE'],
+				$return = array(
+					'CHILDREN' => $item['PROPERTY_CHILDREN_VALUE'] == 1,
+					'TITLE' => $item['PROPERTY_TITLE_VALUE'],
+					'DESCRIPTION' => $item['PROPERTY_DESCRIPTION_VALUE'],
+					'H1' => $item['PROPERTY_H1_VALUE'],
+					'TEXT' => $item['PROPERTY_TEXT_VALUE']['TEXT'],
 				);
-				if ($item['CODE']) {
-					$return['BY_CODE'][$item['CODE']] = $item['ID'];
-				}
 			}
 
 			$extCache->endDataCache($return);
@@ -64,51 +73,4 @@ class Holidays
 		return $return;
 	}
 
-	/**
-	 * Возвращает праздник по ID элемента
-	 * @param $id
-	 * @return mixed
-	 */
-	public static function getById($id) {
-		$all = self::getAll();
-		return $all['ITEMS'][$id];
-	}
-
-	/**
-	 * Возвращает ID праздника по коду
-	 * @param $code
-	 * @return mixed
-	 */
-	public static function getIdByCode($code) {
-		$all = self::getAll();
-		return $all['BY_CODE'][$code];
-	}
-
-	/**
-	 * Возвращает группу для панели фильтров
-	 * @return array
-	 */
-	public static function getGroup()
-	{
-		$return = array();
-
-		$all = self::getAll();
-		foreach ($all['ITEMS'] as $item)
-			$return[$item['CODE']] = array(
-				'ID' => $item['ID'],
-				'CODE' => 'HOLIDAY',
-				'NAME' => $item['NAME'],
-			);
-
-		return $return;
-	}
-
-	/**
-	 * Очищает кеш
-	 */
-	public static function clearCache()
-	{
-		$phpCache = new \CPHPCache();
-		$phpCache->CleanDir(static::CACHE_PATH . 'getAll');
-	}
 }

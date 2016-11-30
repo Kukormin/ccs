@@ -1,12 +1,13 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
+/** @var array $arParams */
+
 $filter = array(
-	'NEW' => 'Y',
+	'CATEGORY' => array($arParams['CATEGORY'] => true),
 );
 $sort = array(
 	'sort' => 'asc',
-	'created' => 'desc',
 );
 $nav = array(
 	'nTopCount' => 15
@@ -19,8 +20,15 @@ if (!$products)
 	return;
 
 ?>
-<div class="b-mod b-mod--novelty">
-	<div class="b-slider-wrap-about-novelty" id="related_products_main"><?
+<div class="b-content-center b-slider-about-novelty">
+	<div class="b-title b-title--border-middle">
+		<div class="b-title__item b-title__item--grey">
+			<span class="b-mod--about-novelty__item-img">
+				У нас есть много вкусных сладостей
+			</span>
+		</div>
+	</div>
+	<div class="b-slider-wrap-about-novelty" id="related-products"><?
 
 		foreach ($products as $item) {
 			?>
@@ -32,8 +40,28 @@ if (!$products)
 								<img src="<?= $item['PREVIEW_PICTURE'] ?>"
 								     alt="<?= $item['PIC_ALT'] ?>" title="<?= $item['PIC_TITLE'] ?>" />
 							</a>
-						</div>
-						<div class="b-mod__item-label">новинка</div>
+						</div><?
+
+
+						$label = '';
+						$class = '';
+						if ($item['ACTION'])
+						{
+							$label = 'акция';
+							$class = ' b-mod__item-label--discont';
+						}
+						elseif ($item['NEW'])
+							$label = 'новинка';
+						elseif ($item['HIT'])
+							$label = 'хит';
+
+						if ($label)
+						{
+							?>
+							<div class="b-mod__item-label<?= $class ?>"><?= $label ?></div><?
+						}
+
+						?>
 					</div>
 					<div class="b-mod__item-title">
 						<a href="<?= $item['DETAIL_PAGE_URL'] ?>"><?= $item['TITLE'] ?></a>

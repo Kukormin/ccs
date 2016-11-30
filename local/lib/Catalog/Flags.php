@@ -1,8 +1,6 @@
 <?
 namespace Local\Catalog;
 
-use Local\System\ExtCache;
-
 /**
  * Class Flags Простые свойства товаров
  */
@@ -18,14 +16,17 @@ class Flags
 			'new' => array(
 				'CODE' => 'NEW',
 				'NAME' => 'Новинка',
+			    'MAP' => true,
 			),
 			'action' => array(
 				'CODE' => 'ACTION',
 				'NAME' => 'Акция',
+				'MAP' => true,
 			),
 			'hit' => array(
 				'CODE' => 'HIT',
 				'NAME' => 'Хит',
+				'MAP' => true,
 			),
 		),
 		'Для кого' => array(
@@ -68,10 +69,12 @@ class Flags
 			'happy' => array(
 				'CODE' => 'HAPPY',
 				'NAME' => 'Happy Box',
+				'MAP' => true,
 			),
 			'logo' => array(
 				'CODE' => 'LOGO',
 				'NAME' => 'С логотипом',
+				'MAP' => true,
 			),
 			'classic' => array(
 				'CODE' => 'CLASSIC',
@@ -80,6 +83,7 @@ class Flags
 			'choice' => array(
 				'CODE' => 'CHOICE',
 				'NAME' => 'Наш выбор',
+				'MAP' => true,
 			),
 		),
 	);
