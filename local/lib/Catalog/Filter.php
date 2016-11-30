@@ -314,11 +314,16 @@ class Filter
 				foreach ($group['ITEMS'] as &$item)
 				{
 					$data = self::$DATA_BY_KEY[$item['KEY']];
-
 					if ($item['CODE'] == 'CATEGORY' || $item['CODE'] == 'HOLIDAY')
 						$item['CNT'] = intval($data[$item['CODE']][$item['ID']]);
 					else
 						$item['CNT'] = intval($data[$item['CODE']]);
+
+					$data = self::$DATA_BY_KEY[''];
+					if ($item['CODE'] == 'CATEGORY' || $item['CODE'] == 'HOLIDAY')
+						$item['ALL_CNT'] = intval($data[$item['CODE']][$item['ID']]);
+					else
+						$item['ALL_CNT'] = intval($data[$item['CODE']]);
 
 					$cntGroup += $item['CNT'];
 				}

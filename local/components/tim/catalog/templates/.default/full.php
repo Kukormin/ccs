@@ -66,7 +66,7 @@ $products = $component->products['ITEMS'];
 
 						foreach ($group['ITEMS'] as $code => $item)
 						{
-							$style = '';//$item['CNT'] ? '' : ' style="display:none;"';
+							$style = $item['ALL_CNT'] ? '' : ' style="display:none;"';
 							$class = '';
 							if (!$item['CNT'] && $item['CHECKED'])
 								$class = ' class="checked disabled"';
@@ -150,7 +150,7 @@ $cnt = $filter['CHECKED_CNT'] ? '(' .  $filter['CHECKED_CNT'] . ')' : '';
 
 							foreach ($group['ITEMS'] as $code => $item)
 							{
-								$style = '';//$item['CNT'] ? '' : ' style="display:none;"';
+								$style = $item['ALL_CNT'] ? '' : ' style="display:none;"';
 								$class = '';
 								if (!$item['CNT'] && $item['CHECKED'])
 									$class = ' class="checked disabled"';

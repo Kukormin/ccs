@@ -36,7 +36,7 @@ if (!$products)
 						<div class="b-mod__item-label">новинка</div>
 					</div>
 					<div class="b-mod__item-title">
-						<a href="<?= $item['DETAIL_PAGE_URL'] ?>"><?= $item['TITLE'] ?></a>
+						<a href="<?= $item['DETAIL_PAGE_URL'] ?>"><?= $item['NAME'] ?></a>
 						<span><?= $item['NAME'] ?></span>
 					</div>
 					<div class="b-mod__item-price"><?
