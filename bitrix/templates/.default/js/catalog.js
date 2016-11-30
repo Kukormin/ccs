@@ -36,11 +36,11 @@ var Filters = {
 
 		this.cb.click(this.checkboxClick);
 		this.panel.on('click', '.filter-group li b', this.bClick);
-		this.panel.on('click', 'h3 s', this.h3_s);
+		this.panel.on('click', 'h3', this.h3_s);
 		this.ajaxCont.on('click', '#current-filters a', this.urlClick);
 		this.ajaxCont.on('click', '.js-catalog-pager a', this.urlClick);
 		this.bcCont.on('click', 'a', this.urlClick);
-		this.mobileFilters.on('click', 'h3 s', this.m_h3_s);
+		this.mobileFilters.on('click', 'h3', this.m_h3_s);
 		this.mobileFilters.on('click', 'h3 b', this.m_h3_b);
 		this.mobileFilters.on('click', '#mf-cont > ul li', this.m_li_s);
 		this.mobileFilters.on('click', '.mfg > span', this.clearGroup);
@@ -144,7 +144,7 @@ var Filters = {
 		Filters.mprice.set([Filters.price_from, Filters.price_to]);
 	},
 	h3_s: function() {
-		var gr = $(this).parent().parent();
+		var gr = $(this).parent();
 		var div = gr.children('div');
 		if (gr.hasClass('closed')) {
 			gr.removeClass('closed');
@@ -359,7 +359,8 @@ var Filters = {
 		if (Filters.curMfg)
 			Filters.curMfg.hide();
 	},
-	m_h3_b: function() {
+	m_h3_b: function(e) {
+		e.stopPropagation();
 		Filters.mfCont.animate({left: 0});
 		Filters.mobileFilters.removeClass('l2');
 		Filters.curMfg.hide();
