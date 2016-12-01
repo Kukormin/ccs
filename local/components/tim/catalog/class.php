@@ -18,7 +18,7 @@ class TimCatalog extends \CBitrixComponent
 	 */
 	private $sortParams = array(
 		'sort' => array(
-			'ORDER_DEFAULT' => 'desc',
+			'ORDER_DEFAULT' => 'asc',
 			'FIELD' => 'SORT',
 			'DEFAULT' => true,
 		    'NAME' => 'По-умолчанию',
