@@ -328,6 +328,9 @@ class Products
 					$nav = false;
 				}
 
+				if (!isset($sort['ID']))
+					$sort['ID'] = 'DESC';
+
 				// Товары
 				$iblockElement = new \CIBlockElement();
 				$rsItems = $iblockElement->GetList($sort, array(
