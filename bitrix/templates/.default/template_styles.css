@@ -7645,12 +7645,6 @@ section.b-bg-grey.b-bg-grey--order {
     margin: 1px 0 0 6px;
 }
 
-.item-desc {
-    font-family: "PTSansRegular",sans-serif;
-    font-size: 16px;
-    margin: 80px auto auto;
-    width: 1170px;
-}
 .new_descr {
     color: #22303d;
     font-family: "PTSansRegular",sans-serif;
@@ -7661,6 +7655,10 @@ section.b-bg-grey.b-bg-grey--order {
 }
 .new_descr p {
     margin: 0 0 10px;
+}
+.new_descr.desc-detail {
+    margin: 80px auto auto;
+    width: 1170px;
 }
 .new_descr h2 {
     font-size: 18px;

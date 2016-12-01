@@ -125,7 +125,7 @@ $product = $component->product;
 	if ($product["DETAIL_TEXT"])
 	{
 		?>
-		<div class="item-desc"><?= $product["DETAIL_TEXT"] ?></div><?
+		<div class="new_descr desc-detail"><?= $product["DETAIL_TEXT"] ?></div><?
 	}
 
 	?>
