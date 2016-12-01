@@ -211,6 +211,12 @@ class Filter
 			if ($code == '_ALL')
 				continue;
 
+			if ($searchIds)
+			{
+				$filters[$code]['KEY'] = 'search';
+				$filters[$code]['DATA']['ID'] = $searchIds;
+			}
+
 			foreach (self::$GROUPS as $group)
 			{
 				if ($group['TYPE'] == 'price')
@@ -259,8 +265,6 @@ class Filter
 		{
 			$key = $filters[$code]['KEY'];
 			self::$FILTER_BY_KEY[$key] = $filters[$code]['DATA'];
-			if ($searchIds)
-				self::$FILTER_BY_KEY[$key]['ID'] = $searchIds;
 		}
 
 		// Теперь полученные фильтры добавим обратно в свойства
