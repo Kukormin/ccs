@@ -883,7 +883,7 @@ class Products
 		// Разделы старого каталога
 		// TODO: убрать позже
 		//
-		$iblockIds = array(4, 5, 6, 7, 12, 16, 30, 33, 37, 38, 40);
+		/*$iblockIds = array(4, 5, 6, 7, 12, 16, 30, 33, 37, 38, 40);
 		foreach ($iblockIds as $iblockId)
 		{
 			$rsItems = $iblockSection->GetList(array('left_margin' => 'asc'), array(
@@ -910,7 +910,7 @@ class Products
 					'OLD' => true,
 				);
 			}
-		}
+		}*/
 
 		//
 		// Товары
@@ -1036,7 +1036,7 @@ class Products
 		// Товары старого каталога
 		// TODO: убрать позже
 		//
-		foreach ($iblockIds as $iblockId)
+		/*foreach ($iblockIds as $iblockId)
 		{
 			$iblockOffer = \CCatalogSKU::GetInfoByProductIBlock($iblockId);
 			$rsItems = $iblockElement->GetList(array(), array(
@@ -1131,7 +1131,7 @@ class Products
 
 				}
 			}
-		}
+		}*/
 
 		return $return;
 	}
