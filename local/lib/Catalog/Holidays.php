@@ -39,6 +39,15 @@ class Holidays
 		} else {
 			$extCache->startDataCache();
 
+			// Любой праздник
+			$return['ITEMS'][1] = array(
+				'ID' => 1,
+				'NAME' => 'Любой',
+				'CODE' => 'holiday',
+				'SEO' => 'на праздники',
+			);
+			$return['BY_CODE']['holiday'] = 1;
+
 			$iblockElement = new \CIBlockElement();
 			$rsItems = $iblockElement->GetList(array(), array(
 				'IBLOCK_ID' => self::IB_HOLIDAYS,

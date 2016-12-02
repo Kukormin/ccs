@@ -61,6 +61,8 @@ class Products
 			), false, false, $select);
 			while ($item = $rsItems->Fetch())
 			{
+				if ($item['PROPERTY_HOLIDAY_VALUE'])
+					$item['PROPERTY_HOLIDAY_VALUE'][] = 1;
 				$product = array(
 					'ID' => $item['ID'],
 					'CATEGORY' => intval($item['PROPERTY_CATEGORY_VALUE']),
@@ -70,7 +72,12 @@ class Products
 				);
 
 				foreach ($codes as $code)
-					$product[$code] = intval($item['PROPERTY_' . $code . '_VALUE']);
+				{
+					if ($code == 'KIDS')
+						$product[$code] = ($item['PROPERTY_BOY_VALUE'] || $item['PROPERTY_GIRL_VALUE']) ? 1 : 0;
+					else
+						$product[$code] = intval($item['PROPERTY_' . $code . '_VALUE']);
+				}
 
 				$return[$item['ID']] = $product;
 			}

@@ -588,25 +588,15 @@ class Filter
 
 			if ($group['TYPE'] == 'holiday')
 			{
-				if ($itemsCnt == 1)
-				{
-					$h = Holidays::getById($lastItem['ID']);
-					if ($h['SEO'])
-						$holiday = ' ' . $h['SEO'];
-				}
-				else
-					$holiday = ' на праздники';
+				$holidayId = $itemsCnt == 1 ? $lastItem['ID'] : 1;
+				$h = Holidays::getById($holidayId);
+				$holiday = ' ' . $h['SEO'];
 			}
 
 			if ($group['NAME'] == 'Для кого')
 			{
 				if ($itemsCnt == 1)
 					$gender = ' ' . strtolower($lastItem['NAME']);
-				elseif ($itemsCnt == 2)
-				{
-					if ($group['ITEMS']['girl']['CHECKED'] && $group['ITEMS']['boy']['CHECKED'])
-						$gender = ' для детей';
-				}
 			}
 		}
 

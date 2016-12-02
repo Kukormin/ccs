@@ -30,6 +30,10 @@ class Flags
 			),
 		),
 		'Для кого' => array(
+			'kids' => array(
+				'CODE' => 'KIDS',
+				'NAME' => 'Для детей',
+			),
 			'girl' => array(
 				'CODE' => 'GIRL',
 				'NAME' => 'Для девочек',
