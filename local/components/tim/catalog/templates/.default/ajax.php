@@ -26,6 +26,9 @@ include('bc.php');
 $result['BC'] = ob_get_contents();
 ob_end_clean();
 
+// Поисковый запрос
+$result['SEARCH'] = $component->searchQuery;
+
 // Заголовок браузера
 $result['TITLE'] = $component->seo['TITLE'];
 

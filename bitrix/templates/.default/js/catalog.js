@@ -319,6 +319,8 @@ var Filters = {
 			if (setHistory)
 				history.pushState('', resp.TITLE, url);
 
+			Filters.q = resp.SEARCH;
+
 			return false;
 		});
 	},
