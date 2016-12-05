@@ -1,6 +1,5 @@
 <?
-if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true)
-	return;
+if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true) return;
 
 \Local\Utils\Remarketing::printHtml();
 
@@ -26,3 +25,9 @@ if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true)
 <!-- VK tracking code -->
 <script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = location.protocol + '//vk.com/rtrg?r=PoDlXltXU*pSE/i0w4jJDVD5j0vJHDre2ldVzdCNsXBKxNCylQQXZ9KIk9F5l6DOsRHXfbapASH9Y4c9swoyeeeevgLc*jKfRswN10dh9JwNyLix2oB*Xsj6Y8czD1Rrpt75ponvDeKPQb7O83HOa37AAQkv5PISTbpXypfGjjc-';</script>
 <!-- end of VK tracking code -->
+
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+	(function(){ var widget_id = 'ORFO3uXdFb';var d=document;var w=window;function l(){
+		var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+<!-- {/literal} END JIVOSITE CODE -->
