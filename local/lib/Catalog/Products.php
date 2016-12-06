@@ -4,6 +4,7 @@ namespace Local\Catalog;
 
 use Bitrix\Iblock\InheritedProperty\ElementValues;
 use Local\Sale\Package;
+use Local\Sale\Postals;
 use Local\System\ExtCache;
 
 /**
@@ -886,6 +887,12 @@ class Products
 			'NAME' => 'Упаковка',
 		);
 
+		// Для открыток тоже
+		$return['CAT'][2] = array(
+			'ID' => 2,
+			'NAME' => 'Открытки',
+		);
+
 		//
 		// Разделы старого каталога
 		// TODO: убрать позже
@@ -1010,6 +1017,7 @@ class Products
 			);
 		}
 
+		// Упаковки
 		$rsItems = $iblockElement->GetList(array(), array(
 			'IBLOCK_ID' => Package::IBLOCK_ID,
 		), false, false, array(
@@ -1035,6 +1043,36 @@ class Products
 				'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
 				'PRICE' => $price,
 				'CATEGORY_ID' => 1,
+				'CATEGORY_NAME' => $cat['NAME'],
+			);
+		}
+
+		// Открытки
+		$rsItems = $iblockElement->GetList(array(), array(
+			'IBLOCK_ID' => Postals::IBLOCK_ID,
+		), false, false, array(
+			'ID',
+			'NAME',
+			'ACTIVE',
+			'DETAIL_PICTURE',
+			'PROPERTY_ARTICLE',
+			'CATALOG_GROUP_1',
+		));
+		while ($item = $rsItems->Fetch())
+		{
+			$cat = $return['CAT'][2];
+			$price = floatval($item['CATALOG_PRICE_1']);
+			$return['OFFERS'][] = array(
+				'ID' => $item['ID'],
+				'NAME' => $item['NAME'],
+				'PRODUCT_ID' => $item['ID'],
+				'PRODUCT_ACTIVE' => $item['ACTIVE'],
+				'PRODUCT_NAME' => $item['NAME'],
+				'PICTURE' => $file->GetPath($item['DETAIL_PICTURE']),
+				'DETAIL_PAGE_URL' => '',
+				'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
+				'PRICE' => $price,
+				'CATEGORY_ID' => 2,
 				'CATEGORY_NAME' => $cat['NAME'],
 			);
 		}

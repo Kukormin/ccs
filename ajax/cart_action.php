@@ -15,6 +15,9 @@ elseif ($_POST['action'] == 'pack') {
 elseif ($_POST['action'] == 'offer') {
 	$result = \Local\Sale\Cart::offer($_POST['bid'], $_POST['oid']);
 }
+elseif ($_POST['action'] == 'postal') {
+	$result = \Local\Sale\Cart::postal($_POST['bid'], $_POST['id']);
+}
 /*elseif ($_POST['action'] == 'delete')
 {
 	CSaleBasket::Delete($_POST["ajaxdeleteid"]);

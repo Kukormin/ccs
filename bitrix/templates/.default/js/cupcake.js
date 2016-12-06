@@ -1104,7 +1104,7 @@ $(document).ready(function () {
 		var pack_item = that.closest('.js-package-item');
 		var id = pack_item.data('package-id');
 
-		$.post('/ajax/cart_action.php', {'action': 'pack' , 'bid': gbid, 'pid': id}, function () {
+		$.post('/ajax/cart_action.php', {'action': 'pack', 'bid': gbid, 'pid': id}, function () {
 			var total = line.find('.js-item-total');
 			var price = parseFloat(line.data('base-price'));
 			var pack_price = parseInt(pack_item.data('package-price'));
@@ -1112,6 +1112,35 @@ $(document).ready(function () {
 			var sum = Math.round((price + pack_price)*cnt);
 			total.text(sum);
 			total.next().val(Math.round(pack_price*cnt));
+			updateBasketPrice();
+			updateDiscountBlock();
+		});
+	}
+
+	$("body").on('change', '.js-postals-selector', function () {
+		updatePostalsPrice(this);
+	});
+
+	function updatePostalsPrice(that) {
+		var that = $(that);
+		var item = that.closest('.b-slider__item-basket');
+		item.siblings('.b-slider__item-basket').each(function() {
+			$(this).find('input').prop('checked', false);
+		});
+		var cont = item.closest('#postals');
+		var id = item.data('id');
+		var price = parseInt(item.data('price'));
+		if (!that.prop('checked')) {
+			id = 0;
+			price = 0;
+		}
+		var bid = cont.data('bid');
+
+		$.post('/ajax/cart_action.php', {'action': 'postal', 'bid': bid, 'id': id}, function (res) {
+			bid = res;
+			cont.data('bid', bid);
+			cont.data('price', price);
+
 			updateBasketPrice();
 			updateDiscountBlock();
 		});
@@ -1393,14 +1422,16 @@ $(document).ready(function () {
 });
 
 var pack_sum = 0;
+var total_sum = 0;
 function updateBasketPrice() {
-	var sum = 0;
+	total_sum = 0;
 	pack_sum = 0;
 	$('.js-item-total').each(function() {
-		sum += parseInt($(this).text());
+		total_sum += parseInt($(this).text());
 		pack_sum += parseInt($(this).next().val());
 	});
-	$('.js-order-total').html(sum > 10000 ? format_number(sum) : sum);
+	total_sum += parseInt($('#postals').data('price'));
+	$('.js-order-total').html(total_sum > 10000 ? format_number(total_sum) : total_sum);
 }
 
 function updateCouponsBlock(list, sum, discount) {
@@ -1430,11 +1461,10 @@ function updateCouponsBlock(list, sum, discount) {
 function updateDiscountBlock() {
 	var total = $('.discount-total');
 	if (total.length) {
-		var sum = allSum + pack_sum;
 		if (discount_price_all > 0) {
-			total.find('#dtotal1').text(sum + discount_price_all);
+			total.find('#dtotal1').text(total_sum + discount_price_all);
 			total.find('#dtotal2').text(discount_price_all);
-			total.find('#dtotal3').text(sum);
+			total.find('#dtotal3').text(total_sum);
 			total.removeClass('hidden');
 		}
 		else {

@@ -246,4 +246,81 @@ class Cart
 
 		return 0;
 	}
+
+	/**
+	 * Выбор открытки
+	 * @param $bid
+	 * @param $id
+	 * @return int
+	 */
+	public static function postal($bid, $id)
+	{
+		$saleBasket = new \CSaleBasket();
+
+		if ($id)
+		{
+			$pst = Postals::getById($id);
+			if (!$pst)
+				return 0;
+
+			if ($bid)
+			{
+				$item = $saleBasket->GetByID($bid);
+				if ($item['PRODUCT_ID'] == $id)
+					return 0;
+
+				$data = array(
+					'PRODUCT_ID' => $pst['ID'],
+					'PRODUCT_XML_ID' => $pst['ID'],
+					'CATALOG_XML_ID' => $pst['ID'],
+					"PRODUCT_PRICE_ID" => $pst['PRICE_ID'],
+					"PRICE" => $pst['PRICE'],
+				);
+				$saleBasket->Update($bid, $data);
+
+				return intval($bid);
+			}
+			else
+			{
+				$fields = array(
+					"PRODUCT_ID" => $pst['ID'],
+					"PRODUCT_PRICE_ID" => $pst['PRICE_ID'],
+					"PRICE" => $pst['PRICE'],
+					"CURRENCY" => 'RUB',
+					"QUANTITY" => 1,
+					"LID" => SITE_ID,
+					"DELAY" => "N",
+					"CAN_BUY" => "Y",
+					"NAME" => $pst['NAME'],
+					"MODULE" => "catalog",
+					"DETAIL_PAGE_URL" => '',
+					"CATALOG_XML_ID" => $pst['ID'],
+					"PRODUCT_XML_ID" => $pst['ID'],
+					"VAT_INCLUDED" => 'Y',
+					"VAT_RATE" => '18',
+				);
+
+				$basket = new \CSaleBasket();
+				$basket->Init();
+				if (!$basket->CheckFields('ADD', $fields))
+					return 0;
+
+				$basketItem = BasketCompatibility::add($fields);
+				if (!$basketItem)
+					return 0;
+
+				$ID = $basketItem->getId();
+
+				return $ID;
+			}
+		}
+		else
+		{
+			if ($bid)
+				$saleBasket->Delete($bid);
+
+			return 0;
+		}
+
+	}
 }

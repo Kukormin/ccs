@@ -8046,3 +8046,29 @@ label.iPhoneCheckLabelOn {
 #a404 b.cat {
     background-position: 0 -80px;
 }
+
+#postals {
+    float: left;
+}
+#postals h3 {
+    color: #aa6290;
+    font-family: "PTSansCaptionBold",sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 10px 0 0;
+}
+#coupons_block {
+    float: right;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.clearfix:after {
+    clear: both;
+}

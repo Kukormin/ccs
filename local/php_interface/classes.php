@@ -20,6 +20,7 @@ CModule::AddAutoloadClasses(
 		'Local\\Media\\Banners' => '/local/lib/Media/Banners.php',
 		'Local\\Sale\\Cart' => '/local/lib/Sale/Cart.php',
 		'Local\\Sale\\Package' => '/local/lib/Sale/Package.php',
+		'Local\\Sale\\Postals' => '/local/lib/Sale/Postals.php',
 		'Local\\Sale\\Shops' => '/local/lib/Sale/Shops.php',
 	)
 );

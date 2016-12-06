@@ -4,6 +4,7 @@ namespace Local\System;
 use Local\Catalog\Holidays;
 use Local\Catalog\Products;
 use Local\Sale\Package;
+use Local\Sale\Postals;
 use Local\Utils\Abandoned;
 
 /**
@@ -190,6 +191,11 @@ class Handlers
 		elseif ($iblockId == Package::IBLOCK_ID)
 		{
 			$APPLICATION->throwException("\nНельзя просто так взять и удалить упаковку");
+			return false;
+		}
+		elseif ($iblockId == Postals::IBLOCK_ID)
+		{
+			$APPLICATION->throwException("\nНельзя просто так взять и удалить открытку");
 			return false;
 		}
 
