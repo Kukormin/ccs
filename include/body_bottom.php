@@ -23,7 +23,7 @@ if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true) return;
 
 ?>
 <!-- VK tracking code -->
-<script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = location.protocol + '//vk.com/rtrg?r=PoDlXltXU*pSE/i0w4jJDVD5j0vJHDre2ldVzdCNsXBKxNCylQQXZ9KIk9F5l6DOsRHXfbapASH9Y4c9swoyeeeevgLc*jKfRswN10dh9JwNyLix2oB*Xsj6Y8czD1Rrpt75ponvDeKPQb7O83HOa37AAQkv5PISTbpXypfGjjc-';</script>
+<script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = location.protocol + '//vk.com/rtrg?r=r9Xiv2cJkhoqbctvozN8qeM*V3KmkIU6fHaocDFACJergEggBjN5XxfwUHDlQiEkU9BC8hevMrJK0ZqDkrUa5WQy5fj33JopzftvIOOFJHUQ2NY0wojq8UfJy2T2sdCnmsP2zt1Hn0lSq3AOBnqtSsqthQWDGv9vyK9KBPmGCpk-&pixel_id=1000050943';</script>
 <!-- end of VK tracking code -->
 
 <!-- BEGIN JIVOSITE CODE {literal} -->
