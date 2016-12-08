@@ -1066,11 +1066,7 @@
 		margin-left:0;
 		float:none;
 	}
-	
-	.b-pagination__item:nth-child(6) {
-		display:none;
-	}
-	
+
 	.b-content__category-item {
 		width: calc(50% - 20px);
 		margin: 0 10px;
@@ -1336,9 +1332,6 @@
 		padding: 220px 0;
 	}
 	
-	.b-pagination__item:nth-child(5) {
-		display:none;
-	}	
 	.b-news__category-item:nth-child(3n+1),
 	.b-news__category-item {
 		margin:0 30px;
@@ -3610,9 +3603,6 @@
 
 @media (max-width: 500px) {	
 	
-	.b-pagination__item:nth-child(4) {
-		display: none;
-	}
 
 	.b-content__category-item {
 		width: calc(80% - 20px);
