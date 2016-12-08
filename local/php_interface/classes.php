@@ -17,6 +17,7 @@ CModule::AddAutoloadClasses(
 		'Local\\Catalog\\Seo' => '/local/lib/Catalog/Seo.php',
 		'Local\\Catalog\\Export' => '/local/lib/Catalog/Export.php',
 		'Local\\Catalog\\Sitemap' => '/local/lib/Catalog/Sitemap.php',
+		'Local\\Catalog\\Accessories' => '/local/lib/Catalog/Accessories.php',
 		'Local\\Media\\Banners' => '/local/lib/Media/Banners.php',
 		'Local\\Sale\\Cart' => '/local/lib/Sale/Cart.php',
 		'Local\\Sale\\Package' => '/local/lib/Sale/Package.php',

@@ -893,6 +893,12 @@ class Products
 			'NAME' => 'Открытки',
 		);
 
+		// Для открыток тоже
+		$return['CAT'][3] = array(
+			'ID' => 3,
+			'NAME' => 'Аксессуары',
+		);
+
 		//
 		// Разделы старого каталога
 		// TODO: убрать позже
@@ -1073,6 +1079,36 @@ class Products
 				'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
 				'PRICE' => $price,
 				'CATEGORY_ID' => 2,
+				'CATEGORY_NAME' => $cat['NAME'],
+			);
+		}
+
+		// Аксессуары
+		$rsItems = $iblockElement->GetList(array(), array(
+			'IBLOCK_ID' => Accessories::IBLOCK_ID,
+		), false, false, array(
+			'ID',
+			'NAME',
+			'ACTIVE',
+			'DETAIL_PICTURE',
+			'PROPERTY_ARTICLE',
+			'CATALOG_GROUP_1',
+		));
+		while ($item = $rsItems->Fetch())
+		{
+			$cat = $return['CAT'][3];
+			$price = floatval($item['CATALOG_PRICE_1']);
+			$return['OFFERS'][] = array(
+				'ID' => $item['ID'],
+				'NAME' => $item['NAME'],
+				'PRODUCT_ID' => $item['ID'],
+				'PRODUCT_ACTIVE' => $item['ACTIVE'],
+				'PRODUCT_NAME' => $item['NAME'],
+				'PICTURE' => $file->GetPath($item['DETAIL_PICTURE']),
+				'DETAIL_PAGE_URL' => '',
+				'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
+				'PRICE' => $price,
+				'CATEGORY_ID' => 3,
 				'CATEGORY_NAME' => $cat['NAME'],
 			);
 		}
