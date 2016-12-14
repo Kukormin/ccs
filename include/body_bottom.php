@@ -24,10 +24,14 @@ if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true) return;
 ?>
 <!-- VK tracking code -->
 <script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = location.protocol + '//vk.com/rtrg?r=r9Xiv2cJkhoqbctvozN8qeM*V3KmkIU6fHaocDFACJergEggBjN5XxfwUHDlQiEkU9BC8hevMrJK0ZqDkrUa5WQy5fj33JopzftvIOOFJHUQ2NY0wojq8UfJy2T2sdCnmsP2zt1Hn0lSq3AOBnqtSsqthQWDGv9vyK9KBPmGCpk-&pixel_id=1000050943';</script>
-<!-- end of VK tracking code -->
+<!-- end of VK tracking code --><?
 
-<!-- BEGIN JIVOSITE CODE {literal} -->
+// t.k: для себя вырубил на проде
+if ($_SERVER["REMOTE_ADDR"] != '109.197.195.38')
+{
+?>
 <script type='text/javascript'>
 	(function(){ var widget_id = 'ORFO3uXdFb';var d=document;var w=window;function l(){
 		var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
-<!-- {/literal} END JIVOSITE CODE -->
+<?
+}

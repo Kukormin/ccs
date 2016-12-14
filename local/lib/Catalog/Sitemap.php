@@ -8,38 +8,46 @@ namespace Local\Catalog;
 class Sitemap
 {
 	protected $error;
-	protected $filename;
-	protected $fp;
+	protected $xml;
+	protected $html;
+	protected $fxml;
+	protected $fhtml;
 	protected $url;
 
 	/**
-	 * Обновляет файл sitemap.xml
+	 * Обновляет файлы sitemap.xml и sitemap.html
 	 * @return bool
 	 */
 	public function start()
 	{
 		$this->url = 'http://cupcakestory.ru';
-		$this->filename = $_SERVER["DOCUMENT_ROOT"] . '/sitemap.xml';
+		$this->xml = $_SERVER["DOCUMENT_ROOT"] . '/sitemap.xml';
+		$this->html = $_SERVER["DOCUMENT_ROOT"] . '/include/sitemap.html';
 
-		$this->fp = $this->prepareFile($this->filename. '.tmp');
-		if (!$this->fp)
+		$this->fxml = $this->prepareFile($this->xml. '.tmp');
+		$this->fhtml = $this->prepareFile($this->html. '.tmp');
+		if (!$this->fxml)
 		{
-			$this->error = 'Ошибка создания файла';
+			$this->error = 'Ошибка создания xml файла';
+			return false;
+		}
+		if (!$this->fhtml)
+		{
+			$this->error = 'Ошибка создания html файла';
 			return false;
 		}
 
 		$this->preWrite();
 
-		$data = $this->getStatic();
-		$this->writeStatic($data);
-		$data = Filter::getSiteMap();
-		$this->write($data);
+		$staticData = $this->getStatic();
+		$this->writeStatic($staticData);
+		$filtersData = Filter::getSiteMap();
+		$this->write($filtersData);
 
 		$this->postWrite();
 		$this->closeFile();
 
-		unlink($this->filename);
-		rename($this->filename. '.tmp', $this->filename);
+		$this->moveFile();
 
 		return true;
 	}
@@ -56,41 +64,61 @@ class Sitemap
 
 	protected function preWrite()
 	{
-		@fwrite($this->fp, '<?xml version="1.0" encoding="UTF-8"?>'."\n");
-		@fwrite($this->fp, '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"');
-		@fwrite($this->fp, ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"');
-		@fwrite($this->fp, ' xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"');
-		@fwrite($this->fp, ">\n");
+		@fwrite($this->fxml, '<?xml version="1.0" encoding="UTF-8"?>'."\n");
+		@fwrite($this->fxml, '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"');
+		@fwrite($this->fxml, ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"');
+		@fwrite($this->fxml, ' xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"');
+		@fwrite($this->fxml, ">\n");
+
+		@fwrite($this->fhtml, "<ul>\n");
 	}
 
 	protected function writeStatic($data)
 	{
 		foreach ($data as $url => $p) {
-			@fwrite($this->fp, "<url>\n");
-			@fwrite($this->fp, "\t<loc>" . $this->url . $url . "</loc>\n");
-			@fwrite($this->fp, "\t<priority>$p</priority>\n");
-			@fwrite($this->fp, "</url>\n");
+			@fwrite($this->fxml, "<url>\n");
+			@fwrite($this->fxml, "\t<loc>" . $this->url . $url . "</loc>\n");
+			@fwrite($this->fxml, "\t<priority>$p</priority>\n");
+			@fwrite($this->fxml, "</url>\n");
 		}
 	}
 
 	protected function write($data)
 	{
 		foreach ($data as $url) {
-			@fwrite($this->fp, "<url>\n");
-			@fwrite($this->fp, "\t<loc>" . $this->url . $url . "</loc>\n");
-			@fwrite($this->fp, "\t<priority>0.50</priority>\n");
-			@fwrite($this->fp, "</url>\n");
+			@fwrite($this->fxml, "<url>\n");
+			@fwrite($this->fxml, "\t<loc>" . $this->url . $url . "</loc>\n");
+			@fwrite($this->fxml, "\t<priority>0.50</priority>\n");
+			@fwrite($this->fxml, "</url>\n");
+		}
+
+		foreach ($data as $url) {
+			@fwrite($this->fhtml, "<li>\n");
+			@fwrite($this->fhtml, "\t<a href=\"$url\">$url</a>\n");
+			@fwrite($this->fhtml, "</li>\n");
 		}
 	}
 
 	protected function postWrite()
 	{
-		@fwrite($this->fp, "</urlset>\n");
+		@fwrite($this->fxml, "</urlset>\n");
+
+		@fwrite($this->fhtml, "</ul>\n");
 	}
 
 	protected function closeFile()
 	{
-		@fclose($this->fp);
+		@fclose($this->fxml);
+		@fclose($this->fhtml);
+	}
+
+	protected function moveFile()
+	{
+		unlink($this->xml);
+		rename($this->xml. '.tmp', $this->xml);
+
+		unlink($this->html);
+		rename($this->html. '.tmp', $this->html);
 	}
 
 	public function getError()
