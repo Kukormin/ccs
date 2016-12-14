@@ -10,8 +10,7 @@ $APPLICATION->SetTitle("Контакты");
 	 Контакты
 </div>
  </h1>
-<div class="b-bg-grey-contact--title">
-	 <?$APPLICATION->IncludeComponent(
+ <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"cupcake_adr_contacts",
 	Array(
@@ -67,17 +66,17 @@ $APPLICATION->SetTitle("Контакты");
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC"
 	)
-);?>контакты
-</div>
- <!--info-->
+);?>
 <div class="b-content-center b-contact-info">
 	<div class="b-contact-info__link-wrap">
- <a href="tel:+74993220020" class="b-contact-info__link-phone">+7 499 322 00 20</a> <a href="mailto:zakaz@cupcakestory.ru" class="b-contact-info__link-email">zakaz@cupcakestory.ru</a>
- <img src="/images/scheme.jpg" alt="схема" />
+ <a href="tel:+74993220020" class="b-contact-info__link-phone">+7 (499) 322 00 20</a> <a href="mailto:zakaz@cupcakestory.ru" class="b-contact-info__link-email">zakaz@cupcakestory.ru</a> <img src="/images/scheme.jpg" alt="схема">
 	</div>
 	<div class="b-contact-info__item">
 		<p>
 			 Заказы в интернет-магазине принимаются по телефону с понедельника по пятницу с 10 до 20. По&nbsp;субботам и воскресеньям с&nbsp;10&nbsp;до&nbsp;17.
+		</p>
+		<p>
+ <b>Мини-кафе в Москве в Фуд Маркете улица Новый Арбат, 21. Режим работы&nbsp;</b><b>&nbsp;ежедневно&nbsp;</b><b>с 12 до 24.</b>
 		</p>
 		<p>
  <strong style="font-weight:bold">Точка самовывоза. Фабрика «Кристалл»</strong><br>
@@ -101,7 +100,9 @@ $APPLICATION->SetTitle("Контакты");
 </div>
  <!--map-->
 <div class="b-maps">
-	<div id="gmap" class="b-gmap"></div><?
+	<div id="gmap" class="b-gmap">
+	</div>
+	 <?
 
 	/*?>
 	<div class="b-contact-label">пункты самовывоза</div><?*/
@@ -124,5 +125,4 @@ $APPLICATION->SetTitle("Контакты");
 );?>
 </div>
  </section> <br>
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
