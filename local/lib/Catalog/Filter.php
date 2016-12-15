@@ -607,17 +607,143 @@ class Filter
 		if ($prefix)
 			$name = strtolower($name);
 		$h1 = $prefix . $name . $suffix . $gender . $holiday;
-		$title = $h1 . ' от Cupcake Story';
+		$h1l = strtolower($h1);
+		$title = 'Купить ' . $h1l . ' – от кондитерской Cupcake Story';
 		$description = $h1 . ' с доставкой в Москве по оптимальным ценам. У нас Вы можете купить ' .
 			$type . ' на любой вкус.';
+		$text = 'Купить ' . $h1l . ' с круглосуточной доставкой по Москве, в офис или на дом в удобное для вас время.' .
+			' Интернет-магазин Cupcake Story предлагает приобрести идеальные сладости на праздник!';
 
 		return array(
 			'H1' => $h1,
 			'TITLE' => $title,
 			'DESCRIPTION' => $description,
+			'TEXT' => $text,
 		    'URL' => $href,
 		    'PARTS' => $parts,
 		);
+	}
+
+	/**
+	 * Формирует ссылки для карты сайта - упрощенная версия
+	 * (только один тип, один праздник и т.п.)
+	 * @return array
+	 */
+	public static function getSimpleSiteMap()
+	{
+		$return = array();
+		$parts = array();
+
+		$categories = Categories::getAll();
+
+		$flags = Flags::getAll();
+		$i = 0;
+		foreach ($flags as $group)
+		{
+			$i++;
+			$parts[$i][] = '';
+			foreach ($group as $k => $f)
+				$parts[$i][$k] = $f;
+		}
+
+		$parts['HOLIDAY'][] = '';
+		$holidays = Holidays::getAll();
+		foreach ($holidays['ITEMS'] as $item)
+			$parts['HOLIDAY'][$item['ID']] = $item['CODE'];
+
+		foreach ($parts['HOLIDAY'] as $holidayId => $holCode)
+		{
+			foreach ($parts[4] as $fCode4 => $fProp4)
+			{
+				foreach ($parts[3] as $fCode3 => $fProp3)
+				{
+					foreach ($parts[2] as $fCode2 => $fProp2)
+					{
+						foreach ($parts[1] as $fCode1 => $fProp1)
+						{
+							foreach ($categories['ITEMS'] as $category)
+							{
+								$filter = array();
+								$url = self::$CATALOG_PATH;
+
+								$filter['CATEGORY'][$category['ID']] = $category['ID'];
+								$url .= $category['CODE'] . '/';
+								if ($fCode1)
+								{
+									$filter[$fProp1['CODE']] = true;
+									$url .= $fCode1 . '/';
+								}
+								if ($fCode2)
+								{
+									$filter[$fProp2['CODE']] = true;
+									$url .= $fCode2 . '/';
+								}
+								if ($fCode3)
+								{
+									$filter[$fProp3['CODE']] = true;
+									$url .= $fCode3 . '/';
+								}
+								if ($fCode4)
+								{
+									$filter[$fProp4['CODE']] = true;
+									$url .= $fCode4 . '/';
+								}
+								if ($holidayId)
+								{
+									$filter['HOLIDAY'][$holidayId] = $holidayId;
+									$url .= $holCode . '/';
+								}
+
+								$ex = Products::ex3ByFilter($filter);
+
+								if ($ex)
+								{
+
+									$name = $category['NAME'];
+
+									$holiday = '';
+									$gender = '';
+									$suffix = '';
+									$prefix = '';
+
+									if ($fCode1 === 'logo' || $fCode2 === 'logo' ||
+										$fCode3 === 'logo' || $fCode4 === 'logo')
+										$suffix .= ' с логотипом';
+									elseif ($fCode1 === 'action' || $fCode2 === 'action' ||
+										$fCode3 === 'action' || $fCode4 === 'action')
+										$suffix .= ' по акции';
+
+									if ($fCode1 === 'classic' || $fCode2 === 'classic' ||
+										$fCode3 === 'classic' || $fCode4 === 'classic')
+										$prefix = 'Классические ';
+									elseif ($fCode1 === 'fitness' || $fCode2 === 'fitness' ||
+										$fCode3 === 'fitness' || $fCode4 === 'fitness')
+										$prefix = 'Фитнес ';
+
+									if ($holidayId)
+									{
+										$h = Holidays::getById($holidayId);
+										$holiday = ' ' . $h['SEO'];
+									}
+
+									if ($fCode2)
+										$gender = ' ' . strtolower($fProp2['NAME']);
+
+									// Капкейки для девочек ко Дню Рождения
+									if ($prefix)
+										$name = strtolower($name);
+									$h1 = $prefix . $name . $suffix . $gender . $holiday;
+
+									$return[$url] = $h1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return $return;
 	}
 
 	/**
@@ -700,16 +826,28 @@ class Filter
 					if ($p)
 						$url .= $p . '/';
 				}
-				$return[] = $url;
+				$return[$url] = true;
 			}
 
 		}
+
+		return $return;
+	}
+
+	/**
+	 * Возвращает ссылки на товары для карты сайта
+	 * @return array
+	 */
+	public static function getSiteMapProducts()
+	{
+		$return = array();
 
 		$products = Products::getAll();
 		foreach ($products as $item)
 		{
 			$category = Categories::getById($item['CATEGORY']);
-			$return[] = Products::getDetailUrl($item, $category['CODE']);
+			$url = Products::getDetailUrl($item, $category['CODE']);
+			$return[$url] = $item['NAME'];
 		}
 
 		return $return;

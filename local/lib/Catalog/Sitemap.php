@@ -42,7 +42,12 @@ class Sitemap
 		$staticData = $this->getStatic();
 		$this->writeStatic($staticData);
 		$filtersData = Filter::getSiteMap();
-		$this->write($filtersData);
+		$this->writeXml($filtersData);
+		$filtersData = Filter::getSimpleSiteMap();
+		$this->writeHtml($filtersData);
+		$products = Filter::getSiteMapProducts();
+		$this->writeXml($products);
+		$this->writeHtml($products);
 
 		$this->postWrite();
 		$this->closeFile();
@@ -83,18 +88,21 @@ class Sitemap
 		}
 	}
 
-	protected function write($data)
+	protected function writeXml($data)
 	{
-		foreach ($data as $url) {
+		foreach ($data as $url => $name) {
 			@fwrite($this->fxml, "<url>\n");
 			@fwrite($this->fxml, "\t<loc>" . $this->url . $url . "</loc>\n");
 			@fwrite($this->fxml, "\t<priority>0.50</priority>\n");
 			@fwrite($this->fxml, "</url>\n");
 		}
+	}
 
-		foreach ($data as $url) {
+	protected function writeHtml($data)
+	{
+		foreach ($data as $url => $name) {
 			@fwrite($this->fhtml, "<li>\n");
-			@fwrite($this->fhtml, "\t<a href=\"$url\">$url</a>\n");
+			@fwrite($this->fhtml, "\t<a href=\"$this->url$url\">$name</a>\n");
 			@fwrite($this->fhtml, "</li>\n");
 		}
 	}

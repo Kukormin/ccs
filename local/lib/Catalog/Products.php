@@ -46,6 +46,7 @@ class Products
 
 			$select = array(
 				'ID',
+				'NAME',
 			    'PROPERTY_PRICE',
 			    'PROPERTY_PRICE_WO_DISCOUNT',
 			    'PROPERTY_CATEGORY',
@@ -66,6 +67,7 @@ class Products
 					$item['PROPERTY_HOLIDAY_VALUE'][] = 1;
 				$product = array(
 					'ID' => $item['ID'],
+					'NAME' => $item['NAME'],
 					'CATEGORY' => intval($item['PROPERTY_CATEGORY_VALUE']),
 					'HOLIDAY' => $item['PROPERTY_HOLIDAY_VALUE'],
 					'PRICE' => intval($item['PROPERTY_PRICE_VALUE']),
@@ -287,6 +289,66 @@ class Products
 
 			if ($ok)
 				return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Есть ли 3 товара по фильтру?
+	 * @param $filter
+	 * @return bool
+	 */
+	public static function ex3ByFilter($filter)
+	{
+		$all = self::getAll();
+		$cnt = 0;
+		foreach ($all as $productId => $product)
+		{
+			$ok = true;
+			foreach ($filter as $key => $value)
+			{
+				if ($key == 'CATEGORY')
+				{
+					if (!$value[$product['CATEGORY']])
+					{
+						$ok = false;
+						break;
+					}
+				}
+				elseif ($key == 'HOLIDAY')
+				{
+					$ex = false;
+					foreach ($product['HOLIDAY'] as $h)
+					{
+						if ($value[$h])
+						{
+							$ex = true;
+							break;
+						}
+					}
+					if (!$ex)
+					{
+						$ok = false;
+						break;
+					}
+				}
+				else
+				{
+					if (!$product[$key])
+					{
+						$ok = false;
+						break;
+					}
+				}
+			}
+
+			if ($ok)
+			{
+				$cnt++;
+				if ($cnt >= 3)
+					return true;
+			}
 		}
 
 		return false;

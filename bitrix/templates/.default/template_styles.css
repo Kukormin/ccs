@@ -4665,7 +4665,7 @@ a.basket {
 .b-footer-nav__list,
 .b-footer-phones 
  {
-	margin:0 40px;
+	margin:0 20px;
     float: left;
 	display:inline-block;
 	vertical-align:top;
@@ -8071,4 +8071,16 @@ label.iPhoneCheckLabelOn {
 }
 .clearfix:after {
     clear: both;
+}
+
+.b-sitemap ul {
+    list-style: none;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.b-cards-wrapper .b-sitemap-footer {
+    width: 16px;
+    height: 16px;
+    background: url('/images/sitemap.png') no-repeat;
+    vertical-align: middle;
 }

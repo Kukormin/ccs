@@ -286,6 +286,9 @@ class TimCatalog extends \CBitrixComponent
 		elseif ($this->filter)
 		{
 			$this->seo = Seo::getByUrl($this->filter['SEO']['URL']);
+
+			/*
+			Пока отключил обработку галочки "Применять к дочерним фильтрам"
 			$parts = $this->filter['SEO']['PARTS'];
 			while (!$this->seo)
 			{
@@ -297,7 +300,7 @@ class TimCatalog extends \CBitrixComponent
 				$seo = Seo::getByUrl($url);
 				if ($seo['CHILDREN'])
 					$this->seo = $seo;
-			}
+			}*/
 
 			if (!$this->seo['H1'])
 				$this->seo['H1'] = $this->filter['SEO']['H1'];
@@ -305,6 +308,8 @@ class TimCatalog extends \CBitrixComponent
 				$this->seo['TITLE'] = $this->filter['SEO']['TITLE'];
 			if (!$this->seo['DESCRIPTION'])
 				$this->seo['DESCRIPTION'] = $this->filter['SEO']['DESCRIPTION'];
+			if (!$this->seo['TEXT'])
+				$this->seo['TEXT'] = $this->filter['SEO']['TEXT'];
 		}
 	}
 }

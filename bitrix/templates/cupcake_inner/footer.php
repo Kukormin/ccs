@@ -55,6 +55,7 @@ if (defined('INDEX_PAGE') && INDEX_PAGE)
 				<span class="b-footer-phones">7 (499) 322-00-20</span>
 
 				<div class="b-cards-wrapper">
+					<a class="b-sitemap-footer" href="/sitemap.php" title="Карта сайта"> </a>
 					<a href="https://www.instagram.com/cupcake.story/" target="_blank"
 					   class="b-footer-instagram-main"> </a>
 					<a href="#" class="b-footer-mail"> </a>
@@ -87,6 +88,7 @@ else
 			<span class="b-footer-phones b-footer-phones-about">7 (499) 322-00-20</span>
 
 			<div class="b-cards-wrapper">
+				<a class="b-sitemap-footer" href="/sitemap.php" title="Карта сайта"> </a>
 				<a href="https://www.instagram.com/cupcake.story/" target="_blank"
 				   class="b-footer-instagram-inner"> </a>
 				<a href="#" class="b-footer-mail b-footer-mail-about"> </a>
