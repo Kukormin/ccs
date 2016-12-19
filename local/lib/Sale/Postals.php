@@ -47,11 +47,14 @@ class Postals
 				'IBLOCK_ID' => self::IBLOCK_ID,
 				'ACTIVE' => 'Y',
 			), false, false, array(
-				'ID', 'NAME', 'PREVIEW_PICTURE', 'DETAIL_PICTURE',
+				'ID', 'NAME', 'CODE', 'PREVIEW_PICTURE', 'DETAIL_PICTURE',
 				'CATALOG_GROUP_1',
 			));
 			while ($item = $rsItems->Fetch()) {
-				$return[$item['ID']] = array(
+				$key = $item['ID'];
+				if ($item['CODE'] == 'default')
+					$key = 0;
+				$return[$key] = array(
 					'ID' => $item['ID'],
 					'NAME' => $item['NAME'],
 					'PRICE' => intval($item['CATALOG_PRICE_1']),
@@ -68,7 +71,7 @@ class Postals
 	}
 
 	/**
-	 * Возвращает упаковку по ID
+	 * Возвращает открытку по ID
 	 * @param $id
 	 * @return mixed
 	 */
@@ -76,6 +79,16 @@ class Postals
 	{
 		$all = self::getAll();
 		return $all[$id];
+	}
+
+	/**
+	 * Возвращает открытку по-умолчанию
+	 * @return mixed
+	 */
+	public static function getDefault()
+	{
+		$all = self::getAll();
+		return $all[0];
 	}
 
 }

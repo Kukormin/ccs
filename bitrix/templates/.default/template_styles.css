@@ -7017,6 +7017,30 @@ margin-top: 20px;
 .b-footer-instagram-main:hover {
     background: rgba(0, 0, 0, 0) url("../.default/images/instagram-pink.png") no-repeat scroll 0 0;
 }
+.b-footer-facebook-main {
+    background: rgba(0, 0, 0, 0) url("/images/fb.png") no-repeat scroll -55px 0;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+    float:right;
+    margin-right: -40px;
+}
+
+.b-footer-facebook-inner {
+    background: rgba(0, 0, 0, 0) url("/images/fb.png") no-repeat scroll 0 0;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+    float:right;
+}
+
+.b-footer-facebook-inner:hover {
+    background-position: -27px 0;
+}
+
+.b-footer-facebook-main:hover {
+    background-position: -83px 0;
+}
 
 .b-footer-visa-main {
     background: rgba(0, 0, 0, 0) url("../.default/images/visa-inner.png") no-repeat scroll center center;
@@ -8083,4 +8107,21 @@ label.iPhoneCheckLabelOn {
     height: 16px;
     background: url('/images/sitemap.png') no-repeat;
     vertical-align: middle;
+}
+
+#free_postals {
+    float: left;
+    margin-left: 40px;
+    display: none;
+    font-family: "PTSansCaptionBold",sans-serif;
+    color: #22303d;
+}
+#free_postals .b-item-basket-img {
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;
+}
+#free_postals .b-item-basket-img > img {
+    width: 150px;
+    height: 100px;
 }

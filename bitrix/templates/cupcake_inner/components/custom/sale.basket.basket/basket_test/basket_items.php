@@ -275,7 +275,7 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 
 	<div class="bx_ordercart_order_pay clearfix"><?
 
-		$postals = \Local\Sale\Postals::getAll();
+		/*$postals = \Local\Sale\Postals::getAll();
 		if ($postals)
 		{
 			?>
@@ -304,7 +304,15 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 				}
 				?>
 			</div><?
-		}
+		}*/
+
+		?>
+		<div id="free_postals">
+			<div class="b-item-basket-img js-package-popup" data-featherlight="/images/postals.jpg">
+				<img src="/images/postals_t.jpg" alt="" />
+			</div>
+			<p>Открытка "С Новым Годом" в подарок!</p>
+		</div><?
 
 		?>
 		<div class="bx_ordercart_order_pay_left" id="coupons_block">
@@ -383,7 +391,6 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 </div>
 </div>
 </section>
-
 
 <div class="b-total-page">
 	<div class="b-content-center">

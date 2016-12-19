@@ -147,6 +147,46 @@ class Cart
 	}
 
 	/**
+	 * Добавляет открытку в заказ
+	 * @return bool|int
+	 */
+	public static function addPostal()
+	{
+		$postal = Postals::getDefault();
+
+		$fields = array(
+			"PRODUCT_ID" => $postal['ID'],
+			"PRODUCT_PRICE_ID" => $postal['PRICE_ID'],
+			"PRICE" => $postal['PRICE'],
+			"CURRENCY" => 'RUB',
+			"QUANTITY" => 1,
+			"LID" => SITE_ID,
+			"DELAY" => "N",
+			"CAN_BUY" => "Y",
+			"NAME" => $postal['NAME'],
+			"MODULE" => "catalog",
+			"DETAIL_PAGE_URL" => '',
+			"CATALOG_XML_ID" => $postal['ID'],
+			"PRODUCT_XML_ID" => $postal['ID'],
+			"VAT_INCLUDED" => 'Y',
+			"VAT_RATE" => '18',
+		);
+
+		$basket = new \CSaleBasket();
+		$basket->Init();
+		if (!$basket->CheckFields('ADD', $fields))
+			return false;
+
+		$basketItem = BasketCompatibility::add($fields);
+		if (!$basketItem)
+			return false;
+
+		$ID = $basketItem->getId();
+
+		return $ID;
+	}
+
+	/**
 	 * Меняем упаковку для товара в корзине
 	 * @param $bid
 	 * @param $pid

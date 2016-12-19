@@ -38,11 +38,13 @@ if (!$arOrder)
 				"WEIGHT",
 				"NAME"
 			));
+		$price = 0;
 		// Добавляем подарочные упаковки в заказ
 		while ($arBasketItems = $dbBasketItems->GetNext())
 		{
 			if ($arBasketItems["DELAY"] == "N" && $arBasketItems["CAN_BUY"] == "Y")
 			{
+				$packPrice = 0;
 				$rsProps = CSaleBasket::GetPropsList(array(), array(
 						"BASKET_ID" => $arBasketItems['ID'],
 						'CODE' => 'PACKAGE'
@@ -52,10 +54,18 @@ if (!$arOrder)
 					$pack = \Local\Sale\Package::getById($prop['SORT']);
 
 					if ($pack && $pack['PRICE'] > 0)
+					{
 						Local\Sale\Cart::addPackage($pack, $arBasketItems['QUANTITY']);
+						$packPrice = $pack['PRICE'];
+					}
 				}
+				$price += ($arBasketItems['PRICE'] + $packPrice) * $arBasketItems['QUANTITY'];
 			}
 		}
+
+		// Добавляем открытку
+		if ($price >= 2000)
+			Local\Sale\Cart::addPostal();
 	}
 
 	$APPLICATION->IncludeComponent("bitrix:sale.order.ajax", "cupcake_basket_make", Array(
