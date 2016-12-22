@@ -1577,6 +1577,9 @@ text-align:left;
 	width:48%;
 	float:left;
 }
+.b-contact-info__link-wrap > img {
+    margin-top: 20px;
+}
 .b-contact-info__link-phone {
 	margin:0 35px 10px 0;
 	padding-left:55px;
