@@ -17,7 +17,7 @@ $products = $component->products['ITEMS'];
 
 <section class="b-bg-grey">
 <div class="b-content-center b-content-center--cupcake b-content-center--cupcake-catalog">
-<div id="bc"><?
+<div id="bc" itemscope itemtype="http://schema.org/BreadcrumbList"><?
 
 	//=========================================================
 	include('bc.php');

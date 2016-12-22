@@ -117,6 +117,15 @@ $product = $component->product;
 					</div><?*/
 
 					?>
+
+				</div><?
+
+				$deliveryText = $price >= 2000 ? '<b>500 руб. + 40 руб./км</b>' :
+					'при заказе от <b>2000</b><span class="rub">i</span>';
+				?>
+				<div class="b-delivery-info i-margin-left-30">
+					<div class="b-delivery">Доставка по Москве - <?= $deliveryText ?></div>
+					<div class="b-pickup">Самовывоз - <b>г.Москва, ул.Самокатная, д.10, стр.50, оф.25</b></div>
 				</div>
 			</div>
 		</div>

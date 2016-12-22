@@ -10,11 +10,11 @@ foreach ($filter['BC'] as $i => $item)
 	if ($i == $last)
 	{
 		?>
-		<span><?= $item['NAME'] ?></span><?
+		<span itemprop="item"><?= $item['NAME'] ?></span><?
 	}
 	else
 	{
 		?>
-		<a href="<?= $item['HREF'] ?>"><?= $item['NAME'] ?></a> /<?
+		<a itemprop="item" href="<?= $item['HREF'] ?>"><?= $item['NAME'] ?></a> /<?
 	}
 }
