@@ -3,8 +3,6 @@ Disallow: /*index.php$
 Disallow: /bitrix/
 Disallow: /auth/
 Disallow: /personal/
-Disallow: /season/
-Disallow: /cat/
 Disallow: /d/
 Disallow: */*search
 Disallow: /*/slide_show/
@@ -41,8 +39,6 @@ Disallow: /*index.php$
 Disallow: /bitrix/
 Disallow: /auth/
 Disallow: /personal/
-Disallow: /season/
-Disallow: /cat/
 Disallow: /d/
 Disallow: */*search
 Disallow: /*/slide_show/
