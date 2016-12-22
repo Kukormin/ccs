@@ -1,5 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
+LocalRedirect('/cat/');
+
 $APPLICATION->SetPageProperty("title", "Новый Год");
 $APPLICATION->SetTitle("");
 
