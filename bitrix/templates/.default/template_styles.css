@@ -877,6 +877,7 @@ text-align:left;
     line-height: 25px;
     font-size: 17px;
     color: #fff;
+    text-shadow: 1px 1px 3px black;
     text-align: center;
 }
 .b-sweet-table-top-text__sub-item {
@@ -2586,6 +2587,23 @@ label.is-color-white,
 
 
 
+.b-delivery-info {
+    color: #fff;
+    font-family: 'PTSansRegular', sans-serif;
+    font-size: 15px;
+    line-height: 25px;
+    max-width: 570px;
+}
+.b-delivery-info > div {
+    background: url(/images/delivery.png) no-repeat;
+    padding-left: 32px;
+}
+.b-delivery-info .b-delivery {
+    background-position: 0 5px;
+}
+.b-delivery-info .b-pickup {
+    background-position: 6px -26px;
+}
 .b-block-assortment__wrap .b-content-center--title {
 	color:#fff;
 	padding: 23px 0;
@@ -3368,7 +3386,7 @@ background: url(../.default/images/arr-post.png) no-repeat center -55px;
 
 
 .b-content-wrap {
-	padding-bottom:125px;
+	padding-bottom:100px;
 	position:relative;
 	box-sizing:border-box;
 	min-height:100%;
@@ -4539,7 +4557,7 @@ a.basket {
 .b-footer-wrap {
     width: 100%;
     position: relative;    
-    margin-top: -125px;
+    margin-top: -100px;
 }
 
 
@@ -7089,6 +7107,18 @@ margin-top: 20px;
 .gl-block-footer-info .b-footer-mastercard-main:hover {
 	background:#aa6290 url("../.default/images/master-black.png") no-repeat scroll 0 0;
 }*/
+.b-footer-address {
+    font-family: "PTSansRegular",sans-serif;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    float: right;
+    clear: right;
+    margin-top: 9px;
+}
+.b-footer-info-about .b-footer-address {
+    color: #7c7d70;
+}
 
 
 

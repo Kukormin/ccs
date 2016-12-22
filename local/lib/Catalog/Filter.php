@@ -349,7 +349,7 @@ class Filter
 		$href = self::$CATALOG_PATH;
 		$return = array(
 			array(
-				'NAME' => 'Главная',
+				'NAME' => 'Капкейки на заказ',
 				'HREF' => '/',
 			),
 			array(
