@@ -103,12 +103,17 @@ $product = $component->product;
 						</div>
 					</div><?
 
-					?>
-					<div class="b-assortment-total--btn">
-						<button class="b-bnt-form b-bnt-form--green i-padd-12x40 js-add-to-basket"
-						        data-id="<?= $product['ID'] ?>" data-offer="<?= $offerId ?>"
-						        data-href="/personal/cart">в корзину</button>
-					</div><?
+					$showBtn = \Local\Catalog\Suspended::check($product['ID']);
+					if ($showBtn)
+					{
+						?>
+						<div class="b-assortment-total--btn">
+							<button class="b-bnt-form b-bnt-form--green i-padd-12x40 js-add-to-basket"
+							        data-id="<?= $product['ID'] ?>" data-offer="<?= $offerId ?>"
+							        data-href="/personal/cart">в корзину
+							</button>
+						</div><?
+					}
 
 					/*?>
 					<div class="b-delivery_popup">

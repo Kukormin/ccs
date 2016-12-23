@@ -3,6 +3,7 @@ namespace Local\Sale;
 
 use Bitrix\Sale\Compatible\BasketCompatibility;
 use Local\Catalog\Products;
+use Local\Catalog\Suspended;
 
 /**
  * Class Cart Корзина
@@ -26,6 +27,9 @@ class Cart
 	{
 		$productId = intval($id);
 		if ($productId <= 0)
+			return false;
+
+		if (!Suspended::check($productId))
 			return false;
 
 		$quantity = intval($quantity);

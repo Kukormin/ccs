@@ -432,7 +432,8 @@ var Detail = {
 		if (!modal.length) {
 			var url = '/ajax/product_modal.php?id=' + id;
 			$.get(url, function (data) {
-				Detail.modals.append(data);
+				modal = $(data);
+				Detail.modals.append(modal);
 				Detail.showModal(modal);
 			});
 		}
@@ -440,7 +441,8 @@ var Detail = {
 			Detail.showModal(modal);
 	},
 	showModal: function(modal) {
-		modal.show().css('top', $(window).scrollTop() + 25 + "px");
+		var top = $(window).scrollTop() + 25;
+		modal.show().css({'top': top});
 	},
 	countChange: function () {
 		var id = $(this).val();
@@ -490,7 +492,6 @@ var Detail = {
 		return v;
 	},
 	showPickupPopup: function() {
-		console.log(Detail.addBtn.data('offer'));
 		Detail.pickupModal.find('#offer_id').val(Detail.addBtn.data('offer'));
 		Detail.overlay.show();
 		Detail.showModal(Detail.pickupModal);

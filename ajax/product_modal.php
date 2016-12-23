@@ -91,12 +91,18 @@ $select = empty($product['OFFERS']) ? ' without_select' : '';
 					<span class="v"><?= number_format($price, 0, '', ' ') ?></span>
 					<span class="rub">i</span>
 				</div>
-			</div>
+			</div><?
 
-			<button class="b-bnt-form b-bnt-modal-cupcake--white js-add-to-basket"
-			        data-id="<?= $product['ID'] ?>" data-offer="<?= $offerId ?>"
-			        data-href="/personal/cart">в корзину</button>
+			$showBtn = \Local\Catalog\Suspended::check($product['ID']);
+			if ($showBtn)
+			{
+				?>
+				<button class="b-bnt-form b-bnt-modal-cupcake--white js-add-to-basket"
+				        data-id="<?= $product['ID'] ?>" data-offer="<?= $offerId ?>"
+				        data-href="/personal/cart">в корзину</button><?
+			}
 
+			?>
 			<button class="b-bnt-form b-bnt-buy-one-click i-margin-left-30 js-buy-fastorder">купить в один клик</button>
 		</div>
 	</div>

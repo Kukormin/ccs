@@ -65,8 +65,14 @@ if ($filter['CUR_FILTERS'])
 				<div class="b-mod__item-label<?= $class ?>"><?= $label ?></div><?
 			}
 
+			$showBtn = \Local\Catalog\Suspended::check($item['ID']);
+			if ($showBtn)
+			{
+				?>
+				<div class="quick-detail" data-id="<?= $item['ID'] ?>"></div><?
+			}
+
 			?>
-			<div class="quick-detail" data-id="<?= $item['ID'] ?>"></div>
 		</div>
 		<div class="b-mod__item-title">
 			<a href="<?= $item['DETAIL_PAGE_URL'] ?>"><?= $item['NAME'] ?></a>
