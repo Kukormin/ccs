@@ -130,7 +130,7 @@ $product = $component->product;
 				?>
 				<div class="b-delivery-info i-margin-left-30">
 					<div class="b-delivery">Доставка по Москве - <?= $deliveryText ?></div>
-					<div class="b-pickup">Самовывоз - <b>г.Москва, ул.Самокатная, д.10, стр.50, оф.25</b></div>
+					<div class="b-pickup">Самовывоз - <b>г.Москва, ул.Самокатная, д.4, стр.1</b></div>
 				</div>
 			</div>
 		</div>
