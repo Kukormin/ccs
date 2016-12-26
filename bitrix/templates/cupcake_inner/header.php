@@ -163,10 +163,12 @@ if (!$hideHeader)
 					?>
 					<a href="/sweet-table/" class="sweet-table<?= $active ?>">сладкие столы</a><?
 
+					$cartCount = Local\Sale\Cart::getQuantity();
+					$style = $cartCount ? '' : 'style="display:none;"';
 					// Ссылка на корзину
 					?><a href="/personal/cart/" class="basket">
 						<img src="/bitrix/templates/.default/images/icn-bascet.png" alt="" />
-						<span class="item_shopping_cart js-basket-total-count" style="display: none;"></span>
+						<span class="item_shopping_cart js-basket-total-count"<?= $style ?>><?= $cartCount ?></span>
 					</a>
 				</div><?
 

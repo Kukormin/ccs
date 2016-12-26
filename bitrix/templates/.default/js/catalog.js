@@ -417,6 +417,7 @@ var Detail = {
 		this.addBtn = $('.js-add-to-basket');
 		this.pickupBtn = $('#js_show_delivery_popup');
 		this.pickupModal = $('.js_delivery_modal');
+		this.headCart = $('.js-basket-total-count');
 
 		this.cont.on('click', '.quick-detail', this.loadModal);
 		this.countSelect.on('change', this.countChange);
@@ -471,6 +472,28 @@ var Detail = {
 
 		var id = btn.data('id');
 		var offer = btn.data('offer');
+		var product = btn.closest('.js-product');
+		var price = product.find('.js-priceblock');
+		console.log(price);
+		if (price.length) {
+			var moved = price.clone();
+			var pos = price.offset();
+			var toPos = Detail.headCart.offset();
+			moved.css({
+				position: 'absolute',
+				left: pos.left,
+				top: pos.top,
+				'zIndex': 999
+			});
+			$('body').append(moved);
+			moved.animate({
+				left: toPos.left - 40,
+				top: toPos.top - 60,
+				opacity: 0
+			}, function() {
+				moved.remove();
+			});
+		}
 
 		$.post('/ajax/cart_action.php', {
 			'action': 'add',
@@ -480,6 +503,7 @@ var Detail = {
 		}, function (resp) {
 			if (resp != 0) {
 				btn.addClass('js-go-to').text('к корзине');
+				Detail.headCart.text(resp);
 			}
 		});
 	},

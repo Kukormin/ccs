@@ -1,6 +1,7 @@
 <?
 namespace Local\Sale;
 
+use Bitrix\Main\Loader;
 use Bitrix\Sale\Compatible\BasketCompatibility;
 use Local\Catalog\Products;
 use Local\Catalog\Suspended;
@@ -15,6 +16,28 @@ class Cart
 	 * Путь для кеширования
 	 */
 	const CACHE_PATH = 'Local/Sale/Cart/';
+
+	/**
+	 * Возвращает количество всех экземпляров корзины
+	 */
+	public static function getQuantity()
+	{
+		$return = 0;
+		Loader::IncludeModule('sale');
+
+		$basket = new \CSaleBasket();
+		$basket->Init();
+		$rsCart = $basket->GetList(array(), array(
+			'ORDER_ID' => 'NULL',
+			'FUSER_ID' => $basket->GetBasketUserID(),
+		));
+		while ($item = $rsCart->Fetch())
+		{
+			$return += intval($item['QUANTITY']);
+		}
+
+		return $return;
+	}
 
 	/**
 	 * Добавление товара (или предложения) в корзину
@@ -365,6 +388,5 @@ class Cart
 
 			return 0;
 		}
-
 	}
 }

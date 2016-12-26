@@ -7,7 +7,8 @@ $result = 0;
 
 if ($_POST['action'] == 'add')
 {
-	$result = \Local\Sale\Cart::add($_POST['id'], $_POST['offer'], $_POST['quantity']);
+	\Local\Sale\Cart::add($_POST['id'], $_POST['offer'], $_POST['quantity']);
+	$result = \Local\Sale\Cart::getQuantity();
 }
 elseif ($_POST['action'] == 'pack') {
 	$result = \Local\Sale\Cart::pack($_POST['bid'], $_POST['pid']);

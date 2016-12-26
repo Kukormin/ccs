@@ -3628,14 +3628,6 @@ background: url(../.default/images/arr-post.png) no-repeat center -55px;
 }
 
 
-.b-header__bottom.menu-fixed .item_shopping_cart {
-	top: 45px;
-}
-/*b-header__bottom*/
-
-
-
-
 /*b-bottom-nav*/
 .mobile-button-nav {
 	display:none;
@@ -6334,9 +6326,8 @@ width:100%;
 }
 .item_shopping_cart {    
 	position: absolute;
-    top: -11px;
-    left: 50%;
-    margin-left: -12px;
+    top: 45px;
+    left: 54px;
 	background:#949970;
 	color:#fff;
 	width:25px;
@@ -6345,6 +6336,7 @@ width:100%;
     border-radius: 50%;
 	text-align:center;
 	line-height: 25px;
+    font-family: "PTSansRegular",sans-serif;
 }
 
 .addition-order--title {
