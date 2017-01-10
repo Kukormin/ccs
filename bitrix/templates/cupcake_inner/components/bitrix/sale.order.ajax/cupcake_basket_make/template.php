@@ -7,7 +7,7 @@
 /** @global CUser $USER */
 /** @global CMain $APPLICATION */
 
-$deliveryPriceDefault = 500;
+$deliveryPriceDefault = 450;
 $price = round($arResult['ORDER_PRICE']);
 ?>
 <script>
