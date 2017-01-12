@@ -43,11 +43,11 @@ $this->setFrameMode(true);
                 </div>
                 <div class="b-slider-favorite-label">я люблю</div>
                 <div class="b-slider-favorite__list">
-                    <?foreach($arItem['RELATED_ITEMS_INFO'] as $like_items) { ?>
+                    <?foreach($arItem['RELATED_PRODUCTS'] as $like_items) { ?>
                     <div class="b-slider-favorite__item">
                         <div class="b-slider-favorite-img">
                             <a href="<?=$like_items['DETAIL_PAGE_URL']?>">
-                                <img src="<?=CFile::GetPath($like_items['DETAIL_PICTURE'])?>" width="120" height="90"/>
+                                <img src="<?=$like_items['PREVIEW_PICTURE']?>" width="120" height="90"/>
                             </a>
                         </div>
 									<span class="b-slider-favorite-desc b-slider--stories-desc">

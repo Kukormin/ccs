@@ -1,19 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 /** @var array $arParams */
 /** @var array $arResult */
-/** @global CMain $APPLICATION */
-/** @global CUser $USER */
-/** @global CDatabase $DB */
-/** @var CBitrixComponentTemplate $this */
-/** @var string $templateName */
-/** @var string $templateFile */
-/** @var string $templateFolder */
-/** @var string $componentPath */
-/** @var CBitrixComponent $component */
-$this->setFrameMode(true);
-//print_r($arResult);
-?>
 
+?>
 <div class="b-slider-wrap">
 <?foreach($arResult["ITEMS"] as $arItem):?>
     <?if($arItem['PROPERTIES']['MAIN_OUTPUT']['VALUE'] == 'Да'):?>
@@ -33,11 +22,11 @@ $this->setFrameMode(true);
     <div class="b-slider-favorite">
         <div class="b-slider-favorite-label">я люблю</div>
         <div class="b-slider-favorite__list">
-            <?foreach($arItem['RELATED_ITEMS_INFO'] as $like_items) { ?>
+            <?foreach($arItem['RELATED_PRODUCTS'] as $like_items) { ?>
                 <div class="b-slider-favorite__item">
                     <div class="b-slider-favorite-img">
                         <a href="<?=$like_items['DETAIL_PAGE_URL']?>">
-                            <img src="<?=CFile::GetPath($like_items['DETAIL_PICTURE'])?>" width="120" height="90"/>
+                            <img src="<?=$like_items['PREVIEW_PICTURE']?>" width="120" height="90"/>
                         </a>
                     </div>
                         <span class="b-slider-favorite-desc">
