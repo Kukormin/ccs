@@ -120,9 +120,9 @@ if (!$hideHeader)
 			// Телефоны
 			?>
 			<div class="b-header-phones-wrapper">
-				<div class="b-header__phone">+7 499 322 00 20</div>
+				<div class="b-header__phone">+7 (499) 322-00-20</div>
 				<div class="b-header-watsup">Пишите нам в WhatsApp</div>
-				<div class="b-header-watsup-phone">+7 968 622 73 42</div>
+				<div class="b-header-watsup-phone">+7 (968) 622-73-42</div>
 			</div><?
 
 			// Логотип
