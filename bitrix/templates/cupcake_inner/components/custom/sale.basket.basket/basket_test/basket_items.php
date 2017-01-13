@@ -306,13 +306,13 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 			</div><?
 		}*/
 
-		?>
+		/*?>
 		<div id="free_postals">
 			<div class="b-item-basket-img js-package-popup" data-featherlight="/images/postals.jpg">
 				<img src="/images/postals_t.jpg" alt="" />
 			</div>
 			<p>Открытка "С Новым Годом" в подарок!</p>
-		</div><?
+		</div><?*/
 
 		?>
 		<div class="bx_ordercart_order_pay_left" id="coupons_block">

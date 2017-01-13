@@ -64,8 +64,8 @@ if (!$arOrder)
 		}
 
 		// Добавляем открытку
-		if ($price >= 2000)
-			Local\Sale\Cart::addPostal();
+		//if ($price >= 2000)
+		//	Local\Sale\Cart::addPostal();
 	}
 
 	$APPLICATION->IncludeComponent("bitrix:sale.order.ajax", "cupcake_basket_make", Array(

@@ -1433,13 +1433,13 @@ function updateBasketPrice() {
 	if ($('#postals').length)
 		total_sum += parseInt($('#postals').data('price'));
 	$('.js-order-total').html(total_sum > 10000 ? format_number(total_sum) : total_sum);
-	var free_postals = $('#free_postals');
+	/*var free_postals = $('#free_postals');
 	if (free_postals.length) {
 		if (total_sum >= 2000)
 			free_postals.show();
 		else
 			free_postals.hide();
-	}
+	}*/
 }
 
 function updateCouponsBlock(list, sum, discount) {
