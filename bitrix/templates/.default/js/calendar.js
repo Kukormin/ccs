@@ -8,6 +8,7 @@ tomorrow.setMinutes(0);
 tomorrow.setSeconds(0);
 var afterTomorrow = new Date();
 afterTomorrow.setDate(afterTomorrow.getDate() + 2);
+var FREE_DELIVERY_SELECTED = false;
 
 
 function insertNodeText(obj, text) {
@@ -154,7 +155,10 @@ function generateCalendar() {
 					if (is_holiday)
 						cell.className = 'holiday';
 					else {
-						cell.className = 'dd';
+						if (isFreeDelivery(s))
+							cell.className = 'dd free';
+						else
+							cell.className = 'dd';
 						clickHandler = true;
 					}
 				}
@@ -174,7 +178,10 @@ function generateCalendar() {
 						var dd = (d < 10) ? '0' + d : d;
 						var m = date.getMonth() + 1;
 						var mm = (m < 10) ? '0' + m : m;
-						input.value = dd + '.' + mm + '.' + date.getFullYear();
+						var y = date.getFullYear();
+						input.value = dd + '.' + mm + '.' + y;
+						FREE_DELIVERY_SELECTED = isFreeDelivery(d + '.' + m + '.' + y);
+						$('.js_radio_input input').change();
 					};
 				}
 
@@ -221,6 +228,15 @@ function isHoliday2(dow, s) {
 function inHolidays(s) {
 	for (var i in holidays) {
 		var tmp = holidays[i];
+		if (tmp == s)
+			return true;
+	}
+	return false;
+}
+
+function isFreeDelivery(s) {
+	for (var i in free_delivery) {
+		var tmp = free_delivery[i];
 		if (tmp == s)
 			return true;
 	}
