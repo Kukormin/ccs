@@ -19,34 +19,48 @@ $price = round($arResult['ORDER_PRICE']);
 		var price = <?=$price?>;
 		var total_price = 0;
 		var delivery_id = 14;
+		var free_delivery_id = 16;
 		var deliveryType = 0;
 		var new_address = $('#new_address');
 
 		$('.js_radio_input input').change(function () {
 			var isNewDelivery = false;
+			var delPrice = 0;
 			if ($('.js_radio_input input:checked').data('price') == 0) {
-				total_price = price;
 				deliveryType = parseInt($('.js_radio_input input:checked').data('deltype'));
 				$('.js_footer_label').html('Самовывоз');
 				$('.js_price_footer').html('Итого');
 				$('#address_hidden').val($('.js_radio_input input:checked').data('addr'));
 				$('.del_title').text('самовывоза');
 			} else if ($('.js_radio_input input:checked').prop('id') == 'delivery_new') {
-				total_price = price + deliveryPrice();
-				deliveryType = delivery_id;
-				$('.js_footer_label').html('Доставка ' + deliveryPrice() + ' <span class="rub">i</span>');
+				if (FREE_DELIVERY_SELECTED) {
+					deliveryType = free_delivery_id;
+					$('.js_footer_label').html('Бесплатная доставка');
+				}
+				else {
+					delPrice = deliveryPrice();
+					deliveryType = delivery_id;
+					$('.js_footer_label').html('Доставка ' + delPrice + ' <span class="rub">i</span>');
+				}
 				$('.js_price_footer').html('Итого с доставкой');
 				$('#address_hidden').val('');
 				isNewDelivery = true;
 				$('.del_title').text('доставки');
 			} else {
-				total_price = price + deliveryPrice();
-				deliveryType = delivery_id;
-				$('.js_footer_label').html('Доставка ' + deliveryPrice() + ' <span class="rub">i</span>');
+				if (FREE_DELIVERY_SELECTED) {
+					deliveryType = free_delivery_id;
+					$('.js_footer_label').html('Бесплатная доставка');
+				}
+				else {
+					delPrice = deliveryPrice();
+					deliveryType = delivery_id;
+					$('.js_footer_label').html('Доставка ' + delPrice + ' <span class="rub">i</span>');
+				}
 				$('.js_price_footer').html('Итого с доставкой');
 				$('#address_hidden').val($('.js_radio_input input:checked').siblings('label').text());
 				$('.del_title').text('доставки');
 			}
+			total_price = price + delPrice;
 			$('.js_total_price').html((total_price > 10000 ? format_number(total_price) : total_price) + ' <span class="rub">i</span>');
 			$('.hidden_total_price').html(total_price + ' <span class="rub">i</span>');
 			$('.hidden_delivery_type').val(deliveryType);
@@ -579,10 +593,26 @@ while ($s !== false)
 	$s = strtok(", \r\n\t");
 }
 
+$freeDeliveryText = COption::GetOptionString("grain.customsettings", "FREE_DELIVERY");
+$freeDeliveryJs = '';
+$s = strtok($freeDeliveryText, ", \r\n\t");
+while ($s !== false)
+{
+	if (strlen($s) > 0)
+	{
+		if ($freeDeliveryJs)
+			$freeDeliveryJs .= ',';
+		$tmp = explode('.', $s);
+		$freeDeliveryJs .= "'" . intval($tmp[0]) . "." . intval($tmp[1]) . "." . intval($tmp[2]) . "'";
+	}
+	$s = strtok(", \r\n\t");
+}
+
 ?>
 <script>var sunday_holidays = <?= $sunday ? 1 : 0 ?>;
 	var holidays = [<?= $holidaysJs ?>];
-	var dhour = <?= ($dhour-3) ?>;var dminutes = <?= $dminutes ?>;</script>
+	var dhour = <?= ($dhour-3) ?>;var dminutes = <?= $dminutes ?>;
+	var free_delivery = [<?= $freeDeliveryJs ?>];</script>
 
 <script>
 	$(document).ready(function () {
@@ -599,15 +629,16 @@ while ($s !== false)
 		var payType = ($('input[name="PAY_SYSTEM_ID"]:checked').val() == 1) ? 'cash' : 'card';
 
 		$('.js-ck-buy-btn').click(function () {
-			dataLayer.push({
-				'event': 'checkout',
-				'ecommerce': {
-					'checkout': {
-						'actionField': {'step': 2, 'option': payType},
-						'products': products
+			if (!!dataLayer)
+				dataLayer.push({
+					'event': 'checkout',
+					'ecommerce': {
+						'checkout': {
+							'actionField': {'step': 2, 'option': payType},
+							'products': products
+						}
 					}
-				}
-			});
+				});
 		});
 	});
 </script><?

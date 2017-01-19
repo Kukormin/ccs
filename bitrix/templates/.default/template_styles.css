@@ -6658,6 +6658,9 @@ sup.sum-add-postcard {
     color: #272829;
     cursor: pointer;
 }
+.calendar-wrapper table td.dd.free {
+    color: #aa6290;
+}
 .calendar-wrapper table td.dd:hover {
     color: #aa6290;
 }
