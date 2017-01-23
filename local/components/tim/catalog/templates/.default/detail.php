@@ -125,7 +125,7 @@ $product = $component->product;
 
 				</div><?
 
-				$deliveryText = $price >= 2000 ? '<b>500 руб. + 40 руб./км</b>' :
+				$deliveryText = $price >= 2000 ? '<b>450 руб. + 40 руб./км</b>' :
 					'при заказе от <b>2000</b><span class="rub">i</span>';
 				?>
 				<div class="b-delivery-info i-margin-left-30">
