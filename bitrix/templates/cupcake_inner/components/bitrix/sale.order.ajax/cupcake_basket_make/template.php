@@ -92,9 +92,6 @@ $price = round($arResult['ORDER_PRICE']);
 					required: true,
 					minlength: 3
 				},
-				ORDER_PROP_2: {
-					required: true
-				},
 				ORDER_PROP_3: {
 					required: true
 				},
@@ -114,7 +111,6 @@ $price = round($arResult['ORDER_PRICE']);
 					minlength: 'Не менее 3 символов'
 				},
 				ORDER_PROP_2: {
-					required: 'Обязательное поле',
 					email: 'Введите верную почту'
 				},
 				ORDER_PROP_3: 'Обязательное поле',
@@ -287,7 +283,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 
 				<div class="b-account-form--input">
 					<input type="email" name="ORDER_PROP_2" value="<?= $arUserData["EMAIL"] ?>"
-					       class="required email"/>
+					       class="email"/>
 				</div>
 			</div>
 			<div class="b-account-form--line">
