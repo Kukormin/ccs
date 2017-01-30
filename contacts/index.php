@@ -74,7 +74,7 @@ $APPLICATION->SetTitle("Контакты");
 				<a href="mailto:zakaz@cupcakestory.ru" class="b-contact-info__link-email" itemprop="email">zakaz@cupcakestory.ru</a>
 			</p>
 			<p>Оптовые поставки, сотрудничество, ритейл<br />
-				тел.: +7 (499) 322-00-20 (доб. 103), email: <a href="mailto:taisiyal@cupcakestory.ru">taisiyal@cupcakestory.ru</a></p>
+				тел.: +7 (499) 322-00-20 (доб. 103), email: taisiyal@cupcakestory.ru</p>
 			<img src="/images/scheme.jpg" alt="схема" />
 		</div>
 		<div class="b-contact-info__item">
