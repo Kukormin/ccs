@@ -131,7 +131,20 @@ $product = $component->product;
 				<div class="b-delivery-info i-margin-left-30">
 					<div class="b-delivery">Доставка по Москве - <?= $deliveryText ?></div>
 					<div class="b-pickup">Самовывоз - <b>г.Москва, ул.Самокатная, д.4, стр.1</b></div>
-				</div>
+				</div><?
+
+				if ($product['CATEGORY']['CODE'] == 'gingerbread')
+				{
+					?>
+					<div class="b-delivery-info i-margin-left-30">
+						<br />
+						<b>Состав пряничной основы:</b> сахар, масло сливочное, корица молотая, имбирь молотый,
+						мускатный орех молотый, гвоздика молотая, кардамон молотый, перец черный молотый, соль,
+						мед гречишный, сода пищевая, яйцо куриное п/ф, мука пшеничная, вода питьевая
+					</div><?
+				}
+
+				?>
 			</div>
 		</div>
 	</section><?
