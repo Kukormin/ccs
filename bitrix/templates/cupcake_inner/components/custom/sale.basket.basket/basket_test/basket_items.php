@@ -80,7 +80,7 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 						<img src="<?= $arItem2['PREVIEW_PICTURE_SRC'] ?>" alt="">
 					</div>
 					<div class="b-mod__item-title--basket">
-						<?= $arItem2['PARENT_NAME'] ? $arItem2['PARENT_NAME'] : $arItem2['NAME']; ?>
+						<?= $arItem2['PARENT_NAME'] ? $arItem2['PARENT_NAME'] : $arItem2['~NAME']; ?>
 					</div>
 				</div><?
 			/*
