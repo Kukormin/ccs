@@ -162,6 +162,8 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 						foreach ($packages as $pack)
 						{
 							$vip = strpos($pack['NAME'], '9') !== false ? ' js-vip-box' : '';
+							if (strpos($pack['NAME'], '12') !== false)
+								$vip = ' js-12-box';
 							$free = round($pack['PRICE'], 0) == 0 ? ' js-free-box' : '';
 							?>
 							<div class="js-package-item b-slider__item-basket<?= $vip ?><?= $free ?>"
