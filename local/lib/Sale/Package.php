@@ -60,6 +60,7 @@ class Package
 			), false, false, array(
 				'ID', 'NAME', 'IBLOCK_SECTION_ID', 'PREVIEW_PICTURE', 'DETAIL_PICTURE',
 				'CATALOG_GROUP_1',
+			    'PROPERTY_SIZE',
 			));
 			while ($item = $rsItems->Fetch()) {
 				$categoryId = $categories[$item['IBLOCK_SECTION_ID']];
@@ -67,6 +68,7 @@ class Package
 					'ID' => $item['ID'],
 					'NAME' => $item['NAME'],
 					'CATEGORY' => $categoryId,
+					'SIZES' => explode(',', $item['PROPERTY_SIZE_VALUE']),
 					'PRICE' => intval($item['CATALOG_PRICE_1']),
 					'PRICE_ID' => $item['CATALOG_PRICE_1_ID'],
 					'PREVIEW_PICTURE' => \CFile::GetPath($item['PREVIEW_PICTURE']),

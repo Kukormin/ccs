@@ -980,31 +980,12 @@ $(document).ready(function () {
 		var that = line.find('.js-basket-option');
 		if (!that.length) return true;
 		var cnt = parseInt(that.find("option:selected").text().trim());
-		if (cnt == 9) {
-			line.find('.js-package-cont').find('.js-package-item').not('.js-free-box, .js-vip-box').addClass('js-hidden').hide();
-			line.find('.js-package-cont').find('.js-free-box, .js-vip-box').removeClass('js-hidden').show();
+		var cl = '.js-box-' + cnt;
+		if (cnt) {
+			line.find('.js-package-cont').find('.js-package-item').not(cl).addClass('js-hidden').hide();
+			line.find('.js-package-cont').find(cl).removeClass('js-hidden').show();
 			if ($(".js-package-selector:checked").closest('.js-hidden').length) {
-				var target = line.find('.js-package-cont .js-vip-box, .js-package-cont .js-free-box').eq(0).find('.js-package-selector');
-				line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
-				target.prop('checked', true);
-				updatePackagePrice(target);
-			}
-		}
-		else if (cnt == 12) {
-			line.find('.js-package-cont').find('.js-package-item').not('.js-free-box, .js-12-box').addClass('js-hidden').hide();
-			line.find('.js-package-cont').find('.js-free-box, .js-12-box').removeClass('js-hidden').show();
-			if ($(".js-package-selector:checked").closest('.js-hidden').length) {
-				var target = line.find('.js-package-cont .js-12-box, .js-package-cont .js-free-box').eq(0).find('.js-package-selector');
-				line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
-				target.prop('checked', true);
-				updatePackagePrice(target);
-			}
-		}
-		else {
-			line.find('.js-package-cont').find('.js-package-item').not('.js-vip-box, .js-12-box').removeClass('js-hidden').show();
-			line.find('.js-package-cont').find('.js-vip-box, .js-12-box').addClass('js-hidden').hide();
-			if ($(".js-package-selector:checked").closest('.js-hidden').length) {
-				var target = line.find('.js-package-cont .js-package-item').not('.js-vip-box, .js-12-box').eq(0).find('.js-package-selector');
+				var target = line.find('.js-package-cont').find(cl).eq(0).find('.js-package-selector');
 				line.find('.js-package-cont .js-package-item .js-package-selector').prop('checked', false);
 				target.prop('checked', true);
 				updatePackagePrice(target);

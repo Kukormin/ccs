@@ -66,8 +66,7 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 			$product = \Local\Catalog\Products::getById($arItem2['PARENT_ITEM_ID']);
 
 			?>
-			<div class="b-basket__li-item js-basket-item-cont <?= round($pack['PRICE'],
-				0) == 0 ? 'js-free-box' : '' ?> <?= $pack['NAME'] == 'VIP-коробка' ? 'js-vip-box' : ''; ?>"
+			<div class="b-basket__li-item js-basket-item-cont"
 			    id="line_<?= $arItem2['ID'] ?>" data-oiid="<?= $arItem2["ID"] ?>"
 			    data-base-price="<?= $arItem2['PRICE'] ?>"><?
 
@@ -83,16 +82,6 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 						<?= $arItem2['PARENT_NAME'] ? $arItem2['PARENT_NAME'] : $arItem2['~NAME']; ?>
 					</div>
 				</div><?
-			/*
-				?>
-				<div class="b-basket__item--box"><?
-					if (isset($arItem['PACKAGES']) && isset($arResult['PACKAGES'][$arItem['PACKAGES']]))
-					{
-						?>
-						<span> коробка</span><?
-					}
-					?>
-				</div><?*/
 
 				?>
 				<div class="b-basket--select">
@@ -161,12 +150,15 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 					<div class="js-package-cont"><?
 						foreach ($packages as $pack)
 						{
-							$vip = strpos($pack['NAME'], '9') !== false ? ' js-vip-box' : '';
+							$classes = '';
+							foreach ($pack['SIZES'] as $size)
+								$classes .= ' js-box-' . $size;
+							/*$vip = strpos($pack['NAME'], '9') !== false ? ' js-vip-box' : '';
 							if (strpos($pack['NAME'], '12') !== false)
 								$vip = ' js-12-box';
-							$free = round($pack['PRICE'], 0) == 0 ? ' js-free-box' : '';
+							$free = round($pack['PRICE'], 0) == 0 ? ' js-free-box' : '';*/
 							?>
-							<div class="js-package-item b-slider__item-basket<?= $vip ?><?= $free ?>"
+							<div class="js-package-item b-slider__item-basket<?= $classes ?>"
 							     data-package-price="<?= intval($pack['PRICE']) ?>"
 							     data-package-name="<?= $pack['NAME'] ?>"
 							     data-package-id="<?= $pack['ID'] ?>">
