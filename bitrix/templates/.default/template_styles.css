@@ -8153,6 +8153,10 @@ label.iPhoneCheckLabelOn {
     width: 150px;
     height: 100px;
 }
+.delivery_pre {
+    height: 1px;
+    overflow: hidden;
+}
 .delivery_items li {
     display: inline-block;
     text-align: center;
