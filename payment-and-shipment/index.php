@@ -27,6 +27,38 @@ $APPLICATION->SetTitle("Оплата и доставка");
 				 Мы доставляем заказы по&nbsp;Москве и&nbsp;Московской области. По&nbsp;умолчанию доставка осуществляется на&nbsp;завтрашний день при заказе до 15:30.Минимальная сумма заказа для доставки 2000 рублей. Стоимость доставки внутри МКАД: 450 рублей. За каждый километр за МКАД: +40 рублей. Стоимость доставки к&nbsp;конкретному часу или на&nbsp;сегодняшний день договорная.
 			</p>
 			<p>
+				<ul class="delivery_items">
+					<li>
+						<div class="b-item-basket-img js-package-popup"
+					         data-featherlight="/images/delivery/d1.jpg">
+							<img src="/images/delivery/d1.png" alt="">
+						</div>
+						Транспортировка
+					</li>
+					<li>
+						<div class="b-item-basket-img js-package-popup"
+						     data-featherlight="/images/delivery/d2.jpg">
+							<img src="/images/delivery/d2.png" alt="">
+						</div>
+						Коробка для тортов
+					</li>
+					<li>
+						<div class="b-item-basket-img js-package-popup"
+						     data-featherlight="/images/delivery/d3.jpg">
+							<img src="/images/delivery/d3.png" alt="">
+						</div>
+						Коробка для капкейков
+					</li>
+					<li>
+						<div class="b-item-basket-img js-package-popup"
+						     data-featherlight="/images/delivery/d4.jpg">
+							<img src="/images/delivery/d4.png" alt="">
+						</div>
+						Коробка для эклеров
+					</li>
+				</ul>
+			</p>
+			<p>
  <b>Возврат</b><br>
 				 Такое бывает крайне редко, но&nbsp;если&nbsp;вдруг вам привезли продукт с&nbsp;явными повреждениями или&nbsp;растаявшим кремом, мы можем либо вернуть вам деньги (если вы предоплачивали заказ), либо бесплатно доставить вам аналогичный продукт. Если вы решите вернуть деньги, вам необходимо написать письмо на zakaz@cupcakestory письмо с email-адреса, на который был оформлен заказ. Укажите в письме номер заказа, причину возврата денег и полные реквизиты любой вашей банковской карты (номер счета, номер карты, БИК банка, ваше полное ФИО). Возврат денег при оплате картой возможен только на ту карту, с которой был осуществлен платеж.
 			</p>

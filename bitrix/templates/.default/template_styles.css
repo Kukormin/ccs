@@ -8153,3 +8153,19 @@ label.iPhoneCheckLabelOn {
     width: 150px;
     height: 100px;
 }
+.delivery_items li {
+    display: inline-block;
+    text-align: center;
+    width: 214px;
+}
+.delivery_items .b-item-basket-img {
+    width: 125px;
+    height: 100px;
+    border-radius: 0;
+    margin: 0 44px;
+}
+.delivery_items .b-item-basket-img > img {
+    width: 125px;
+    height: 100px;
+    margin: 0;
+}
