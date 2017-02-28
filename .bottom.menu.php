@@ -43,9 +43,9 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Агентствам", 
-		"http://partners.cupcakestory.ru/",
-		Array(), 
+		"Эко-продукты",
+		"/cat/eco/",
+		Array(),
 		Array(), 
 		"" 
 	),
