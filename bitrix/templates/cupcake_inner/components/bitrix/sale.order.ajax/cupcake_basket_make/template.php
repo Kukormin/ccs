@@ -122,6 +122,8 @@ $price = round($arResult['ORDER_PRICE']);
 			submitHandler: function(form) {
 				var date = $('input[name="date"]').val();
 				var ti = $('#time_interval').val();
+				if ($('#time_interval_8m').is(':visible'))
+					ti = $('#time_interval_8m').val();
 				var comment = $('textarea[name="COMMENT"]').val();
 				var coupon = $('input[name="COUPON_CODE"]').val();
 				if (coupon)
@@ -158,7 +160,9 @@ $price = round($arResult['ORDER_PRICE']);
 		var intervals = [
 			'с 10:00 по 13:00',
 			'с 13:00 по 16:00',
-			'с 16:00 по 20:00'
+			'с 16:00 по 20:00',
+			'с 8:00 по 15:00',
+			'с 15:00 по 20:00'
 		];
 
 		$('.js_radio_input input').change();
@@ -486,11 +490,26 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 				'13:00 — 16:00',
 				'16:00 — 20:00',
 			);
+			$intervals8m = array(
+				3 => '8:00 — 15:00',
+				4 => '15:00 — 20:00',
+			);
 			?>
-			<div class="b-form-item__input b-form-item__input--select">
+			<div class="b-form-item__input b-form-item__input--select js-default-int">
 				<p class="select_title"><?= $intervals[0] ?></p>
 				<select id="time_interval" name="time_interval" class="b-form-item__input"><?
 					foreach ($intervals as $index => $interval)
+					{
+						?>
+						<option value="<?= $index ?>"><?= $interval ?></option><?
+					}
+					?>
+				</select>
+			</div>
+			<div class="b-form-item__input b-form-item__input--select js-8m-int" style="display:none;">
+				<p class="select_title"><?= $intervals8m[3] ?></p>
+				<select id="time_interval_8m" name="time_interval" class="b-form-item__input"><?
+					foreach ($intervals8m as $index => $interval)
 					{
 						?>
 						<option value="<?= $index ?>"><?= $interval ?></option><?

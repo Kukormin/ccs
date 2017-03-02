@@ -181,6 +181,7 @@ function generateCalendar() {
 						var y = date.getFullYear();
 						input.value = dd + '.' + mm + '.' + y;
 						FREE_DELIVERY_SELECTED = isFreeDelivery(d + '.' + m + '.' + y);
+						correct8m(d + '.' + m + '.' + y);
 						$('.js_radio_input input').change();
 					};
 				}
@@ -241,6 +242,19 @@ function isFreeDelivery(s) {
 			return true;
 	}
 	return false;
+}
+
+function correct8m(s) {
+	var m8 = s == '8.3.2017' || s == '9.3.2017' || s == '10.3.2017';
+	if (m8) {
+		$('.js-default-int').hide();
+		$('.js-8m-int').show();
+	}
+	else {
+		$('.js-default-int').show();
+		$('.js-8m-int').hide();
+	}
+
 }
 
 function getNextDeliveryDate(d) {
