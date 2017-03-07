@@ -46,7 +46,7 @@ $price = preg_replace('|(\D)|', '', $arResult['ORDER_PRICE_FORMATED']);
 						<div class="b-personal_account__form--line">
 							<!--form item-->
 							<div class="b-personal_account__form-item">
-								<label for="">Ваше имя</label>
+								<label for="">Имя и фамилия</label>
 								<div class="b-form-item__input">
 									<input type="text" name="NAME" value="<?=isset($arUser["NAME"])?$arUser["NAME"]:''?>" class="required">
 								</div>

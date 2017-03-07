@@ -275,7 +275,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 	<div id="order_form_content">
 		<div class="b-account-form">
 			<div class="b-account-form--line">
-				<label for="">ваше имя</label>
+				<label for="">Имя и фамилия</label>
 
 				<div class="b-account-form--input">
 					<input type="text" name="ORDER_PROP_1" value="<?= $arUserData["NAME"] ?>"
