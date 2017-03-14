@@ -1888,6 +1888,9 @@ text-align:left;
 	text-transform:uppercase;    
 	display: block;
 }
+.b-account-form--line label span {
+    font-style: italic;
+}
 .b-account-form--input {
     padding: 12px 20px;
     max-width: 420px;

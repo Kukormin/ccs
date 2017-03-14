@@ -10,6 +10,7 @@
 $deliveryPriceDefault = 450;
 $price = round($arResult['ORDER_PRICE']);
 ?>
+<section class="b-topblock b-topblock--pay-ship"></section>
 <script>
 	$(document).ready(function () {
 		function deliveryPrice() {
@@ -275,7 +276,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 	<div id="order_form_content">
 		<div class="b-account-form">
 			<div class="b-account-form--line">
-				<label for="">Имя и фамилия</label>
+				<label for="">Имя и фамилия <span>(обязательно)</span></label>
 
 				<div class="b-account-form--input">
 					<input type="text" name="ORDER_PROP_1" value="<?= $arUserData["NAME"] ?>"
@@ -291,7 +292,7 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 				</div>
 			</div>
 			<div class="b-account-form--line">
-				<label for="">телефон</label>
+				<label for="">Телефон <span>(обязательно)</span></label>
 
 				<div class="b-account-form--input">
 					<input type="text" name="ORDER_PROP_3"

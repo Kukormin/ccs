@@ -28,6 +28,7 @@ $arBasketJSParams = array(
 	'ADD_URL' => $arUrls["add"]
 );
 ?>
+<section class="b-topblock b-topblock--pay-ship"></section>
 <script type="text/javascript">
 	var basketJSParams = <?=CUtil::PhpToJSObject($arBasketJSParams);?>
 </script>
