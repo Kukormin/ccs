@@ -79,8 +79,6 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 }
 else
 {?>
-    <section class="b-topblock b-topblock--pay-ship">
-    </section>
     <div class="b-block-account--content-wrap">
         <div class="empty_basket">В корзине пока пусто, самое время <a href="/catalog/cupcakes/">добавить в нее что-нибудь вкусное:)</a></div>
     </div>
