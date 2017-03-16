@@ -39,6 +39,7 @@ var Filters = {
 		this.panel.on('click', 'h3', this.h3_s);
 		this.ajaxCont.on('click', '#current-filters a', this.urlClick);
 		this.ajaxCont.on('click', '.js-catalog-pager a', this.urlClick);
+		this.ajaxCont.on('click', '.show_all_btn', this.urlClick);
 		this.bcCont.on('click', 'a', this.urlClick);
 		this.mobileFilters.on('click', 'h3', this.m_h3_s);
 		this.mobileFilters.on('click', 'h3 b', this.m_h3_b);

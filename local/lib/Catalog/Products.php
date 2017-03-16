@@ -386,7 +386,7 @@ class Products
 			{
 				$return['NAV'] = array(
 					'COUNT' => count($productIds),
-					'PAGE' => $nav['iNumPage'],
+					'PAGE' => $nav ? $nav['iNumPage'] : 'all',
 				);
 
 				// В случае поиска - ручная пагинация

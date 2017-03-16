@@ -1678,7 +1678,7 @@ text-align:left;
 	float: right;
 }
 .b-pagination__list {
-	padding-top:40px;
+	padding-top:20px;
 	display:inline-block;
 	width:100%;
 	text-align:center;
@@ -8175,4 +8175,22 @@ label.iPhoneCheckLabelOn {
     width: 125px;
     height: 100px;
     margin: 0;
+}
+
+.show_all_btn {
+    display: inline-block;
+    font-family: "PTSansRegular",sans-serif;
+    font-size: 15px;
+    line-height: 20px;
+    height: 20px;
+    background: #aa6290;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 20px;
+    margin: 20px 0 10px;
+}
+.show_all_btn:hover {
+    color: #fff;
+    background-color: #a3a67b;
 }

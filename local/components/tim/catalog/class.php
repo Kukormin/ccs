@@ -53,7 +53,7 @@ class TimCatalog extends \CBitrixComponent
 	/**
 	 * @var array параметры постранички
 	 */
-	public $navParams;
+	public $navParams = false;
 
 	/**
 	 * @var string поисковый запрос
@@ -225,12 +225,15 @@ class TimCatalog extends \CBitrixComponent
 		// Постраничная навигация
 		//
 		$page = $this->urlParams['page'];
-		if (intval($page) <= 0)
-			$page = 1;
-		$this->navParams = array(
-			'iNumPage' => $page,
-			'nPageSize' => self::PAGE_SIZE,
-		);
+		if ($page != 'all')
+		{
+			if (intval($page) <= 0)
+				$page = 1;
+			$this->navParams = array(
+				'iNumPage' => $page,
+				'nPageSize' => self::PAGE_SIZE,
+			);
+		}
 	}
 
 	/**
