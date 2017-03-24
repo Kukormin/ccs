@@ -3933,6 +3933,10 @@ a.basket {
     color: #aaa;
     text-decoration: line-through;
 }
+.b-mod__item-price .disabled-item {
+    color: #aaaba2;
+    font-size: 15px;
+}
 
 .b-mod__item-label {
 	padding:0 15px 0 30px;

@@ -410,6 +410,7 @@ class Products
 					'PREVIEW_PICTURE',
 					'PROPERTY_PRICE_COUNT',
 					'PROPERTY_CATEGORY',
+					'PROPERTY_DISABLED',
 				));
 				while ($item = $rsItems->GetNext())
 				{
@@ -429,6 +430,7 @@ class Products
 					$product['DETAIL_PAGE_URL'] = $detail;
 					$product['PREVIEW_PICTURE'] = \CFile::GetPath($item['PREVIEW_PICTURE']);
 					$product['PRICE_COUNT'] = $item['PROPERTY_PRICE_COUNT_VALUE'];
+					$product['DISABLED'] = $item['PROPERTY_DISABLED_VALUE'];
 
 					$return['ITEMS'][$item['ID']] = $product;
 				}
@@ -554,6 +556,7 @@ class Products
 			$select = array(
 				'ID', 'NAME', 'CODE', 'PREVIEW_PICTURE', 'PREVIEW_TEXT', 'DETAIL_TEXT',
 				'PROPERTY_PICTURES',
+				'PROPERTY_DISABLED',
 				'PROPERTY_CATEGORY',
 				'PROPERTY_HIT',
 				'PROPERTY_ACTION',
@@ -583,6 +586,7 @@ class Products
 					'TITLE' => $title,
 					'DESCRIPTION' => $desc,
 					'CODE' => $item['CODE'],
+					'DISABLED' => $item['PROPERTY_DISABLED_VALUE'],
 					'DETAIL_PAGE_URL' => $detail,
 					'PREVIEW_PICTURE' => $file->GetPath($item['PREVIEW_PICTURE']),
 					'PREVIEW_TEXT' => $item['~PREVIEW_TEXT'],
@@ -962,39 +966,6 @@ class Products
 		);
 
 		//
-		// Разделы старого каталога
-		// TODO: убрать позже
-		//
-		/*$iblockIds = array(4, 5, 6, 7, 12, 16, 30, 33, 37, 38, 40);
-		foreach ($iblockIds as $iblockId)
-		{
-			$rsItems = $iblockSection->GetList(array('left_margin' => 'asc'), array(
-				'IBLOCK_ID' => $iblockId,
-			));
-			$hasCategories = false;
-			while ($item = $rsItems->Fetch()) {
-				$return['CAT'][$item['ID']] = array(
-					'ID' => $item['ID'],
-					'NAME' => $item['NAME'],
-					'CODE' => $item['CODE'],
-					'PARENT' => $item['IBLOCK_SECTION_ID'],
-					'OLD' => true,
-				);
-				$hasCategories = true;
-			}
-			if (!$hasCategories) {
-				$iblock = \CIBlock::GetByID($iblockId)->Fetch();
-				$iid = 1000000 + $iblockId;
-				$return['CAT'][$iid] = array(
-					'ID' => $iid,
-					'NAME' => $iblock['NAME'],
-					'CODE' => $iblock['CODE'],
-					'OLD' => true,
-				);
-			}
-		}*/
-
-		//
 		// Товары
 		//
 		$products = array();
@@ -1174,107 +1145,6 @@ class Products
 				'CATEGORY_NAME' => $cat['NAME'],
 			);
 		}
-
-		//
-		// Товары старого каталога
-		// TODO: убрать позже
-		//
-		/*foreach ($iblockIds as $iblockId)
-		{
-			$iblockOffer = \CCatalogSKU::GetInfoByProductIBlock($iblockId);
-			$rsItems = $iblockElement->GetList(array(), array(
-				'IBLOCK_ID' => $iblockId,
-			), false, false, array(
-				'ID', 'NAME', 'ACTIVE', 'CODE',
-				'DETAIL_PICTURE', 'IBLOCK_SECTION_ID', 'DETAIL_PAGE_URL',
-				'PROPERTY_ARTICLE',
-				'PROPERTY_VENDOR_CODE',
-				'CATALOG_GROUP_1',
-			));
-			while ($item = $rsItems->GetNext())
-			{
-				$catId = $item['IBLOCK_SECTION_ID'];
-				$cat = $return['CAT'][$catId];
-				$price = floatval($item['CATALOG_PRICE_1']);
-
-				$article = trim($item['PROPERTY_ARTICLE_VALUE']);
-				if (!$article)
-					$article = trim($item['PROPERTY_VENDOR_CODE_VALUE']);
-
-				$product = array(
-					'ID' => $item['ID'],
-					'ACTIVE' => $item['ACTIVE'],
-					'NAME' => $item['NAME'],
-					'ARTICLE' => $article,
-					'PICTURE' => $file->GetPath($item['DETAIL_PICTURE']),
-					'DETAIL_PAGE_URL' => $item['DETAIL_PAGE_URL'],
-					'CATEGORY_ID' => $catId,
-					'CATEGORY_NAME' => $cat['NAME'],
-					'PRICE' => $price,
-					'OFFERS' => 0,
-				);
-				$products[$item['ID']] = $product;
-
-				if (!$iblockOffer['IBLOCK_ID'] || $price > 0)
-				{
-					$detail = $product['DETAIL_PAGE_URL'];
-					if (!$detail)
-						$detail = '/catalog/detail.php?ID=' . $product['ID'];
-					$return['OFFERS'][] = array(
-						'ID' => $product['ID'],
-						'NAME' => $product['NAME'],
-						'PRODUCT_ID' => $product['ID'],
-						'PRODUCT_ACTIVE' => $product['ACTIVE'],
-						'PRODUCT_NAME' => $product['NAME'],
-						'PICTURE' => $product['PICTURE'],
-						'DETAIL_PAGE_URL' => $detail,
-						'ARTICLE' => $product['ARTICLE'],
-						'PRICE' => $product['PRICE'],
-						'CATEGORY_ID' => $product['CATEGORY_ID'],
-						'CATEGORY_NAME' => $product['CATEGORY_NAME'],
-					);
-				}
-			}
-
-			if ($iblockOffer['IBLOCK_ID'])
-			{
-				$rsItems = $iblockElement->GetList(array(), array(
-					'IBLOCK_ID' => $iblockOffer['IBLOCK_ID'],
-				), false, false, array(
-					'ID',
-					'NAME',
-					'PROPERTY_ARTICLE',
-					'PROPERTY_CML2_LINK',
-					'CATALOG_GROUP_1',
-				));
-				while ($item = $rsItems->GetNext())
-				{
-					$productId = $item['PROPERTY_CML2_LINK_VALUE'];
-					if ($productId <= 0)
-						continue;
-
-					$product = $products[$productId];
-					$price = floatval($item['CATALOG_PRICE_1']);
-
-					$return['OFFERS'][] = array(
-						'ID' => $item['ID'],
-						'NAME' => $item['NAME'],
-						'PRODUCT_ID' => $productId,
-						'PRODUCT_ACTIVE' => $product['ACTIVE'],
-						'PRODUCT_NAME' => $product['NAME'],
-						'PICTURE' => $product['PICTURE'],
-						'DETAIL_PAGE_URL' => $product['DETAIL_PAGE_URL'],
-						'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
-						'PRICE' => $price,
-						'CATEGORY_ID' => $product['CATEGORY_ID'],
-						'CATEGORY_NAME' => $product['CATEGORY_NAME'],
-					);
-
-					$products[$productId]['OFFERS']++;
-
-				}
-			}
-		}*/
 
 		return $return;
 	}

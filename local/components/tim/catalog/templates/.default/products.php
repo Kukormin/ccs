@@ -66,7 +66,7 @@ if ($filter['CUR_FILTERS'])
 			}
 
 			$showBtn = \Local\Catalog\Suspended::check($item['ID']);
-			if ($showBtn)
+			if ($showBtn && !$item['DISABLED'])
 			{
 				?>
 				<div class="quick-detail" data-id="<?= $item['ID'] ?>"></div><?
@@ -80,18 +80,26 @@ if ($filter['CUR_FILTERS'])
 		</div>
 		<div class="b-mod__item-price"><?
 
-			if ($item['PRICE_WO_DISCOUNT'] > $item['PRICE'])
+			if ($item['DISABLED'])
 			{
 				?>
-				<em><?= number_format($item['PRICE_WO_DISCOUNT'], 0, '', ' ') ?></em><?
+				<span class="disabled-item">временно недоступен для заказа</span><?
 			}
-			?>
-			<?= number_format($item['PRICE'], 0, '', ' ') ?> P<?
-
-			if ($item['PRICE_COUNT'])
+			else
 			{
+				if ($item['PRICE_WO_DISCOUNT'] > $item['PRICE'])
+				{
+					?>
+					<em><?= number_format($item['PRICE_WO_DISCOUNT'], 0, '', ' ') ?></em><?
+				}
 				?>
-				<span>/ <?= $item['PRICE_COUNT'] ?> шт</span><?
+				<?= number_format($item['PRICE'], 0, '', ' ') ?> P<?
+
+				if ($item['PRICE_COUNT'])
+				{
+					?>
+					<span>/ <?= $item['PRICE_COUNT'] ?> шт</span><?
+				}
 			}
 
 			?>

@@ -104,7 +104,7 @@ $product = $component->product;
 					</div><?
 
 					$showBtn = \Local\Catalog\Suspended::check($product['ID']);
-					if ($showBtn)
+					if ($showBtn && !$product['DISABLED'])
 					{
 						?>
 						<div class="b-assortment-total--btn">
@@ -125,13 +125,22 @@ $product = $component->product;
 
 				</div><?
 
-				$deliveryText = $price >= 2000 ? '<b>450 руб. + 40 руб./км</b>' :
-					'при заказе от <b>2000</b><span class="rub">i</span>';
-				?>
-				<div class="b-delivery-info i-margin-left-30">
+				if ($product['DISABLED'])
+				{
+					?>
+					<div class="b-delivery-info i-margin-left-30">
+						временно недоступен для заказа
+					</div><?
+				}
+				else
+				{
+					$deliveryText = $price >= 2000 ? '<b>450 руб. + 40 руб./км</b>' : 'при заказе от <b>2000</b><span class="rub">i</span>';
+					?>
+					<div class="b-delivery-info i-margin-left-30">
 					<div class="b-delivery">Доставка по Москве - <?= $deliveryText ?></div>
 					<div class="b-pickup">Самовывоз - <b>г.Москва, ул.Самокатная, д.4, стр.1</b></div>
-				</div><?
+					</div><?
+				}
 
 				if ($product['CATEGORY']['CODE'] == 'gingerbread')
 				{
