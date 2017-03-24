@@ -42,12 +42,13 @@ $(document).ready(function () {
 	$('.b-cupcake__navigation--mobile-first-line__list a').click(function () {
 		$('.b-mobile-breadcrumbs').removeClass('open');
 	});
-
+/* Какой кретин это придумал?!
 	$('.carousel-main .carousel-main-row').each(function () {
 		var src = $(this).find('img').attr('src');
-		$(this).find('img').hide();
 		$(this).css('background-image', 'url(' + src + ')');
-	})
+		$(this).find('img').remove();
+	})*/
+
 	//slider
 	$('.carousel-main').slick({
 		slide: '.carousel-main-row',
@@ -61,6 +62,7 @@ $(document).ready(function () {
 	});
 
 	$('.b-slider-wrap').slick({
+		lazyLoad: 'ondemand',
 		dots: true,
 		infinite: true,
 		speed: 300,
@@ -108,6 +110,7 @@ $(document).ready(function () {
 
 
 	$('#related_products_main').slick({
+		lazyLoad: 'ondemand',
 		dots: false,
 		infinite: true,
 		speed: 300,
