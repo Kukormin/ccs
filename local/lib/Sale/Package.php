@@ -58,7 +58,7 @@ class Package
 				'IBLOCK_ID' => self::IBLOCK_ID,
 				'ACTIVE' => 'Y',
 			), false, false, array(
-				'ID', 'NAME', 'IBLOCK_SECTION_ID', 'PREVIEW_PICTURE', 'DETAIL_PICTURE',
+				'ID', 'NAME', 'CODE', 'IBLOCK_SECTION_ID', 'PREVIEW_PICTURE', 'DETAIL_PICTURE',
 				'CATALOG_GROUP_1',
 			    'PROPERTY_SIZE',
 			));
@@ -67,6 +67,7 @@ class Package
 				$return['ITEMS'][$item['ID']] = array(
 					'ID' => $item['ID'],
 					'NAME' => $item['NAME'],
+					'CODE' => $item['CODE'],
 					'CATEGORY' => $categoryId,
 					'SIZES' => explode(',', $item['PROPERTY_SIZE_VALUE']),
 					'PRICE' => intval($item['CATALOG_PRICE_1']),

@@ -31,7 +31,7 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 	<script type="text/javascript" src="/bitrix/templates/.default/js/featherlight.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/slick.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.suggestions.min.js"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=11"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/cupcake.js?v=12"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/share.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/additional.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.validate.min.js?v=6"></script>
