@@ -983,7 +983,7 @@ $(document).ready(function () {
 		var that = line.find('.js-basket-option');
 		if (!that.length) return true;
 		var cnt = parseInt(that.find("option:selected").text().trim());
-		var cl = '.js-box-' + cnt;
+		var cl = '.js-box-all,.js-box-' + cnt;
 		if (cnt) {
 			line.find('.js-package-cont').find('.js-package-item').not(cl).addClass('js-hidden').hide();
 			line.find('.js-package-cont').find(cl).removeClass('js-hidden').show();

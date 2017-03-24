@@ -183,6 +183,8 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 								if ($pack['ID'] == $packageId)
 									$packagePrice = $price;
 								$fPrice = $price > 0 ? $price . ' <span class="rub">i</span>' : 'бесплатно';
+								if ($pack['CODE'] == 'ribbon')
+									$fPrice = $pack['NAME'] . '<br>' . $fPrice;
 
 								?>
 								<div class="b-mod__item-title">
