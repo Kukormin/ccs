@@ -2691,6 +2691,7 @@ label.is-color-white,
     background: url(../.default/images/pic/prod-card-2.jpg) no-repeat left top;
     width: 48.3%;
     float: left;
+    background-size: cover;
 	position: relative;
 	z-index: 2;
     min-height: 680px;	
