@@ -2673,6 +2673,7 @@ label.is-color-white,
 }
 .b-product-card__wrap {
 	background: #000000 no-repeat center top;
+    background-size: cover;
     min-height: 680px;
 }
 .b-topscreen-blurred{
@@ -2690,7 +2691,6 @@ label.is-color-white,
     background: url(../.default/images/pic/prod-card-2.jpg) no-repeat left top;
     width: 48.3%;
     float: left;
-    background-size: cover;
 	position: relative;
 	z-index: 2;
     min-height: 680px;	
