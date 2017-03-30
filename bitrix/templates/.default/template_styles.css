@@ -2673,7 +2673,6 @@ label.is-color-white,
 }
 .b-product-card__wrap {
 	background: #000000 no-repeat center top;
-    background-size: cover;
     min-height: 680px;
 }
 .b-topscreen-blurred{
