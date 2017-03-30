@@ -88,7 +88,7 @@ else
 						"ROOT_MENU_TYPE" => "bottom2",
 					), false);?>
 			</ul>
-			<span class="b-footer-phones b-footer-phones-about">7 (499) 322-00-20</span>
+			<span class="b-footer-phones b-footer-phones-about">+7 (499) 322-00-20</span>
 
 			<div class="b-cards-wrapper">
 				<a class="b-sitemap-footer" href="/sitemap.php" title="Карта сайта"> </a>

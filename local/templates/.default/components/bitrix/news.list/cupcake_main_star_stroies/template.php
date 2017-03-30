@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="b-slider__img">
-        <img src="<?=CFile::GetPath($arItem['PROPERTIES']['MAIN_ANNOUNCE']['VALUE'])?>" alt=""/>
+        <img data-lazy="<?=CFile::GetPath($arItem['PROPERTIES']['MAIN_ANNOUNCE']['VALUE'])?>" alt=""/>
     </div>
     <div class="b-slider-favorite">
         <div class="b-slider-favorite-label">я люблю</div>
@@ -26,7 +26,7 @@
                 <div class="b-slider-favorite__item">
                     <div class="b-slider-favorite-img">
                         <a href="<?=$like_items['DETAIL_PAGE_URL']?>">
-                            <img src="<?=$like_items['PREVIEW_PICTURE']?>" width="120" height="90"/>
+                            <img data-lazy="<?=$like_items['PREVIEW_PICTURE']?>" width="120" height="90"/>
                         </a>
                     </div>
                         <span class="b-slider-favorite-desc">

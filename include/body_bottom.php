@@ -37,3 +37,13 @@ if ($_SERVER["REMOTE_ADDR"] != '109.197.195.38')
 }
 
 ?><img src="//code.directadvert.ru/track/291860.gif" width="1" height="1" /><?
+
+?>
+<script>
+(function (w, d, n, u, s) {
+w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+var a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+a.async=true;a.src=u;m.parentNode.insertBefore(a,m)
+})(window, document, 'DSPCounter', '//tags.soloway.ru/DSPCounter.js', 'script');
+</script>
+<script type="text/javascript">DSPCounter('send', {'sid':'216208','user_id':''});</script><?

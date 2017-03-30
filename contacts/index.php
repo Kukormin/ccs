@@ -74,7 +74,10 @@ $APPLICATION->SetTitle("Контакты");
 		</p>
 		<p>
  <b>Оптовые поставки, сотрудничество, ритейл</b><br>
-			 тел.: +7 (499) 322-00-20 (доб. 103), email: taisiyal@cupcakestory.ru
+			 тел.: +7 (499) 322-00-20 (доб. 103), email: <a href="mailto:taisiyal@cupcakestory.ru">taisiyal@cupcakestory.ru</a>
+		</p>
+		<p>
+			 Реклама email:<a href="mailto:dorofeeva@cupcakestory.ru">dorofeeva@cupcakestory.ru</a>
 		</p>
  <img src="/images/scheme.jpg" alt="схема">
 	</div>
@@ -86,7 +89,10 @@ $APPLICATION->SetTitle("Контакты");
 			 Заказы в интернет-магазине принимаются по телефону <span itemprop="hoursAvailable" datetime="Mo-Fr 10:00−20:00">с понедельника по пятницу с 10 до 20.</span> <span itemprop="hoursAvailable" datetime="Sa,Su 10:00−17:00">По&nbsp;субботам и воскресеньям с&nbsp;10&nbsp;до&nbsp;17.</span>
 		</p>
 		<p itemprop="contactPoint" itemscope="" itemtype="http://schema.org/ContactPoint">
- <b>Мини-кафе в Москве в Фуд Маркете улица Новый Арбат, 21.&nbsp;</b><br>
+ <b>Мини-кафе в Москве в Фуд Маркете улица Новый Арбат, 21.&nbsp;</b>
+		</p>
+		<p itemprop="contactPoint" itemscope="" itemtype="http://schema.org/ContactPoint">
+			Узнать о наличии, забронировать продукцию можно по номеру +7 (967) 022-99-03 (WhatsApp,Telegram).
 		</p>
 		<p>
  <b>Режим работы:&nbsp;</b><b>&nbsp;ежедневно&nbsp;</b><b>с 12 до 24.&nbsp;</b>

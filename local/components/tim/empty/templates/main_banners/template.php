@@ -28,10 +28,12 @@ $file = new CFile();
 
 				?>
 				<div class="carousel-main-row">
-					<a href="<?= $item['LINK'] ?>"><img src="<?= $pic['src'] ?>" alt="<?= $item['NAME'] ?>">
-						<div class="details">
-							<h3><?= $item['NAME'] ?></h3>
-							<p><?= $item['TEXT'] ?></p>
+					<a href="<?= $item['LINK'] ?>">
+						<div style="background-image: url('<?= $pic['src']?>'); width: 100%; height: 100%;">
+							<div class="details">
+								<h3><?= $item['NAME'] ?></h3>
+								<p><?= $item['TEXT'] ?></p>
+							</div>
 						</div>
 					</a>
 				</div><?

@@ -33,7 +33,7 @@ if (!$products)
 					<div class="b-mod__item-img">
 						<div class="b-mod__item-img--effect-transform">
 							<a href="<?= $item['DETAIL_PAGE_URL'] ?>">
-								<img src="<?= $item['PREVIEW_PICTURE'] ?>"
+								<img data-lazy="<?= $item['PREVIEW_PICTURE'] ?>"
 								     alt="<?= $item['PIC_ALT'] ?>" title="<?= $item['PIC_TITLE'] ?>" />
 							</a>
 						</div><?
