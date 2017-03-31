@@ -220,7 +220,15 @@ $oid = intval($_GET['id']);
         }
         ?>
         <script>
-            dataLayer.push({
+			DSPCounter('send', {
+				'sid': '216208',
+				'site_area': 'chGedGaY',
+				'user_id': '',
+				'lead_id': '',
+				'order_sum': '<?=$price?>'
+			});
+
+			dataLayer.push({
                 'ecommerce': {
                     'purchase': {
                         'actionField': {

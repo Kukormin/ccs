@@ -27,3 +27,12 @@ if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, fal
 <img src="//top-fwz1.mail.ru/counter?id=2856468;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
 </div></noscript>
 <!-- //Rating@Mail.ru counter -->
+
+<script>
+	(function (w, d, n, u, s) {
+		w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+		var a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+		a.async=true;a.src=u;m.parentNode.insertBefore(a,m)
+	})(window, document, 'DSPCounter', '//tags.soloway.ru/DSPCounter.js', 'script');
+</script>
+<script type="text/javascript">DSPCounter('send', {'sid':'216208','user_id':''});</script><?
