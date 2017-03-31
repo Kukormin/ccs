@@ -3397,6 +3397,15 @@
 	/*.b-addition-order-wrap .b-slider-wrap-postcard__list .b-slider__item {
 		width:142px !important;
 	}*/
+    .carousel-main {
+        height: 400px;
+    }
+    .carousel-main .carousel-main-row {
+        height: 400px;
+    }
+    .carousel-main .details {
+        top: 280px;
+    }
 }
 	
 	
@@ -3436,6 +3445,15 @@
 		left: -20px;
 		top: 8px;
 	}
+    .carousel-main {
+        height: 380px;
+    }
+    .carousel-main .carousel-main-row {
+        height: 380px;
+    }
+    .carousel-main .details {
+        top: 260px;
+    }
 }
 
 
@@ -3535,9 +3553,17 @@
 	
 	.b-basket--select {
 		padding-left: 30px;
-	}	
-	
-	
+	}
+
+    .carousel-main {
+        height: 360px;
+    }
+    .carousel-main .carousel-main-row {
+        height: 360px;
+    }
+    .carousel-main .details {
+        top: 240px;
+    }
 	
 }
 
