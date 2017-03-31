@@ -20,7 +20,7 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 
 	<link href="/bitrix/templates/.default/css/slick.css?v=7" rel="stylesheet" type="text/css"/>
 	<link href="/bitrix/templates/.default/css/about.css?v=13" rel="stylesheet" type="text/css"/>
-	<link href="/bitrix/templates/.default/template_styles.css?v=28" rel="stylesheet" type="text/css"/>
+	<link href="/bitrix/templates/.default/template_styles.css?v=29" rel="stylesheet" type="text/css"/>
 	<link href="/bitrix/templates/.default/css/cupcake-media.css?v=15" rel="stylesheet" type="text/css"/>
 	<link href="/bitrix/templates/.default/css/featherlight.css?v=7" rel="stylesheet" type="text/css"/>
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>

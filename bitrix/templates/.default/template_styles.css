@@ -7428,6 +7428,11 @@ margin-top: 20px;
     height: 100%;
 }
 
+.carousel-main .carousel-main-row a > div {
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 /* 15.06.2016 */ 
 
 /*.b-ordering-accessory__list .b-postcard__item {
