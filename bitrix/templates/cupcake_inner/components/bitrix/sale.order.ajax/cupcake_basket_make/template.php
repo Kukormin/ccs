@@ -162,8 +162,8 @@ $price = round($arResult['ORDER_PRICE']);
 			'с 10:00 по 13:00',
 			'с 13:00 по 16:00',
 			'с 16:00 по 20:00',
-			'с 8:00 по 15:00',
-			'с 15:00 по 20:00'
+			'с 8:00 по 14:00',
+			'с 14:00 по 20:00'
 		];
 
 		$('.js_radio_input input').change();
@@ -492,8 +492,8 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 				'16:00 — 20:00',
 			);
 			$intervals8m = array(
-				3 => '8:00 — 15:00',
-				4 => '15:00 — 20:00',
+				3 => '8:00 — 14:00',
+				4 => '14:00 — 20:00',
 			);
 			?>
 			<div class="b-form-item__input b-form-item__input--select js-default-int">

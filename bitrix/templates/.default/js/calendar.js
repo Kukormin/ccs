@@ -245,7 +245,7 @@ function isFreeDelivery(s) {
 }
 
 function correct8m(s) {
-	var m8 = s == '6.3.2017' || s == '7.3.2017' || s == '8.3.2017';
+	var m8 = s == '14.4.2017' || s == '15.4.2017';
 	if (m8) {
 		$('.js-default-int').hide();
 		$('.js-8m-int').show();
