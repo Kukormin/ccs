@@ -1629,4 +1629,26 @@ $(function () {
 		var type = $(this).data('share');
 		Share2[type](document.location, 'CupCakeStory');
 	});
+
+    $('body').on('click','#calendar td',function(){
+        var deltype = $('[name="address"]:checked').data('deltype');
+        if(deltype == 15 && ($(this).text() == '14' || $(this).text() == '15')){
+            $('[name="PAY_SYSTEM_ID"]:eq(1)').attr('checked',true);
+            $('[name="PAY_SYSTEM_ID"]:eq(0)').parents('.b-method-shipping-input').css('display','none');
+        }else{
+            $('[name="PAY_SYSTEM_ID"]:eq(0)').parents('.b-method-shipping-input').css('display','block');
+        }
+    });
+
+    $('body').on('click','[name="address"]',function(){
+        var deltype = $('[name="address"]:checked').data('deltype');
+        var date = $('[name="date"]').val();
+        date = date.split('.');
+        if(deltype == 15 && (date[0] == '14' || date[0] == '15')){
+            $('[name="PAY_SYSTEM_ID"]:eq(1)').attr('checked',true);
+            $('[name="PAY_SYSTEM_ID"]:eq(0)').parents('.b-method-shipping-input').css('display','none');
+        }else{
+            $('[name="PAY_SYSTEM_ID"]:eq(0)').parents('.b-method-shipping-input').css('display','block');
+        }
+    });
 });
