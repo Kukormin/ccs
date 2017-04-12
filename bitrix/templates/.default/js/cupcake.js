@@ -235,6 +235,16 @@ $(document).ready(function () {
 		]
 	});
 
+	$('#cake_slider').slick({
+		dots: true,
+		infinite: true,
+		speed: 1000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 10000
+	});
+
 	var $elems = $('.b-slider-stock__list').children(),
 		$parents = $elems.parent(),
 		selector = 'a';

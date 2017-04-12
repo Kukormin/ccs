@@ -78,7 +78,6 @@ else
 	<div class="b-footer b-footer-about">
 		<div class="b-footer-info b-footer-info-about">
 			<div class="b-footer-copy b-footer-copy-about">
-				<span>Проект развивает </span><a style="color:#a3a67b" href="http://komanda-a.pro/">Команда-А</a><br>
 				<span>Продвижение сайта - </span><a style="color:#a3a67b;" href="http://neyiron.ru/">Neyiron</a>
 			</div>
 			<ul class="b-footer-nav__list b-footer-nav__list-about">

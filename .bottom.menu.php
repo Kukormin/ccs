@@ -1,15 +1,22 @@
 <?
 $aMenuLinks = Array(
+	/*Array(
+		"Торты на заказ",
+		"/cakes/",
+		Array(),
+		Array(),
+		""
+	),*/
+	Array(
+		"Торты",
+		"/cat/cakes/",
+		Array(),
+		Array(),
+		""
+	),
 	Array(
 		"Капкейки", 
 		"/cat/cupcakes/",
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Торты", 
-		"/cat/cakes/",
 		Array(), 
 		Array(), 
 		"" 
@@ -46,13 +53,6 @@ $aMenuLinks = Array(
 		"Эко-продукты",
 		"/cat/eco/",
 		Array(),
-		Array(), 
-		"" 
-	),
-	Array(
-		"Свадьбы", 
-		"http://wedding.cupcakestory.ru/", 
-		Array(), 
 		Array(), 
 		"" 
 	)

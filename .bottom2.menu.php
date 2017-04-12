@@ -29,8 +29,8 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Подарочные карты",
-		"https://shop.giftd.tech/cupcakestory",
+		"Свадьбы",
+		"http://wedding.cupcakestory.ru/",
 		Array(),
 		Array(),
 		""
