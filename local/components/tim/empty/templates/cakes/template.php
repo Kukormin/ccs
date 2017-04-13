@@ -12,8 +12,8 @@ $file = new \CFile();
 			$img = $file->ResizeImageGet(
 				$item['PICTURE'],
 				array(
-					'width' => 800,
-					'height' => 800
+					'width' => 600,
+					'height' => 600
 				),
 				BX_RESIZE_IMAGE_PROPORTIONAL,
 				true

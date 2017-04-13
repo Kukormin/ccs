@@ -8214,16 +8214,20 @@ label.iPhoneCheckLabelOn {
 }
 #cake_slider {
     width: 100%;
-    max-width: 800px;
+    max-width: 400px;
     display: inline-block;
 }
 #cake_slider .cs-item {
     width: 100%;
-    max-width: 800px;
+    max-width: 400px;
     display: inline-block;
     text-align: center;
 }
 #cake_slider img {
     display: inline-block;
     width: 100%;
+}
+#cake_slider .slick-arrow {
+    top: 50%;
+    margin-top: -30px;
 }
