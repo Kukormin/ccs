@@ -6,7 +6,7 @@ $APPLICATION->SetTitle("Торты на заказ");
 </section>
 <section class="b-bg-grey">
 	<div class="b-content-center b-block-new">
-		<div class="b-block-new--wrap i-padding__top-100">
+		<div class="b-block-new--wrap" style="padding-top:0;">
 			<h1>
 				<div class="b-block-new--title">
 					Торты на заказ

@@ -39,6 +39,22 @@ class Cakes
 		} else {
 			$extCache->startDataCache();
 
+			$iblockSection = new \CIBlockSection();
+			$rsItems = $iblockSection->GetList(array(), array(
+				'IBLOCK_ID' => self::IBLOCK_ID,
+				'ACTIVE' => 'Y',
+			), false, array(
+				'ID', 'NAME', 'CODE',
+			));
+			while ($item = $rsItems->Fetch())
+			{
+				$id = intval($item['ID']);
+				$return[$id] = array(
+					'NAME' => $item['NAME'],
+					'ITEMS' => array(),
+				);
+			}
+
 			$iblockElement = new \CIBlockElement();
 			$rsItems = $iblockElement->GetList(array(
 				'SORT' => 'ASC',
@@ -46,13 +62,15 @@ class Cakes
 				'IBLOCK_ID' => self::IBLOCK_ID,
 				'ACTIVE' => 'Y',
 			), false, false, array(
-				'ID', 'NAME', 'CODE', 'DETAIL_PICTURE',
+				'ID', 'NAME', 'CODE', 'PREVIEW_PICTURE', 'DETAIL_PICTURE', 'IBLOCK_SECTION_ID',
 			));
 			while ($item = $rsItems->GetNext())
 			{
-				$return[] = array(
+				$section = intval($item['IBLOCK_SECTION_ID']);
+				$return[$section]['ITEMS'][] = array(
 					'ID' => $item['ID'],
 					'PICTURE' => $item['DETAIL_PICTURE'],
+					'PICTURE1' => $item['PREVIEW_PICTURE'],
 				);
 			}
 

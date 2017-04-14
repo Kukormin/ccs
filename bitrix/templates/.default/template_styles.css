@@ -8208,26 +8208,29 @@ label.iPhoneCheckLabelOn {
     width: 100%;
 }
 
-#cake_slider_wp {
-    text-align: center;
-    padding: 40px 20px;
+.cake_slider_wp {
+    padding: 0 0 40px;
 }
-#cake_slider {
+.cake_slider_wp .b-title {
+    margin: 0;
+}
+.cake_slider {
     width: 100%;
     max-width: 400px;
     display: inline-block;
 }
-#cake_slider .cs-item {
+.cake_slider .cs-item {
     width: 100%;
     max-width: 400px;
     display: inline-block;
     text-align: center;
+    padding: 0 10px;
 }
-#cake_slider img {
+.cake_slider img {
     display: inline-block;
     width: 100%;
 }
-#cake_slider .slick-arrow {
+.cake_slider .slick-arrow {
     top: 50%;
     margin-top: -30px;
 }
