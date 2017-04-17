@@ -8225,6 +8225,7 @@ label.iPhoneCheckLabelOn {
     display: inline-block;
     text-align: center;
     padding: 0 10px;
+    cursor: pointer;
 }
 .cake_slider img {
     display: inline-block;

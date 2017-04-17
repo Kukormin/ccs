@@ -26,8 +26,20 @@ foreach ($items as $section)
 					true
 				);
 
+				$imgDetail = $file->ResizeImageGet(
+					$item['PICTURE'],
+					[
+						'width' => 800,
+						'height' => 800
+					],
+					BX_RESIZE_IMAGE_PROPORTIONAL,
+					true
+				);
+
 				?>
-				<div class="cs-item"><img src="<?= $img['src'] ?>"/></div><?
+				<div class="cs-item js-package-popup" data-featherlight="<?= $imgDetail['src'] ?>"><img src="<?=
+				$img['src']
+				?>"/></div><?
 			}
 			?>
 		</div>
