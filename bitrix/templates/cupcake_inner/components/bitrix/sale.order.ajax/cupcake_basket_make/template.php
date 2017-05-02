@@ -567,7 +567,9 @@ if (!empty($arResult['JS_DATA']['COUPON_LIST']))
 						class="rub">i</span>
 				</div>
 			</div>
-			<div class="button-group">
+			<div class="button-group w-cond">
+				<div class="cond-info">Нажимая на кнопку "Купить",
+					вы принимаете <a target="_blank" href="/conditions/">условия</a></div>
 				<a href="/personal/cart/">
 					<button class="b-bnt-form b-bnt-buy-one-click wo_border"
 					        value="" type="button"></button>

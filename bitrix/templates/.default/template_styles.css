@@ -682,6 +682,26 @@ text-align:left;
     line-height: 25px;
     color: #22303d;
 }
+.conditions ul {
+    list-style: disc;
+    margin:0 0 20px 40px;
+}
+.conditions h2 {
+    font-family: 'PTSansRegular';
+    font-size: 28px;
+    line-height: 44px;
+    margin: 30px 0 10px;
+    color: #22303d;
+}
+.cond-info {
+    font-family: 'PTSansRegular';
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 5px;
+}
+.cond-info a {
+    color: #fff;
+}
 .b-block-new-content--img {
 	padding-top:40px;
 	margin-bottom:60px;
@@ -6418,6 +6438,9 @@ sup.sum-add-postcard {
 .button-group {
 	margin-left:40px;
 	padding-top:10px;
+}
+.button-group.w-cond {
+    padding-top:0;
 }
 .b-flag-bg--basket .button-group {
 	margin-right:170px;
