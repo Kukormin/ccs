@@ -40,7 +40,7 @@ class Cakes
 			$extCache->startDataCache();
 
 			$iblockSection = new \CIBlockSection();
-			$rsItems = $iblockSection->GetList(array(), array(
+			$rsItems = $iblockSection->GetList(array('SORT' => 'ASC'), array(
 				'IBLOCK_ID' => self::IBLOCK_ID,
 				'ACTIVE' => 'Y',
 			), false, array(

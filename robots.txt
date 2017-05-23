@@ -3,6 +3,7 @@ Disallow: /*index.php$
 Disallow: /bitrix/
 Disallow: /auth/
 Disallow: /personal/
+Disallow: /conditions/
 Disallow: /d/
 Disallow: */*search
 Disallow: /*/slide_show/
@@ -39,6 +40,7 @@ Disallow: /*index.php$
 Disallow: /bitrix/
 Disallow: /auth/
 Disallow: /personal/
+Disallow: /conditions/
 Disallow: /d/
 Disallow: */*search
 Disallow: /*/slide_show/

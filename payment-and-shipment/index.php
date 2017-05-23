@@ -24,46 +24,37 @@ $APPLICATION->SetTitle("Оплата и доставка");
 			</p>
 			<p>
  <b>Доставка</b><br>
-				 Мы доставляем заказы по&nbsp;Москве и&nbsp;Московской области. По&nbsp;умолчанию доставка осуществляется на&nbsp;завтрашний день при заказе до 15:30.Минимальная сумма заказа для доставки 2000 рублей. Стоимость доставки внутри МКАД: 450 рублей. За каждый километр за МКАД: +40 рублей. Стоимость доставки к&nbsp;конкретному часу или на&nbsp;сегодняшний день договорная.
+				 Мы доставляем заказы по&nbsp;Москве и&nbsp;Московской области. По&nbsp;умолчанию доставка осуществляется на&nbsp;завтрашний день при заказе до 15:30. &nbsp;Внимание! Доставляем при заказе от 2000 рублей. При сумме заказа ниже 2000 возможен только самовывоз.Стоимость доставки внутри МКАД: 450 рублей. За каждый километр за МКАД: +40 рублей. Стоимость доставки к&nbsp;конкретному часу или на&nbsp;сегодняшний день договорная.
 			</p>
 			<p>
-				<div class="delivery_pre">
-					<br />
-					<img src="/images/delivery/d1.jpg" alt="">
-					<img src="/images/delivery/d2.jpg" alt="">
-					<img src="/images/delivery/d3.jpg" alt="">
-					<img src="/images/delivery/d4.jpg" alt="">
+			</p>
+			<div class="delivery_pre">
+ <br>
+ <img src="/images/delivery/d1.jpg" alt=""> <img src="/images/delivery/d2.jpg" alt=""> <img src="/images/delivery/d3.jpg" alt=""> <img src="/images/delivery/d4.jpg" alt="">
+			</div>
+			<ul class="delivery_items">
+				<li>
+				<div class="b-item-basket-img js-package-popup" data-featherlight="/images/delivery/d1.jpg">
+ <img src="/images/delivery/d1.png" alt="">
 				</div>
-				<ul class="delivery_items">
-					<li>
-						<div class="b-item-basket-img js-package-popup"
-					         data-featherlight="/images/delivery/d1.jpg">
-							<img src="/images/delivery/d1.png" alt="">
-						</div>
-						Транспортировка
-					</li>
-					<li>
-						<div class="b-item-basket-img js-package-popup"
-						     data-featherlight="/images/delivery/d2.jpg">
-							<img src="/images/delivery/d2.png" alt="">
-						</div>
-						Коробка для тортов
-					</li>
-					<li>
-						<div class="b-item-basket-img js-package-popup"
-						     data-featherlight="/images/delivery/d3.jpg">
-							<img src="/images/delivery/d3.png" alt="">
-						</div>
-						Коробка для капкейков
-					</li>
-					<li>
-						<div class="b-item-basket-img js-package-popup"
-						     data-featherlight="/images/delivery/d4.jpg">
-							<img src="/images/delivery/d4.png" alt="">
-						</div>
-						Коробка для эклеров
-					</li>
-				</ul>
+				 Транспортировка </li>
+				<li>
+				<div class="b-item-basket-img js-package-popup" data-featherlight="/images/delivery/d2.jpg">
+ <img src="/images/delivery/d2.png" alt="">
+				</div>
+				 Коробка для тортов </li>
+				<li>
+				<div class="b-item-basket-img js-package-popup" data-featherlight="/images/delivery/d3.jpg">
+ <img src="/images/delivery/d3.png" alt="">
+				</div>
+				 Коробка для капкейков </li>
+				<li>
+				<div class="b-item-basket-img js-package-popup" data-featherlight="/images/delivery/d4.jpg">
+ <img src="/images/delivery/d4.png" alt="">
+				</div>
+				 Коробка для эклеров </li>
+			</ul>
+			<p>
 			</p>
 			<p>
  <b>Возврат</b><br>

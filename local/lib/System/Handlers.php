@@ -20,8 +20,8 @@ class Handlers
 		static $added = false;
 		if (!$added) {
 			$added = true;
-			AddEventHandler('iblock', 'OnBeforeIBlockElementDelete',
-				array(__NAMESPACE__ . '\Handlers', 'beforeIBlockElementDelete'));
+			/*AddEventHandler('iblock', 'OnBeforeIBlockElementDelete',
+				array(__NAMESPACE__ . '\Handlers', 'beforeIBlockElementDelete'));*/
 			AddEventHandler('iblock', 'OnBeforeIBlockElementUpdate',
 				array(__NAMESPACE__ . '\Handlers', 'beforeIBlockElementUpdate'));
 			AddEventHandler('iblock', 'OnIBlockPropertyBuildList',

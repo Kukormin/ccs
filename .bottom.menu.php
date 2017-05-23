@@ -1,12 +1,12 @@
 <?
 $aMenuLinks = Array(
-	/*Array(
+	Array(
 		"Торты на заказ",
 		"/cakes/",
 		Array(),
 		Array(),
 		""
-	),*/
+	),
 	Array(
 		"Торты",
 		"/cat/cakes/",

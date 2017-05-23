@@ -29,7 +29,7 @@ if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true) return;
 // t.k: для себя вырубил на проде
 if ($_SERVER["REMOTE_ADDR"] != '109.197.195.38')
 {
-?>
+	?>
 <script type='text/javascript'>
 	(function(){ var widget_id = 'ORFO3uXdFb';var d=document;var w=window;function l(){
 		var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
@@ -37,3 +37,5 @@ if ($_SERVER["REMOTE_ADDR"] != '109.197.195.38')
 }
 
 ?><img src="//code.directadvert.ru/track/291860.gif" width="1" height="1" /><?
+
+?><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'marketcall.start':new Date().getTime(),event:'marketcall.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='mcLayer'?'&l='+l:'';j.async=true;j.src='https://marketcall.ru/js/marketcall.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','mcLayer','1109');</script><?
