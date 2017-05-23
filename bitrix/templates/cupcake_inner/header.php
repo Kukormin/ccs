@@ -122,7 +122,7 @@ if (!$hideHeader)
 			<div class="b-header-phones-wrapper">
 				<div class="b-header__phone">+7 (499) 322-00-20</div>
 				<div class="b-header-watsup">Пишите нам в WhatsApp</div>
-				<a class="b-header-watsup-phone" href="intent://send/+79686227342#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">+7 (968) 622-73-42</a>
+				<a class="b-header-watsup-phone" href="whatsapp://send?text=Привет!">+7 (968) 622-73-42</a>
 			</div><?
 
 			// Логотип
@@ -222,7 +222,7 @@ if (!$hideHeader)
 						<li class="b-top-nav__item  b-top-nav__item--mob">
 							<div class="b-header__phone b-header__phone--mob">+7 499 322-00-20</div>
 							<div class="b-header-watsup b-header-watsup--mob">Пишите нам в WhatsApp</div>
-							<a class="b-header-watsup-phone b-header-watsup-phone--mob" href="intent://send/+79686227342#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">+7 (968) 622-73-42</a>
+							<a class="b-header-watsup-phone b-header-watsup-phone--mob" href="whatsapp://send?text=Привет!">+7 (968) 622-73-42</a>
 						</li>
 					</ul>
 				</nav>
