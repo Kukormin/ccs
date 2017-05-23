@@ -1495,7 +1495,7 @@
 
 @media (max-width: 650px) {
     .main-screen{
-        padding-top: 65px;
+        padding-top: 115px;
     }
     .with_header_alert .main-screen{
         padding-top: 105px;
@@ -1508,6 +1508,18 @@
 		font-size:16px;
 	}
 
+	.b-subheader-phone {
+		display: block;
+		background:url(../images/icn-phone.png) no-repeat left center;
+		margin: 70px 0 0 30px;
+		padding-left: 40px;
+	}
+	.b-subheader-phone a {
+		line-height: 40px;
+		font-family: 'PTSansCaptionBold', sans-serif;
+		font-size: 18px;
+		color:#fff;
+	}
 	.b-header__user,
 	.b-header__phone {
 		display:none;

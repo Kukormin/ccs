@@ -8258,3 +8258,6 @@ label.iPhoneCheckLabelOn {
     top: 50%;
     margin-top: -30px;
 }
+.b-subheader-phone {
+    display: none;
+}
