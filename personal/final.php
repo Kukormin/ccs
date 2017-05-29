@@ -190,6 +190,7 @@ $oid = intval($_GET['id']);
         </div>
     </section>
         <?
+
         CModule::IncludeModule('sale');
         CModule::IncludeModule("iblock");
 
@@ -200,105 +201,119 @@ $oid = intval($_GET['id']);
         $categoryName = [];
 
         $arOrder = CSaleOrder::GetByID($oid);
-        $db_dtype = CSaleDelivery::GetList(
-        array(
-        "SORT" => "ASC",
-        ),
-        array(
-        "ACTIVE" => "Y",
-        ),
-        false,
-        false,
-        array('*')
-        );
+        $db_dtype = CSaleDelivery::GetList(["SORT" => "ASC",], ["ACTIVE" => "Y",], false, false, ['*']);
 
-        while ($ar_dtype = $db_dtype->Fetch()) {
-            if ($ar_dtype['ID'] == $arOrder['DELIVERY_ID']) {
+        while ($ar_dtype = $db_dtype->Fetch())
+        {
+            if ($ar_dtype['ID'] == $arOrder['DELIVERY_ID'])
+            {
                 $deliveryPrice = $ar_dtype['PRICE'];
                 break;
             }
         }
 
-        $items = [];
-        ?>
-        <script>
-			DSPCounter('send', {
-				'sid': '216208',
-				'site_area': 'chGedGaY',
-				'user_id': '',
-				'lead_id': '',
-				'order_sum': '<?=$price?>'
-			});
+        $track = false;
+        $db_props = CSaleOrderPropsValue::GetOrderProps($oid);
+        $iGroup = -1;
+        while ($arProps = $db_props->Fetch())
+        {
+            if ($arProps["CODE"]=="TRACK")
+            {
+				$track = true;
+				break;
+			}
+        }
 
-			dataLayer.push({
-                'ecommerce': {
-                    'purchase': {
-                        'actionField': {
-                            'id': '<?=$oid?>',
-                            'affiliation': 'cupcakestory.ru',
-                            'revenue': '<?=$price?>',
-                            'shipping': '<?=$deliveryPrice?>',
-                            'tax': 0,
-                            'currency': 'RUR'
-                        },
-                        'products': [
-                            <?
-                            $dbBasketItems = CSaleBasket::GetList(
-                                array("NAME" => "ASC"),
-                                array(
-                                    "LID" => s1,
-                                    "ORDER_ID" => $oid
-                                ),
-                                false,
-                                false,
-                                array("ID", "PRODUCT_ID", "PRICE", "WEIGHT", "NAME", "IBLOCK_NAME", "QUANTITY")
-                            );
+        if (!$track)
+		{
+			$arFields = array(
+				"ORDER_ID" => $oid,
+				"ORDER_PROPS_ID" => 8,
+				"NAME" => "Трекеры",
+				"CODE" => "TRACK",
+				"VALUE" => true
+			);
+			CSaleOrderPropsValue::Add($arFields);
 
-                            while ($arBasketItems = $dbBasketItems->GetNext()) {
-                                $res = CIBlockElement::GetByID($arBasketItems['PRODUCT_ID']);
-                                if($ar_res = $res->GetNext()) {
-                                    $catPos = strpos($ar_res['IBLOCK_NAME'], '(');
-                                    $categoryName = trim(substr($ar_res['IBLOCK_NAME'], 0, $catPos));
-                                }
-                                $pos = strpos($arBasketItems['NAME'], '(');
-                                $productName = trim(substr($arBasketItems['NAME'], 0, $pos)) ? trim(substr($arBasketItems['NAME'], 0, $pos)) : $arBasketItems['NAME'];
-                                $items[] = [
-                                        'ID' => $arBasketItems['PRODUCT_ID'],
-                                        'QNT' => intval($arBasketItems['QUANTITY']),
-                                        'PRICE' => intval($arBasketItems['PRICE']),
-                                ]
-                                ?>
-                            {
-                                'id': '<?=$arBasketItems['PRODUCT_ID']?>',
-                                'name': '<?=$productName?>',
-                                'category': '<?=$categoryName?>',
-                                'price': '<?=$arBasketItems['PRICE']?>',
-                                'quantity': '<?=preg_replace('/\D/', '', $arBasketItems['NAME']) ? preg_replace('/\D/', '', $arBasketItems['NAME']) : '1'?>',
-                            },
-                            <? } ?>
-                        ]
-                    }
-                }
-            });
+			$items = [];
+			?>
+            <script>
+				DSPCounter('send', {
+					'sid': '216208',
+					'site_area': 'chGedGaY',
+					'user_id': '',
+					'lead_id': '',
+					'order_sum': '<?=$price?>'
+				});
 
-			(window["rrApiOnReady"] = window["rrApiOnReady"] || []).push(function() {
-				try {
-					rrApi.order({
-						transaction: <?=$oid?>,
-						items: [<?
-                            foreach ($items as $i => $item)
-                            {
-                                if ($i)
-                                    echo ',';
-                                ?>
-							    { id: <?= $item['ID'] ?>, qnt: <?= $item['QNT'] ?>, price: <?= $item['PRICE'] ?>}<?
-                            }
-                            ?>
-				        ]
-				    });
-				} catch(e) {}
-			});
+				dataLayer.push({
+					'ecommerce': {
+						'purchase': {
+							'actionField': {
+								'id': '<?=$oid?>',
+								'affiliation': 'cupcakestory.ru',
+								'revenue': '<?=$price?>',
+								'shipping': '<?=$deliveryPrice?>',
+								'tax': 0,
+								'currency': 'RUR'
+							},
+							'products': [
+								<?
+								$dbBasketItems =
+									CSaleBasket::GetList(["NAME" => "ASC"], ["LID" => s1, "ORDER_ID" => $oid], false,
+										false,
+										["ID", "PRODUCT_ID", "PRICE", "WEIGHT", "NAME", "IBLOCK_NAME", "QUANTITY"]);
 
-        </script>
+								while ($arBasketItems = $dbBasketItems->GetNext()) {
+								$res = CIBlockElement::GetByID($arBasketItems['PRODUCT_ID']);
+								if ($ar_res = $res->GetNext())
+								{
+									$catPos = strpos($ar_res['IBLOCK_NAME'], '(');
+									$categoryName = trim(substr($ar_res['IBLOCK_NAME'], 0, $catPos));
+								}
+								$pos = strpos($arBasketItems['NAME'], '(');
+								$productName = trim(substr($arBasketItems['NAME'], 0, $pos)) ?
+									trim(substr($arBasketItems['NAME'], 0, $pos)) : $arBasketItems['NAME'];
+								$items[] =
+									['ID' => $arBasketItems['PRODUCT_ID'], 'QNT' => intval($arBasketItems['QUANTITY']),
+										'PRICE' => intval($arBasketItems['PRICE']),]
+								?>
+								{
+									'id': '<?=$arBasketItems['PRODUCT_ID']?>',
+									'name': '<?=$productName?>',
+									'category': '<?=$categoryName?>',
+									'price': '<?=$arBasketItems['PRICE']?>',
+									'quantity': '<?=preg_replace('/\D/', '', $arBasketItems['NAME']) ?
+										preg_replace('/\D/', '', $arBasketItems['NAME']) : '1'?>',
+								},
+								<? } ?>
+							]
+						}
+					}
+				});
 
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+				(window["rrApiOnReady"] = window["rrApiOnReady"] || []).push(function () {
+					try {
+						rrApi.order({
+							transaction: <?=$oid?>,
+							items: [<?
+								foreach ($items as $i => $item)
+								{
+								if ($i)
+									echo ',';
+								?>
+								{id: <?= $item['ID'] ?>, qnt: <?= $item['QNT'] ?>, price: <?= $item['PRICE'] ?>}<?
+								}
+								?>
+							]
+						});
+					} catch (e) {
+					}
+				});
+
+            </script>
+
+			<?
+		}
+
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
