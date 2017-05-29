@@ -4,6 +4,25 @@ if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true) return;
 \Local\Utils\Remarketing::printHtml();
 
 ?>
+    <script type="text/javascript">
+		var rrPartnerId = "57f4d6a465bf1932e8abf6db";
+		var rrApi = {};
+		var rrApiOnReady = rrApiOnReady || [];
+		rrApi.addToBasket = rrApi.order = rrApi.categoryView = rrApi.view =
+			rrApi.recomMouseDown = rrApi.recomAddToCart = function() {};
+		(function(d) {
+			var ref = d.getElementsByTagName('script')[0];
+			var apiJs, apiJsId = 'rrApi-jssdk';
+			if (d.getElementById(apiJsId)) return;
+			apiJs = d.createElement('script');
+			apiJs.id = apiJsId;
+			apiJs.async = true;
+			apiJs.src = "//cdn.retailrocket.ru/content/javascript/tracking.js";
+			ref.parentNode.insertBefore(apiJs, ref);
+		}(document));
+    </script><?
+
+?>
 <script> window._txq = window._txq || []; var s = document.createElement('script'); s.type = 'text/javascript'; s
 .async = true; s.src = '//st.targetix.net/txsp.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s); _txq.push(['createPixel', '553f0dbe870a8e040c5d3d9b']); _txq.push(['track', 'PageView']); </script>
 <?

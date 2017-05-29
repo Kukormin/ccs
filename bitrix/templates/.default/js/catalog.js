@@ -475,7 +475,6 @@ var Detail = {
 		var offer = btn.data('offer');
 		var product = btn.closest('.js-product');
 		var price = product.find('.js-priceblock');
-		console.log(price);
 		if (price.length) {
 			var moved = price.clone();
 			var pos = price.offset();
@@ -505,6 +504,8 @@ var Detail = {
 			if (resp != 0) {
 				btn.addClass('js-go-to').text('к корзине');
 				Detail.headCart.text(resp);
+
+				try { rrApi.addToBasket(id) } catch(e) {}
 			}
 		});
 	},
