@@ -218,6 +218,8 @@ $oid = intval($_GET['id']);
                 break;
             }
         }
+
+        $items = [];
         ?>
         <script>
 			DSPCounter('send', {
@@ -249,10 +251,10 @@ $oid = intval($_GET['id']);
                                 ),
                                 false,
                                 false,
-                                array("ID", "PRODUCT_ID", "PRICE", "WEIGHT", "NAME", "IBLOCK_NAME")
-                            );?>
+                                array("ID", "PRODUCT_ID", "PRICE", "WEIGHT", "NAME", "IBLOCK_NAME", "QUANTITY")
+                            );
 
-                            <?while ($arBasketItems = $dbBasketItems->GetNext()) {
+                            while ($arBasketItems = $dbBasketItems->GetNext()) {
                                 $res = CIBlockElement::GetByID($arBasketItems['PRODUCT_ID']);
                                 if($ar_res = $res->GetNext()) {
                                     $catPos = strpos($ar_res['IBLOCK_NAME'], '(');
@@ -260,6 +262,11 @@ $oid = intval($_GET['id']);
                                 }
                                 $pos = strpos($arBasketItems['NAME'], '(');
                                 $productName = trim(substr($arBasketItems['NAME'], 0, $pos)) ? trim(substr($arBasketItems['NAME'], 0, $pos)) : $arBasketItems['NAME'];
+                                $items[] = [
+                                        'ID' => $arBasketItems['PRODUCT_ID'],
+                                        'QNT' => intval($arBasketItems['QUANTITY']),
+                                        'PRICE' => intval($arBasketItems['PRICE']),
+                                ]
                                 ?>
                             {
                                 'id': '<?=$arBasketItems['PRODUCT_ID']?>',
@@ -273,6 +280,25 @@ $oid = intval($_GET['id']);
                     }
                 }
             });
+
+			(window["rrApiOnReady"] = window["rrApiOnReady"] || []).push(function() {
+				try {
+					rrApi.order({
+						transaction: <?=$oid?>,
+						items: [<?
+                            foreach ($items as $i => $item)
+                            {
+                                if ($i)
+                                    echo ',';
+                                ?>
+							    { id: <?= $item['ID'] ?>, qnt: <?= $item['QNT'] ?>, price: <?= $item['PRICE'] ?>}<?
+                            }
+                            ?>
+				        ]
+				    });
+				} catch(e) {}
+			});
+
         </script>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

@@ -281,7 +281,14 @@ $product = $component->product;
 					}
 				});
 			}
-		});
+			(window["rrApiOnReady"] = window["rrApiOnReady"] || []).push(function() {
+				try{ rrApi.view(<?= $product['ID '] ?>); } catch(e) {}
+			});
+			$('.js-add-to-basket').click(function () {
+				if ($('.js-add-to-basket').html() == 'в корзину') {
+					try { rrApi.addToBasket(<?= $product['ID '] ?>) } catch(e) {}
+				}
+			});
 	</script><?
 
 	?>

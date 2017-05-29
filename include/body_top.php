@@ -3,6 +3,25 @@ if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true)
 	return;
 
 ?>
+<script type="text/javascript">
+    var rrPartnerId = "57f4d6a465bf1932e8abf6db";
+    var rrApi = {};
+    var rrApiOnReady = rrApiOnReady || [];
+    rrApi.addToBasket = rrApi.order = rrApi.categoryView = rrApi.view =
+        rrApi.recomMouseDown = rrApi.recomAddToCart = function() {};
+    (function(d) {
+        var ref = d.getElementsByTagName('script')[0];
+        var apiJs, apiJsId = 'rrApi-jssdk';
+        if (d.getElementById(apiJsId)) return;
+        apiJs = d.createElement('script');
+        apiJs.id = apiJsId;
+        apiJs.async = true;
+        apiJs.src = "//cdn.retailrocket.ru/content/javascript/tracking.js";
+        ref.parentNode.insertBefore(apiJs, ref);
+    }(document));
+</script><?
+
+?>
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PVMWDQ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
