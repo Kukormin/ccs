@@ -289,6 +289,7 @@ $product = $component->product;
 					try { rrApi.addToBasket(<?= $product['ID '] ?>) } catch(e) {}
 				}
 			});
+		});
 	</script><?
 
 	?>
