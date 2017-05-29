@@ -30,3 +30,5 @@ if (!defined('PRODUCTION_ZONE') || PRODUCTION_ZONE !== true)
 
 <meta name="google-site-verification" content="hr5ePvwzR38szUFRFQDF_ZR3vpcewz-ZKBgwXg4WDLE" />
 <meta name='yandex-verification' content='68d480cb35a9235a' />
+
+<noindex><script async src="https://stats.lptracker.ru/code/new/38143"></script></noindex>

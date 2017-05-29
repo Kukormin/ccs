@@ -40,5 +40,3 @@ if ($_SERVER["REMOTE_ADDR"] != '109.197.195.38')
 
 ?><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'marketcall.start':new Date().getTime(),event:'marketcall.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='mcLayer'?'&l='+l:'';j.async=true;j.src='https://marketcall.ru/js/marketcall.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','mcLayer','1109');</script><?
 
-?>
-<noindex><script async src="https://stats.lptracker.ru/code/new/38143"></script></noindex><?
