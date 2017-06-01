@@ -254,10 +254,10 @@ textarea {
 
 
 .personal_galery {
-	margin:0 auto;
-	padding-bottom: 85px;
-	max-width:870px;
-	width:90%;
+    margin: 0 auto;
+    padding-bottom: 35px;
+    max-width: 870px;
+    width: 90%;
 }
 .photo-page-main .b-slider-about-novelty {
     padding: 95px 0 60px;
@@ -880,7 +880,7 @@ text-align:left;
 }
 .b-sweet-table-text {
 	margin: 0 auto;
-    padding: 315px 0 20px;
+    padding: 40px 0 20px;
     max-width: 1100px;
 	width:92%;
     position: relative;
@@ -892,14 +892,6 @@ text-align:left;
     color: #fff;
     text-align: center;
 }
-.b-sweet-table-top-text__sub {
-    font-family: 'PTSansCaptionBold', sans-serif;
-    line-height: 25px;
-    font-size: 17px;
-    color: #fff;
-    text-shadow: 1px 1px 3px black;
-    text-align: center;
-}
 .b-sweet-table-top-text__sub-item {
     margin-bottom: 38px;
     display: block;
@@ -909,10 +901,34 @@ text-align:left;
 	padding: 90px 0 100px;
     text-align: center;
 }
+
 .b-sweet-table-text h3 {
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 10px;
+    font-family: 'Lasco Bold';
+    position: relative;
 }
+
+.b-sweet-table-text h3:before{
+    content: '';
+    position: absolute;
+    background: url(./images/wave.png);
+    left: 0px;
+    width: 21%;
+    height: 4px;
+    top: 10px;
+}
+
+.b-sweet-table-text h3:after{
+    content: '';
+    position: absolute;
+    background: url(./images/wave.png);
+    right: 0px;
+    width: 21%;
+    height: 4px;
+    top: 10px;
+}
+
 .b-sweet-table-text h4 {
     font-size: 16px;
     margin: 10px 0 0px;
@@ -920,13 +936,84 @@ text-align:left;
 }
 .b-sweet-table-text ul {
     list-style: outside none disc;
-    margin: 10px 0 10px 40px;
+    margin: 10px 0 10px 10px;
     text-align: left;
 }
 
+.item{
+    margin-bottom: 60px;
+}
 
+.item .item-title{
+    font-family: 'PTSansRegular', sans-serif;
+    line-height: 20px;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 60px;
+}
 
+.item .item-description{
+    font-family: 'PTSansRegular';
+    font-size: 14px;
+    margin-bottom: 25px;
+}
 
+.item-consist{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    float: left;
+}
+
+.consist-title{
+    font-family: 'PTSansRegular';
+    font-size: 17px;
+}
+
+.consist-items{
+    font-family: 'PTSansRegular';
+    font-size: 17px;
+}
+
+.item-price{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    float: right;
+}
+
+.price-title{
+    font-family: 'PTSansRegular';
+    font-size: 17px;
+}
+
+.price-value{
+    padding: 10px 28px;
+    background: #aa6290;
+    color: #FFF;
+    font-family: 'PTSansCaptionBold';
+    font-size: 17px;
+    margin: 0 10px 0 10px;
+    position: relative;
+    margin-top: -5px;
+}
+
+.price-value:before{
+    content: ' ';
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 20px solid transparent;	border-right: 20px solid #f2f1ec;
+}
+
+.price-description{
+    font-family: 'PTSansRegular';
+    font-size: 13px;
+}
+
+.clr{
+    clear: both;
+}
 
 
 .b-grey-wrap-top {
@@ -7154,8 +7241,8 @@ margin-top: 20px;
     font-family: "PTSansCaption",sans-serif;
 }
 
-.photo-page-sweet{
-	margin-top: 50px;
+.photo-page-sweet {
+    margin-top: 38px;
 }
 
 .b-comments-wrap > label {
