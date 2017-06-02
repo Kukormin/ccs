@@ -988,7 +988,7 @@ text-align:left;
 }
 
 .price-value{
-    padding: 10px 28px;
+    padding: 10px 28px 10px 20px;
     background: #aa6290;
     color: #FFF;
     font-family: 'PTSansCaptionBold';
