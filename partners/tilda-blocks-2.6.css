@@ -2149,7 +2149,6 @@
 .t330__blockinput {
   display: block;
   vertical-align: middle;
-  height: 100%;
   padding-right: 0px;
   margin-bottom: 25px;
 }
@@ -2167,7 +2166,6 @@
   display: block;
   text-align: center;
   vertical-align: middle;
-  height: 100%;
   width: 100%;
 }
 .t330__submit,
