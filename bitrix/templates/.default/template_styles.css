@@ -935,7 +935,7 @@ text-align:left;
     text-align: left;
 }
 .b-sweet-table-text ul {
-    list-style: outside none disc;
+    list-style: inside none disc;
     margin: 10px 0 10px 10px;
     text-align: left;
 }
