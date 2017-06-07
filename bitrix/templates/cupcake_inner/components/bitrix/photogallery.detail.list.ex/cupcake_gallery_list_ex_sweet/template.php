@@ -5,16 +5,15 @@
 $first = reset($arResult['ELEMENTS_LIST']);
 ?>
 <div class="personal_galery">	
-    <div class="slider-for">
-        <img src="<?=$first['BIG_PICTURE']['SRC']?>" alt=""/>
-    </div>
+    <!--<div class="slider-for">
+        <img src="<?/*=$first['BIG_PICTURE']['SRC']*/?>" alt=""/>
+    </div>-->
     
     <div class="slider-nav-gal">
         <? foreach ($arResult['ELEMENTS_LIST'] as $img) { ?>
-        <div class="slider-nav-gal--item"> 
-            <a class="<?=$img['ID']==$first['ID']?'active':''?>" href="<?=$img['BIG_PICTURE']['SRC']?>">
-                <img src="<?=$img['PREVIEW_PICTURE']['SRC']?>" alt=""/></a>
-        </div>
+            <div class="slider-nav-gal--item" style="background: url('<?=$img['PREVIEW_PICTURE']['SRC']?>'); background-size: cover; height: 320px; margin-left: 10px; position: relative;">
+                <a class="<?=$img['ID']==$first['ID']?'active':''?>" href="<?=$img['BIG_PICTURE']['SRC']?>"></a>
+            </div>
         <? } ?>
     </div>
 </div>

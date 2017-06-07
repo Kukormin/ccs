@@ -415,7 +415,7 @@ $(document).ready(function () {
 
 
 	$('.slider-nav-gal').slick({
-		slidesToShow: 9,
+		slidesToShow: 3,
 		slidesToScroll: 1,
 		arrows: true,
 		fade: false,

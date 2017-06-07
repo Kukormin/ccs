@@ -6648,7 +6648,7 @@ sup.sum-add-postcard {
 .personal_galery .slick-prev {
     position: absolute;
 	left: -30px;
-	top: -9px;
+	top: 120px;
     margin-top: 0;
     border: 0;
     background: url(../.default/images/arr-slide.png) no-repeat left top;
@@ -6666,7 +6666,7 @@ sup.sum-add-postcard {
 .personal_galery  .slick-next {
     position: absolute;
 	right: -30px;
-	top: -9px;
+	top: 120px;
     margin-top: 0;
     border: 0;
     background: url(../.default/images/arr-slide.png) no-repeat right top;
@@ -6687,12 +6687,13 @@ sup.sum-add-postcard {
 }
 .personal_galery .slider-nav-gal--item  a {
 	padding:0 15px;
-	position:relative;
+	position:absolute;
 	display:block;
 	width:100%;
-	box-sizing:border-box;	
+    top: 0;
+    bottom: 0;
 }
-.personal_galery .slider-nav-gal--item  a:after {
+/*.personal_galery .slider-nav-gal--item  a:after {
     content: "";
     position: absolute;
     top: 0;
@@ -6700,7 +6701,7 @@ sup.sum-add-postcard {
     box-shadow: none;
     bottom: 0;
     right: 15px;
-} 
+} */
 .personal_galery .slider-nav-gal--item  a.active:after {
 	box-shadow: 0 0 0 3px #a3a67b inset;
 }
