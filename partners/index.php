@@ -7,7 +7,7 @@
     <title>Cupcake Story. Стильные сладости для красивых событий</title>
 
 
-    <meta property="og:url" content="http://partners.cupcakestory.ru">
+    <meta property="og:url" content="http://cupcakestory.ru/partners/">
     <meta property="og:title" content="Cupcake Story. Стильные сладости для красивых событий">
     <meta property="og:description" content="Партнерская программа для pr, event и свадебных агентств">
     <meta property="og:type" content="website">
