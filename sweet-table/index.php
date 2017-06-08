@@ -254,7 +254,6 @@ $APPLICATION->SetTitle("Заказать сладкий стол для дете
             return [value]
         });
         hideTables.forEach(function (element, index, array) {
-            console.log(element);
             $(element).wrap('<div class="hide_table hidden"></div>');
             $(element).parent().css("height", $(element).css("height"));
             $(element).parent().append('<div class="moar">Показать полностью...</div>');

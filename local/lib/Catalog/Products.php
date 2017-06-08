@@ -1038,8 +1038,6 @@ class Products
 		{
 			if ($product['OFFERS'])
 				continue;
-			if (!$product['PRICE'])
-				continue;
 
 			$return['OFFERS'][] = array(
 				'ID' => $product['ID'],

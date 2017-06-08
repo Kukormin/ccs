@@ -330,7 +330,7 @@
                 }
 
                 $jform.find('.js-form-spec-comments').val('');
-                $formurl = 'https://forms.tildacdn.com/procces/';
+                $formurl = '/ajax/wedding.php';
                 $.ajax({
                     type: "POST",
                     url: $formurl /*$(this).attr('action')*/,
@@ -588,7 +588,6 @@
                         timeout: 1000*15
                     });
 
-                    event.preventDefault();
                     return false;
                 } else {
                     //btnformsubmit.removeClass('t-btn_sending');
@@ -599,33 +598,6 @@
             }
         };
 
-        $('.js-tilda-captcha').each(function(){
-            if ($(this).attr('data-tilda-captchakey') > '' ) {
-                if (window.tildaForm.isRecaptchaScriptInit === false) {
-                    window.tildaForm.isRecaptchaScriptInit = true;
-                    $('head').append('<script src="https://www.google.com/recaptcha/api.js?render=explicit"'+' async defer><'+'/script>');
-                    $('head').append('<style type="text/css">.js-send-form-success .grecaptcha-badge {display: none;}</style>');
-                }
-                var idform = $(this).attr('id');
-                if ($('#'+idform+'recaptcha').length == 0) {
-                    $(this).append('<div id="'+idform+'recaptcha" class="g-recaptcha" data-sitekey="'+$(this).attr('data-tilda-captchakey')+'" data-callback="window.tildaForm.captchaCallback" data-size="invisible"></div>');
-                }
-            } else {
-                $(this).removeClass('js-tilda-captcha');
-            }
-        });
-
-        $('.js-tilda-mask').each(function(){
-            var mask = $(this).data('tilda-mask');
-            var maskplaceholder = $(this).data('tilda-mask-holder');
-            if (mask) {
-                if (maskplaceholder > '') {
-                    $(this).mask(mask, {placeholder: maskplaceholder});
-                } else {
-                    $(this).mask(mask);
-                }
-            }
-        });
 
         $('.js-tilda-rule').focus(function(){
             var str = $(this).attr('placeholder');
@@ -661,13 +633,14 @@
         $('.r').on('submit','.js-form-proccess', function(){
             var btnformsubmit = $(this).find('[type=submit]');
             var btnstatus = btnformsubmit.data('form-sending-status');
-            if(btnstatus && btnstatus == 3) {
+            /*if(btnstatus && btnstatus == 3) {
                 btnformsubmit.data('form-sending-status');
                 return true;
             } else {
                 $(this).find('[type=submit]').trigger('click');
                 return false;
-            }
+            }*/
+            return false;
         });
 
         $('.r').off('dblclick','.js-form-proccess [type=submit]');

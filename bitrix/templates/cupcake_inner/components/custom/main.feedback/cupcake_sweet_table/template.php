@@ -9,10 +9,31 @@ if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)die();
  * @global CMain $APPLICATION
  * @global CUser $USER
  */
+
+$ajax = false;
+$result = [];
+if ($arResult["ERROR_MESSAGE"])
+{
+    $ajax = true;
+	$result['MESSAGE'] = implode('<br>', $arResult["ERROR_MESSAGE"]);
+}
+elseif($arResult["OK_MESSAGE"])
+{
+	$ajax = true;
+	$result['MESSAGE'] = $arResult["OK_MESSAGE"];
+}
+
+if ($ajax)
+{
+	$APPLICATION->RestartBuffer();
+
+	header('Content-Type: application/json');
+	echo json_encode($result);
+
+	die();
+}
+
 ?>
-
-
-
 <section class="b-bg-grey">
 
     <div class="b-content-center b-sweet-table--form">
@@ -99,6 +120,11 @@ if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)die();
 </section>
 
 <script type="text/javascript">
+	var sunday_holidays = 0;
+	var holidays = [];
+	var dhour = 15;
+	var dminutes = 0;
+	var free_delivery = [];
     $(document).ready(function(){
         $('#reloadCaptcha').click(function(){
             $('#whiteBlock').show();

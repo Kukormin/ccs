@@ -280,8 +280,8 @@
 
         <!-- T186 -->
         <div class="t186">
-            <form id="form7044371" name="form7044371" role="form" action="" method="POST" data-formactiontype="0"
-                  data-inputbox=".t186__blockinput" class="js-form-proccess">
+            <form id="form7044371" name="form7044371" role="form" action="/ajax/wedding.php" method="POST" data-formactiontype="0"
+                  data-inputbox=".t186__blockinput" class="js-form-proccess" data-is-formajax="y">
                 <div class="t-container">
                     <div class="t-col t-col_8 t-prefix_2">
                         <div>
@@ -319,9 +319,6 @@
                         </div>
                     </div>
                 </div>
-                <div style="position: absolute; left: -5000px;"><input name="form-spec-comments" value="Its good"
-                                                                       class="js-form-spec-comments" tabindex="-1"
-                                                                       type="text"></div>
             </form>
         </div>
 

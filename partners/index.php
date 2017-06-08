@@ -35,10 +35,8 @@
     <script src="//tilda.ws/js/jquery-1.10.2.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <script src="tilda-scripts-2.6.js"></script>
-    <script src="tilda-blocks-2.3.js?t=1476114483"></script>
-
-
-    <script src="tilda-forms-1.0.js?t=1476114483"></script>
+    <script src="tilda-blocks-2.3.js"></script>
+    <script src="tilda-forms-1.js"></script>
 
 
 </head>
@@ -352,7 +350,7 @@
                             <div class="t330__descr t-descr t-descr_xs" field="descr">мы перезвоним и все расскажем
                             </div>
                             <form id="form5823446" name="form5823446" role="form"
-                                  action="http://forms.tildacdn.info/procces/" method="POST" data-formactiontype="2"
+                                  action="/ajax/partners.php" method="POST" data-formactiontype="2"
                                   data-inputbox=".t330__blockinput" class="js-form-proccess"><input type="hidden"
                                                                                                     name="formservices[]"
                                                                                                     value="1b81fab760d749e5d2c03dcb1ef7a245"
@@ -403,12 +401,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div style="position: absolute; left: -5000px;"><input type="text"
-                                                                                       name="form-spec-comments"
-                                                                                       value="Its good"
-                                                                                       class="js-form-spec-comments"
-                                                                                       tabindex="-1"></div>
-                            </form>
+                             </form>
                         </div>
                     </div>
                 </div>
