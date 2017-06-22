@@ -8349,3 +8349,124 @@ label.iPhoneCheckLabelOn {
 .b-subheader-phone {
     display: none;
 }
+
+.clr{
+    clear: both;
+}
+
+.b-content{
+    width: 100%;
+    max-width: 1170px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.b-goodies-block{
+    background: url("/local/templates/.default/images/goodies/post_header_bg.jpg") no-repeat;
+    height: 480px;
+}
+
+.content-left{
+    float: left;
+    width: 40%;
+    margin-top: 50px;
+}
+
+.content-right{
+    margin-top: 50px;
+    float: right;
+    width: 60%;
+    text-align: right;
+}
+
+.b-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.this-is {
+    font-size: 24px;
+    color: #FFF;
+    margin-left: 25px;
+    font-family: 'PTSansRegular';
+}
+
+.list {
+    margin-left: 88px;
+    margin-top: 25px;
+}
+
+.list__item{
+    font-size: 18px;
+    color: #FFF;
+    position: relative;
+    font-family: 'PTSansCaption', sans-serif;
+    line-height: 35px;
+}
+
+.list__item::before{
+    position: absolute;
+    content: ' ';
+    background: url('/local/templates/.default/images/goodies/list_marker.png');
+    width: 20px;
+    height: 20px;
+    left: -35px;
+    top: 7px;
+}
+
+.goodies-content{
+    margin-top: 20px;
+}
+
+.goody__line{
+    margin-bottom: 30px;
+    float: left;
+}
+
+.goody-item{
+    float: left;
+    margin-right: 70px;
+    height: 293px;
+    max-width: 240px;
+}
+
+.goody__line .goody-item:nth-child(4){
+    margin-right: 0px;
+}
+
+.goody-item__image{
+    width: 240px;
+    height: 240px;
+}
+
+.goody-item__content {
+    margin-top: 15px;
+    font-family: 'PTSansRegular';
+    font-size: 14px;
+}
+
+.goody-item__content-left {
+    float: left;
+    width: 48%;
+    text-align: right;
+    padding-right: 7px;
+}
+
+.goody_property{
+    color: #aa6290;
+}
+
+.goody-item__content-mid {
+    float: left;
+    width: 2px;
+    height: 43px;
+    background: #aa6290;
+    margin-top: -5px;
+}
+
+.goody-item__content-right {
+    float: right;
+    width: 45%;
+}
