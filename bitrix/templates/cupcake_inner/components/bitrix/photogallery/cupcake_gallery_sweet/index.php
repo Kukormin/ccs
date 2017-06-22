@@ -23,30 +23,6 @@ foreach ($URL_NAME_DEFAULT as $URL => $URL_VALUE)
 }
 ?>
 <div class="photo-page-main photo-page-sweet"><?
-if ($arParams["PERMISSION"] >= "U" || $arParams["SHOW_TAGS"] == "Y" || !empty($arRes))
-{
-	ob_start();
-	if ($arParams["PERMISSION"] >= "U")
-	{
-	?>
-	<div class="photo-controls photo-controls-buttons">
-		<ul class="photo-controls">
-            <li class="photo-control photo-control-last photo-control-album-upload">
-				<a rel="nofollow" href="<?=CComponentEngine::MakePathFromTemplate($arParams["UPLOAD_URL"], array("SECTION_ID" => "56"))?>">
-					<span><?=GetMessage("P_UPLOAD")?></span></a>
-			</li>
-		</ul>
-		<div class="empty-clear"></div>
-	</div>
-	<?
-	}
-	$res = ob_get_clean();
-	if (!empty($res)):
-?>
-        <?=$res?>
-<?
-	endif;
-}
 
 ?><?$APPLICATION->IncludeComponent(
 	"bitrix:photogallery.section.list",

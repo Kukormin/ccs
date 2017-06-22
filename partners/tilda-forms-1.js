@@ -330,7 +330,7 @@
                 }
 
                 $jform.find('.js-form-spec-comments').val('');
-                $formurl = 'https://forms.tildacdn.com/procces/';
+                $formurl = '/ajax/partners.php';
                 $.ajax({
                     type: "POST",
                     url: $formurl /*$(this).attr('action')*/,
@@ -665,95 +665,85 @@
                 btnformsubmit.data('form-sending-status');
                 return true;
             } else {
-                $(this).find('[type=submit]').trigger('click');
+
+				if (btnstatus >= '1') {
+					/* 0 - могу отправлять, 1 - отправляю, как только отправлено снова в ставим в 0 */
+					return false;
+				}
+
+				var $activeForm = $(this).closest('form'), arErrors=false;
+				if ($activeForm.length == 0) {
+					return false;
+				}
+
+				btnformsubmit.addClass('t-btn_sending');
+				btnformsubmit.data('form-sending-status','1');
+				btnformsubmit.data('submitform', $activeForm);
+
+				window.tildaForm.hideErrors($activeForm);
+
+				arErrors = window.tildaForm.validate($activeForm);
+
+				if (window.tildaForm.showErrors($activeForm, arErrors)) {
+					btnformsubmit.removeClass('t-btn_sending');
+					btnformsubmit.data('form-sending-status','0');
+					btnformsubmit.data('submitform','');
+					return false;
+				} else {
+					var formtype = $activeForm.data('formactiontype');
+					var formskey = $('#allrecords').data('tilda-formskey');
+
+					if ($activeForm.find('.js-formaction-services').length == 0 && formtype != 1 && formskey == '') {
+						var $errBox = $activeForm.find('.js-errorbox-all');
+						if(!$errBox || $errBox.length == 0) {
+							$activeForm.prepend('<div class="js-errorbox-all"></div>');
+							$errBox = $activeForm.find('.js-errorbox-all');
+						}
+
+						var $allError = $errBox.find('.js-rule-error-all');
+						if (!$allError || $allError.length == 0) {
+							$errBox.append('<p class="js-rule-error-all">'+json.error+'</p>');
+							$allError = $errBox.find('.js-rule-error-all');
+						}
+						$allError.html('Please set reciever in block with forms').show();
+						$errBox.show();
+
+						$activeForm.addClass('js-send-form-error');
+						btnformsubmit.removeClass('t-btn_sending');
+						btnformsubmit.data('form-sending-status','0');
+						btnformsubmit.data('submitform','');
+						return false;
+					}
+
+					if ($activeForm.find('.g-recaptcha').length > 0 && grecaptcha) {
+						window.tildaForm.currentFormProccessing = {
+							form: $activeForm,
+							btn: btnformsubmit,
+							formtype: formtype,
+							formskey: formskey
+						};
+
+						var captchaid = $activeForm.data('tilda-captcha-clientid');
+						if (captchaid === undefined || captchaid === '') {
+							var opts = {
+								size: 'invisible',
+								sitekey: $activeForm.data('tilda-captchakey'),
+								callback: window.tildaForm.captchaCallback
+							};
+							captchaid = grecaptcha.render($activeForm.attr('id')+'recaptcha', opts);
+							$activeForm.data('tilda-captcha-clientid', captchaid);
+						} else {
+							grecaptcha.reset(captchaid);
+						}
+						grecaptcha.execute(captchaid);
+						return false;
+					}
+
+					window.tildaForm.send($activeForm, btnformsubmit, formtype, formskey);
+				}
+
                 return false;
             }
-        });
-
-        $('.r').off('dblclick','.js-form-proccess [type=submit]');
-        $('.r').off('click','.js-form-proccess [type=submit]');
-        $('.r').on('click','.js-form-proccess [type=submit]', function(event) {
-            event.preventDefault();
-
-            var btnformsubmit = $(this);
-            var btnstatus = btnformsubmit.data('form-sending-status');
-            if (btnstatus >= '1') {
-                /* 0 - могу отправлять, 1 - отправляю, как только отправлено снова в ставим в 0 */
-                return false;
-            }
-
-            var $activeForm = $(this).closest('form'), arErrors=false;
-            if ($activeForm.length == 0) {
-                return false;
-            }
-
-            btnformsubmit.addClass('t-btn_sending');
-            btnformsubmit.data('form-sending-status','1');
-            btnformsubmit.data('submitform', $activeForm);
-
-            window.tildaForm.hideErrors($activeForm);
-
-            arErrors = window.tildaForm.validate($activeForm);
-
-            if (window.tildaForm.showErrors($activeForm, arErrors)) {
-                btnformsubmit.removeClass('t-btn_sending');
-                btnformsubmit.data('form-sending-status','0');
-                btnformsubmit.data('submitform','');
-                return false;
-            } else {
-                var formtype = $activeForm.data('formactiontype');
-                var formskey = $('#allrecords').data('tilda-formskey');
-
-                if ($activeForm.find('.js-formaction-services').length == 0 && formtype != 1 && formskey == '') {
-                    var $errBox = $activeForm.find('.js-errorbox-all');
-                    if(!$errBox || $errBox.length == 0) {
-                        $activeForm.prepend('<div class="js-errorbox-all"></div>');
-                        $errBox = $activeForm.find('.js-errorbox-all');
-                    }
-
-                    var $allError = $errBox.find('.js-rule-error-all');
-                    if (!$allError || $allError.length == 0) {
-                        $errBox.append('<p class="js-rule-error-all">'+json.error+'</p>');
-                        $allError = $errBox.find('.js-rule-error-all');
-                    }
-                    $allError.html('Please set reciever in block with forms').show();
-                    $errBox.show();
-
-                    $activeForm.addClass('js-send-form-error');
-                    btnformsubmit.removeClass('t-btn_sending');
-                    btnformsubmit.data('form-sending-status','0');
-                    btnformsubmit.data('submitform','');
-                    return false;
-                }
-
-                if ($activeForm.find('.g-recaptcha').length > 0 && grecaptcha) {
-                    window.tildaForm.currentFormProccessing = {
-                        form: $activeForm,
-                        btn: btnformsubmit,
-                        formtype: formtype,
-                        formskey: formskey
-                    };
-
-                    var captchaid = $activeForm.data('tilda-captcha-clientid');
-                    if (captchaid === undefined || captchaid === '') {
-                        var opts = {
-                            size: 'invisible',
-                            sitekey: $activeForm.data('tilda-captchakey'),
-                            callback: window.tildaForm.captchaCallback
-                        };
-                        captchaid = grecaptcha.render($activeForm.attr('id')+'recaptcha', opts);
-                        $activeForm.data('tilda-captcha-clientid', captchaid);
-                    } else {
-                        grecaptcha.reset(captchaid);
-                    }
-                    grecaptcha.execute(captchaid);
-                    return false;
-                }
-
-                window.tildaForm.send($activeForm, btnformsubmit, formtype, formskey);
-            }
-
-            return false;
         });
 
         /* запоминанием utm-метки чтобы потом передать дальше */

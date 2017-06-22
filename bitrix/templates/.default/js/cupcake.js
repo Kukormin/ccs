@@ -1336,7 +1336,7 @@ $(document).ready(function () {
 	});
 
 	$('.js-validation-sweet-table').submit(function (e) {
-		if ($('.error').length) {
+		if ($('.error').length && $('.error').text()) {
 			$('html,body').animate({scrollTop: $('.error').eq(0).offset().top - 300}, 1000);
 			e.preventDefault();
 		}
@@ -1405,7 +1405,8 @@ $(document).ready(function () {
 		$('.js_thankyou_modal').show().css('top', $(window).scrollTop() + 25 + "px");
 		$('.overlay').show();
 	});
-	$('.js-validation-sweet-table').ajaxForm(function () {
+	$('.js-validation-sweet-table').ajaxForm(function (data) {
+		$('.js_thankyou_modal .thank_you_mess').html(data.MESSAGE);
 		$('.js_thankyou_modal').show().css('top', $(window).scrollTop() + 25 + "px");
 		$('.overlay').show();
 	});
