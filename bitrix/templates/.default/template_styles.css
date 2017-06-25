@@ -8384,6 +8384,7 @@ label.iPhoneCheckLabelOn {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .this-is {
@@ -8420,20 +8421,16 @@ label.iPhoneCheckLabelOn {
     margin-top: 20px;
 }
 
-.goody__line{
-    margin-bottom: 30px;
+.goody-wrapper{
     float: left;
+    width: 25%;
+    margin-bottom: 30px;
 }
 
 .goody-item{
-    float: left;
-    margin-right: 70px;
     height: 293px;
-    max-width: 240px;
-}
-
-.goody__line .goody-item:nth-child(4){
-    margin-right: 0px;
+    width: 240px;
+    margin: 0 auto;
 }
 
 .goody-item__image{
@@ -8448,8 +8445,7 @@ label.iPhoneCheckLabelOn {
 }
 
 .goody-item__content-left {
-    float: left;
-    width: 48%;
+    width: 100px;
     text-align: right;
     padding-right: 7px;
 }
@@ -8459,14 +8455,191 @@ label.iPhoneCheckLabelOn {
 }
 
 .goody-item__content-mid {
-    float: left;
     width: 2px;
     height: 43px;
     background: #aa6290;
-    margin-top: -5px;
 }
 
 .goody-item__content-right {
-    float: right;
-    width: 45%;
+    width: 80px;
+    padding-left: 7px;
+}
+
+.what{
+    margin-top: 30px;
+}
+
+.what__title{
+    font-family: Lasco Bold;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    font-size: 24px;
+}
+
+.what__title:after{
+    position: absolute;
+    content: ' ';
+    background: url(/local/templates/.default/images/goodies/wave.png);
+    width: 25%;
+    height: 4px;
+    right: 0px;
+    top: 12px;
+}
+
+.what__title:before{
+    position: absolute;
+    content: ' ';
+    background: url('/local/templates/.default/images/goodies/wave.png');
+    width: 25%;
+    height: 4px;
+    left: 0px;
+    top: 12px;
+}
+
+.what__list, .what__center{
+    margin-top: 30px;
+    font-family: PTSansRegular;
+    font-size: 16px;
+    color: #424242;
+    margin-left: 25px;
+}
+
+.what__item{
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+
+.what__item:before{
+    position: absolute;
+    content: ' ';
+    background: url('/local/templates/.default/images/goodies/what_marker.png');
+    width: 15px;
+    height: 15px;
+    left: -20px;
+    top: 2px;
+}
+
+
+.what__center{
+    text-align: center;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1200px){
+    .goody-wrapper{
+        width: 33.33333%;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1023px){
+    .b-goodies-block {
+        background: url(/local/templates/.default/images/goodies/post_header_bg.jpg);
+        height: auto;
+    }
+
+    .content-left{
+        float: none;
+        margin-top: 0px;
+        padding-top: 30px;
+        width: auto;
+    }
+    .content-right{
+        float: none;
+        padding: 0px 10px 20px 10px;
+        margin-top: 10px;
+        width: auto;
+    }
+
+    .content-right iframe{
+        width: 100%;
+    }
+
+    .list {
+        margin-left: 34px;
+        margin-top: 25px;
+        padding: 10px;
+    }
+
+    .goody-wrapper{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 640px) and (max-width: 799px){
+    .b-goodies-block {
+        background: url(/local/templates/.default/images/goodies/post_header_bg.jpg);
+        height: auto;
+    }
+
+    .content-left{
+        float: none;
+        margin-top: 0px;
+        padding-top: 120px;
+        width: auto;
+    }
+    .content-right{
+        float: none;
+        padding: 0px 10px 20px 10px;
+        margin-top: 10px;
+        width: auto;
+    }
+
+    .content-right iframe{
+        width: 100%;
+    }
+
+    .list {
+        margin-left: 34px;
+        margin-top: 25px;
+        padding: 10px;
+    }
+
+    .list__item{
+        font-size: 15px;
+    }
+
+    .goody-wrapper{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 639px){
+    .b-goodies-block {
+        background: url(/local/templates/.default/images/goodies/post_header_bg.jpg);
+        height: auto;
+    }
+
+    .content-left{
+        float: none;
+        margin-top: 0px;
+        padding-top: 120px;
+        width: auto;
+    }
+    .content-right{
+        float: none;
+        padding: 0px 10px 20px 10px;
+        margin-top: 10px;
+        width: auto;
+    }
+
+    .content-right iframe{
+        width: 100%;
+        height: auto;
+    }
+
+    .list {
+        margin-left: 34px;
+        margin-top: 25px;
+        padding: 10px;
+    }
+
+    .list__item{
+        font-size: 13px;
+    }
+
+    .goody-wrapper{
+        width: 100%;
+    }
 }

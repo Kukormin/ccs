@@ -43,7 +43,8 @@ if ($ajax)
                 <div class="b-grey-wrap-bottom">
                     <div class="b-grey-wrap-bottom-right">
                         <div class="b-application-event--title">
-                            <span>  заявка на мероприятие</span>
+                            <? $title = (isset($arParams['FORM_TITLE']) && !empty($arParams['FORM_TITLE'])) ? $arParams['FORM_TITLE'] : 'заявка на мероприятие' ?>
+                            <span>  <?=$title?></span>
                         </div>
                         <div class="b-application-event__form-wrap">
                             <?if(!empty($arResult["ERROR_MESSAGE"]))

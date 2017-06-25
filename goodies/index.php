@@ -92,7 +92,36 @@ $APPLICATION->SetTitle("Контакты");
 				"AJAX_OPTION_ADDITIONAL" => "",
 			]
 		); ?>
+        <div class="what">
+            <div class="what__title">Что такое Жуковские Вкусности?</div>
+            <div class="what__list">
+                <div class="what__item">Знакомые всем снеки с новыми оригинальными вкусами: печенье в шоколаде, сушки с маком, сладкая и соленая соломка, воздушная кукуруза острая и сахарная, традиционные «ушки».</div>
+                <div class="what__item">Современная упаковка, которую удобно поставить в подстаканник в машине или положить в школьный рюкзак. Она не сломает снеки, не рассыпется в сумке. </div>
+                <div class="what__item">Яркий дизайн хорошо видно в прикассовой зоне и на полке.</div>
+                <div class="what__item">Промышленное производство из качественных ингредиентов без добавления заменителей и усилителей вкуса. Мы контролируем качество от закупки сырья до упаковки.</div>
+                <div class="what__item">Поддержка звезд, которые показывают, как любят и едят Жуковские Вкусности.</div>
+            </div>
+            <div class="what__center">
+                Попробуйте в корнере CupCake Story на Даниловском рынке (ссылка на адрес в яндексе)<br>
+                Закажите партию снеков!
+            </div>
+        </div>
+
+	    <? $APPLICATION->IncludeComponent(
+		    "custom:main.feedback",
+		    "cupcake_sweet_table",
+		    [
+			    "COMPONENT_TEMPLATE" => "cupcake_sweet_table",
+			    "EMAIL_TO" => "sergeich06@gmail.com",
+			    "EVENT_MESSAGE_ID" => [0 => "39",],
+			    "OK_TEXT" => "Спасибо, ваше сообщение принято.",
+			    "REQUIRED_FIELDS" => "",
+			    "USE_CAPTCHA" => "Y",
+			    "FORM_TITLE" => 'заказать снеки',
+		    ]
+	    ); ?>
     </div>
+
 
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
