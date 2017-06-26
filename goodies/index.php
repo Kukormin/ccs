@@ -1,8 +1,7 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty("description", "На данной странице предоставлены контакты нашей компании");
-$APPLICATION->SetPageProperty("title", "Контакты");
-$APPLICATION->SetTitle("Контакты");
+$APPLICATION->SetPageProperty("title", "Жуковские вкусности");
+$APPLICATION->SetTitle("Жуковские вкусности");
 ?>
 
     <section class="b-topblock b-topblock--pay-ship"></section>
@@ -107,20 +106,20 @@ $APPLICATION->SetTitle("Контакты");
             </div>
         </div>
 
-	    <? $APPLICATION->IncludeComponent(
-		    "custom:main.feedback",
-		    "cupcake_sweet_table",
-		    [
-			    "COMPONENT_TEMPLATE" => "cupcake_sweet_table",
-			    "EMAIL_TO" => "sergeich06@gmail.com",
-			    "EVENT_MESSAGE_ID" => [0 => "39",],
-			    "OK_TEXT" => "Спасибо, ваше сообщение принято.",
-			    "REQUIRED_FIELDS" => "",
-			    "USE_CAPTCHA" => "Y",
-			    "FORM_TITLE" => 'заказать снеки',
-		    ]
-	    ); ?>
     </div>
+<? $APPLICATION->IncludeComponent(
+	"custom:main.feedback",
+	"cupcake_sweet_table",
+	[
+		"COMPONENT_TEMPLATE" => "cupcake_sweet_table",
+		"EMAIL_TO" => "zakaz@cupcakestory.ru",
+		"EVENT_MESSAGE_ID" => [0 => "39",],
+		"OK_TEXT" => "Спасибо, ваше сообщение принято.",
+		"REQUIRED_FIELDS" => "",
+		"USE_CAPTCHA" => "Y",
+        'FORM_pppTITLE' => 'Заказать снеки',
+	]
+); ?>
 
 
 

@@ -16,7 +16,7 @@ if(!$iBlock){
 		'ACTIVE' => 'Y',
 		'CODE' => $blockCode,
 	    'IBLOCK_TYPE_ID' => 'new_catalog',
-	    'NAME' => 'Вкусности',
+	    'NAME' => 'Жуковские вкусности',
 	    'SITE_ID' => 's1'
 
 	];
@@ -24,30 +24,32 @@ if(!$iBlock){
 
 }else{
 	$ID = $iBlock['ID'];
-	echo 'Блок "Вкусности уже существует"<br>';
+	echo 'Блок "Жуковские вкусности" уже существует<br>';
 }
 
-$props = new CIBlockProperty();
-$arProps = [];
-$dbRes = CIBlockProperty::GetList([],['IBLOCK_ID' => $ID]);
-$arPropsCodes = ['PROPERTY' => 'Свойство','WEIGHT' => 'Вес','UNIT' => 'Еденица измерения'];
+if ($ID)
+{
+	$props = new CIBlockProperty();
+	$arProps = [];
+	$dbRes = CIBlockProperty::GetList([], ['IBLOCK_ID' => $ID]);
+	$arPropsCodes = ['PROPERTY' => 'Свойство', 'WEIGHT' => 'Вес', 'UNIT' => 'Единица измерения'];
 
-while ($prop = $dbRes->Fetch()){
-	$arProps[$prop['CODE']] = $prop;
-}
+	while ($prop = $dbRes->Fetch())
+	{
+		$arProps[$prop['CODE']] = $prop;
+	}
 
-foreach ($arPropsCodes as $code => $name){
-	if(isset($arProps[$code])){
-		echo "Свойство '$name' уже существует<br>";
-	}else{
-		$props->Add([
-			'NAME' => $name,
-		    'ACTIVE' => 'Y',
-		    'CODE' => $code,
-		    'PROPERTY_TYPE' => 'S',
-		    'IBLOCK_ID' => $ID,
-
-		]);
+	foreach ($arPropsCodes as $code => $name)
+	{
+		if (isset($arProps[$code]))
+		{
+			echo "Свойство '$name' уже существует<br>";
+		}
+		else
+		{
+			$props->Add(['NAME' => $name, 'ACTIVE' => 'Y', 'CODE' => $code, 'PROPERTY_TYPE' => 'S',
+				'IBLOCK_ID' => $ID,]);
+		}
 	}
 }
 
