@@ -24,7 +24,7 @@ $APPLICATION->SetTitle("Жуковские вкусности");
 				<? $APPLICATION->IncludeComponent('tim:empty', 'video.youtube', [
 					'VIDEO_WIDTH' => '560',
 					'VIDEO_HEIGHT' => '315',
-					'VIDEO_URL' => 'https://www.youtube.com/embed/xR4Qtbnxjq8",',
+					'VIDEO_URL' => 'https://www.youtube.com/embed/aZHsQ2noPMM',
 				]); ?>
             </div>
             <div class="clr"></div>
