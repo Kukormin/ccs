@@ -11,9 +11,9 @@ $first = reset($arResult['ELEMENTS_LIST']);
     
     <div class="slider-nav-gal">
         <? foreach ($arResult['ELEMENTS_LIST'] as $img) { ?>
-        <div class="slider-nav-gal--item"> 
+        <div class="slider-nav-gal--item" style="background: url(<?=$img['PREVIEW_PICTURE']['SRC']?>); background-size: cover; background-repeat: no-repeat; height: 270px">
             <a class="<?=$img['ID']==$first['ID']?'active':''?>" href="<?=$img['BIG_PICTURE']['SRC']?>">
-                <img src="<?=$img['PREVIEW_PICTURE']['SRC']?>" alt=""/></a>
+            </a>
         </div>
         <? } ?>
     </div>
