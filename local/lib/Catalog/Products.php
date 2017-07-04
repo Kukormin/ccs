@@ -60,6 +60,7 @@ class Products
 			$rsItems = $iblockElement->GetList(array(), array(
 				'IBLOCK_ID' => self::IB_PRODUCTS,
 				'ACTIVE' => 'Y',
+				'!PROPERTY_CATEGORY' => Categories::getDisabledIds(),
 			), false, false, $select);
 			while ($item = $rsItems->Fetch())
 			{

@@ -19,6 +19,7 @@ CModule::AddAutoloadClasses(
 		'Local\\Catalog\\Sitemap' => '/local/lib/Catalog/Sitemap.php',
 		'Local\\Catalog\\Accessories' => '/local/lib/Catalog/Accessories.php',
 		'Local\\Catalog\\Suspended' => '/local/lib/Catalog/Suspended.php',
+		'Local\\Catalog\\Goodies' => '/local/lib/Catalog/Goodies.php',
 		'Local\\Media\\Banners' => '/local/lib/Media/Banners.php',
 		'Local\\Media\\Cakes' => '/local/lib/Media/Cakes.php',
 		'Local\\Sale\\Cart' => '/local/lib/Sale/Cart.php',

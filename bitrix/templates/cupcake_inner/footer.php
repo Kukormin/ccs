@@ -62,7 +62,7 @@ if (defined('INDEX_PAGE') && INDEX_PAGE)
 					<a class="b-footer-mastercard-main"> </a>
 					<a class="b-footer-visa-main"> </a>
 				</div>
-
+                <div class="b-footer-policy"><a href="/policy.docx">Политика обработки персональных данных</a></div>
 				<div class="b-footer-address">111033, Россия, г.Москва, ул.Самокатная, д.4, стр.9</div>
 			</div>
 		</div>
@@ -97,7 +97,7 @@ else
 				<a class="b-footer-mastercard-main"> </a>
 				<a class="b-footer-visa-inner"> </a>
 			</div>
-
+            <div class="b-footer-policy"><a href="/policy.docx">Политика обработки персональных данных</a></div>
 			<div class="b-footer-address">111033, Россия, г.Москва, ул.Самокатная, д.4, стр.9</div>
 		</div>
 	</div>

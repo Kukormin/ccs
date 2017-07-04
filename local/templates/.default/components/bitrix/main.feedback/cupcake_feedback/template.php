@@ -77,6 +77,9 @@ if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)die();
 													<div class="b-personal_account__form-item b-personal_account__form-item-right-btn">
 														<input class="b-bnt-form" type="submit" name="submit" value="<?=GetMessage("MFT_SUBMIT")?>">
 													</div>
+                                                    <div class="line-conditions">
+                                                        Нажимая на кнопку в принимаете <a href="/conditions.docx">условия обработки персональных данных</a>
+                                                    </div>
 												</div>
 											</form>
 										</div>

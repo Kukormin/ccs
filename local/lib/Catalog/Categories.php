@@ -41,6 +41,7 @@ class Categories
 				'NAME' => 'ASC',
 			), Array(
 				'IBLOCK_ID' => Products::IB_PRODUCTS,
+				'ACTIVE' => 'Y',
 			));
 			while ($item = $rsItems->Fetch()) {
 
@@ -55,6 +56,41 @@ class Categories
 				}
 
 			}
+
+			$extCache->endDataCache($return);
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Возвращает все категории каталога
+	 * @param bool|false $refreshCache
+	 * @return array
+	 */
+	public static function getDisabledIds($refreshCache = false)
+	{
+		$return = array();
+
+		$extCache = new ExtCache(
+			array(
+				__FUNCTION__,
+			),
+			static::CACHE_PATH . __FUNCTION__ . '/',
+			86400000
+		);
+		if(!$refreshCache && $extCache->initCache()) {
+			$return = $extCache->getVars();
+		} else {
+			$extCache->startDataCache();
+
+			$iblockSection = new \CIBlockSection();
+			$rsItems = $iblockSection->GetList([], Array(
+				'IBLOCK_ID' => Products::IB_PRODUCTS,
+				'ACTIVE' => 'N',
+			));
+			while ($item = $rsItems->Fetch())
+				$return[] = $item['ID'];
 
 			$extCache->endDataCache($return);
 		}

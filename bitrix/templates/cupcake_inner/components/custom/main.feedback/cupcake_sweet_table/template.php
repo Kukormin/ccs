@@ -108,6 +108,9 @@ if ($ajax)
                                     <div class="b-form-item--right">
                                         <input class="b-bnt-form" type="submit" name="submit" value="<?=GetMessage("MFT_SUBMIT")?>">
                                     </div>
+                                    <div class="line-conditions">
+                                        Нажимая на кнопку в принимаете <a href="/conditions.docx">условия обработки персональных данных</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>

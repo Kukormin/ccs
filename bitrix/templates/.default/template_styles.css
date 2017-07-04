@@ -7045,6 +7045,10 @@ line-height:7px;
 .b-modal-cupcake-assortment--package:first-child{
 margin-top: 20px;
 }
+.line-conditions {
+    font-family: 'PTSansRegular', sans-serif;
+    font-size: 14px;
+}
 
  
  
@@ -7234,6 +7238,23 @@ margin-top: 20px;
 }
 .b-footer-info-about .b-footer-address {
     color: #7c7d70;
+}
+.b-footer-policy {
+    font-family: "PTSansRegular",sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    float: left;
+    clear: both;
+    margin-top: 3px;
+}
+.b-footer-policy a {
+    color: #fff;
+}
+.b-footer-info-about .b-footer-policy a {
+    color: #7c7d70;
+}
+.b-footer-policy a:hover {
+    color: #aa6290;
 }
 
 
@@ -8431,16 +8452,47 @@ label.iPhoneCheckLabelOn {
     height: 293px;
     width: 240px;
     margin: 0 auto;
+    font-family: 'PTSansRegular';
 }
 
 .goody-item__image{
     width: 240px;
     height: 240px;
+    position: relative;
+}
+.goody-item__image .b-price {
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+    display: block;
+    line-height: 40px;
+    height: 40px;
+}
+.goody-item__image .b-price .price {
+    display: inline-block;
+    line-height: 40px;
+    height: 40px;
+    background: #a3a67b;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0 20px;
+    vertical-align: top;
+}
+.goody-item__image .b-price:after {
+    content: '';
+    display: inline-block;
+    position: relative;
+    width: 10px;
+    height: 40px;
+    background: url(/images/gprice.png);;
+}
+.goody-item__image .quick-detail {
+    bottom: 15px;
 }
 
 .goody-item__content {
     margin-top: 15px;
-    font-family: 'PTSansRegular';
     font-size: 14px;
 }
 

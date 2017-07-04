@@ -73,13 +73,15 @@ foreach ($arResult['GROUPED_GOODS'] as $parentName => $items)
 				//
 				// Картинка и название
 				//
+                $name = $arItem2['PARENT_NAME'] ? $arItem2['PARENT_NAME'] : $arItem2['~NAME'];
+                $name = str_replace('#', '', $name);
 				?>
 				<div class="b-mod__item--basket">
 					<div class="b-mod__item-img--effect-transform b-mod__item-basket--img">
 						<img src="<?= $arItem2['PREVIEW_PICTURE_SRC'] ?>" alt="">
 					</div>
 					<div class="b-mod__item-title--basket">
-						<?= $arItem2['PARENT_NAME'] ? $arItem2['PARENT_NAME'] : $arItem2['~NAME']; ?>
+						<?= $name ?>
 					</div>
 				</div><?
 

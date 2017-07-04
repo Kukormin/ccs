@@ -426,6 +426,8 @@ var Detail = {
 		this.modals.on('change', '.js_detail_count', this.countChange);
 		this.modals.on('click', '.js-add-to-basket', this.addToCart);
 		this.pickupBtn.click(this.showPickupPopup);
+
+		$('.quick-add-cart').on('click', this.quickAddToCart);
 	},
 	loadModal: function() {
 		var id = $(this).data('id');
@@ -503,6 +505,52 @@ var Detail = {
 		}, function (resp) {
 			if (resp != 0) {
 				btn.addClass('js-go-to').text('к корзине');
+				Detail.headCart.text(resp);
+
+				try { rrApi.addToBasket(id) } catch(e) {}
+			}
+		});
+	},
+	quickAddToCart: function(e) {
+		e.preventDefault();
+
+		var btn = $(this);
+
+		if (btn.hasClass('js-go-to')) {
+			location.href = btn.data('href');
+			return false;
+		}
+
+		var id = btn.data('id');
+		/*var product = btn.closest('.js-product');
+		var price = product.find('.js-priceblock');
+		if (price.length) {
+			var moved = price.clone();
+			var pos = price.offset();
+			var toPos = Detail.headCart.offset();
+			moved.css({
+				position: 'absolute',
+				left: pos.left,
+				top: pos.top,
+				'zIndex': 999
+			});
+			$('body').append(moved);
+			moved.animate({
+				left: toPos.left - 40,
+				top: toPos.top - 60,
+				opacity: 0
+			}, function() {
+				moved.remove();
+			});
+		}*/
+
+		$.post('/ajax/cart_action.php', {
+			'action': 'add',
+			'id': id,
+			'quantity': 1
+		}, function (resp) {
+			if (resp != 0) {
+				btn.addClass('js-go-to');
 				Detail.headCart.text(resp);
 
 				try { rrApi.addToBasket(id) } catch(e) {}
