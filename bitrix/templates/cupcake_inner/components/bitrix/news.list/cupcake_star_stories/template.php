@@ -28,7 +28,7 @@ $this->setFrameMode(true);
                     <div class="b-slider-stories__desc"> <?=$arItem['PROPERTIES']['STATUS']['VALUE']?></div>
                 </div>
                 <div class="b-slider-stories__img-photo">
-                    <a target="_blank "href="<?=$arItem['PROPERTIES']['INSTAGRAM_URL']['VALUE']?>"><div class="b-slider-stories__icon-photo"></div></a>
+					<noindex><a target="_blank "href="<?=$arItem['PROPERTIES']['INSTAGRAM_URL']['VALUE']?>" rel="nofollow"><div class="b-slider-stories__icon-photo"></div></a></noindex>
                     <img src="<?=CFile::GetPath($arItem['PROPERTIES']['INSTAGRAM_IMG']['VALUE'])?>" alt=""/>
                 </div>
 
@@ -39,7 +39,15 @@ $this->setFrameMode(true);
 
             <div class="b-slider-favorite b-slider-stories-wrap">
                 <div class="b-slider-stories__text "  >
-                    <?=$arItem['DETAIL_TEXT']?>
+<?
+$replace = [
+    '</a>' => '',
+    ];
+
+$content = str_replace(array_keys($replace), $replace, $arItem['DETAIL_TEXT']);
+$content = $content = preg_replace('/(<a [^\>]*>)/', '',  $content);
+?>
+                    <?=$content?>
                 </div>
                 <div class="b-slider-favorite-label">я люблю</div>
                 <div class="b-slider-favorite__list">

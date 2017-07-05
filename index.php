@@ -3,8 +3,10 @@
 
 define('INDEX_PAGE', true);
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Кондитерская CupCake  Story предлагает сладости на заказ ручной работы. Десерты на заказ по  лучшим ценам. Для более подробной информации тел. +7 (499) 322-00-20");
+$APPLICATION->SetPageProperty("title", "Капкейки на заказ в Москве с доставкой | Пирожные на заказ в Москве от  семейной кондитерской Cupcake Story");
 
-$APPLICATION->SetTitle("Cupcake Story — семейная кондитерская. Капкейки, торты, эклеры, пряники, пирожные с доставкой на дом");
+$APPLICATION->SetTitle("Cupcake Story — семейная кондитерская. Капкейки, торты, эклеры, пряники, пирожные с доставкой на домКапкейки на заказ в Москве с доставкой | Пирожные на заказ в Москве от  семейной кондитерской Cupcake Story");
 
 ?>
 <section class="b-topblock main-screen"><?

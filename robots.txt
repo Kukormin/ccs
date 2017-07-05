@@ -1,5 +1,6 @@
 User-agent: Yandex
 Disallow: /*index.php$
+Disallow: /?
 Disallow: /bitrix/
 Disallow: /auth/
 Disallow: /personal/
@@ -34,9 +35,10 @@ Disallow: /*PAGE_NAME=detail_slide_show
 Disallow: /*SHOWALL
 Disallow: /*show_all=
 Host: cupcakestory.ru
- 
+
 User-agent: *
 Disallow: /*index.php$
+Disallow: /?
 Disallow: /bitrix/
 Disallow: /auth/
 Disallow: /personal/

@@ -73,11 +73,14 @@ $APPLICATION->SetTitle("Контакты");
  <a href="tel:+74993220020" class="b-contact-info__link-phone" itemprop="telephone">+7 (499) 322 00 20</a> <a href="mailto:zakaz@cupcakestory.ru" class="b-contact-info__link-email" itemprop="email"><b>zakaz@cupcakestory.ru</b></a>
 		</p>
 		<p>
- <b>Оптовые поставки, сотрудничество, ритейл</b><br>
-			 тел.: +7 (499) 322-00-20 (доб. 103), email: <a href="mailto:taisiyal@cupcakestory.ru">taisiyal@cupcakestory.ru</a>
+ <b>Оптовые поставки,&nbsp;ритейл</b><br>
+			 тел.: +7 (499) 322-00-20 (доб. 103), email: <a href="mailto:taisiyal@cupcakestory.ru">taisiyal(собака)cupcakestory.ru</a>
 		</p>
 		<p>
 			 Реклама email:<a href="mailto:dorofeeva@cupcakestory.ru">dorofeeva@cupcakestory.ru</a>
+		</p>
+		<p>
+			 Отдел закупок:&nbsp;<a href="mailto:sklad@cupcakestory.ru">sklad@cupcakestory.ru</a><br>
 		</p>
  <img src="/images/scheme.jpg" alt="схема">
 	</div>
@@ -92,13 +95,24 @@ $APPLICATION->SetTitle("Контакты");
  <b>Мини-кафе в Москве в Фуд Маркете улица Новый Арбат, 21.&nbsp;</b>
 		</p>
 		<p itemprop="contactPoint" itemscope="" itemtype="http://schema.org/ContactPoint">
-			 Узнать о наличии, забронировать продукцию можно по номеру +7 (967) 022-99-03 (WhatsApp,Telegram).<b>&nbsp;</b>
+ <b>Режим работы:&nbsp;&nbsp;ежедневно&nbsp;с 12 до 24.&nbsp;<br>
+ </b>
 		</p>
 		<p itemprop="contactPoint" itemscope="" itemtype="http://schema.org/ContactPoint">
-			<b><i>Внимание! В кафе нельзя сделать заказ на индивидуальный дизайн.</i></b>
+ <b>Мини-кафе в Москве на Даниловском рынке. </b>Справа от главного входа.<b><br>
+ </b>
+		</p>
+		<p itemprop="contactPoint" itemscope="" itemtype="http://schema.org/ContactPoint">
+ <b>Режим работы:&nbsp;&nbsp;ежедневно&nbsp;с 10 до 21.&nbsp;</b><br>
+		</p>
+		<p itemprop="contactPoint" itemscope="" itemtype="http://schema.org/ContactPoint">
+			 Узнать о наличии продукции на Даниловском рынке, забронировать продукцию можно по номеру +7 (967) 022-99-03 (WhatsApp,Telegram).<b>&nbsp;</b><br>
+		</p>
+		<p itemprop="contactPoint" itemscope="" itemtype="http://schema.org/ContactPoint">
+ <b><i>Внимание! В кафе нельзя сделать заказ на индивидуальный дизайн.</i></b>
 		</p>
 		<p>
- <b>Режим работы:&nbsp;</b><b>&nbsp;ежедневно&nbsp;</b><b>с 12 до 24.&nbsp;</b>
+ <br>
 		</p>
 		<p>
  <strong>Точки самовывоза.</strong><br>
@@ -126,9 +140,6 @@ $APPLICATION->SetTitle("Контакты");
 		</p>
 		<p>
 			 Напротив церкви вы увидите красные ворота завода Кристалл и шлагбаум. Вам туда. Если закрыты - не стесняйтесь посигналить.&nbsp; Берите у охраника пропуск (не забудьте поставить потом у нас печать, чтобы отдать на выезде). Дальше езжайте прямо, пока не переедете железнодорожные пути (примерно метров 200).&nbsp; За ними - направо, и где-то через 100 метров снова направо через рельсы.&nbsp; Огибаете угол дома вправо и увидите площадку с зеленой лестницей наверх.&nbsp; Паркуйтесь рядом и поднимайтесь по лестнице на 2 этаж. Следите за указателями.
-		</p>
-		<p>
-			 Отдел закупок: <a href="mailto:sklad@cupcakestory.ru">sklad@cupcakestory.ru</a>
 		</p>
 	</div>
 </div>

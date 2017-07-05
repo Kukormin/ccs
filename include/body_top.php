@@ -35,4 +35,11 @@ if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, fal
 		a.async=true;a.src=u;m.parentNode.insertBefore(a,m)
 	})(window, document, 'DSPCounter', '//tags.soloway.ru/DSPCounter.js', 'script');
 </script>
+<script type="text/javascript">
+(function ct_load_script() {
+var ct = document.createElement('script'); ct.type = 'text/javascript';
+ct.src = document.location.protocol+'//cc.calltracking.ru/phone.c7ffd.5504.async.js?nc='+Math.floor(new Date().getTime()/300000);
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ct, s);
+})();
+</script>
 <script type="text/javascript">DSPCounter('send', {'sid':'216208','user_id':''});</script><?
