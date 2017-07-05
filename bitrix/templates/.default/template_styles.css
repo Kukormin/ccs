@@ -3759,7 +3759,7 @@ background: url(../.default/images/arr-post.png) no-repeat center -55px;
 	vertical-align:top;
 	line-height:60px;
 	font-family: 'Lasco Bold', sans-serif;
-	font-size:14px;
+	font-size:13px;
 }
 .b-bottom-nav__item--mob {
 	text-align:left;
@@ -3804,7 +3804,7 @@ background: url(../.default/images/arr-post.png) no-repeat center -55px;
 	background:#80366a;
 }
 .b-bottom-nav__link {
-	padding:0 12px;
+	padding:0 6px;
 	display:block;
 	color:#fff;
 }
