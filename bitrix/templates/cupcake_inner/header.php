@@ -39,7 +39,7 @@ $APPLICATION->IncludeFile('/include/retailcrm_utm.php', array());
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.maskedinput.min.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/jquery.form.min.js?v=6"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/calendar.js?v=10"></script>
-	<script type="text/javascript" src="/bitrix/templates/.default/js/catalog.js?v=3"></script>
+	<script type="text/javascript" src="/bitrix/templates/.default/js/catalog.js?v=4"></script>
 	<script type="text/javascript" src="/bitrix/templates/.default/js/iphone-style-checkboxes.js?v=2"></script>
 
 	<!--[if lt IE 9]>
