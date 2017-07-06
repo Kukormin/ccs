@@ -58,7 +58,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Жуковские вкусности",
-		"/goodies/",
+		"/zhu/",
 		Array(),
 		Array(),
 		""
