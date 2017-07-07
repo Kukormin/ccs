@@ -42,6 +42,7 @@ class Goodies
 			$iblockElement = new \CIBlockElement();
 			$rsItems = $iblockElement->GetList(array(), array(
 				'IBLOCK_ID' => Products::IB_PRODUCTS,
+				'ACTIVE' => 'Y',
 				'=PROPERTY_CATEGORY' => self::CATEGORY_ID,
 			), false, false, array(
 				'ID', 'NAME', 'CODE', 'IBLOCK_ID',
